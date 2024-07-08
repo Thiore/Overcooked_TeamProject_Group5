@@ -1371,7 +1371,7 @@ MonoBehaviour:
   - {fileID: 1449125034408950154, guid: 54e27e557a63eaf46988d4ba7ab268b0, type: 3}
   - {fileID: 1900013951120342509, guid: a077e376fa8986e408b22b8547535aed, type: 3}
   recipePoolPanel: {fileID: 1307582313}
-  moveSpeed: 1000
+  moveSpeed: 10000
   maxVisibleObjects: 5
 --- !u!1 &1318658737
 GameObject:
