@@ -1,0 +1,34 @@
+{
+"RecipeData":[
+ {
+  "id": 100,
+  "stage": 1,
+  "recipe": "Fish",
+  "ingredient": "Fish"
+ },
+ {
+  "id": 101,
+  "stage": 1,
+  "recipe": "Shrimp",
+  "ingredient": "Shrimp"
+ },
+ {
+  "id": 102,
+  "stage": 2,
+  "recipe": "Suish",
+  "ingredient": "Fish"
+ },
+ {
+  "id": 103,
+  "stage": 2,
+  "recipe": "Suish",
+  "ingredient": "Rice"
+ },
+ {
+  "id": 104,
+  "stage": 2,
+  "recipe": "Suish",
+  "ingredient": "Seaweed"
+ }
+]
+}
