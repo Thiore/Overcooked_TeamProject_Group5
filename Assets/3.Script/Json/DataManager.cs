@@ -8,7 +8,7 @@ using System.Linq;
 
 public class DataManager : MonoBehaviour
 {
-    private Dictionary<string, Recipe> recipeData;
+    public Dictionary<int, Recipe> recipeData;
     private static DataManager instance;
 
     private void Recipe_DataManager()
@@ -40,14 +40,24 @@ public class DataManager : MonoBehaviour
 
 
 
-    private Dictionary<string, Recipe> LoadRecipeFromJson()
+    private Dictionary<int, Recipe> LoadRecipeFromJson()
     {
         string jsonFile = Resources.Load<TextAsset>("Data/Recipe_JDB").text;
-       var recipes = JsonConvert.DeserializeObject<Recipe[]>(jsonFile).ToDictionary(x => x.id, x => x);
-        Debug.Log("Loaded " + recipes.Count + " recipes from JSON.");
-        return recipeData;
-        
+        var recipes = JsonConvert.DeserializeObject<Recipe[]>(jsonFile).ToDictionary(x => x.id, x => x);
+        //Debug.Log("Loaded " + recipes.Count + " recipes from JSON.");
+
+        // Filter recipes for stage 1
+        var stage1Recipes = recipes.Values.Where(recipe => recipe.stage == 1).ToList();
+
+        // Select a random recipe from stage 1 recipes
+        Recipe selectedRecipe = stage1Recipes[Random.Range(0, stage1Recipes.Count)];
+
+        Debug.Log("Selected recipe: " + selectedRecipe.recipe);
+        return recipes;
+         
+
     }
+   
 
    
 }
