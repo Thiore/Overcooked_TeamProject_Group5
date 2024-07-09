@@ -28,27 +28,15 @@ public class Player_Movent : MonoBehaviour
 
     private void Walking()
     {
-        //if (_playerInput.Move_Value != 0 || _playerInput.Rotate_Value != 0)
-        //{
-        //    _animator.SetBool("IsWalking", true);
-        //    Move();
-        //}
-        //else
-        //{
-        //    _animator.SetBool("IsWalking", false);
-        //}
-
-
-        if (_playerInput.Move_Value == 0 && _playerInput.Rotate_Value == 0)
-        {
-            _animator.SetBool("IsWalking", false);
-        }
-        else
+        if (_playerInput.Move_Value != 0 || _playerInput.Rotate_Value != 0)
         {
             _animator.SetBool("IsWalking", true);
             Move();
         }
-
+        else
+        {
+            _animator.SetBool("IsWalking", false);
+        }
     }
 
     private void Move()
