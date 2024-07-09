@@ -6,69 +6,91 @@ using UnityEngine.UIElements;
 
 public class Player_Movent : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed = 5f;
-    [SerializeField] private float _rotateSpeed = 90f;
-    [SerializeField] private PlayerIntput _playerInput;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float rotateSpeed = 380f;
+    [SerializeField] private PlayerIntput playerInput;
 
-    private Rigidbody _player_rb;
-    private Animator _animator;
+    private Rigidbody player_rb;
+    private Animator animator;
     private Vector3 moveDirection;
+
+    private bool isJumping = false;
 
     private void Awake()
     {
-        _playerInput = GetComponent<PlayerIntput>();
-        _player_rb = GetComponent<Rigidbody>();
-        _animator = GetComponent<Animator>();
+        playerInput = GetComponent<PlayerIntput>();
+        player_rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
         Walking();
+
+        if (Input.GetKeyDown(KeyCode.V) && isJumping.Equals(false))
+        {
+            Jump();
+        }
+
     }
 
     private void Walking()
     {
-        if (_playerInput.Move_Value != 0 || _playerInput.Rotate_Value != 0)
+        if (playerInput.Move_Value != 0 || playerInput.Rotate_Value != 0)
         {
-            _animator.SetBool("IsWalking", true);
+            animator.SetBool("IsWalking", true);
             Move();
         }
         else
         {
-            _animator.SetBool("IsWalking", false);
+            animator.SetBool("IsWalking", false);
         }
     }
 
     private void Move()
     {
-        // 회전하고 돌고 이전 값과 동일하면 돌지 않는다 ? 
+        // 이동 전 회전을 주고 비교
+        moveDirection = new Vector3(playerInput.Rotate_Value, 0, playerInput.Move_Value) * moveSpeed * Time.deltaTime;
 
-        //회전
-        float x = 0;
-        float y = 0;
-        if (x < 1 && x > -1)
+        if (moveDirection != Vector3.zero)
         {
-            x = _playerInput.Rotate_Value * _rotateSpeed * Time.deltaTime;
-        }
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            float angleDifference = Quaternion.Angle(transform.rotation, targetRotation);
 
-        if(y < 1 && y > -1)
-        {
-            y = _playerInput.Move_Value * _rotateSpeed * Time.deltaTime;
-        }
-        this.transform.LookAt(transform.position + new Vector3(x, 0, y).normalized);
+            // 일정 각도 이상 차이나는 경우에만 회전
+            if (angleDifference > 0.3f)
+            {
+                float step = rotateSpeed * Time.deltaTime;
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, step);
+            }
 
-        //이동
-        moveDirection = new Vector3(_playerInput.Rotate_Value, 0, _playerInput.Move_Value) * _moveSpeed * Time.deltaTime;
-        _player_rb.MovePosition(_player_rb.position + moveDirection);
+        }
+ 
+        player_rb.MovePosition(player_rb.position + moveDirection);
 
     }
 
-    private void Rotate()
+    private void Jump()
     {
-        float turn = _playerInput.Rotate_Value * _rotateSpeed * Time.deltaTime;
-        _player_rb.rotation = _player_rb.rotation * Quaternion.Euler(0, turn, 0);
-
+        StartCoroutine(Jump_co());
     }
 
+    private IEnumerator Jump_co()
+    {
+        isJumping = true;
+
+        Vector3 endPos = player_rb.position + transform.forward * 3f;
+        float elaspedTime = 0f;
+
+        while (elaspedTime < 0.15f)
+        {
+            player_rb.MovePosition(Vector3.Lerp(player_rb.position, endPos, elaspedTime / 0.15f));
+            elaspedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        player_rb.MovePosition(endPos);
+        isJumping = false;
+    }
 
 }
