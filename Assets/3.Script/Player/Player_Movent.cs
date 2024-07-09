@@ -78,6 +78,7 @@ public class Player_Movent : MonoBehaviour
     private IEnumerator Jump_co()
     {
         isJumping = true;
+        animator.SetBool("IsWalking", true);
 
         Vector3 endPos = player_rb.position + transform.forward * 3f;
         float elaspedTime = 0f;
@@ -90,6 +91,7 @@ public class Player_Movent : MonoBehaviour
         }
 
         player_rb.MovePosition(endPos);
+        animator.SetBool("IsWalking", false);
         isJumping = false;
     }
 
