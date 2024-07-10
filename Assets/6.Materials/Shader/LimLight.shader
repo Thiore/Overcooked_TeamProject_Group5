@@ -3,6 +3,7 @@ Shader "Unlit/LimLight"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _UseTexture("Use Texture(0or1)", Float) = 1.0
         _Color ("Main Color", Color) = (1,1,1,1)
         _RimColor ("Rim Color", Color) = (1,1,1,1)
         _RimPower ("Rim Power", Range(1.0, 10.0)) = 3.0
@@ -37,6 +38,7 @@ Shader "Unlit/LimLight"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            float _UseTexture;
             float4 _Color;
             float4 _RimColor;
             float _RimPower;
@@ -56,14 +58,14 @@ Shader "Unlit/LimLight"
             {
                 // sample the texture
                 half4 texColor = tex2D(_MainTex, i.uv) * _Color;
-
+                half4 color = lerp(_Color, texColor, _UseTexture);
                 // Calculate the rim effect
                 float rim = 1.0 - saturate(dot(normalize(i.viewDir), normalize(i.normal)));
                 rim = pow(rim, _RimPower);
                 half4 rimColor = rim * _RimColor;
 
                 // Combine texture color and rim color
-                return texColor + rimColor;
+                return color + rimColor;
             }
             ENDCG
         }
