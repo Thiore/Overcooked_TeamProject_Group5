@@ -44,7 +44,7 @@ public class DataManager : MonoBehaviour
     {
         string jsonFile = Resources.Load<TextAsset>("Data/Recipe_JDB").text;
         var recipes = JsonConvert.DeserializeObject<Recipe[]>(jsonFile).ToDictionary(x => x.id, x => x);
-        //Debug.Log("Loaded " + recipes.Count + " recipes from JSON.");
+        Debug.Log("Loaded " + recipes.Count + " recipes from JSON.");
 
         // Filter recipes for stage 1
         var stage1Recipes = recipes.Values.Where(recipe => recipe.stage == 1).ToList();
@@ -57,7 +57,8 @@ public class DataManager : MonoBehaviour
          
 
     }
-   
+
+ 
 
    
 }
