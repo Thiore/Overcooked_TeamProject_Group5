@@ -6,6 +6,7 @@ public class EmissionController : MonoBehaviour
 {
     private bool isPick = false;
     private Queue<GameObject> pickQue;
+    private Player_Ray goray;
 
     private Material originalMaterial;
     private Material instanceMaterial;
@@ -13,6 +14,7 @@ public class EmissionController : MonoBehaviour
     private void Awake()
     {
         pickQue = new Queue<GameObject>();
+        goray = GetComponent<Player_Ray>();
     }
 
     void OnCollisionStay(Collision collision)
@@ -26,6 +28,18 @@ public class EmissionController : MonoBehaviour
                 {
                     ByeObeject(pickQue.Peek());
                     pickQue.Clear();
+
+                    GameObject hit_ob; 
+                    StartCoroutine(goray.ShotRay(out GameObject ob => {
+                        
+                        if(ob != null)
+                        {
+                            hit_ob = ob;
+                        }
+                        
+                    }));
+                    
+                    
                     pickQue.Enqueue(collision.gameObject);
                     PickObject(pickQue.Peek());
                 }
