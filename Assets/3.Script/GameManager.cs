@@ -32,6 +32,13 @@ public class GameManager : MonoBehaviour
         isPlaying = true;
     }
 
+    private void Update()
+    {
+        if (isPause && !isPlaying)
+        {
+            PauseScreen();
+        }
+    }
 
     public void LoadScene(int index)
     {
@@ -58,6 +65,7 @@ public class GameManager : MonoBehaviour
                 yield return null;
             }
 
+            pauseScreen = GameObject.Find("Pause_Screen");
             isPause = false;
             isPlaying = true;
         }
@@ -87,4 +95,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("ResultScene");
     }
 
+    private void PauseScreen()
+    {
+        if (pauseScreen != null)
+        {
+            pauseScreen.SetActive(true);
+        }
+    }
 }
