@@ -7,6 +7,7 @@ Shader "Unlit/GlowShader"
         _BaseColor ("Base Color", Color) = (1,1,1,1)
         _GlowColor("Glow Color", Color) = (1,1,1,1)
         _GlowIntensity("Glow Intensity", Range(0, 20)) = 1.0
+        _AlphaClip ("Alpha Clip Threshold", Range(0,1)) = 0.5
     }
     SubShader
     {
@@ -15,6 +16,16 @@ Shader "Unlit/GlowShader"
 
         Pass
         {
+            Stencil
+            {
+                Ref 1
+                Comp always
+                Pass replace
+            }
+            ZWrite On
+            ZTest LEqual
+            ColorMask RGB
+
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -38,6 +49,7 @@ Shader "Unlit/GlowShader"
             float4 _BaseColor;
             float4 _GlowColor;
             float _GlowIntensity;
+            float _AlphaClip;
 
             v2f vert (appdata v)
             {
@@ -51,6 +63,9 @@ Shader "Unlit/GlowShader"
             {
                half4 texColor = tex2D(_MainTex, i.uv);
                half4 baseColor = _BaseColor;
+
+               clip(texColor.a - _AlphaClip);
+
                half4 color = lerp(baseColor, texColor, _UseTexture);
                half4 glow = _GlowColor * _GlowIntensity;
                return color + glow;
