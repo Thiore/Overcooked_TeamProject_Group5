@@ -218,6 +218,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &15883534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 15883535}
+  m_Layer: 0
+  m_Name: CheckOB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &15883535
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15883534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1264090017734614451}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &97711354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1599,6 +1629,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9026898797367753082}
+  - {fileID: 15883535}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2007,10 +2038,11 @@ GameObject:
   - component: {fileID: 1264090017734614451}
   - component: {fileID: 1927861152138659592}
   - component: {fileID: 1927861152138659595}
-  - component: {fileID: 1927861152138659594}
   - component: {fileID: 1927861152138659604}
   - component: {fileID: 1927861152138659605}
   - component: {fileID: 1927861152138659596}
+  - component: {fileID: 1927861152138659597}
+  - component: {fileID: 1927861152138659594}
   m_Layer: 0
   m_Name: Chef
   m_TagString: Untagged
@@ -2029,8 +2061,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 1}
+  m_Size: {x: 1.1, y: 1.4, z: 1.4}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!54 &1927861152138659595
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2059,7 +2091,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1924a658fd74eba47a74a379d58bea9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instanceMaterial: {fileID: 2100000, guid: f3c2e5f5e638c8c45b93090cb01b92ed, type: 2}
+--- !u!136 &1927861152138659597
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927861152138659593}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.9
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!114 &1927861152138659604
 MonoBehaviour:
   m_ObjectHideFlags: 0
