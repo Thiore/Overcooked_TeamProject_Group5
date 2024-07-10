@@ -8,11 +8,24 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if(GameManager.Instance.isPause==true && GameManager.Instance.isPlaying == false)
         {
-            GameManager.Instance.isPause = true;
-            GameManager.Instance.isPlaying = false;
-            pauseScreen.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                GameManager.Instance.isPause = false;
+                GameManager.Instance.isPlaying = true;
+                pauseScreen.SetActive(false);
+            }
         }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                GameManager.Instance.isPause = true;
+                GameManager.Instance.isPlaying = false;
+                pauseScreen.SetActive(true);
+            }
+        }
+        
     }
 }
