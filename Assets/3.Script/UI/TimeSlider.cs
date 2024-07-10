@@ -6,10 +6,15 @@ using UnityEngine.UI;
 public class TimeSlider : MonoBehaviour
 {
     [SerializeField] private Slider slider;
+    private TimeManager time;
+    private void Start()
+    {
+        time = FindObjectOfType<TimeManager>();
+    }
     private void Update()
     {
-        slider.maxValue = GameManager.Instance.initTime;
-        slider.value = slider.maxValue-GameManager.Instance.playTime;
+        slider.maxValue = time.initTime;
+        slider.value = slider.maxValue-time.playTime;
         if (slider.maxValue/slider.value>=5)
         {
             Image img = transform.Find("Fill Area").GetComponentInChildren<Image>();

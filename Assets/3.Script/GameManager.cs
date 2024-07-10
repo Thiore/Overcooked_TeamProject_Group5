@@ -1,18 +1,18 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
     public int score = 0;
-    public float initTime = 60f;
-    public float playTime = 0;
     public int tip = 1;
-    public float tipTime = 0;
-    private bool isPause = false;
-    private bool isPlaying = false;
+    public bool isPause = false;
+    public bool isPlaying = true;
+    public GameObject pauseScreen;
+
     private void Awake()
     {
         if (Instance == null)
@@ -26,40 +26,46 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void Start()
     {
-        if (!isPause)
+        isPause = false;
+        isPlaying = true;
+    }
+
+
+    public void LoadScene(int index)
+    {
+        StartCoroutine(LoadSceneCoroutine(index));
+    }
+
+    private IEnumerator LoadSceneCoroutine(int index)
+    {
+        AsyncOperation asyncLoad = null;
+        switch (index)
         {
-            if (initTime - playTime > 0)
+            case 0:
+                asyncLoad = SceneManager.LoadSceneAsync("MangoScene");
+                break;
+            case 1:
+                asyncLoad = SceneManager.LoadSceneAsync("MenuScene");
+                break;
+        }
+
+        if (asyncLoad != null)
+        {
+            while (!asyncLoad.isDone)
             {
-                tipTime += Time.deltaTime;
-                playTime += Time.deltaTime;
-                if (tipTime >= 20)
-                {
-                    tip += 1;
-                    tipTime = 0f;
-                }
-                if (initTime - playTime <= 0)
-                {
-                    playTime = 0;
-                    EndGame();
-                }
+                yield return null;
             }
+
+            isPause = false;
+            isPlaying = true;
         }
-        else if(isPlaying)
-        {
-            
-        }
-        else
-        {
-            PauseScreen();
-        }
-        
     }
 
     public void AddScore(int points)
     {
-        score += points*tip;
+        score += points * tip;
     }
 
     public void SubScore(int points)
@@ -67,22 +73,18 @@ public class GameManager : MonoBehaviour
         score -= points;
         tip = 1;
     }
-    private void EnterGame()
+
+    public void EnterGame()
     {
         isPlaying = true;
         SceneManager.LoadScene("GameScene");
     }
-    private void EndGame()
+
+    public void EndGame()
     {
         isPause = true;
         isPlaying = false;
-        // 게임 종료 로직 (예: 결과 씬으로 전환)
         SceneManager.LoadScene("ResultScene");
-    }
-    private void PauseScreen()
-    {
-        //일시종료 UI 활성화
-
     }
 
 }

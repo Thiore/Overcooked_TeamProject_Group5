@@ -18,7 +18,6 @@ public class RecipePool : MonoBehaviour
 
     private void Start()
     {
-        // 초기 오브젝트 풀 생성
         for (int i = 0; i < maxVisibleObjects * recipePrefabs.Length; i++)
         {
             GameObject obj = Instantiate(recipePrefabs[i % recipePrefabs.Length], recipePoolPanel);
@@ -26,22 +25,27 @@ public class RecipePool : MonoBehaviour
             objectPool.Enqueue(obj);
         }
 
-        // 게임 시작 시 첫 번째 오브젝트 활성화
         ActivateObject();
     }
 
     private void Update()
     {
-        elapsedTime += Time.deltaTime;
-
-        // 8초마다 새로운 오브젝트 활성화
-        if (elapsedTime >= spawnInterval)
+        if (GameManager.Instance.isPlaying)
         {
-            elapsedTime = 0f;
-            ActivateObject();
-        }
+            elapsedTime += Time.deltaTime;
 
-        // 오브젝트가 오른쪽에서 왼쪽으로 이동
+            if (elapsedTime >= spawnInterval)
+            {
+                elapsedTime = 0f;
+                ActivateObject();
+            }
+
+            MoveActiveObjects();
+        }
+    }
+
+    private void MoveActiveObjects()
+    {
         for (int i = 0; i < activeObjects.Count; i++)
         {
             GameObject obj = activeObjects[i];
@@ -50,7 +54,6 @@ public class RecipePool : MonoBehaviour
                 RectTransform rectTransform = obj.GetComponent<RectTransform>();
                 rectTransform.anchoredPosition += Vector2.left * moveSpeed * Time.deltaTime;
 
-                // 이전 오브젝트의 오른쪽에서 멈춤
                 if (i > 0)
                 {
                     RectTransform prevRectTransform = activeObjects[i - 1].GetComponent<RectTransform>();
@@ -61,14 +64,12 @@ public class RecipePool : MonoBehaviour
                 }
                 else
                 {
-                    // 첫 번째 오브젝트는 왼쪽 끝에서 멈춤
                     if (rectTransform.anchoredPosition.x - rectTransform.rect.width / 2 <= -recipePoolPanel.rect.width / 2 + rectTransform.rect.width / 2)
                     {
                         rectTransform.anchoredPosition = new Vector2(-recipePoolPanel.rect.width / 2 + rectTransform.rect.width / 2, rectTransform.anchoredPosition.y);
                     }
                 }
 
-                // 오브젝트가 활성화된 지 20초가 지나면 비활성화
                 if (Time.time - obj.GetComponent<RecipeObject>().activationTime >= 20f)
                 {
                     DeactivateObject(obj);
@@ -82,30 +83,23 @@ public class RecipePool : MonoBehaviour
     {
         if (objectPool.Count > 0)
         {
-            // 풀에서 오브젝트를 가져와 활성화
             GameObject obj = objectPool.Dequeue();
             obj.SetActive(true);
 
-            // 오브젝트의 시작 위치를 패널의 가장 오른쪽으로 설정
             RectTransform rectTransform = obj.GetComponent<RectTransform>();
             rectTransform.anchoredPosition = new Vector2(recipePoolPanel.rect.width / 2 + rectTransform.rect.width / 2, 0);
 
-            // 활성화된 오브젝트 목록에 추가
             activeObjects.Add(obj);
 
-            // 활성화된 오브젝트에 활성화 시간을 설정
             obj.GetComponent<RecipeObject>().activationTime = Time.time;
 
-            // 활성화된 오브젝트 수가 최대치를 넘으면 가장 오래된 오브젝트를 비활성화
             if (activeObjects.Count > maxVisibleObjects)
             {
                 GameObject oldestObj = activeObjects[0];
                 activeObjects.RemoveAt(0);
-                oldestObj.SetActive(false);
-                objectPool.Enqueue(oldestObj);
+                DeactivateObject(oldestObj);
             }
 
-            // 자식 Image 오브젝트 설정
             SetRecipeObjectImages(obj);
         }
     }
@@ -119,14 +113,9 @@ public class RecipePool : MonoBehaviour
 
     public void CorrectRecipe(GameObject obj)
     {
-        // obj를 초록색으로 변경
         obj.GetComponent<Image>().color = Color.green;
-
-        // 점수 추가
         int points = obj.GetComponent<RecipeObject>().Point;
         GameManager.Instance.AddScore(points);
-
-        // 0.2초 뒤 오브젝트 비활성화
         StartCoroutine(DeactivateAfterDelay(obj, 0.2f));
     }
 
@@ -138,7 +127,6 @@ public class RecipePool : MonoBehaviour
 
     private void SetRecipeObjectImages(GameObject obj)
     {
-        // RecipeObject의 자식 Image 오브젝트 이름을 기준으로 설정
         Dictionary<string, string> imageNameMap = new Dictionary<string, string>();
 
         switch (obj.name)
