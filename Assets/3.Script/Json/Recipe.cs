@@ -1,14 +1,16 @@
-using System.Collections;
+using UnityEngine;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 
 [System.Serializable]
 public class Recipe
 {
-    public int id;
-    public int stage;
+    //public int id;
+    //public int stage;
     public string recipe;
-    public string ingredient;
-
+    public List<string> ingredient;
+    
 }
 
 public class Recipe_List

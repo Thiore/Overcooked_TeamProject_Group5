@@ -2,21 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
-using System.IO;
 using System.Linq;
-
 
 public class DataManager : MonoBehaviour
 {
-    public Dictionary<int, Recipe> recipeData;
     private static DataManager instance;
+    public Dictionary<string, Recipe> recipeData;
+    
 
+
+    // 선택된 레시피와 재료들을 담는 리스트
+    private List<Recipe> stageRecipe;
+    
+    //private List<string> stage1Ingredient;
     private void Recipe_DataManager()
     {
-        recipeData = LoadRecipeFromJson();
+        LoadRecipeFromJson();
+        StageRecipeData();
+        GetStage1Recipe();
     }
 
-   public static DataManager Instance
+    public static DataManager Instance
     {
         get
         {
@@ -27,39 +33,76 @@ public class DataManager : MonoBehaviour
                 {
                     GameObject obj = new GameObject("Recipe_DataManager");
                     instance = obj.AddComponent<DataManager>();
-                    Debug.Log(obj.name);
+                    //Debug.Log(obj.name);
                 }
             }
             return instance;
         }
     }
+
     private void Awake()
     {
         Recipe_DataManager();
+        
     }
 
-
-
-    private Dictionary<int, Recipe> LoadRecipeFromJson()
+    private void LoadRecipeFromJson()
     {
         string jsonFile = Resources.Load<TextAsset>("Data/Recipe_JDB").text;
-        var recipes = JsonConvert.DeserializeObject<Recipe[]>(jsonFile).ToDictionary(x => x.id, x => x);
-        Debug.Log("Loaded " + recipes.Count + " recipes from JSON.");
+        var recipes = JsonConvert.DeserializeObject<Recipe[]>(jsonFile);
+        
 
-        // Filter recipes for stage 1
-        var stage1Recipes = recipes.Values.Where(recipe => recipe.stage == 1).ToList();
-
-        // Select a random recipe from stage 1 recipes
-        Recipe selectedRecipe = stage1Recipes[Random.Range(0, stage1Recipes.Count)];
-
-        Debug.Log("Selected recipe: " + selectedRecipe.recipe);
-        return recipes;
-         
+        // recipes 배열을 Dictionary로 변환
+        recipeData = recipes.ToDictionary(x => x.recipe, x => x);
+        
+        //Debug.Log("Loaded " + recipeData.Count + " recipes from JSON.");
 
     }
+    
+    public void StageRecipeData()
+    {
+        stageRecipe = new List<Recipe>();
+        //stage1Ingredient = new List<string>();
 
- 
+        // 선택된 레시피 출력 및 재료 출력
+        var stageRecipes = recipeData.Values.Where(recipe => recipe.recipe == "Sushi").ToList();
+        Recipe selectedRecipe = stageRecipes[Random.Range(0, stageRecipes.Count)];
 
-   
+        foreach (var recipe in stageRecipes)
+        {
+            stageRecipe.Add(recipe);//레시피 추가
+            //string ingredient = string.Join(",", recipe.ingredient);
+            //stage1Ingredient.Add(ingredient);//해당 레시피의 재료 추가
+            //Debug.Log("Selected recipe: " + recipe.recipe);
+            //Debug.Log("Ingredients for " + recipe.recipe + ": " + ingredient);
+        }
+
+        //Debug.Log("Selected recipe: " + selectedRecipe.recipe);
+        // 재료들을 문자열로 조합하여 출력
+        //string ingredients = string.Join(", ", selectedRecipe.ingredient);
+        //Debug.Log("Ingredients for " + selectedRecipe.recipe + ": " + ingredients);
+
+        
+    }
+    
+    public List<Recipe> GetStage1Recipe()
+    {
+        if(stageRecipe.Count!=0)
+        {
+            for(int i = 0; i < stageRecipe.Count;i++)
+            {
+                Debug.Log($"{stageRecipe[i].recipe} : ");
+                for(int j = 0; j < stageRecipe[i].ingredient.Count;j++)
+                {
+                    Debug.Log(stageRecipe[i].ingredient[j]);
+                }
+            }
+        }
+        return stageRecipe;
+        
+    }
+    //public List<string> GetStage1Ingredient()
+    //{
+    //    return stage1Ingredient;
+    //}
 }
-
