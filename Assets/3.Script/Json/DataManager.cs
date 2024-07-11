@@ -45,7 +45,11 @@ public class DataManager : MonoBehaviour
         Recipe_DataManager();
         
     }
-
+    private void LoadStageFromJson()
+    {
+        string stageJsonFile = Resources.Load<TextAsset>("Data/Stage_JDB").text;
+        var stages = JsonConvert.DeserializeObject<Stage[]>(stageJsonFile);
+    }
     private void LoadRecipeFromJson()
     {
         string jsonFile = Resources.Load<TextAsset>("Data/Recipe_JDB").text;
@@ -101,8 +105,5 @@ public class DataManager : MonoBehaviour
         return stageRecipe;
         
     }
-    //public List<string> GetStage1Ingredient()
-    //{
-    //    return stage1Ingredient;
-    //}
+   
 }
