@@ -1,0 +1,1485 @@
+fileFormatVersion: 2
+guid: b9927482da9fb024f85becb356d240f0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7349973170331317708
+    second: UI_FlameHUD_01_Edit_0
+  - first:
+      213: 7723856023441605912
+    second: UI_FlameHUD_01_Edit_1
+  - first:
+      213: 3966367605711831795
+    second: UI_FlameHUD_01_Edit_2
+  - first:
+      213: -1602022569415881229
+    second: UI_FlameHUD_01_Edit_3
+  - first:
+      213: 8421757776041874622
+    second: UI_FlameHUD_01_Edit_4
+  - first:
+      213: 2497654698478406822
+    second: UI_FlameHUD_01_Edit_5
+  - first:
+      213: 2287304872246531054
+    second: UI_FlameHUD_01_Edit_6
+  - first:
+      213: 7821304027599762897
+    second: UI_FlameHUD_01_Edit_7
+  - first:
+      213: -9203520934198881317
+    second: UI_FlameHUD_01_Edit_8
+  - first:
+      213: -1523715326004450445
+    second: UI_FlameHUD_01_Edit_9
+  - first:
+      213: 6218659030867717753
+    second: UI_FlameHUD_01_Edit_10
+  - first:
+      213: -8007700001463217693
+    second: UI_FlameHUD_01_Edit_11
+  - first:
+      213: -4646397550112163268
+    second: UI_FlameHUD_01_Edit_12
+  - first:
+      213: 4315059059074594821
+    second: UI_FlameHUD_01_Edit_13
+  - first:
+      213: -3533966746081789704
+    second: UI_FlameHUD_01_Edit_14
+  - first:
+      213: 7108663932970773682
+    second: UI_FlameHUD_01_Edit_15
+  - first:
+      213: 5248012992779061037
+    second: UI_FlameHUD_01_Edit_16
+  - first:
+      213: -7356113508535042887
+    second: UI_FlameHUD_01_Edit_17
+  - first:
+      213: -5181533815953362670
+    second: UI_FlameHUD_01_Edit_18
+  - first:
+      213: -3710978496492641640
+    second: UI_FlameHUD_01_Edit_19
+  - first:
+      213: 5888072577966166953
+    second: UI_FlameHUD_01_Edit_20
+  - first:
+      213: -8044122356558636745
+    second: UI_FlameHUD_01_Edit_21
+  - first:
+      213: 6972164018040015858
+    second: UI_FlameHUD_01_Edit_22
+  - first:
+      213: -8054394885557976973
+    second: UI_FlameHUD_01_Edit_23
+  - first:
+      213: -6808620317134631522
+    second: UI_FlameHUD_01_Edit_24
+  - first:
+      213: 2927604489274103538
+    second: UI_FlameHUD_01_Edit_25
+  - first:
+      213: 4827389058568502706
+    second: UI_FlameHUD_01_Edit_26
+  - first:
+      213: 6579034504632557983
+    second: UI_FlameHUD_01_Edit_27
+  - first:
+      213: -1623482059021964546
+    second: UI_FlameHUD_01_Edit_28
+  - first:
+      213: -5669620889636173997
+    second: UI_FlameHUD_01_Edit_29
+  - first:
+      213: -771418439624415120
+    second: UI_FlameHUD_01_Edit_30
+  - first:
+      213: 131932879499363821
+    second: UI_FlameHUD_01_Edit_31
+  - first:
+      213: 8055714237884608592
+    second: UI_FlameHUD_01_Edit_32
+  - first:
+      213: 2131356703825257480
+    second: UI_FlameHUD_01_Edit_33
+  - first:
+      213: -6768803277056764490
+    second: UI_FlameHUD_01_Edit_34
+  - first:
+      213: 5584008342203776019
+    second: UI_FlameHUD_01_Edit_35
+  - first:
+      213: 7105290575453725716
+    second: UI_FlameHUD_01_Edit_36
+  - first:
+      213: -4984160688004269143
+    second: UI_FlameHUD_01_Edit_37
+  - first:
+      213: -8158088819674375918
+    second: UI_FlameHUD_01_Edit_38
+  - first:
+      213: 2836870243719539919
+    second: UI_FlameHUD_01_Edit_39
+  - first:
+      213: -5951115810627712141
+    second: UI_FlameHUD_01_Edit_40
+  - first:
+      213: 5566491879414026964
+    second: UI_FlameHUD_01_Edit_41
+  - first:
+      213: -6903172248217912285
+    second: UI_FlameHUD_01_Edit_42
+  - first:
+      213: -3747696834056918474
+    second: UI_FlameHUD_01_Edit_43
+  - first:
+      213: 1627819308566448271
+    second: UI_FlameHUD_01_Edit_44
+  - first:
+      213: 4764743139124712745
+    second: UI_FlameHUD_01_Edit_45
+  - first:
+      213: 817425672677972412
+    second: UI_FlameHUD_01_Edit_46
+  - first:
+      213: -6916758495573727988
+    second: UI_FlameHUD_01_Edit_47
+  - first:
+      213: 5927846779692029193
+    second: UI_FlameHUD_01_Edit_48
+  - first:
+      213: -6844708517964644435
+    second: UI_FlameHUD_01_Edit_49
+  - first:
+      213: 6924228877395181661
+    second: UI_FlameHUD_01_Edit_50
+  - first:
+      213: 4297731370777446422
+    second: UI_FlameHUD_01_Edit_51
+  - first:
+      213: -5905725232312404259
+    second: UI_FlameHUD_01_Edit_52
+  - first:
+      213: -6767141136847065536
+    second: UI_FlameHUD_01_Edit_53
+  - first:
+      213: -7435917184090614021
+    second: UI_FlameHUD_01_Edit_54
+  - first:
+      213: 5774270461009098881
+    second: UI_FlameHUD_01_Edit_55
+  - first:
+      213: 1117725464985143093
+    second: UI_FlameHUD_01_Edit_56
+  - first:
+      213: 1471517358501855498
+    second: UI_FlameHUD_01_Edit_57
+  - first:
+      213: 956494571544372501
+    second: UI_FlameHUD_01_Edit_58
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1708
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc5ff3618a9500660800000000000000
+      internalID: 7349973170331317708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_1
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 1708
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8158f7d6126a03b60800000000000000
+      internalID: 7723856023441605912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_2
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 1708
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f2021b925e5b0730800000000000000
+      internalID: 3966367605711831795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_3
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 1708
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fdcec306f874c9e0800000000000000
+      internalID: -1602022569415881229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_4
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 1708
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb41c51b31810e470800000000000000
+      internalID: 8421757776041874622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_5
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 1708
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ac046217b379a220800000000000000
+      internalID: 2497654698478406822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_6
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 1708
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee35643a9a32ebf10800000000000000
+      internalID: 2287304872246531054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_7
+      rect:
+        serializedVersion: 2
+        x: 1715
+        y: 1708
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d57a65f29ada8c60800000000000000
+      internalID: 7821304027599762897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1448
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd354320976864080800000000000000
+      internalID: -9203520934198881317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_9
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 1448
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37bafa6ebfcaadae0800000000000000
+      internalID: -1523715326004450445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_10
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 1448
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97e2522d07d1d4650800000000000000
+      internalID: 6218659030867717753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_11
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 1448
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e1d3e8764feed090800000000000000
+      internalID: -8007700001463217693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_12
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 1448
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3ab15cbb0ea48fb0800000000000000
+      internalID: -4646397550112163268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_13
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 1448
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 508f8f02a5b22eb30800000000000000
+      internalID: 4315059059074594821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_14
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 1448
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f870cbd7f3d4fec0800000000000000
+      internalID: -3533966746081789704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_15
+      rect:
+        serializedVersion: 2
+        x: 1715
+        y: 1448
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bcaa580f2c07a260800000000000000
+      internalID: 7108663932970773682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1188
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d270b330300b4d840800000000000000
+      internalID: 5248012992779061037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_17
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 1188
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bcf0540db5d9e990800000000000000
+      internalID: -7356113508535042887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_18
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 1188
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 211fc64827e7718b0800000000000000
+      internalID: -5181533815953362670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_19
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 1188
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 892617318b4ff7cc0800000000000000
+      internalID: -3710978496492641640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_20
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 1188
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a3546530d2a6b150800000000000000
+      internalID: 5888072577966166953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_21
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 1188
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7395b8716598d5090800000000000000
+      internalID: -8044122356558636745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_22
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 1188
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fb090bfb3a12c060800000000000000
+      internalID: 6972164018040015858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_23
+      rect:
+        serializedVersion: 2
+        x: 1715
+        y: 1188
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 370089d868a093090800000000000000
+      internalID: -8054394885557976973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 928
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9dceaa25ebe281a0800000000000000
+      internalID: -6808620317134631522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_25
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 928
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f6950a95c0f0a820800000000000000
+      internalID: 2927604489274103538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_26
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 928
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bd359ca5c45ef240800000000000000
+      internalID: 4827389058568502706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_27
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 928
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9169a5560d6d4b50800000000000000
+      internalID: 6579034504632557983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_28
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 928
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efaa6cc3bab3879e0800000000000000
+      internalID: -1623482059021964546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_29
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 928
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3570a1ef6d57151b0800000000000000
+      internalID: -5669620889636173997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_30
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 928
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 078200d240f5b45f0800000000000000
+      internalID: -771418439624415120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_31
+      rect:
+        serializedVersion: 2
+        x: 1715
+        y: 928
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de501c04148b4d100800000000000000
+      internalID: 131932879499363821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 668
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0503b291b65abcf60800000000000000
+      internalID: 8055714237884608592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_33
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 668
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 804e62531a9149d10800000000000000
+      internalID: 2131356703825257480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_34
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 668
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b5188c38416012a0800000000000000
+      internalID: -6768803277056764490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_35
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 668
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31cbfdb70026e7d40800000000000000
+      internalID: 5584008342203776019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_36
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 668
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 414a9d702201b9260800000000000000
+      internalID: 7105290575453725716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_37
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 668
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9abf900f244b4dab0800000000000000
+      internalID: -4984160688004269143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_38
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 668
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21919312175a8ce80800000000000000
+      internalID: -8158088819674375918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_39
+      rect:
+        serializedVersion: 2
+        x: 1715
+        y: 668
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcc67cec4769e5720800000000000000
+      internalID: 2836870243719539919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 408
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37b035a53b3696da0800000000000000
+      internalID: -5951115810627712141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_41
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 408
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d2d19d2fd6204d40800000000000000
+      internalID: 5566491879414026964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_42
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 408
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32cf2a13a610330a0800000000000000
+      internalID: -6903172248217912285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_43
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 408
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63a6e28e5918dfbc0800000000000000
+      internalID: -3747696834056918474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_44
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 408
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8800ad590d279610800000000000000
+      internalID: 1627819308566448271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_45
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 408
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 925128de3a4cf1240800000000000000
+      internalID: 4764743139124712745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_46
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 408
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb951428154185b00800000000000000
+      internalID: 817425672677972412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_47
+      rect:
+        serializedVersion: 2
+        x: 1715
+        y: 408
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c05a92a7bccb200a0800000000000000
+      internalID: -6916758495573727988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_48
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 148
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9059c723d31f34250800000000000000
+      internalID: 5927846779692029193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_49
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 148
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: daf70a32ed5b201a0800000000000000
+      internalID: -6844708517964644435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_50
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 148
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5044a45a7dc71060800000000000000
+      internalID: 6924228877395181661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_51
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 148
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6180e3f49eb94ab30800000000000000
+      internalID: 4297731370777446422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_52
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 148
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd635fae036aa0ea0800000000000000
+      internalID: -5905725232312404259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_53
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 148
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04e2c496df84612a0800000000000000
+      internalID: -6767141136847065536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_54
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 148
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf65e0fd7b05ec890800000000000000
+      internalID: -7435917184090614021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_FlameHUD_01_Edit_55
+      rect:
+        serializedVersion: 2
+        x: 1715
+        y: 148
+        width: 245
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1887a711464522050800000000000000
+      internalID: 5774270461009098881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
