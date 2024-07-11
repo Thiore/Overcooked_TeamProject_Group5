@@ -479,7 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1430,7 +1430,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 654968979}
   m_LocalRotation: {x: -0, y: -0.070764214, z: -0, w: 0.9974931}
-  m_LocalPosition: {x: 4.921, y: 3.799, z: -5.838}
+  m_LocalPosition: {x: 5.15, y: 3.46, z: -7.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1863218046}
@@ -1797,7 +1797,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uAC8C\uC784\uC744 \uC2DC\uC791\uD558\uB824\uBA74 A\uD0A4\uB97C \uB20C\uB7EC\uC8FC\uC138\uC694."
+  m_Text: "\uAC8C\uC784\uC744 \uC2DC\uC791\uD558\uB824\uBA74 SPACE\uB97C \uB20C\uB7EC\uC8FC\uC138\uC694."
 --- !u!222 &762055892
 CanvasRenderer:
   m_ObjectHideFlags: 0
