@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EmissionController : MonoBehaviour
 {
-    private bool isPick = false;
     private Queue<GameObject> pickQue;
     private List<GameObject> pickList;
 
