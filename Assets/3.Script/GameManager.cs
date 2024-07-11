@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public bool isPause = false;
     public bool isPlaying = true;
     public GameObject pauseScreen;
-
+    public bool isInputEnabled = false;
     private void Awake()
     {
         if (Instance == null)

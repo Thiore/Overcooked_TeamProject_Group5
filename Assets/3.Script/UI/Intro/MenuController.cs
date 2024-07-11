@@ -45,19 +45,23 @@ public class MenuController : MonoBehaviour
 
     private void Update()
     {
-        // 좌우 방향키 입력 처리
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (GameManager.Instance.isInputEnabled)
         {
-            ChangeButtonSelection(-1);
+            // 좌우 방향키 입력 처리
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                ChangeButtonSelection(-1);
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                ChangeButtonSelection(1);
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                HandleButtonPress();
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            ChangeButtonSelection(1);
-        }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            HandleButtonPress();
-        }
+        
     }
 
     // 버튼 선택 변경

@@ -12,19 +12,24 @@ public class ShutterControll : MonoBehaviour
     {
         shutter = GetComponent<GameObject>();
         shutter_ani = GetComponent<Animator>();
-        camera_ani=GameObject.Find("Cameraman").GetComponent<Animator>();
+        camera_ani = GameObject.Find("Cameraman").GetComponent<Animator>();
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("´­¸²");
             shutter_ani.SetTrigger("Open");
             camera_ani.SetTrigger("GameStart");
+            GameManager.Instance.isInputEnabled = true;
         }
-        else 
+        else
         {
             return;
         }
+    }
+    private void DestoryMySelf()
+    {
+        Destroy(gameObject);
     }
 }
