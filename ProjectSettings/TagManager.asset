@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Crate
+  - TrashCan
+  - ChoppingBoard
+  - Plate_Return
+  - Pass
+  - Counter
   layers:
   - Default
   - TransparentFX
