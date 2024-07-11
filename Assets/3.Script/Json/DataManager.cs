@@ -7,14 +7,12 @@ using System.Linq;
 public class DataManager : MonoBehaviour
 {
     private static DataManager instance;
-    public Dictionary<string, Recipe> recipeData;
+    public Dictionary<int, Recipe> recipeData;
     
-
-
     // 선택된 레시피와 재료들을 담는 리스트
     private List<Recipe> stageRecipe;
     
-    //private List<string> stage1Ingredient;
+    
     private void Recipe_DataManager()
     {
         LoadRecipeFromJson();
@@ -57,7 +55,7 @@ public class DataManager : MonoBehaviour
         
 
         // recipes 배열을 Dictionary로 변환
-        recipeData = recipes.ToDictionary(x => x.recipe, x => x);
+        recipeData = recipes.ToDictionary(x => x.stage, x => x);
         
         //Debug.Log("Loaded " + recipeData.Count + " recipes from JSON.");
 
@@ -69,7 +67,7 @@ public class DataManager : MonoBehaviour
         //stage1Ingredient = new List<string>();
 
         // 선택된 레시피 출력 및 재료 출력
-        var stageRecipes = recipeData.Values.Where(recipe => recipe.recipe == "Sushi").ToList();
+        var stageRecipes = recipeData.Values.Where(recipe => recipe.stage == 2).ToList();
         Recipe selectedRecipe = stageRecipes[Random.Range(0, stageRecipes.Count)];
 
         foreach (var recipe in stageRecipes)

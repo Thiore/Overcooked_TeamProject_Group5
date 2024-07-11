@@ -7,7 +7,7 @@ using System.Linq;
 public class Recipe
 {
     //public int id;
-    //public int stage;
+    public int stage;
     public string recipe;
     public List<string> ingredient;
     
