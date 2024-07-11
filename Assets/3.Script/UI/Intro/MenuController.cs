@@ -4,43 +4,48 @@ using UnityEngine.EventSystems;
 
 public class MenuController : MonoBehaviour
 {
-    private Button[] buttons;
-    private int currentButtonIndex = 0;
+    // 메인 메뉴 버튼
+    public Button storyButton;
+    public Button arcadeButton;
+    public Button battleButton;
+    public Button characterButton;
+    public Button setButton;
 
-    private GameObject storyPanel;
-    private GameObject arcadePanel;
-    private GameObject battlePanel;
+    // 서브 패널
+    public GameObject storyPanel;
+    public GameObject arcadePanel;
+    public GameObject battlePanel;
 
+    // 서브 패널 버튼들
     private Button[] storyButtons;
     private Button[] arcadeButtons;
     private Button[] battleButtons;
 
+    // 메인 메뉴 버튼 배열
+    private Button[] buttons;
+    private int currentButtonIndex = 0;
     private Button[] currentSubButtons;
     private int currentSubButtonIndex = 0;
 
     private void Awake()
     {
-        // Initialize buttons array
+        // 메인 메뉴 버튼 배열 초기화
         buttons = new Button[]
         {
-            GameObject.Find("Story_Button").GetComponent<Button>(),
-            GameObject.Find("Arcade_Button").GetComponent<Button>(),
-            GameObject.Find("Battle_Button").GetComponent<Button>(),
-            GameObject.Find("Character_Button").GetComponent<Button>(),
-            GameObject.Find("Set_Button").GetComponent<Button>()
+            storyButton,
+            arcadeButton,
+            battleButton,
+            characterButton,
+            setButton
         };
 
-        // Find panels by name
-        storyPanel = GameObject.Find("Story_Panel");
-        arcadePanel = GameObject.Find("Arcade_Panel");
-        battlePanel = GameObject.Find("Battle_Panel");
-
-        // Select the first button
+        // 첫 번째 버튼 선택
         SelectButton(currentButtonIndex);
     }
 
     private void Update()
     {
+        // 좌우 방향키 입력 처리
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             ChangeButtonSelection(-1);
@@ -55,6 +60,7 @@ public class MenuController : MonoBehaviour
         }
     }
 
+    // 버튼 선택 변경
     private void ChangeButtonSelection(int direction)
     {
         ResetButtonColor(currentButtonIndex);
@@ -62,6 +68,7 @@ public class MenuController : MonoBehaviour
         SelectButton(currentButtonIndex);
     }
 
+    // 버튼 선택
     private void SelectButton(int index)
     {
         EventSystem.current.SetSelectedGameObject(buttons[index].gameObject);
@@ -69,11 +76,13 @@ public class MenuController : MonoBehaviour
         TogglePanel(index);
     }
 
+    // 버튼 색상 초기화
     private void ResetButtonColor(int index)
     {
         buttons[index].GetComponentInChildren<Text>().color = Color.white;
     }
 
+    // 패널 활성화/비활성화
     private void TogglePanel(int index)
     {
         storyPanel.SetActive(index == 0);
@@ -86,6 +95,7 @@ public class MenuController : MonoBehaviour
         }
     }
 
+    // 버튼 클릭 처리
     private void HandleButtonPress()
     {
         if (currentSubButtons != null && currentSubButtons.Length > 0)
@@ -98,15 +108,25 @@ public class MenuController : MonoBehaviour
         }
     }
 
+    // 서브 패널 버튼 초기화
     public void InitializeSubPanelButtons()
     {
-        // Initialize sub-panel buttons array
-        storyButtons = storyPanel.GetComponentsInChildren<Button>(true);
-        arcadeButtons = arcadePanel.GetComponentsInChildren<Button>(true);
-        battleButtons = battlePanel.GetComponentsInChildren<Button>(true);
+        if (storyPanel != null)
+        {
+            storyButtons = storyPanel.GetComponentsInChildren<Button>(true);
+        }
+        if (arcadePanel != null)
+        {
+            arcadeButtons = arcadePanel.GetComponentsInChildren<Button>(true);
+        }
+        if (battlePanel != null)
+        {
+            battleButtons = battlePanel.GetComponentsInChildren<Button>(true);
+        }
     }
 
-    public void ActivateSubPanel(int index)
+    // 서브 패널 활성화
+    private void ActivateSubPanel(int index)
     {
         switch (index)
         {
@@ -131,17 +151,20 @@ public class MenuController : MonoBehaviour
         }
     }
 
+    // 서브 패널 버튼 선택
     private void SelectSubButton(int index)
     {
         EventSystem.current.SetSelectedGameObject(currentSubButtons[index].gameObject);
         currentSubButtons[index].GetComponentInChildren<Text>().color = Color.yellow;
     }
 
+    // 서브 패널 버튼 색상 초기화
     private void ResetSubButtonColor(int index)
     {
         currentSubButtons[index].GetComponentInChildren<Text>().color = Color.white;
     }
 
+    // 서브 패널 버튼 클릭 처리
     private void HandleSubButtonPress()
     {
         currentSubButtons[currentSubButtonIndex].onClick.Invoke();
