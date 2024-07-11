@@ -6,7 +6,7 @@ public class EmissionController : MonoBehaviour
 {
     private bool isPick = false;
     private Queue<GameObject> pickQue;
-    private Player_Ray goray;
+    private List<GameObject> pickList;
 
     private Material originalMaterial;
     private Material instanceMaterial;
@@ -14,57 +14,47 @@ public class EmissionController : MonoBehaviour
     private void Awake()
     {
         pickQue = new Queue<GameObject>();
-        goray = GetComponent<Player_Ray>();
+        pickList = new List<GameObject>();
     }
 
-    void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        if (collision.gameObject.CompareTag("TEST"))
+        if (other.gameObject.CompareTag("TEST"))
         {
-            if(!isPick)
+            pickList.Add(other.gameObject);
+
+            for (int i = 0; i < pickList.Count; i++)
             {
-                isPick = true;
+                float distance = Vector3.Distance(transform.position, pickList[i].transform.position);
+
                 if (pickQue.Count > 0)
                 {
-                    ByeObeject(pickQue.Peek());
-                    pickQue.Clear();
-
-                    GameObject hit_ob; 
-                    StartCoroutine(goray.ShotRay(out GameObject ob => {
-                        
-                        if(ob != null)
-                        {
-                            hit_ob = ob;
-                        }
-                        
-                    }));
-                    
-                    
-                    pickQue.Enqueue(collision.gameObject);
-                    PickObject(pickQue.Peek());
+                    float pickDistance = Vector3.Distance(transform.position, pickQue.Peek().transform.position);
+                    if (distance < pickDistance)
+                    {
+                        ByeObeject(pickQue.Peek());
+                        pickQue.Clear();
+                        pickQue.Enqueue(pickList[i]);
+                        PickObject(pickQue.Peek());
+                    }
                 }
 
                 if (pickQue.Count.Equals(0))
                 {
-                    pickQue.Enqueue(collision.gameObject);
+                    pickQue.Enqueue(pickList[i]);
                     PickObject(pickQue.Peek());
                 }
-
-                Debug.Log("È£Ãâ");
             }
-
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if(pickQue.Count > 0)
+        if (pickQue.Count > 0)
         {
-           ByeObeject(pickQue.Peek());
-           pickQue.Clear();
+            ByeObeject(pickQue.Peek());
+            pickQue.Clear();
         }
-
-        isPick = false;
     }
 
     void PickObject(GameObject gameObject)

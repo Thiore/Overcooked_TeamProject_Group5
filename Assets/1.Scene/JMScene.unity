@@ -2041,6 +2041,7 @@ GameObject:
   - component: {fileID: 1927861152138659604}
   - component: {fileID: 1927861152138659605}
   - component: {fileID: 1927861152138659596}
+  - component: {fileID: 1927861152138659598}
   - component: {fileID: 1927861152138659597}
   - component: {fileID: 1927861152138659594}
   m_Layer: 0
@@ -2050,8 +2051,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1927861152138659594
-BoxCollider:
+--- !u!136 &1927861152138659594
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2059,10 +2060,11 @@ BoxCollider:
   m_GameObject: {fileID: 1927861152138659593}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1.1, y: 1.4, z: 1.4}
-  m_Center: {x: 0, y: 0.8, z: 0}
+  m_Enabled: 1
+  m_Radius: 0.7
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &1927861152138659595
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2099,12 +2101,24 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1927861152138659593}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.75
+  m_Radius: 0.9
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1927861152138659598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927861152138659593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e874c4c4be75f584fbe4f1a7b93fecb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1927861152138659604
 MonoBehaviour:
   m_ObjectHideFlags: 0
