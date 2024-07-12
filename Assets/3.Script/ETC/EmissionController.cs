@@ -20,9 +20,10 @@ public class EmissionController : MonoBehaviour
         playerStateController = GetComponent<Player_StateController>();
     }
 
+    //카운터나 화구 등등 설치된거 검별 나중에 if || 추가하기 (태그를 나눠도 똑같이 queue로 검사하기 위해)
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Crate"))
+        if (other.gameObject.CompareTag("TEST")/*||화구||쓰레기통*/)
         {
             pickList.Add(other.gameObject);
 
@@ -64,7 +65,7 @@ public class EmissionController : MonoBehaviour
     {
 
         // 충돌한 오브젝트의 렌더러 가져오기
-        Renderer renderer = gameObject.gameObject.GetComponent<Renderer>();
+        Renderer renderer = gameObject.GetComponent<Renderer>();
 
         if (renderer != null)
         {
