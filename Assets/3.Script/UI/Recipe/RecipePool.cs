@@ -17,8 +17,8 @@ public class RecipePool : MonoBehaviour
 
     private float spawnInterval = 8f; // 오브젝트 생성 간격 (초)
     private float elapsedTime = 0f; // 경과 시간
-
     private List<Recipe> recipes; // 레시피 데이터 목록
+    public List<Recipe> Recipes { get { return recipes; } }
 
     private void Start()
     {
@@ -158,6 +158,7 @@ public class RecipePool : MonoBehaviour
             for (int j = 0; j < recipe.ingredient.Count(); j++)
             {
                 imageNameMap.Add($"Ingredient_Icon_{j + 1}", recipe.ingredient[j]);
+                
             }
 
             RecipeObject recipeObject = obj.GetComponent<RecipeObject>();
