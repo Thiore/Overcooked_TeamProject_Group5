@@ -87,6 +87,14 @@ public class DataManager : MonoBehaviour
         stageData = stages.ToDictionary(x => x.stage, x => x);
     }
 
+    public void StageScoreData(int stageNumber)
+    {
+        stageScore = new List<Stage>();
+
+        var stageScores = stageData.Values.Where(stage => stage.stage == stageNumber).ToList();
+
+
+    }
     public List<List<Recipe>> StageRecipeData(int stageNumber)
     {
         List<Recipe> stageRecipes = recipeData.Values.Where(recipe => recipe.stage == stageNumber).ToList();
@@ -107,25 +115,25 @@ public class DataManager : MonoBehaviour
             allIngredients.Add(ingredients); // 각 레시피의 재료 리스트를 전체 재료 리스트에 추가
         }
 
-        // 각 리스트들을 출력하여 확인
-        foreach (var recipes in allRecipes)
-        {
-            foreach (var recipe in recipes)
-            {
-                Debug.Log("Recipe: " + recipe.recipe);
-            }
-        }
+        return allRecipes;
+        //// 각 리스트들을 출력하여 확인
+        //foreach (var recipes in allRecipes)
+        //{
+        //    foreach (var recipe in recipes)
+        //    {
+        //        Debug.Log("Recipe: " + recipe.recipe);
+        //    }
+        //}
 
-        foreach (var ingredients in allIngredients)
-        {
-            foreach (var ingredient in ingredients)
-            {
-                Debug.Log("Ingredient: " + ingredient);
-            }
-        }
+        //foreach (var ingredients in allIngredients)
+        //{
+        //    foreach (var ingredient in ingredients)
+        //    {
+        //        Debug.Log("Ingredient: " + ingredient);
+        //    }
+        //}
 
         // allRecipes를 반환하여 호출한 곳에서 필요한 데이터를 사용
-        return allRecipes;
     }
     //public List<Recipe> StageRecipeData(int stageNumber)
     //{                       
@@ -162,14 +170,6 @@ public class DataManager : MonoBehaviour
     //    //Debug.Log("Ingredients for " + selectedRecipe.recipe + ": " + ingredients);
     //}
 
-    public void StageScoreData(int stageNumber)
-    {
-        stageScore = new List<Stage>();
-
-        var stageScores = stageData.Values.Where(stage => stage.stage == stageNumber).ToList();
-
-
-    }
 
     //public List<Recipe> GetStageRecipe()
     //{
