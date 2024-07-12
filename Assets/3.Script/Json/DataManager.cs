@@ -4,19 +4,27 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System.Linq;
 
+public enum stagenum_e
+{
+    sushi1 = 1,
+    sushi2,
+    airballon
+}
 public class DataManager : MonoBehaviour
 {
     private static DataManager instance;
     public Dictionary<int, Recipe> recipeData;
-    
+
     // 선택된 레시피와 재료들을 담는 리스트
     private List<Recipe> stageRecipe;
-    
-    
+    private stagenum_e stagenum;
+
+
     private void Recipe_DataManager()
     {
+        stagenum = stagenum_e.sushi1;
         LoadRecipeFromJson();
-        StageRecipeData();
+        StageRecipeData(stagenum); //스테이지 + 레시피 + 재료 데이터 부르는 메서드
         GetStage1Recipe();
     }
 
@@ -41,34 +49,30 @@ public class DataManager : MonoBehaviour
     private void Awake()
     {
         Recipe_DataManager();
-        
+
     }
-    private void LoadStageFromJson()
-    {
-        string stageJsonFile = Resources.Load<TextAsset>("Data/Stage_JDB").text;
-        var stages = JsonConvert.DeserializeObject<Stage[]>(stageJsonFile);
-    }
+    
     private void LoadRecipeFromJson()
     {
         string jsonFile = Resources.Load<TextAsset>("Data/Recipe_JDB").text;
         var recipes = JsonConvert.DeserializeObject<Recipe[]>(jsonFile);
-        
+
 
         // recipes 배열을 Dictionary로 변환
-        recipeData = recipes.ToDictionary(x => x.stage, x => x);
-        
+        recipeData = recipes.ToDictionary(x => x.id, x => x);
+
         //Debug.Log("Loaded " + recipeData.Count + " recipes from JSON.");
 
     }
-    
-    public void StageRecipeData()
+
+    public void StageRecipeData(stagenum_e stageNumber)
     {
         stageRecipe = new List<Recipe>();
         //stage1Ingredient = new List<string>();
 
         // 선택된 레시피 출력 및 재료 출력
-        var stageRecipes = recipeData.Values.Where(recipe => recipe.stage == 2).ToList();
-        Recipe selectedRecipe = stageRecipes[Random.Range(0, stageRecipes.Count)];
+        var stageRecipes = recipeData.Values.Where(recipe => recipe.stage == (int)stageNumber).ToList();
+        //Recipe selectedRecipe = stageRecipes[Random.Range(0, stageRecipes.Count)];
 
         foreach (var recipe in stageRecipes)
         {
@@ -84,24 +88,24 @@ public class DataManager : MonoBehaviour
         //string ingredients = string.Join(", ", selectedRecipe.ingredient);
         //Debug.Log("Ingredients for " + selectedRecipe.recipe + ": " + ingredients);
 
-        
+
     }
-    
+
     public List<Recipe> GetStage1Recipe()
     {
-        if(stageRecipe.Count!=0)
+        if (stageRecipe.Count != 0)
         {
-            for(int i = 0; i < stageRecipe.Count;i++)
+            for (int i = 0; i < stageRecipe.Count; i++)
             {
                 Debug.Log($"{stageRecipe[i].recipe} : ");
-                for(int j = 0; j < stageRecipe[i].ingredient.Count;j++)
+                for (int j = 0; j < stageRecipe[i].ingredient.Count; j++)
                 {
                     Debug.Log(stageRecipe[i].ingredient[j]);
                 }
             }
         }
         return stageRecipe;
-        
+
     }
-   
+
 }

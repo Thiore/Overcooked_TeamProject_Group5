@@ -1,18 +1,18 @@
 [
   {
-    
+    "id" :  101,
     "stage": 1,
     "recipe": "Fish",
     "ingredient": [ "Fish" ]
   },
   {
-    
+    "id": 102,
     "stage": 1,
     "recipe": "Prawn",
     "ingredient": [ "Prawn" ]
   },
   {
-    
+    "id": 103,
     "stage": 2,
     "recipe": "Sushi",
     "ingredient": [ "Fish", "Rice", "Seaweed" ]
