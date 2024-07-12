@@ -2,19 +2,19 @@
   {
     "id" :  101,
     "stage": 1,
-    "recipe": "Fish",
+    "recipe": "Fish_Food",
     "ingredient": [ "Fish" ]
   },
   {
     "id": 102,
     "stage": 1,
-    "recipe": "Prawn",
+    "recipe": "Prawn_Food",
     "ingredient": [ "Prawn" ]
   },
   {
     "id": 103,
     "stage": 2,
     "recipe": "Sushi",
-    "ingredient": [ "Fish", "Rice", "Seaweed" ]
+    "ingredient": [ "Praw", "Rice", "Seaweed","Cucumber" ]
   }
 ]
