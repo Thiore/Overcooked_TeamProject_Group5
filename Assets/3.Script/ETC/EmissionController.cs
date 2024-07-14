@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class EmissionController : MonoBehaviour
 {
-    private bool isPick = false;
     private Queue<GameObject> pickQue;
     private List<GameObject> pickList;
 
     private Material originalMaterial;
     private Material instanceMaterial;
 
+    private Player_StateController playerStateController;
+
     private void Awake()
     {
         pickQue = new Queue<GameObject>();
         pickList = new List<GameObject>();
+
+        playerStateController = GetComponent<Player_StateController>();
     }
 
+    //카운터나 화구 등등 설치된거 검별 나중에 if || 추가하기 (태그를 나눠도 똑같이 queue로 검사하기 위해)
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("TEST"))
+        if (other.gameObject.CompareTag("TEST")/*||화구||쓰레기통*/)
         {
             pickList.Add(other.gameObject);
 
@@ -61,7 +65,7 @@ public class EmissionController : MonoBehaviour
     {
 
         // 충돌한 오브젝트의 렌더러 가져오기
-        Renderer renderer = gameObject.gameObject.GetComponent<Renderer>();
+        Renderer renderer = gameObject.GetComponent<Renderer>();
 
         if (renderer != null)
         {
@@ -78,6 +82,8 @@ public class EmissionController : MonoBehaviour
             instanceMaterial.EnableKeyword("_EMISSION");
             instanceMaterial.SetColor("_EmissionColor", new Color(0.5f, 0.5f, 0.5f)/* * Mathf.LinearToGammaSpace(2.0f)*/);
         }
+
+        playerStateController.IsEmission = true;
     }
 
     void ByeObeject(GameObject gameObject)
@@ -89,6 +95,7 @@ public class EmissionController : MonoBehaviour
         {
             renderer.material = originalMaterial;
         }
+        playerStateController.IsEmission = false;
     }
 }
 
