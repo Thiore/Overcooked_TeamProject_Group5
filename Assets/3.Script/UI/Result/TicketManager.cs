@@ -21,7 +21,7 @@ public class TicketManager : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            StarTexts[i] = ResultTicket.transform.Find($"Star_{i + 1}/Text").GetComponent<Text>();
+            StarTexts[i] = ResultTicket.transform.Find($"Star_{i + 1}/Target_Score_{i+1}").GetComponent<Text>();
             FullStars[i] = ResultTicket.transform.Find($"Star_{i + 1}/Full_Star_{i + 1}").GetComponent<Image>();
         }
 

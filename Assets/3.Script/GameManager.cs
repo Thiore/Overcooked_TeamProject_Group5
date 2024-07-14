@@ -118,4 +118,28 @@ public class GameManager : MonoBehaviour
             pauseScreen.SetActive(true);
         }
     }
+
+    public void AllCorrect_Recipe()
+    {
+        ScoreManager.Instance.AddScore(10);
+        if (tip < 4)
+        {
+            tip += 1;
+        }
+        Debug.Log("AllCorrect_Recipe 호출");
+    }
+    public void Incorrect_Recipe()
+    {
+        ScoreManager.Instance.AddScore(10);
+        tip = 1;
+        Debug.Log("InCorrect_Recipe 호출");
+    }
+    public void Wrong_Recipe()
+    {
+        ScoreManager.Instance.SubScore(10);
+        tip = 1;
+        Debug.Log("Wrong_Recipe 호출");
+    }
+
+
 }

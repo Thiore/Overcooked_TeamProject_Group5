@@ -32,6 +32,7 @@ public class ScoreManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject); // 오브젝트가 씬 전환 시 파괴되지 않도록 설정
         }
         else if (instance != this)
         {
