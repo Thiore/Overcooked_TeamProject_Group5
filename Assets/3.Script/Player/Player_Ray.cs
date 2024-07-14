@@ -4,31 +4,23 @@ using UnityEngine;
 
 public class Player_Ray : MonoBehaviour
 {
-    private GameObject returnob;
+    [SerializeField] Transform rayPoint;
 
-    public GameObject ReturnOb { get => returnob; }
-
-    public void ShotRay()
+    public Vector3? ShotRayFront()
     {
-        StartCoroutine(ShotRay_co());
-    }
+        RaycastHit hit;
+        int layerMask = ~LayerMask.GetMask("Player");
 
-    private IEnumerator ShotRay_co()
-    {
-        while (true)
+        if (Physics.Raycast(rayPoint.position, rayPoint.forward, out hit, 3f, layerMask))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 2f))
+
+            if (hit.collider.gameObject != null)
             {
-                Debug.DrawRay(transform.position, transform.forward * 2f, Color.red);
-                if (hit.collider != null)
-                {
-                    returnob = hit.collider.gameObject;
-                    yield return null;
-                }
+                Debug.Log(hit.collider.name);
+                return hit.point;
             }
-            yield return null;
         }
+        return null;
     }
 
 

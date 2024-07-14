@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//전반적 플레이어 상호작용 (재료 / 요리 도구 등등 상호작용) 
 public class Player_StateController : MonoBehaviour
 {
     private Animator animator;
@@ -22,7 +23,7 @@ public class Player_StateController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    //재료 박스 인접해서 재료 꺼내는 용도
+    //온스테이 안에서 태그로 전반적인 처리
     private void OnTriggerStay(Collider other)
     {
         if(!isCoroutineRunning) 
@@ -52,26 +53,14 @@ public class Player_StateController : MonoBehaviour
             // 재료를 내려놓을때
             if (isBellow)
             {
-                animator.SetBool("IsHold", false);
-                isBellow = false;
-                PickOB.gameObject.AddComponent<Rigidbody>();
-                //ingre_controller.PickObject(PickOB);
-                PickOB.transform.SetParent(null);
-                PickOB = null;
-                yield return new WaitForSeconds(0.5f);                
+                DropIngredients();
+                yield return new WaitForSeconds(0.5f);
             }
 
             // 재료를 들때
             if (!isBellow && gameObject.CompareTag("Ingredients"))
             {
-                animator.SetBool("IsHold", true);
-                isBellow = true;
-                PickOB = gameObject;
-                Destroy(PickOB.transform.GetComponent<Rigidbody>());
-                ingre_controller.ByeObeject(PickOB);
-                PickOB.transform.SetParent(Attachtransform);
-                PickOB.transform.rotation = Attachtransform.rotation;
-                PickOB.transform.position = Attachtransform.position;
+                TakeIngredients(gameObject);
                 yield return new WaitForSeconds(0.5f);
             }
 
@@ -87,5 +76,31 @@ public class Player_StateController : MonoBehaviour
     }
 
 
+
+
+
+    private void DropIngredients()
+    {
+        if(PickOB != null)
+        {
+            animator.SetBool("IsTake", false);
+            isBellow = false;
+            PickOB.gameObject.AddComponent<Rigidbody>();
+            PickOB.transform.SetParent(null);
+            PickOB = null;
+        }
+    }
+
+    private void TakeIngredients(GameObject gameObject)
+    {
+        animator.SetBool("IsTake", true);
+        isBellow = true;
+        PickOB = gameObject;
+        Destroy(PickOB.transform.GetComponent<Rigidbody>());
+        ingre_controller.ByeObeject(PickOB);
+        PickOB.transform.SetParent(Attachtransform);
+        PickOB.transform.rotation = Attachtransform.rotation;
+        PickOB.transform.position = Attachtransform.position;
+    }
 
 }
