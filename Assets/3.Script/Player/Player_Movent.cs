@@ -14,12 +14,14 @@ public class Player_Movent : MonoBehaviour
     private Animator animator;
     private Vector3 moveDirection;
 
+    private Player_Ray playerRay;
     private bool isJumping = false;
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerIntput>();
         player_rb = GetComponent<Rigidbody>();
+        playerRay = GetComponent<Player_Ray>();
         animator = GetComponent<Animator>();
     }
 
@@ -27,6 +29,7 @@ public class Player_Movent : MonoBehaviour
     {
         Walking();
 
+        Debug.DrawRay(transform.position, transform.forward * 3f, Color.red);
         if (Input.GetKeyDown(KeyCode.V) && isJumping.Equals(false))
         {
             Jump();
@@ -82,11 +85,18 @@ public class Player_Movent : MonoBehaviour
         isJumping = true;
         animator.SetBool("IsWalking", true);
 
-        Vector3 endPos = player_rb.position + transform.forward * 3f;
+        Vector3 endPos = player_rb.position + transform.forward * 2f;
         float elaspedTime = 0f;
 
         while (elaspedTime < 0.15f)
         {
+            Vector3? hitpoint = playerRay.ShotRayFront();
+            if(hitpoint.HasValue)
+            {
+                endPos = hitpoint.Value - transform.forward * 0.5f;
+                break;
+            }
+
             player_rb.MovePosition(Vector3.Lerp(player_rb.position, endPos, elaspedTime / 0.15f));
             elaspedTime += Time.deltaTime;
             yield return null;
