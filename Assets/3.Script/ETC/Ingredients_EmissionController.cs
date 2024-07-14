@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmissionController : MonoBehaviour
+public class Ingredients_EmissionController : MonoBehaviour
 {
     private Queue<GameObject> pickQue;
     private List<GameObject> pickList;
@@ -12,6 +12,9 @@ public class EmissionController : MonoBehaviour
 
     private Player_StateController playerStateController;
 
+    private bool isBellowIngre = false;
+    public bool IsBellowIngre { get => isBellowIngre; set => isBellowIngre = value; }
+
     private void Awake()
     {
         pickQue = new Queue<GameObject>();
@@ -20,10 +23,9 @@ public class EmissionController : MonoBehaviour
         playerStateController = GetComponent<Player_StateController>();
     }
 
-    //카운터나 화구 등등 설치된거 검별 나중에 if || 추가하기 (태그를 나눠도 똑같이 queue로 검사하기 위해)
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("TEST")/*||화구||쓰레기통*/)
+        if (other.gameObject.CompareTag("Ingredients"))
         {
             pickList.Add(other.gameObject);
 
@@ -48,8 +50,13 @@ public class EmissionController : MonoBehaviour
                     pickQue.Enqueue(pickList[i]);
                     PickObject(pickQue.Peek());
                 }
+
             }
+
         }
+
+
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -61,9 +68,8 @@ public class EmissionController : MonoBehaviour
         }
     }
 
-    void PickObject(GameObject gameObject)
+    public void PickObject(GameObject gameObject)
     {
-
         // 충돌한 오브젝트의 렌더러 가져오기
         Renderer renderer = gameObject.GetComponent<Renderer>();
 
@@ -80,13 +86,12 @@ public class EmissionController : MonoBehaviour
 
             // Emission 활성화 및 HDR 값 변경
             instanceMaterial.EnableKeyword("_EMISSION");
-            instanceMaterial.SetColor("_EmissionColor", new Color(0.5f, 0.5f, 0.5f)/* * Mathf.LinearToGammaSpace(2.0f)*/);
+            instanceMaterial.SetColor("_EmissionColor", new Color(0.3f, 0.3f, 0.3f)/* * Mathf.LinearToGammaSpace(2.0f)*/);
         }
 
-        playerStateController.IsEmission = true;
     }
 
-    void ByeObeject(GameObject gameObject)
+    public void ByeObeject(GameObject gameObject)
     {
         // 충돌이 끝났을 때 원래 머테리얼로 복구
         Renderer renderer = gameObject.GetComponent<Renderer>();
@@ -95,8 +100,7 @@ public class EmissionController : MonoBehaviour
         {
             renderer.material = originalMaterial;
         }
-        playerStateController.IsEmission = false;
     }
+
+
 }
-
-

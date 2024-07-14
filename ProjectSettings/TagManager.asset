@@ -3,13 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Crate
-  - TrashCan
-  - ChoppingBoard
-  - Plate_Return
-  - Pass
-  - Counter
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -39,20 +33,11 @@ TagManager:
   - 
   - 
   - 
-  - Pass
-  - Plate_Return
-  - Counter
-  - Crate
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: 1
-    uniqueID: 3566987681
-    locked: 0
-  - name: New Layer
-    uniqueID: 2334308269
-    locked: 0
-  - name: New Layer
-    uniqueID: 3616958683
     locked: 0
