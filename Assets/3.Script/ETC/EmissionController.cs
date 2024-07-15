@@ -23,7 +23,7 @@ public class EmissionController : MonoBehaviour
     //카운터나 화구 등등 설치된거 검별 나중에 if || 추가하기 (태그를 나눠도 똑같이 queue로 검사하기 위해)
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("TEST")/*||화구||쓰레기통*/)
+        if (other.gameObject.CompareTag("Counter")/*||화구||쓰레기통*/)
         {
             pickList.Add(other.gameObject);
 

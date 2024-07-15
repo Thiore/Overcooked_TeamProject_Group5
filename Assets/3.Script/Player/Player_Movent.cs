@@ -16,6 +16,7 @@ public class Player_Movent : MonoBehaviour
 
     private Player_Ray playerRay;
     private bool isJumping = false;
+    private Vector3 jumpvelocity = Vector3.zero;
 
     private void Awake()
     {
@@ -88,21 +89,20 @@ public class Player_Movent : MonoBehaviour
         Vector3 endPos = player_rb.position + transform.forward * 2f;
         float elaspedTime = 0f;
 
-        while (elaspedTime < 0.15f)
-        {
-            Vector3? hitpoint = playerRay.ShotRayFront();
-            if(hitpoint.HasValue)
+        while (elaspedTime < 0.3f)
+        {    
+            if(playerRay.ShotRayFront(out Vector3 hitPoint))
             {
-                endPos = hitpoint.Value - transform.forward * 0.5f;
+                endPos = hitPoint - transform.forward * 0.2f;
+                endPos.y = 0f;
                 break;
             }
 
-            player_rb.MovePosition(Vector3.Lerp(player_rb.position, endPos, elaspedTime / 0.15f));
+            player_rb.MovePosition(Vector3.Lerp(player_rb.position, endPos,elaspedTime / 0.3f));
             elaspedTime += Time.deltaTime;
             yield return null;
         }
-
-        player_rb.MovePosition(endPos);
+        player_rb.MovePosition(endPos);       
         animator.SetBool("IsWalking", false);
         isJumping = false;
     }

@@ -67,6 +67,8 @@ public class Player_StateController : MonoBehaviour
             isCoroutineRunning = false;
         }
 
+
+        //요리도구 상호작용 
         if(Input.GetKeyDown(KeyCode.LeftControl))
         {
 

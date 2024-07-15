@@ -6,7 +6,7 @@ public class Player_Ray : MonoBehaviour
 {
     [SerializeField] Transform rayPoint;
 
-    public Vector3? ShotRayFront()
+    public bool ShotRayFront(out Vector3 hitPoint)
     {
         RaycastHit hit;
         int layerMask = ~LayerMask.GetMask("Player");
@@ -16,11 +16,12 @@ public class Player_Ray : MonoBehaviour
 
             if (hit.collider.gameObject != null)
             {
-                Debug.Log(hit.collider.name);
-                return hit.point;
+                hitPoint = hit.point;
+                return true;
             }
         }
-        return null;
+        hitPoint = Vector3.zero;    
+        return false;
     }
 
 
