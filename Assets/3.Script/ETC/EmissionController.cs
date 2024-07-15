@@ -10,14 +10,15 @@ public class EmissionController : MonoBehaviour
     private Material originalMaterial;
     private Material instanceMaterial;
 
-    private Player_StateController playerStateController;
+    //private Player_StateController playerStateController;
+    private Player_StateController1 playerStateController;
 
     private void Awake()
     {
         pickQue = new Queue<GameObject>();
         pickList = new List<GameObject>();
 
-        playerStateController = GetComponent<Player_StateController>();
+        playerStateController = GetComponent<Player_StateController1>();
     }
 
     //카운터나 화구 등등 설치된거 검별 나중에 if || 추가하기 (태그를 나눠도 똑같이 queue로 검사하기 위해)

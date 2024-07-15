@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //전반적 플레이어 상호작용 (재료 / 요리 도구 등등 상호작용) 
-public class Player_StateController : MonoBehaviour
+public class Player_StateController1 : MonoBehaviour
 {
     private Animator animator;
     private GameObject PickOB;
@@ -35,34 +35,37 @@ public class Player_StateController : MonoBehaviour
 
     private IEnumerator PlayerStateChange(GameObject gameObject)
     {
-        // 스페이스바는 집을수 있는 사물들은 집어 올림(재료, 요리도구 등등)
+        // 스페이스바는 집을수 있는 사물들은 집어 올림(재료, 요리도구, 접시
         if (Input.GetKey(KeyCode.Space))
         {
             isCoroutineRunning = true;
 
-            //재료 상자 앞에서 
-            if (gameObject.CompareTag("Crate") && !isBellow)
-            {
-                var ani = gameObject.transform.GetComponent<Animator>();
-                if (ani != null)
-                {
-                    ani.SetTrigger("Pick");
-                }
-                yield return new WaitForSeconds(0.5f);
-            }
-
             // 재료를 내려놓을때
             if (isBellow)
             {
-                DropIngredients();
+                DropObject();
                 yield return new WaitForSeconds(0.5f);
             }
 
-            // 재료를 들때
-            if (!isBellow && gameObject.CompareTag("Ingredients"))
+            // 집지 않은 상태 
+            if (!isBellow)
             {
-                TakeIngredients(gameObject);
-                yield return new WaitForSeconds(0.5f);
+                //재료 상자 앞에서 
+                if (gameObject.CompareTag("Crate"))
+                {
+                    var ani = gameObject.transform.GetComponent<Animator>();
+                    if (ani != null)
+                    {
+                        ani.SetTrigger("Pick");
+                        // 생성된 재료 오브젝트 바로 집는 메소드 추가 필요 
+                    }
+                    yield return new WaitForSeconds(0.5f);
+                }
+                else if (gameObject.CompareTag("Cooker") || gameObject.CompareTag("Ingredients"))
+                {
+                    TakeHandObject(gameObject);
+                    yield return new WaitForSeconds(0.5f);
+                }
             }
 
             isCoroutineRunning = false;
@@ -72,9 +75,6 @@ public class Player_StateController : MonoBehaviour
         //요리도구 상호작용 
         if(Input.GetKeyDown(KeyCode.LeftControl))
         {
-            //프라이팬 
-
-
 
         }
 
@@ -83,9 +83,7 @@ public class Player_StateController : MonoBehaviour
 
 
 
-
-
-    private void DropIngredients()
+    private void DropObject()
     {
         if(PickOB != null)
         {
@@ -97,7 +95,7 @@ public class Player_StateController : MonoBehaviour
         }
     }
 
-    private void TakeIngredients(GameObject gameObject)
+    private void TakeHandObject(GameObject gameObject)
     {
         animator.SetBool("IsTake", true);
         isBellow = true;

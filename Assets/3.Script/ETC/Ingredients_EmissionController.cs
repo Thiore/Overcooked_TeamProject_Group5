@@ -25,7 +25,7 @@ public class Ingredients_EmissionController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Ingredients"))
+        if (other.gameObject.CompareTag("Ingredients") || other.gameObject.CompareTag("Cooker"))
         {
             pickList.Add(other.gameObject);
 

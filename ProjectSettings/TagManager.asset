@@ -12,6 +12,8 @@ TagManager:
   - Sink
   - Ingredients
   - Bin
+  - TrashCan
+  - Cooker
   layers:
   - Default
   - TransparentFX
