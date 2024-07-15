@@ -4,12 +4,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System.Linq;
 
-//public enum stagenum_e
-//{
-//    sushi1 = 1,
-//    sushi2,
-//    airballon
-//}
+
 public class DataManager : MonoBehaviour
 {
     private static DataManager instance;
@@ -53,16 +48,7 @@ public class DataManager : MonoBehaviour
     {
         //스코어
         LoadStageFromJson();
-        //ScoreManager.Instance.InitializeScores();
-        ScoreManager scoreManager = ScoreManager.Instance;
-        if (scoreManager != null)
-        {
-            scoreManager.InitializeScores();
-        }
-        else
-        {
-            Debug.LogError("DataManager안에서 ScoreManager의 인스턴스는 null");
-        }
+        GetAllStageData();
         GetStageInformation(1);
     }
 
@@ -189,6 +175,7 @@ public class DataManager : MonoBehaviour
     //}
     
     //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    // 스테이지 스코어
     private void LoadStageFromJson()
     {
         string score_jsonFile = Resources.Load<TextAsset>("Data/Stage_JDB").text;
@@ -206,18 +193,31 @@ public class DataManager : MonoBehaviour
 
     }
 
-    public Stage GetStageInformation(int stage)
+    public Stage GetStageInformation(int stageNumber)
     {
-        if (stageData.ContainsKey(stage))
+        if (stageData.ContainsKey(stageNumber))
         {
-            return stageData[stage];
+            return stageData[stageNumber];
         }
 
         else
         {
-            Debug.LogError($"Stage {stage} 정보 못 불러왔으요");
+            Debug.LogError($"Stage {stageNumber} 정보 못 불러왔으요");
             return null;
         }
     }
 
+    public List<Stage> GetAllStageData()
+    {
+        return new List<Stage>(stageData.Values);
+    }
+
+    /*
+    public void SceneLoad(int stage_index){
+    RecipePool.SetActivatePool(datamanager.instance.getRecipe(stage_index));
+    for(int i=0;i<3;i++{
+    ScoreManager.Instance.Targetscre[i]=datamanager.instance.
+    
+
+     */
 }
