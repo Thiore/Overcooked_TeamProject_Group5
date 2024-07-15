@@ -12,7 +12,7 @@ public class RecipePool : MonoBehaviour
     [SerializeField] private int maxVisibleObjects = 5; // 화면에 보일 최대 오브젝트 수
 
     private Queue<GameObject> objectPool = new Queue<GameObject>(); // 오브젝트 풀을 저장하는 큐
-    private List<GameObject> activeObjects = new List<GameObject>(); // 활성화된 오브젝트 목록
+    public List<GameObject> activeObjects = new List<GameObject>(); // 활성화된 오브젝트 목록
     private List<GameObject> allObjects = new List<GameObject>(); // 생성된 모든 오브젝트 목록
 
     private float spawnInterval = 8f; // 오브젝트 생성 간격 (초)
