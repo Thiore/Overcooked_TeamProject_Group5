@@ -77,24 +77,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // 점수를 추가하는 메서드
-    public void AddScore(int points)
-    {
-        score += points;
-        addScoreCount++; // 점수를 얻은 횟수 증가
-        ScoreManager.Instance.AddScore(points); // ScoreManager에 점수 추가
-    }
-
-    // 점수를 차감하는 메서드
-    public void SubScore(int points)
-    {
-        score -= points;
-        subScoreCount++; // 점수를 잃은 횟수 증가
-        subScore += points; // 차감된 점수 합계 증가
-        tip = 1; // 팁 배수 초기화
-        ScoreManager.Instance.SubScore(points); // ScoreManager에 점수 차감
-    }
-
     // 게임 씬으로 진입하는 메서드
     public void EnterGame()
     {
@@ -130,8 +112,8 @@ public class GameManager : MonoBehaviour
     }
     public void Incorrect_Recipe()
     {
-        ScoreManager.Instance.AddScore(10);
         tip = 1;
+        ScoreManager.Instance.AddScore(10);
         Debug.Log("InCorrect_Recipe 호출");
     }
     public void Wrong_Recipe()
