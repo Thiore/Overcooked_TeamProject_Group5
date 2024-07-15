@@ -96,10 +96,7 @@ public class RecipePool : MonoBehaviour
     {
         if (objectPool.Count > 0) // 풀에 오브젝트가 남아있을 때
         {
-            int randomIndex = Random.Range(0, objectPool.Count); // 랜덤 인덱스 선택
-            GameObject obj = objectPool.ToArray()[randomIndex]; // 랜덤 오브젝트 선택
-            objectPool = new Queue<GameObject>(objectPool); // 큐 재구성
-            objectPool.Dequeue(); // 선택된 오브젝트 제거
+            GameObject obj = objectPool.Dequeue(); // 큐에서 오브젝트 가져오기
             obj.SetActive(true); // 오브젝트 활성화
 
             RectTransform rectTransform = obj.GetComponent<RectTransform>();
@@ -116,6 +113,7 @@ public class RecipePool : MonoBehaviour
                 DeactivateObject(oldestObj); // 오브젝트 비활성화
             }
         }
+        Debug.Log("레시피 활성화");
     }
 
     // 오브젝트 비활성화
@@ -124,6 +122,7 @@ public class RecipePool : MonoBehaviour
         activeObjects.Remove(obj); // 활성화된 목록에서 제거
         obj.SetActive(false); // 오브젝트 비활성화
         objectPool.Enqueue(obj); // 풀에 다시 추가
+        Debug.Log("레시피 비활성화");
     }
 
     // 정답 오브젝트 처리
@@ -158,7 +157,6 @@ public class RecipePool : MonoBehaviour
             for (int j = 0; j < recipe.ingredient.Count(); j++)
             {
                 imageNameMap.Add($"Ingredient_Icon_{j + 1}", recipe.ingredient[j]);
-                
             }
 
             RecipeObject recipeObject = obj.GetComponent<RecipeObject>();
@@ -167,7 +165,6 @@ public class RecipePool : MonoBehaviour
     }
 
     // 레시피 데이터를 가져오는 메서드 (더미 데이터)
-
     private List<Recipe> GetRecipes()
     {
         // 실제 데이터 가져오는 코드로 대체해야 함

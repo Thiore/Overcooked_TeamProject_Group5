@@ -40,6 +40,14 @@ public class ScoreManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    /*
+     * datamanager
+     * public void Awake(){
+     * ScoreManager.Instance.initailize();
+     * for(int i=0;i<3;i++{
+     * ScoreManager.Instance.TargetScore[i]=this.targetscore[i];
+     * }
+     */
 
     private void Start()
     {
@@ -92,6 +100,7 @@ public class ScoreManager : MonoBehaviour
         int additionalPoints = Mathf.CeilToInt(points * 0.1f * tipMultiplier); // 팁에 의한 추가 점수
         Score += points; // 기본 점수 추가
         Tip_Score += additionalPoints; // 팁 점수 추가
+        GameManager.Instance.addScoreCount += 1;
         GameManager.Instance.score = Score + Tip_Score; // 총 점수 업데이트
     }
 
@@ -103,6 +112,7 @@ public class ScoreManager : MonoBehaviour
         {
             Score = 0;
         }
+        GameManager.Instance.subScoreCount += 1;
         GameManager.Instance.score = Score; // 총 점수 업데이트
     }
 }
