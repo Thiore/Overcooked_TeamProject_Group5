@@ -17,7 +17,6 @@ public enum eIngredients
     Bun,
     Fish,
     Pepperoni,
-    Blank,
     Egg,
     Chicken,
     Tortilla,
@@ -33,8 +32,8 @@ public enum eIngredients
 public enum eCooked
 {
     Normal = 0,
-    Chopping//,
-    //Cooking
+    Chopping,
+    Cooking
 }
 
 public class Ingredeint : MonoBehaviour
@@ -46,6 +45,11 @@ public class Ingredeint : MonoBehaviour
 
     private Renderer Ingredient_renderer;
     private MeshFilter Ingredient_Mesh;
+
+    public eCooked cooking;
+    public eIngredients myIngredients;
+
+
     private int TestNum = 0;
 
     private void Awake()
@@ -55,6 +59,9 @@ public class Ingredeint : MonoBehaviour
     }
     private void OnEnable()
     {
+        cooking = eCooked.Normal;
+
+
         Change_Ingredient(eCooked.Normal);
     }
 

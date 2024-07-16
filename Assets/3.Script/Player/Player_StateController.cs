@@ -9,7 +9,7 @@ public class Player_StateController : MonoBehaviour
     private GameObject PickOB;
     [SerializeField] private Transform Attachtransform;
 
-    private bool isBellow = false;
+    public bool isBellow = false;
     private bool isCoroutineRunning = false;
 
     private bool isEmission = false;

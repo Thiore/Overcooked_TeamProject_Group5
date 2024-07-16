@@ -56,6 +56,7 @@ public class spawn_Ingredient : MonoBehaviour
         if(ingredient_queue.Count>0)
         {
             Ingredeint obj = ingredient_queue.Dequeue();
+            obj.gameObject.SetActive(true);
             player.TakeIngredients(obj.gameObject);
         }
         else
@@ -75,10 +76,10 @@ public class spawn_Ingredient : MonoBehaviour
             {
                 Debug.Log("¾Èµé¾î¿È?");
             }
-            //if(!player.isBellow)
-            //{
-            //    isOpen = true;
-            //}
+            if (!player.isBellow)
+            {
+                isOpen = true;
+            }
         }
     }
     private void OnTriggerExit(Collider other)
