@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class Flag : MonoBehaviour
 {
-    [SerializeField] private int stage_index;
+    public int stage_index;
 
 }
