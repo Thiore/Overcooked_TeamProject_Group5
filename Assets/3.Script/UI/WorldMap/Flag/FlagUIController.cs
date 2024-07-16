@@ -15,30 +15,11 @@ public class FlagUIController : MonoBehaviour
     private Image[] FullStar = new Image[3];
     private void Awake()
     {
-        TryGetComponent(out flag);
-        ui=GameObject.Find("UI");
-        BestScore = GameObject.Find("UI/UI_Canvas/Main_Panel/Player_Info_Panel/Player_Score").GetComponent<Text>();
-        for(int i = 0; i < 3; i++)
-        {
-            Target_Score[i] = GameObject.Find($"UI/UI_Canvas/Main_Panel/Stage_Info/Target_Panel/EmptyStar_{i+1}/Target_Score").GetComponent<Text>();
-            FullStar[i] = GameObject.Find($"UI/UI_Canvas/Main_Panel/Stage_Info/Target_Panel/EmptyStar_{i+1}/FullStar").GetComponent<Image>();
-        }
-        
-        target_Score = DataManager.Instance.GetStageInformation(flag.stage_index).targetScore;
-        bestScore = DataManager.Instance.GetStageInformation(flag.stage_index).bestScore;
-        BestScore.text = bestScore.ToString();
-        for(int i = 0; i < 3; i++)
-        {
-            if (target_Score[i] > bestScore)
-            {
-                FullStar[i].gameObject.SetActive(false);
-            }
-            Target_Score[i].text = target_Score[i].ToString();
-        }
-
-
-        ui.SetActive(false);
+        InitUI();
+        SetUI();
+        DeActiveUI();
     }
+    
     public void ActiveUI()
     {
         ui.SetActive(true);
@@ -47,8 +28,29 @@ public class FlagUIController : MonoBehaviour
     {
         ui.SetActive(false);
     }
+    private void InitUI()
+    {
+        TryGetComponent(out flag);
+        ui = GameObject.Find("UI");
+        BestScore = GameObject.Find("UI/UI_Canvas/Main_Panel/Player_Info_Panel/Player_Score").GetComponent<Text>();
+        for (int i = 0; i < 3; i++)
+        {
+            Target_Score[i] = GameObject.Find($"UI/UI_Canvas/Main_Panel/Stage_Info/Target_Panel/EmptyStar_{i + 1}/Target_Score").GetComponent<Text>();
+            FullStar[i] = GameObject.Find($"UI/UI_Canvas/Main_Panel/Stage_Info/Target_Panel/EmptyStar_{i + 1}/FullStar").GetComponent<Image>();
+        }
+    }
     private void SetUI()
     {
-
+        target_Score = DataManager.Instance.GetStageInformation(flag.stage_index).targetScore;
+        bestScore = DataManager.Instance.GetStageInformation(flag.stage_index).bestScore;
+        BestScore.text = bestScore.ToString();
+        for (int i = 0; i < 3; i++)
+        {
+            if (target_Score[i] > bestScore)
+            {
+                FullStar[i].gameObject.SetActive(false);
+            }
+            Target_Score[i].text = target_Score[i].ToString();
+        }
     }
 }
