@@ -453,6 +453,7 @@ GameObject:
   - component: {fileID: 88001128066974808}
   - component: {fileID: 88001128066974809}
   - component: {fileID: 88001128066974807}
+  - component: {fileID: 88001128066974810}
   m_Layer: 0
   m_Name: m_sk_fryingpan
   m_TagString: Cooker
@@ -503,6 +504,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &88001128066974810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88001128066974806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a5c023a9f39654eaa80548fddb41cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderder: {fileID: 0}
+  originalMaterial: {fileID: 0}
+  instanceMaterial: {fileID: 0}
 --- !u!1 &163455207926345162
 GameObject:
   m_ObjectHideFlags: 0
@@ -6865,6 +6881,7 @@ GameObject:
   - component: {fileID: 5191231522249142962}
   - component: {fileID: 5191231522249142961}
   - component: {fileID: 5191231522249142963}
+  - component: {fileID: 5191231522249142964}
   m_Layer: 0
   m_Name: m_ingredients_prawn
   m_TagString: Ingredients
@@ -6915,6 +6932,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.75
   m_Center: {x: 0.015417516, y: 0.40900698, z: 0.08787966}
+--- !u!114 &5191231522249142964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5191231522249142960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a5c023a9f39654eaa80548fddb41cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderder: {fileID: 0}
+  originalMaterial: {fileID: 0}
+  instanceMaterial: {fileID: 0}
 --- !u!23 &5216312383443547808
 MeshRenderer:
   m_ObjectHideFlags: 0

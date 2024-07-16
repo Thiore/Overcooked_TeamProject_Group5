@@ -7,8 +7,8 @@ public class EmissionController : MonoBehaviour
     private Queue<GameObject> pickQue;
     private List<GameObject> pickList;
 
-    private Material originalMaterial;
-    private Material instanceMaterial;
+    private bool isPutOn = false;
+    public bool IsPutOn { get => isPutOn; set => isPutOn = value; }
 
     //private Player_StateController playerStateController;
     private Player_StateController1 playerStateController;
@@ -50,6 +50,8 @@ public class EmissionController : MonoBehaviour
                     PickObject(pickQue.Peek());
                 }
             }
+
+            isPutOn = true;
         }
     }
 
@@ -62,26 +64,36 @@ public class EmissionController : MonoBehaviour
         }
     }
 
+    public GameObject ReadyPutCounter()
+    {
+        if(pickQue.Count > 0)
+        {
+            return pickQue.Peek();
+        }
+
+        return null;
+    }
+
+    public bool PutOnReady()
+    {
+        if(pickQue.Count > 0)
+        {
+            return pickQue.Peek().transform.childCount.Equals(0);
+        }
+
+        return false;
+    }
+
     void PickObject(GameObject gameObject)
     {
-
         // 충돌한 오브젝트의 렌더러 가져오기
         Renderer renderer = gameObject.GetComponent<Renderer>();
 
         if (renderer != null)
         {
-            // 원래의 머테리얼 저장
-            originalMaterial = renderer.material;
-
-            // 머테리얼 복사
-            instanceMaterial = new Material(originalMaterial);
-
-            // 복사한 머테리얼로 변경
-            renderer.material = instanceMaterial;
-
             // Emission 활성화 및 HDR 값 변경
-            instanceMaterial.EnableKeyword("_EMISSION");
-            instanceMaterial.SetColor("_EmissionColor", new Color(0.5f, 0.5f, 0.5f)/* * Mathf.LinearToGammaSpace(2.0f)*/);
+            renderer.material.EnableKeyword("_EMISSION");
+            renderer.material.SetColor("_EmissionColor", new Color(0.3f, 0.3f, 0.3f)/* * Mathf.LinearToGammaSpace(2.0f)*/);
         }
 
         playerStateController.IsEmission = true;
@@ -94,9 +106,8 @@ public class EmissionController : MonoBehaviour
 
         if (renderer != null)
         {
-            renderer.material = originalMaterial;
+            renderer.material.DisableKeyword("_EMISSION");
         }
-        playerStateController.IsEmission = false;
     }
 }
 

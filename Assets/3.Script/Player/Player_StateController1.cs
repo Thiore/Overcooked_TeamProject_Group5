@@ -11,24 +11,27 @@ public class Player_StateController1 : MonoBehaviour
 
     private bool isBellow = false;
     private bool isCoroutineRunning = false;
+    private Coroutine coroutine;
 
     private bool isEmission = false;
     public bool IsEmission { get => isEmission; set => isEmission = value; }
 
     private Ingredients_EmissionController ingre_controller;
+    private EmissionController emissionController;
 
     private void Awake()
     {
         ingre_controller = GetComponent<Ingredients_EmissionController>();
+        emissionController = GetComponent<EmissionController>();
         animator = GetComponent<Animator>();
     }
 
     //온스테이 안에서 태그로 전반적인 처리
     private void OnTriggerStay(Collider other)
     {
-        if(!isCoroutineRunning) 
-        { 
-            StartCoroutine(PlayerStateChange(other.gameObject));
+        if (coroutine == null)
+        {
+            coroutine = StartCoroutine(PlayerStateChange(other.gameObject));
         }
     }
 
@@ -38,17 +41,14 @@ public class Player_StateController1 : MonoBehaviour
         // 스페이스바는 집을수 있는 사물들은 집어 올림(재료, 요리도구, 접시
         if (Input.GetKey(KeyCode.Space))
         {
-            isCoroutineRunning = true;
-
             // 재료를 내려놓을때
             if (isBellow)
             {
                 DropObject();
+                isBellow = false;
                 yield return new WaitForSeconds(0.5f);
             }
-
-            // 집지 않은 상태 
-            if (!isBellow)
+            else   // 집지 않은 상태 
             {
                 //재료 상자 앞에서 
                 if (gameObject.CompareTag("Crate"))
@@ -64,18 +64,19 @@ public class Player_StateController1 : MonoBehaviour
                 else if (gameObject.CompareTag("Cooker") || gameObject.CompareTag("Ingredients"))
                 {
                     TakeHandObject(gameObject);
+                    isBellow = true;
                     yield return new WaitForSeconds(0.5f);
                 }
             }
 
-            isCoroutineRunning = false;
+            coroutine = null;
         }
 
 
         //요리도구 상호작용 
-        if(Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-
+            isCoroutineRunning = true;
         }
 
 
@@ -85,12 +86,29 @@ public class Player_StateController1 : MonoBehaviour
 
     private void DropObject()
     {
-        if(PickOB != null)
+        if (PickOB != null)
         {
             animator.SetBool("IsTake", false);
-            isBellow = false;
-            PickOB.gameObject.AddComponent<Rigidbody>();
-            PickOB.transform.SetParent(null);
+            if (emissionController.IsPutOn)
+            {
+                Debug.Log("풋온");
+                var counter = emissionController.ReadyPutCounter();
+                if (counter != null && emissionController.PutOnReady())
+                {
+                    PickOB.transform.SetParent(counter.transform);
+                    PickOB.transform.position = counter.transform.position;
+                    PickOB.transform.rotation = Quaternion.identity;
+                    emissionController.IsPutOn = false;
+                }
+            }
+            else
+            {
+                Debug.Log("풋아님");
+                PickOB.transform.SetParent(null);
+                var rb = PickOB.gameObject.AddComponent<Rigidbody>();
+                rb.mass = 10;
+
+            }
             PickOB = null;
         }
     }
@@ -98,7 +116,6 @@ public class Player_StateController1 : MonoBehaviour
     private void TakeHandObject(GameObject gameObject)
     {
         animator.SetBool("IsTake", true);
-        isBellow = true;
         PickOB = gameObject;
         Destroy(PickOB.transform.GetComponent<Rigidbody>());
         ingre_controller.ByeObeject(PickOB);

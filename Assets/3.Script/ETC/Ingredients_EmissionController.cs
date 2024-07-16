@@ -7,10 +7,7 @@ public class Ingredients_EmissionController : MonoBehaviour
     private Queue<GameObject> pickQue;
     private List<GameObject> pickList;
 
-    private Material originalMaterial;
-    private Material instanceMaterial;
-
-    private Player_StateController playerStateController;
+    private Player_StateController1 playerStateController;
 
     private bool isBellowIngre = false;
     public bool IsBellowIngre { get => isBellowIngre; set => isBellowIngre = value; }
@@ -20,7 +17,7 @@ public class Ingredients_EmissionController : MonoBehaviour
         pickQue = new Queue<GameObject>();
         pickList = new List<GameObject>();
 
-        playerStateController = GetComponent<Player_StateController>();
+        playerStateController = GetComponent<Player_StateController1>();
     }
 
     private void OnTriggerStay(Collider other)
@@ -53,6 +50,7 @@ public class Ingredients_EmissionController : MonoBehaviour
 
             }
 
+            pickList.Clear();
         }
 
 
@@ -68,6 +66,7 @@ public class Ingredients_EmissionController : MonoBehaviour
         }
     }
 
+
     public void PickObject(GameObject gameObject)
     {
         // 충돌한 오브젝트의 렌더러 가져오기
@@ -75,30 +74,20 @@ public class Ingredients_EmissionController : MonoBehaviour
 
         if (renderer != null)
         {
-            // 원래의 머테리얼 저장
-            originalMaterial = renderer.material;
-
-            // 머테리얼 복사
-            instanceMaterial = new Material(originalMaterial);
-
-            // 복사한 머테리얼로 변경
-            renderer.material = instanceMaterial;
-
             // Emission 활성화 및 HDR 값 변경
-            instanceMaterial.EnableKeyword("_EMISSION");
-            instanceMaterial.SetColor("_EmissionColor", new Color(0.3f, 0.3f, 0.3f)/* * Mathf.LinearToGammaSpace(2.0f)*/);
+            renderer.material.EnableKeyword("_EMISSION");
+            renderer.material.SetColor("_EmissionColor", new Color(0.3f, 0.3f, 0.3f)/* * Mathf.LinearToGammaSpace(2.0f)*/);
         }
 
     }
 
     public void ByeObeject(GameObject gameObject)
     {
-        // 충돌이 끝났을 때 원래 머테리얼로 복구
         Renderer renderer = gameObject.GetComponent<Renderer>();
 
         if (renderer != null)
         {
-            renderer.material = originalMaterial;
+            renderer.material.DisableKeyword("_EMISSION");
         }
     }
 
