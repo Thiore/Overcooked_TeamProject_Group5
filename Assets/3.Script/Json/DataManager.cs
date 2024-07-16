@@ -4,12 +4,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System.Linq;
 
-//public enum stagenum_e
-//{
-//    sushi1 = 1,
-//    sushi2,
-//    airballon
-//}
+
 public class DataManager : MonoBehaviour
 {
     private static DataManager instance;
@@ -21,15 +16,6 @@ public class DataManager : MonoBehaviour
 
     // 선택된 스테이지 점수 담는 리스트
     private List<Stage> stageScore;
-
-
-    private void Recipe_DataManager()
-    {
-        //레시피
-        LoadRecipeFromJson();
-        StageRecipeData(1); //스테이지 + 레시피 + 재료 데이터 부르는 메서드
-        
-    }
 
     public static DataManager Instance
     {
@@ -50,6 +36,22 @@ public class DataManager : MonoBehaviour
         }
     }
 
+    private void Recipe_DataManager()
+    {
+        //레시피
+        LoadRecipeFromJson();
+        StageRecipeData(1); //스테이지 + 레시피 + 재료 데이터 부르는 메서드
+        
+    }
+
+    private void Stage_DataManager()
+    {
+        //스코어
+        LoadStageFromJson();
+        GetAllStageData();
+        GetStageInformation(1);
+    }
+
     private void Awake()
     {
         if (!Application.isPlaying)
@@ -65,7 +67,7 @@ public class DataManager : MonoBehaviour
         }
 
         Recipe_DataManager();
-
+        Stage_DataManager();
     }
     
     private void LoadRecipeFromJson()
@@ -79,22 +81,6 @@ public class DataManager : MonoBehaviour
         //Debug.Log("Loaded " + recipeData.Count + " recipes from JSON.");
     }
 
-    private void LoadStageFromJson()
-    {
-        string score_jsonFile = Resources.Load<TextAsset>("Data/Stage_JDB").text;
-        var stages = JsonConvert.DeserializeObject<Stage[]>(score_jsonFile);
-
-        stageData = stages.ToDictionary(x => x.stage, x => x);
-    }
-
-    public void StageScoreData(int stageNumber)
-    {
-        stageScore = new List<Stage>();
-
-        var stageScores = stageData.Values.Where(stage => stage.stage == stageNumber).ToList();
-
-
-    }
     public List<List<Recipe>> StageRecipeData(int stageNumber)
     {
         List<Recipe> stageRecipes = recipeData.Values.Where(recipe => recipe.stage == stageNumber).ToList();
@@ -187,5 +173,51 @@ public class DataManager : MonoBehaviour
     //    return stageRecipe;
 
     //}
+    
+    //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    // 스테이지 스코어
+    private void LoadStageFromJson()
+    {
+        string score_jsonFile = Resources.Load<TextAsset>("Data/Stage_JDB").text;
+        var stages = JsonConvert.DeserializeObject<Stage[]>(score_jsonFile);
 
+        stageData = stages.ToDictionary(x => x.stage, x => x);
+    }
+
+    public void StageScoreData(int stageNumber)
+    {
+        stageScore = new List<Stage>();
+
+        var stageScores = stageData.Values.Where(stage => stage.stage == stageNumber).ToList();
+
+
+    }
+
+    public Stage GetStageInformation(int stageNumber)
+    {
+        if (stageData.ContainsKey(stageNumber))
+        {
+            return stageData[stageNumber];
+        }
+
+        else
+        {
+            Debug.LogError($"Stage {stageNumber} 정보 못 불러왔으요");
+            return null;
+        }
+    }
+
+    public List<Stage> GetAllStageData()
+    {
+        return new List<Stage>(stageData.Values);
+    }
+
+    /*
+    public void SceneLoad(int stage_index){
+    RecipePool.SetActivatePool(datamanager.instance.getRecipe(stage_index));
+    for(int i=0;i<3;i++{
+    ScoreManager.Instance.Targetscre[i]=datamanager.instance.
+    
+
+     */
 }
