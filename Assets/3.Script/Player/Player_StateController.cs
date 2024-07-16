@@ -42,11 +42,11 @@ public class Player_StateController : MonoBehaviour
             //재료 상자 앞에서 
             if (gameObject.CompareTag("Crate") && !isBellow)
             {
-                var ani = gameObject.transform.GetComponent<Animator>();
-                if (ani != null)
-                {
-                    ani.SetTrigger("Pick");
-                }
+                //var ani = gameObject.transform.GetComponent<Animator>();
+                //if (ani != null)
+                //{
+                //    ani.SetTrigger("Pick");
+                //}
                 yield return new WaitForSeconds(0.5f);
             }
 
@@ -91,7 +91,7 @@ public class Player_StateController : MonoBehaviour
         }
     }
 
-    private void TakeIngredients(GameObject gameObject)
+    public void TakeIngredients(GameObject gameObject)
     {
         animator.SetBool("IsTake", true);
         isBellow = true;
