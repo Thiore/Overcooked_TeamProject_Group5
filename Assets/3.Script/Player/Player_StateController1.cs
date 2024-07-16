@@ -6,27 +6,32 @@ using UnityEngine;
 public class Player_StateController1 : MonoBehaviour
 {
     private Animator animator;
-    private GameObject PickOB;
+
+    //내가 보는 오브젝트
+    private GameObject nearOb;
+    //내가 집은 오브젝트 
+    private GameObject HandsOnOb;
+    //이건 인스펙터에서 셰프 밑에 스켈레톤 Attach 넣어 사용하기
     [SerializeField] private Transform Attachtransform;
 
-    private bool isBellow = false;
-    private bool isCoroutineRunning = false;
+    //내가 들고 있는지 
+    private bool isHolding = false;
+
+    //코루틴 배열도 가능한데 
+    // Start랑 할떄 어떤건지 배열로 관리
+    // 각 오브젝트마다 하나하나 들어갈수잇고 플레이어가 좀 더 관리?
     private Coroutine coroutine;
 
-    private bool isEmission = false;
-    public bool IsEmission { get => isEmission; set => isEmission = value; }
-
-    private Ingredients_EmissionController ingre_controller;
-    private EmissionController emissionController;
+    private CounterEmissionController emissionController;
+    private NearObject_EmissionController nearcontroller;
 
     private void Awake()
     {
-        ingre_controller = GetComponent<Ingredients_EmissionController>();
-        emissionController = GetComponent<EmissionController>();
         animator = GetComponent<Animator>();
+        emissionController = GetComponent<CounterEmissionController>();
+        nearcontroller = GetComponent<NearObject_EmissionController>();
     }
 
-    //온스테이 안에서 태그로 전반적인 처리
     private void OnTriggerStay(Collider other)
     {
         if (coroutine == null)
@@ -35,50 +40,62 @@ public class Player_StateController1 : MonoBehaviour
         }
     }
 
+    //온스테이로 플레이어 범위 내에서 전반적인 처리
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (coroutine == null)
+    //    {
+    //        coroutine = StartCoroutine(PlayerStateChange(other.gameObject));
+    //    }
+    //}
+
 
     private IEnumerator PlayerStateChange(GameObject gameObject)
     {
-        // 스페이스바는 집을수 있는 사물들은 집어 올림(재료, 요리도구, 접시
-        if (Input.GetKey(KeyCode.Space))
+        if (gameObject != null)
         {
-            // 재료를 내려놓을때
-            if (isBellow)
+            // 스페이스바는 집을수 있는 사물들은 집어 올림(재료, 요리도구, 접시
+            if (Input.GetKey(KeyCode.Space))
             {
-                DropObject();
-                isBellow = false;
-                yield return new WaitForSeconds(0.5f);
-            }
-            else   // 집지 않은 상태 
-            {
-                //재료 상자 앞에서 
-                if (gameObject.CompareTag("Crate"))
+                // 재료를 내려놓을때
+                if (isHolding)
                 {
-                    var ani = gameObject.transform.GetComponent<Animator>();
-                    if (ani != null)
+                    DropObject();
+                    yield return new WaitForSeconds(0.5f);
+                }
+                else   // 집지 않은 상태 
+                {
+                    //재료 상자 앞에서 
+                    if (gameObject.CompareTag("Crate"))
                     {
-                        ani.SetTrigger("Pick");
-                        // 생성된 재료 오브젝트 바로 집는 메소드 추가 필요 
+                        var ani = gameObject.transform.GetComponent<Animator>();
+                        if (ani != null)
+                        {
+                            ani.SetTrigger("Pick");
+                            // 생성된 재료 오브젝트 바로 집는 메소드 추가 필요 
+                        }
+                        yield return new WaitForSeconds(0.5f);
                     }
-                    yield return new WaitForSeconds(0.5f);
+                    else if (gameObject.CompareTag("Cooker") || gameObject.CompareTag("Ingredients"))
+                    {
+                        if (nearcontroller.GetNearObject() != null)
+                        {
+                            TakeHandObject(nearcontroller.GetNearObject());
+                        }
+                        yield return new WaitForSeconds(0.5f);
+                    }
                 }
-                else if (gameObject.CompareTag("Cooker") || gameObject.CompareTag("Ingredients"))
-                {
-                    TakeHandObject(gameObject);
-                    isBellow = true;
-                    yield return new WaitForSeconds(0.5f);
-                }
+
+                coroutine = null;
             }
 
-            coroutine = null;
+
+            //요리도구 상호작용 
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+
+            }
         }
-
-
-        //요리도구 상호작용 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            isCoroutineRunning = true;
-        }
-
 
     }
 
@@ -86,42 +103,42 @@ public class Player_StateController1 : MonoBehaviour
 
     private void DropObject()
     {
-        if (PickOB != null)
+        if (HandsOnOb != null)
         {
             animator.SetBool("IsTake", false);
             if (emissionController.IsPutOn)
             {
-                Debug.Log("풋온");
-                var counter = emissionController.ReadyPutCounter();
-                if (counter != null && emissionController.PutOnReady())
-                {
-                    PickOB.transform.SetParent(counter.transform);
-                    PickOB.transform.position = counter.transform.position;
-                    PickOB.transform.rotation = Quaternion.identity;
-                    emissionController.IsPutOn = false;
-                }
+                //var counter = emissionController.ReadyPutCounter();
+                //if (counter != null)
+                //{
+                //    HandsOnOb.transform.SetParent(counter.transform);
+                //    HandsOnOb.transform.position = counter.transform.position;
+                //    HandsOnOb.transform.rotation = Quaternion.identity;
+                //    emissionController.IsPutOn = false;
+                //}
             }
             else
             {
-                Debug.Log("풋아님");
-                PickOB.transform.SetParent(null);
-                var rb = PickOB.gameObject.AddComponent<Rigidbody>();
+                HandsOnOb.transform.SetParent(null);
+                var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();
                 rb.mass = 10;
 
             }
-            PickOB = null;
+            HandsOnOb = null;
+            isHolding = false;
         }
     }
 
     private void TakeHandObject(GameObject gameObject)
     {
         animator.SetBool("IsTake", true);
-        PickOB = gameObject;
-        Destroy(PickOB.transform.GetComponent<Rigidbody>());
-        ingre_controller.ByeObeject(PickOB);
-        PickOB.transform.SetParent(Attachtransform);
-        PickOB.transform.rotation = Attachtransform.rotation;
-        PickOB.transform.position = Attachtransform.position;
+        HandsOnOb = gameObject;
+        Destroy(HandsOnOb.transform.GetComponent<Rigidbody>());
+        HandsOnOb.transform.SetParent(Attachtransform);
+        HandsOnOb.transform.rotation = Attachtransform.rotation;
+        HandsOnOb.transform.position = Attachtransform.position;
+        isHolding = true;
     }
+
 
 }
