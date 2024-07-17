@@ -7,13 +7,13 @@ public class NearObject_EmissionController : MonoBehaviour
     private Queue<GameObject> pickQue;
     private List<GameObject> pickList;
 
-    private Player_StateController1 playerStateController1;
+    private Player_StateController playerStateController1;
 
     private void Awake()
     {
         pickQue = new Queue<GameObject>();
         pickList = new List<GameObject>();
-        playerStateController1 = GetComponent<Player_StateController1>();
+        playerStateController1 = GetComponent<Player_StateController>();
     }
 
     private void OnTriggerStay(Collider other)

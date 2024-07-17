@@ -1738,6 +1738,7 @@ GameObject:
   - component: {fileID: 1845363565055758953}
   - component: {fileID: 1845363565055758952}
   - component: {fileID: 1845363565055758955}
+  - component: {fileID: 1845363565055758951}
   m_Layer: 0
   m_Name: m_sk_crate
   m_TagString: Crate
@@ -1745,6 +1746,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1845363565055758951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845363565055758950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602b094d345fa914c93a98b2e0157b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &1845363565055758952
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2385,7 +2398,7 @@ GameObject:
   - component: {fileID: 2108584380595448875}
   - component: {fileID: 2108584380595448872}
   m_Layer: 0
-  m_Name: ChoppingBoard (2)
+  m_Name: ChoppingBoard
   m_TagString: ChoppingBoard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3317,7 +3330,7 @@ GameObject:
   - component: {fileID: 2108584381348691130}
   - component: {fileID: 2108584381348691133}
   m_Layer: 0
-  m_Name: ChoppingBoard (3)
+  m_Name: ChoppingBoard
   m_TagString: ChoppingBoard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4055,7 +4068,7 @@ GameObject:
   - component: {fileID: 2108584381854697345}
   - component: {fileID: 2108584381854697350}
   m_Layer: 0
-  m_Name: ChoppingBoard (1)
+  m_Name: ChoppingBoard
   m_TagString: ChoppingBoard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8063,8 +8076,8 @@ GameObject:
   - component: {fileID: 5899685186640464297}
   - component: {fileID: 5899685186640464296}
   - component: {fileID: 5899685186640464307}
-  - component: {fileID: 5899685186640464314}
   - component: {fileID: 5899685186640464313}
+  - component: {fileID: 5899685186640464314}
   - component: {fileID: 5899685186640464312}
   - component: {fileID: 5899685186640464304}
   - component: {fileID: 5899685186640464311}
@@ -8145,7 +8158,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5899685186640464308}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 830bc8098f056b04aa02ef55f12ea3ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 26920b116e24c634fb16cafc4cae4841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Attachtransform: {fileID: 6552049215682243745}
@@ -8350,6 +8363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8481443129497221499}
   - component: {fileID: 8291710744555263038}
+  - component: {fileID: 5977065989831672936}
   m_Layer: 0
   m_Name: m_sk_crate_01 1
   m_TagString: Crate
@@ -8357,6 +8371,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5977065989831672936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5977065989831672935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602b094d345fa914c93a98b2e0157b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &6019489434169173519
 MeshRenderer:
   m_ObjectHideFlags: 0

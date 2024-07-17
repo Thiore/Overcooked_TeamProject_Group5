@@ -7,9 +7,6 @@ public class CounterEmissionController : MonoBehaviour
     private Queue<GameObject> pickQue;
     private List<GameObject> pickList;
 
-    //private Player_StateController playerStateController;
-    private Player_StateController1 playerStateController;
-
     private void Awake()
     {
         pickQue = new Queue<GameObject>();
