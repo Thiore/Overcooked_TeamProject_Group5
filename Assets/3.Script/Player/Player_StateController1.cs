@@ -102,12 +102,14 @@ public class Player_StateController1 : MonoBehaviour
         }
 
 
-        //요리도구 상호작용 
+        //요리도구 상호작용
+        // 굽고 썰고 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             if (nearcounter != null)
             {
-
+                // 동작만하고 실질적인 처리는 재료가?
+                animator.SetTrigger("Chop");
             }
         }
 
