@@ -2,10 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum eCooked
-{
-
-}
 
 public class Change_Object : MonoBehaviour
 {
