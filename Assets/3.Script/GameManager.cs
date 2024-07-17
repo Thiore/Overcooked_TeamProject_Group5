@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    public int stage_index;
     public bool isPause = false; // 일시정지 상태
     public bool isPlaying = true; // 게임 진행 상태
     public GameObject pauseScreen; // 일시정지 화면
@@ -119,4 +120,15 @@ public class GameManager : MonoBehaviour
         ScoreManager.Instance.tip = 1;
         Debug.Log("Wrong_Recipe 호출");
     }
+
+    public void LoadGame(int stage_index)
+    {
+        switch (stage_index)
+        {
+            case 1:
+                SceneManager.LoadScene("MangoScene");
+                break;
+        }
+    }
+
 }

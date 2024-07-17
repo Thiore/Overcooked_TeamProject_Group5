@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class SubPanelButton : MonoBehaviour
 {
+    public void WorldMapLoad()
+    {
+        SceneManager.LoadScene("Bus_Flag");
+    }
     public void MainGameLoad()
     {
         SceneManager.LoadScene("MangoScene");
