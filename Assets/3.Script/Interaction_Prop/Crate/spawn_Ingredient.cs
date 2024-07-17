@@ -57,12 +57,12 @@ public class spawn_Ingredient : MonoBehaviour
         {
             Ingredeint obj = ingredient_queue.Dequeue();
             obj.gameObject.SetActive(true);
-            player.TakeIngredients(obj.gameObject);
+            //player.TakeIngredients(obj.gameObject);
         }
         else
         {
             Ingredeint newobj = Instantiate(myIngredient.GetComponent<Ingredeint>());
-            player.TakeIngredients(newobj.gameObject);
+            //player.TakeIngredients(newobj.gameObject);
         }
     }
 
