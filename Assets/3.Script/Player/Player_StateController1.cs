@@ -146,6 +146,7 @@ public class Player_StateController1 : MonoBehaviour
                 HandsOnOb.transform.SetParent(null);
                 var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();
                 rb.mass = 10;
+                rb.angularDrag = 0;
                 animator.SetBool("IsTake", false);
                 HandsOnOb = null;
                 isHolding = false;
