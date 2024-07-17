@@ -7,9 +7,6 @@ public class CounterEmissionController : MonoBehaviour
     private Queue<GameObject> pickQue;
     private List<GameObject> pickList;
 
-    private bool isPutOn = false;
-    public bool IsPutOn { get => isPutOn; set => isPutOn = value; }
-
     //private Player_StateController playerStateController;
     private Player_StateController1 playerStateController;
 
@@ -80,6 +77,15 @@ public class CounterEmissionController : MonoBehaviour
         {
             renderer.material.DisableKeyword("_EMISSION");
         }
+    }
+
+    public GameObject GetNearCounter()
+    {
+        if (pickQue.Count > 0)
+        {
+            return pickQue.Peek();
+        }
+        return null;
     }
 }
 

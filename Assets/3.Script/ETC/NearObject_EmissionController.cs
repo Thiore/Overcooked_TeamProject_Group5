@@ -49,7 +49,6 @@ public class NearObject_EmissionController : MonoBehaviour
 
             }
 
-            GetNearObject();
             pickList.Clear();
         }
 
@@ -65,7 +64,6 @@ public class NearObject_EmissionController : MonoBehaviour
             pickQue.Clear();
         }
 
-        GetNearObject();
     }
 
 

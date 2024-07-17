@@ -9,6 +9,8 @@ public class Player_StateController1 : MonoBehaviour
 
     //내가 보는 오브젝트
     private GameObject nearOb;
+    //내 근처 카운터
+    private GameObject nearcounter;
     //내가 집은 오브젝트 
     private GameObject HandsOnOb;
     //이건 인스펙터에서 셰프 밑에 스켈레톤 Attach 넣어 사용하기
@@ -32,71 +34,84 @@ public class Player_StateController1 : MonoBehaviour
         nearcontroller = GetComponent<NearObject_EmissionController>();
     }
 
+    //온스테이로 플레이어 범위 내에서 전반적인 처리
     private void OnTriggerStay(Collider other)
     {
         if (coroutine == null)
         {
-            coroutine = StartCoroutine(PlayerStateChange(other.gameObject));
+            nearOb = nearcontroller.GetNearObject();
+            nearcounter = emissionController.GetNearCounter();
+            coroutine = StartCoroutine(PlayerStateChange());
         }
     }
 
-    //온스테이로 플레이어 범위 내에서 전반적인 처리
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (coroutine == null)
-    //    {
-    //        coroutine = StartCoroutine(PlayerStateChange(other.gameObject));
-    //    }
-    //}
 
-
-    private IEnumerator PlayerStateChange(GameObject gameObject)
+    private IEnumerator PlayerStateChange()
     {
-        if (gameObject != null)
+        // 스페이스바는 집을수 있는 사물들은 집어 올림(재료, 요리도구, 접시
+        if (Input.GetKey(KeyCode.Space))
         {
-            // 스페이스바는 집을수 있는 사물들은 집어 올림(재료, 요리도구, 접시
-            if (Input.GetKey(KeyCode.Space))
+            // 재료를 내려놓을때
+            if (isHolding)
             {
-                // 재료를 내려놓을때
-                if (isHolding)
+                DropObject();
+                yield return new WaitForSeconds(0.5f);
+            }
+            else   // 집지 않은 상태 
+            {
+                if (nearcounter != null) // 카운터 옆인지 확인 
                 {
-                    DropObject();
+                    var counter = nearcounter.transform.GetComponent<CounterController>();
+
+                    // 박스 위에 아무것도 없다면 
+                    if (!counter.IsPutOn)
+                    {
+                        if (nearcounter.CompareTag("Crate"))
+                        {
+                            var ani = nearcounter.transform.GetComponent<Animator>();
+                            if (ani != null)
+                            {
+                                ani.SetTrigger("Pick");
+                                Debug.Log("열기");
+                                // 생성된 재료 오브젝트 바로 집는 메소드 추가 필요 
+                            }
+                            yield return new WaitForSeconds(0.5f);
+                        }
+                    }
+                    else
+                    {
+                        if (nearOb != null)
+                        {
+                            TakeHandObject(nearOb);
+                            counter.IsPutOn = false;
+                        }
+                        yield return new WaitForSeconds(0.5f);
+                    }
+
+                }
+                else
+                {
+                    if (nearOb != null)
+                    {
+                        TakeHandObject(nearOb);
+                    }
                     yield return new WaitForSeconds(0.5f);
                 }
-                else   // 집지 않은 상태 
-                {
-                    //재료 상자 앞에서 
-                    if (gameObject.CompareTag("Crate"))
-                    {
-                        var ani = gameObject.transform.GetComponent<Animator>();
-                        if (ani != null)
-                        {
-                            ani.SetTrigger("Pick");
-                            // 생성된 재료 오브젝트 바로 집는 메소드 추가 필요 
-                        }
-                        yield return new WaitForSeconds(0.5f);
-                    }
-                    else if (gameObject.CompareTag("Cooker") || gameObject.CompareTag("Ingredients"))
-                    {
-                        if (nearcontroller.GetNearObject() != null)
-                        {
-                            TakeHandObject(nearcontroller.GetNearObject());
-                        }
-                        yield return new WaitForSeconds(0.5f);
-                    }
-                }
-
-                coroutine = null;
             }
 
+        }
 
-            //요리도구 상호작용 
-            if (Input.GetKeyDown(KeyCode.LeftControl))
+
+        //요리도구 상호작용 
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            if (nearcounter != null)
             {
 
             }
         }
 
+        coroutine = null;
     }
 
 
@@ -105,27 +120,34 @@ public class Player_StateController1 : MonoBehaviour
     {
         if (HandsOnOb != null)
         {
-            animator.SetBool("IsTake", false);
-            if (emissionController.IsPutOn)
+            if (nearcounter != null)
             {
-                //var counter = emissionController.ReadyPutCounter();
-                //if (counter != null)
-                //{
-                //    HandsOnOb.transform.SetParent(counter.transform);
-                //    HandsOnOb.transform.position = counter.transform.position;
-                //    HandsOnOb.transform.rotation = Quaternion.identity;
-                //    emissionController.IsPutOn = false;
-                //}
+                var counter = nearcounter.transform.GetComponent<CounterController>();
+                if (!counter.IsPutOn)
+                {
+                    HandsOnOb.transform.SetParent(nearcounter.transform);
+                    HandsOnOb.transform.position = nearcounter.transform.position;
+                    HandsOnOb.transform.rotation = Quaternion.identity;
+                    counter.IsPutOn = true;
+
+                    animator.SetBool("IsTake", false);
+                    HandsOnOb = null;
+                    isHolding = false;
+                }
+                else
+                {
+                    Debug.Log("이미올라가있음");
+                }
             }
             else
             {
                 HandsOnOb.transform.SetParent(null);
                 var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();
                 rb.mass = 10;
-
+                animator.SetBool("IsTake", false);
+                HandsOnOb = null;
+                isHolding = false;
             }
-            HandsOnOb = null;
-            isHolding = false;
         }
     }
 
@@ -133,6 +155,7 @@ public class Player_StateController1 : MonoBehaviour
     {
         animator.SetBool("IsTake", true);
         HandsOnOb = gameObject;
+        nearcontroller.ChangeOriginEmission(HandsOnOb);
         Destroy(HandsOnOb.transform.GetComponent<Rigidbody>());
         HandsOnOb.transform.SetParent(Attachtransform);
         HandsOnOb.transform.rotation = Attachtransform.rotation;

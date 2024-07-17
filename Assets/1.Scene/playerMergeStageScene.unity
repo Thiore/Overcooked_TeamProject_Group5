@@ -642,6 +642,7 @@ GameObject:
   - component: {fileID: 6063452066827667387}
   - component: {fileID: 7277834205306561327}
   - component: {fileID: 163455207926345163}
+  - component: {fileID: 163455207926345164}
   m_Layer: 0
   m_Name: Counter
   m_TagString: Counter
@@ -662,6 +663,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.1938659, y: 0.50126714, z: 1.20007}
   m_Center: {x: -0.0030670762, y: -0.25010344, z: -0.0020070076}
+--- !u!114 &163455207926345164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163455207926345162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ebcdb405fbd6a4baf21443c4841cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &252488350419051152
 Transform:
   m_ObjectHideFlags: 0
@@ -4095,6 +4108,7 @@ GameObject:
   - component: {fileID: 4617538968121439251}
   - component: {fileID: 4617538968121439250}
   - component: {fileID: 4617538968121439249}
+  - component: {fileID: 4617538968121439264}
   m_Layer: 0
   m_Name: Counter
   m_TagString: Counter
@@ -4102,6 +4116,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4617538968121439264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617538968121439263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ebcdb405fbd6a4baf21443c4841cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &4617538968368168304
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4581,6 +4607,7 @@ GameObject:
   - component: {fileID: 4617538968622926108}
   - component: {fileID: 4617538968622926107}
   - component: {fileID: 4617538968622926106}
+  - component: {fileID: 4617538968622926109}
   m_Layer: 0
   m_Name: Counter
   m_TagString: Counter
@@ -4664,6 +4691,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4617538968622926104}
   m_Mesh: {fileID: 4300000, guid: 4893bf2858b39a24db368a03dd8e5650, type: 2}
+--- !u!114 &4617538968622926109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617538968622926104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ebcdb405fbd6a4baf21443c4841cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &4617538968639510633
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4738,6 +4777,7 @@ GameObject:
   - component: {fileID: 4617538968639510634}
   - component: {fileID: 4617538968639510633}
   - component: {fileID: 4617538968639510641}
+  - component: {fileID: 4617538968639510648}
   m_Layer: 0
   m_Name: Counter
   m_TagString: Counter
@@ -4760,6 +4800,18 @@ Transform:
   m_Father: {fileID: 2068300247347114287}
   m_RootOrder: 47
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4617538968639510648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617538968639510646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ebcdb405fbd6a4baf21443c4841cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &4617538968787299080
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4867,6 +4919,7 @@ GameObject:
   - component: {fileID: 4617538969029003212}
   - component: {fileID: 4617538969029003211}
   - component: {fileID: 4617538969029003210}
+  - component: {fileID: 4617538969029003213}
   m_Layer: 0
   m_Name: Counter
   m_TagString: Counter
@@ -4950,6 +5003,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4617538969029003208}
   m_Mesh: {fileID: 4300000, guid: 4893bf2858b39a24db368a03dd8e5650, type: 2}
+--- !u!114 &4617538969029003213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617538969029003208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ebcdb405fbd6a4baf21443c4841cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4617538969081148432
 GameObject:
   m_ObjectHideFlags: 0
@@ -4962,6 +5027,7 @@ GameObject:
   - component: {fileID: 4617538969081148436}
   - component: {fileID: 4617538969081148435}
   - component: {fileID: 4617538969081148434}
+  - component: {fileID: 4617538969081148437}
   m_Layer: 0
   m_Name: Counter
   m_TagString: Counter
@@ -5045,6 +5111,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4617538969081148432}
   m_Mesh: {fileID: 4300000, guid: 4893bf2858b39a24db368a03dd8e5650, type: 2}
+--- !u!114 &4617538969081148437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617538969081148432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ebcdb405fbd6a4baf21443c4841cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4617538969089317723
 GameObject:
   m_ObjectHideFlags: 0
@@ -5296,6 +5374,7 @@ GameObject:
   - component: {fileID: 4617538969281773361}
   - component: {fileID: 4617538969281773360}
   - component: {fileID: 4617538969281773375}
+  - component: {fileID: 4617538969281773376}
   m_Layer: 0
   m_Name: Counter
   m_TagString: Counter
@@ -5330,6 +5409,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.1938659, y: 0.50126714, z: 1.20007}
   m_Center: {x: -0.0030670762, y: -0.25010344, z: -0.0020070076}
+--- !u!114 &4617538969281773376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617538969281773373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ebcdb405fbd6a4baf21443c4841cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4617538969294870080
 Transform:
   m_ObjectHideFlags: 0
@@ -5418,6 +5509,7 @@ GameObject:
   - component: {fileID: 4617538969294870083}
   - component: {fileID: 4617538969294870082}
   - component: {fileID: 4617538969294870081}
+  - component: {fileID: 4617538969294870096}
   m_Layer: 0
   m_Name: Counter
   m_TagString: Counter
@@ -5425,6 +5517,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4617538969294870096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617538969294870095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ebcdb405fbd6a4baf21443c4841cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &4617538969401583744
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5863,6 +5967,7 @@ GameObject:
   - component: {fileID: 4617538969625287149}
   - component: {fileID: 4617538969625287148}
   - component: {fileID: 4617538969625287147}
+  - component: {fileID: 4617538969625287150}
   m_Layer: 0
   m_Name: Counter
   m_TagString: Counter
@@ -5946,6 +6051,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4617538969625287145}
   m_Mesh: {fileID: 4300000, guid: 4893bf2858b39a24db368a03dd8e5650, type: 2}
+--- !u!114 &4617538969625287150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617538969625287145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ebcdb405fbd6a4baf21443c4841cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &4617538969673218753
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6162,6 +6279,7 @@ GameObject:
   - component: {fileID: 4617538969901705861}
   - component: {fileID: 4617538969901705860}
   - component: {fileID: 4617538969901705856}
+  - component: {fileID: 4617538969901705859}
   m_Layer: 0
   m_Name: Counter
   m_TagString: Counter
@@ -6184,6 +6302,18 @@ Transform:
   m_Father: {fileID: 2068300247347114287}
   m_RootOrder: 46
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4617538969901705859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617538969901705857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ebcdb405fbd6a4baf21443c4841cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &4617538969901705860
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6569,6 +6699,7 @@ GameObject:
   - component: {fileID: 4742697900690867526}
   - component: {fileID: 4742697900690867527}
   - component: {fileID: 4742697900690867528}
+  - component: {fileID: 4742697900690867531}
   - component: {fileID: 4742697900690867529}
   m_Layer: 0
   m_Name: m_sk_crate (1)
@@ -6577,6 +6708,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4742697900690867531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4742697900690867530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ebcdb405fbd6a4baf21443c4841cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4742697900894640336
 Transform:
   m_ObjectHideFlags: 0
