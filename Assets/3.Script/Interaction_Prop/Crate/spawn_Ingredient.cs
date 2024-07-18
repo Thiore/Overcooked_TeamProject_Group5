@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class spawn_Ingredient : MonoBehaviour
 {
-    public eIngredients Ingredient_enum;
+    private eIngredients Ingredient_enum;
 
     [SerializeField] private GameObject[] ingredient_prefab;
 
@@ -16,11 +16,13 @@ public class spawn_Ingredient : MonoBehaviour
 
     private bool isOpen = false;
 
-   
+    private Crate_Info info;
 
     private void Awake()
     {
         TryGetComponent(out anim);
+        Ingredient_enum = info.Ingredients;
+
         myIngredient = ingredient_prefab[0];
         //for (int i = 0; i <ingredient_prefab.Length;i++)
         //{
@@ -62,6 +64,8 @@ public class spawn_Ingredient : MonoBehaviour
         else
         {
             Ingredeint newobj = Instantiate(myIngredient.GetComponent<Ingredeint>());
+            newobj.SetCookProcess(info.CookingProcess, info.Chop_Anim);
+           
             //player.TakeIngredients(newobj.gameObject);
         }
     }
@@ -93,5 +97,9 @@ public class spawn_Ingredient : MonoBehaviour
         ingredient_queue.Enqueue(ingredeint);
     }
 
+    public void Set_IngredientInfo(Crate_Info info)
+    {
+        this.info = info;
+    }
 
 }

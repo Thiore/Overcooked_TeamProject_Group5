@@ -39,7 +39,7 @@ public class Crate_spawn : MonoBehaviour
                     newMat[0] = crate;
                     newMat[1] = crate_Material[num];
                     crate_renderer.materials = newMat;
-                    obj.GetComponent<spawn_Ingredient>().Ingredient_enum = info.Ingredients;
+                    obj.GetComponent<spawn_Ingredient>().Set_IngredientInfo(info);
                     
                     return;
                 }

@@ -163,8 +163,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6847f30ffb87dd4e8f28f9fab4238fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ingredient_enum: 0
-  ingredient_prefab: []
+  ingredient_prefab:
+  - {fileID: 919132149155446097, guid: 9417b0af60289e745bc640e9f16df123, type: 3}
+  - {fileID: 919132149155446097, guid: e47bbdb142ee74045a8023a748520c2e, type: 3}
+  - {fileID: 919132149155446097, guid: 14a08345af1b8e9458c1361af3c159e8, type: 3}
+  - {fileID: 919132149155446097, guid: e01afdca4e941f3459c496be47c582dd, type: 3}
+  - {fileID: 919132149155446097, guid: 76f11791de888954fbce556b50479a8e, type: 3}
 --- !u!1 &3547977258986203295
 GameObject:
   m_ObjectHideFlags: 0
