@@ -12,7 +12,7 @@ public class RecipePool : MonoBehaviour
     [SerializeField] private int maxVisibleObjects = 5; // 화면에 보일 최대 오브젝트 수
 
     private Queue<GameObject> objectPool = new Queue<GameObject>(); // 오브젝트 풀을 저장하는 큐
-    private List<GameObject> activeObjects = new List<GameObject>(); // 활성화된 오브젝트 목록
+    public List<GameObject> activeObjects = new List<GameObject>(); // 활성화된 오브젝트 목록
     private List<GameObject> allObjects = new List<GameObject>(); // 생성된 모든 오브젝트 목록
 
     private float spawnInterval = 8f; // 오브젝트 생성 간격 (초)
@@ -85,7 +85,7 @@ public class RecipePool : MonoBehaviour
                 if (Time.time - obj.GetComponent<RecipeObject>().activationTime >= 20f)
                 {
                     DeactivateObject(obj); // 오브젝트 비활성화
-                    GameManager.Instance.SubScore(10); // 점수 감소
+                    ScoreManager.Instance.SubScore(10); // 점수 감소
                 }
             }
         }
@@ -96,10 +96,7 @@ public class RecipePool : MonoBehaviour
     {
         if (objectPool.Count > 0) // 풀에 오브젝트가 남아있을 때
         {
-            int randomIndex = Random.Range(0, objectPool.Count); // 랜덤 인덱스 선택
-            GameObject obj = objectPool.ToArray()[randomIndex]; // 랜덤 오브젝트 선택
-            objectPool = new Queue<GameObject>(objectPool); // 큐 재구성
-            objectPool.Dequeue(); // 선택된 오브젝트 제거
+            GameObject obj = objectPool.Dequeue(); // 큐에서 오브젝트 가져오기
             obj.SetActive(true); // 오브젝트 활성화
 
             RectTransform rectTransform = obj.GetComponent<RectTransform>();
@@ -116,6 +113,7 @@ public class RecipePool : MonoBehaviour
                 DeactivateObject(oldestObj); // 오브젝트 비활성화
             }
         }
+        Debug.Log("레시피 활성화");
     }
 
     // 오브젝트 비활성화
@@ -124,6 +122,7 @@ public class RecipePool : MonoBehaviour
         activeObjects.Remove(obj); // 활성화된 목록에서 제거
         obj.SetActive(false); // 오브젝트 비활성화
         objectPool.Enqueue(obj); // 풀에 다시 추가
+        Debug.Log("레시피 비활성화");
     }
 
     // 정답 오브젝트 처리
@@ -131,7 +130,7 @@ public class RecipePool : MonoBehaviour
     {
         obj.GetComponent<Image>().color = Color.green; // 오브젝트 색상 변경
         int points = obj.GetComponent<RecipeObject>().Point; // 점수 가져오기
-        GameManager.Instance.AddScore(points); // 점수 추가
+        ScoreManager.Instance.AddScore(points); // 점수 추가
         StartCoroutine(DeactivateAfterDelay(obj, 0.2f)); // 지연 후 비활성화
     }
 
@@ -158,7 +157,6 @@ public class RecipePool : MonoBehaviour
             for (int j = 0; j < recipe.ingredient.Count(); j++)
             {
                 imageNameMap.Add($"Ingredient_Icon_{j + 1}", recipe.ingredient[j]);
-                
             }
 
             RecipeObject recipeObject = obj.GetComponent<RecipeObject>();
@@ -167,7 +165,6 @@ public class RecipePool : MonoBehaviour
     }
 
     // 레시피 데이터를 가져오는 메서드 (더미 데이터)
-
     private List<Recipe> GetRecipes()
     {
         // 실제 데이터 가져오는 코드로 대체해야 함

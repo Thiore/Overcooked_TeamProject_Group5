@@ -6,16 +6,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public int score = 0; // 현재 점수
-    public int tip = 1; // 팁 배수
+    public int stage_index;
     public bool isPause = false; // 일시정지 상태
     public bool isPlaying = true; // 게임 진행 상태
     public GameObject pauseScreen; // 일시정지 화면
     public bool isInputEnabled = false; // 입력 가능 상태
-
-    public int addScoreCount = 0; // 점수를 얻은 횟수
-    public int subScoreCount = 0; // 점수를 잃은 횟수
-    public int subScore = 0; // 차감된 점수 합계
+    
 
     private void Awake()
     {
@@ -77,24 +73,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // 점수를 추가하는 메서드
-    public void AddScore(int points)
-    {
-        score += points;
-        addScoreCount++; // 점수를 얻은 횟수 증가
-        ScoreManager.Instance.AddScore(points); // ScoreManager에 점수 추가
-    }
-
-    // 점수를 차감하는 메서드
-    public void SubScore(int points)
-    {
-        score -= points;
-        subScoreCount++; // 점수를 잃은 횟수 증가
-        subScore += points; // 차감된 점수 합계 증가
-        tip = 1; // 팁 배수 초기화
-        ScoreManager.Instance.SubScore(points); // ScoreManager에 점수 차감
-    }
-
     // 게임 씬으로 진입하는 메서드
     public void EnterGame()
     {
@@ -122,25 +100,35 @@ public class GameManager : MonoBehaviour
     public void AllCorrect_Recipe()
     {
         ScoreManager.Instance.AddScore(10);
-        if (tip < 4)
+        if (ScoreManager.Instance.tip < 4)
         {
-            tip += 1;
+            ScoreManager.Instance.tip += 1;
         }
         Debug.Log("AllCorrect_Recipe 호출");
     }
+
     public void Incorrect_Recipe()
     {
+        ScoreManager.Instance.tip = 1;
         ScoreManager.Instance.AddScore(10);
-        tip = 1;
         Debug.Log("InCorrect_Recipe 호출");
     }
+
     public void Wrong_Recipe()
     {
         ScoreManager.Instance.SubScore(10);
-        tip = 1;
+        ScoreManager.Instance.tip = 1;
         Debug.Log("Wrong_Recipe 호출");
     }
 
-
+    public void LoadGame(int stage_index)
+    {
+        switch (stage_index)
+        {
+            case 1:
+                SceneManager.LoadScene("MangoScene");
+                break;
+        }
+    }
 
 }
