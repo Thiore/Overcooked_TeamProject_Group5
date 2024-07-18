@@ -525,7 +525,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 187850387}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a8bea9446e47fb4d99bcd8fd862e444, type: 3}
+  m_Script: {fileID: 11500000, guid: f739375eaa0d1b44db5afed41637a2ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &187850393
@@ -537,17 +537,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 187850387}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1dab261f5b20354ba3a85e9045ee9d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f25a9914d674104d94e8bb95dc5fd4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyButton: {fileID: 0}
-  arcadeButton: {fileID: 0}
-  battleButton: {fileID: 0}
-  characterButton: {fileID: 0}
-  setButton: {fileID: 0}
-  storyPanel: {fileID: 0}
-  arcadePanel: {fileID: 0}
-  battlePanel: {fileID: 0}
+  storyButton: {fileID: 331759811}
+  arcadeButton: {fileID: 1377755965}
+  battleButton: {fileID: 1320499070}
+  characterButton: {fileID: 1424722943}
+  setButton: {fileID: 684402011}
+  storyPanel: {fileID: 1945396182}
+  arcadePanel: {fileID: 1178051374}
+  battlePanel: {fileID: 1223279586}
 --- !u!1 &331759809
 GameObject:
   m_ObjectHideFlags: 0
@@ -4459,7 +4459,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b27c6ea0a121e1a4b8c55f833e3a977c, type: 2}
+  - {fileID: 2100000, guid: 2e9150f72bdccd149ae0ca5b2dbbabc5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4488,7 +4488,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689800587}
-  m_Mesh: {fileID: 4771411896726511928, guid: 538f5dbbebd29694eae2f5174fb38c7f, type: 3}
+  m_Mesh: {fileID: 4771411896726511928, guid: 78dd15d7e9c541c43abc65798e8142f0, type: 3}
 --- !u!4 &1689800590
 Transform:
   m_ObjectHideFlags: 0
@@ -4953,6 +4953,7 @@ GameObject:
   - component: {fileID: 1945396183}
   - component: {fileID: 1945396185}
   - component: {fileID: 1945396184}
+  - component: {fileID: 1945396186}
   m_Layer: 0
   m_Name: Story_Panel
   m_TagString: Untagged
@@ -5020,6 +5021,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1945396182}
   m_CullTransparentMesh: 1
+--- !u!114 &1945396186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945396182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d991d12eef3e85944be214bfea8d32c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1956164417
 GameObject:
   m_ObjectHideFlags: 0
