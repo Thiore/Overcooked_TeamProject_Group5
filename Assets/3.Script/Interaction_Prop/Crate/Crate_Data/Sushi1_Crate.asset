@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84881ab2516a30d458727328bc6b823f, type: 3}
+  m_Name: Sushi1_Crate
+  m_EditorClassIdentifier: 
+  Install_Pos:
+  - Ingredients: 0
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+    CookingProcess: 0
+    Chop_Anim: 0
+  - Ingredients: 11
+    Position: {x: 7.193, y: 0.018, z: -3.613}
+    Rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+    CookingProcess: 1
+    Chop_Anim: 0
+  - Ingredients: 21
+    Position: {x: 21.614, y: -0.018, z: -4.801}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+    CookingProcess: 1
+    Chop_Anim: 0
