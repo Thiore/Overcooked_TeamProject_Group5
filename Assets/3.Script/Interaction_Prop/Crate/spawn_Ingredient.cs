@@ -10,7 +10,7 @@ public class spawn_Ingredient : MonoBehaviour
 
     private GameObject myIngredient;
     private Queue<Ingredeint> ingredient_queue = new Queue<Ingredeint>();
-    private Player_StateController player;
+    private TestPlayer player;
 
     private Animator anim;
 
@@ -21,18 +21,22 @@ public class spawn_Ingredient : MonoBehaviour
     private void Awake()
     {
         TryGetComponent(out anim);
+        
+    }
+    private void Start()
+    {
         Ingredient_enum = info.Ingredients;
 
-        myIngredient = ingredient_prefab[0];
-        //for (int i = 0; i <ingredient_prefab.Length;i++)
-        //{
-        //    if(Ingredient_enum.ToString().Equals(ingredient_prefab[i].name))
-        //    {
-        //        myIngredient = ingredient_prefab[i];
-        //        return;
-        //    }
+        //myIngredient = ingredient_prefab[0];
+        for (int i = 0; i < ingredient_prefab.Length; i++)
+        {
+            if (Ingredient_enum.ToString().Equals(ingredient_prefab[i].name))
+            {
+                myIngredient = ingredient_prefab[i];
+                return;
+            }
 
-        //}
+        }
     }
 
     private void Update()
@@ -69,26 +73,19 @@ public class spawn_Ingredient : MonoBehaviour
             //player.TakeIngredients(newobj.gameObject);
         }
     }
+  
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         Debug.Log("µé¾î¿È");
         if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
         {
-            player = other.gameObject.GetComponent<Player_StateController>();
-            if(player == null)
-            {
-                Debug.Log("¾Èµé¾î¿È?");
-            }
-            //if (!player.isBellow)
-            //{
-            //    isOpen = true;
-            //}
+            isOpen = true;
         }
     }
-    private void OnTriggerExit(Collider other)
+    private void OnCollisionExit(Collision other)
     {
-        player = null;
+        
         isOpen = false;
     }
 

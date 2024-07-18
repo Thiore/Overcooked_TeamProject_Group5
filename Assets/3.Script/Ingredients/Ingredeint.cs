@@ -17,6 +17,7 @@ public enum eIngredients
     Bun,
     Fish,
     Pepperoni,
+    Cucumber,
     Egg,
     Chicken,
     Tortilla,
@@ -25,8 +26,7 @@ public enum eIngredients
     Chocolate,
     Honey,
     Pasta,
-    Prawn,
-    Cucumber
+    Prawn
 }
 
 public enum eCookingProcess
@@ -34,8 +34,7 @@ public enum eCookingProcess
     Normal = 0,
     Chopping,
     Chop_Cook,
-    Chop_Cook_Cook,
-    Cook_Cook
+    Cook
 }
 
 public enum eCooked
@@ -62,7 +61,7 @@ public class Ingredeint : MonoBehaviour
     private MeshFilter Ingredient_Mesh;
 
     public eCooked cooking { get; private set; }
-    public eIngredients myIngredients;
+   // public eIngredients myIngredients;
     private eCookingProcess CookProcess;
 
     [SerializeField] private bool Chop_Script;
@@ -71,8 +70,11 @@ public class Ingredeint : MonoBehaviour
     private float ChopTime;
     [SerializeField]private float FinishChopTime = default;
 
+    private bool isChopping;
 
-    private int TestNum = 0;
+    private GameObject player;
+
+
 
     private void Awake()
     {
@@ -90,39 +92,60 @@ public class Ingredeint : MonoBehaviour
     private void OnEnable()
     {
         cooking = eCooked.Normal;
+        isChopping = false;
         ChopTime = 0;
 
-
-        Change_Ingredient(eCooked.Normal);
+        if(Ingredient_Mesh.mesh.Equals(Change_Mesh[0]))
+        {
+            Change_Ingredient(eCooked.Normal);
+            Debug.Log("들어오면안됨");
+        }
+       
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.I))
+        if(Input.GetKey(KeyCode.I)&&cooking.Equals(eCooked.Normal))
         {
-            TestNum++;
-            if(TestNum>1)
+            ChopTime += Time.deltaTime;
+            Debug.Log($"잘리는중{ChopTime}");
+            if(ChopTime >FinishChopTime)
             {
-                TestNum = 0;
+                ChopTime = 0;
+                Change_Ingredient(eCooked.Chopping);
             }
-            Change_Ingredient((eCooked)TestNum);
+            
         }
     }
 
     public void Change_Ingredient(eCooked cooked)
     {
+        cooking = cooked;
         int CookEnum = (int)cooked;
         
         Ingredient_Mesh.mesh = Change_Mesh[CookEnum];
         Ingredient_renderer.material = Change_Material[CookEnum];
-        Debug.Log(Ingredient_renderer.material);
-        Debug.Log(Change_Material[CookEnum]);
+        
     }
 
     public void SetCookProcess(eCookingProcess process, bool Anim)
     {
         CookProcess = process;
         Chop_Anim = Anim;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
+        {
+            player = other.gameObject;
+
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(player)
     }
 
     public void Die()

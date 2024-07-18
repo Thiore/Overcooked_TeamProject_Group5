@@ -25,7 +25,7 @@ public class Crate_spawn : MonoBehaviour
         {
             for (int j = 0; j < 5; j++)
             {
-                if(/*info.Ingredients*/eIngredients.Prawn.Equals((eIngredients)(i*5 + j)))
+                if(info.Ingredients.Equals((eIngredients)(i*5 + j)))
                 {
                     
                     crate_Material[num].mainTextureOffset = new Vector2(0.2f * j, 1 - 0.2f * (i+1));
