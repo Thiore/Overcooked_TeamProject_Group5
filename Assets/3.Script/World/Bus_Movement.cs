@@ -19,5 +19,16 @@ public class Bus_Movement : MonoBehaviour
 
     }
 
+    private void FixedUpdate()
+    {
+        
+    }
 
+    private void Move()
+    {
+        //이동 전 회전 주고 비교
+        moveDirection = new Vector3(busInput.Rotate_Value, 0, busInput.Move_Value) * moveSpeed * Time.deltaTime;
+
+
+    }
 }
