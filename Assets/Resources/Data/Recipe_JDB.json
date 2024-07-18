@@ -14,7 +14,13 @@
   {
     "id": 103,
     "stage": 2,
-    "recipe": "Sushi",
-    "ingredient": [ "Rice", "Seaweed","Cucumber" ]
+    "recipe": "Sushi_Cucumber",
+    "ingredient": [ "Rice", "Seaweed", "Cucumber" ]
+  },
+  {
+    "id": 104,
+    "stage": 2,
+    "recipe": "Prawn_Food",
+    "ingredient": [ "Prawn" ]  
   }
 ]

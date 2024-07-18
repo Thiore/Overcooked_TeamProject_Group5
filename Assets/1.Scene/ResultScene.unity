@@ -2059,9 +2059,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e351db465d5b6e429e824b7a44fbe75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ResultTicket: {fileID: 0}
-  StarTexts: []
-  FullStars: []
-  ResultSum: {fileID: 0}
-  ResultSumScore: {fileID: 0}
-  TotalScore: {fileID: 0}
+  ResultTicket: {fileID: 2025678227}
+  StarTexts:
+  - {fileID: 711235168}
+  - {fileID: 386083252}
+  - {fileID: 314997456}
+  FullStars:
+  - {fileID: 1332343150}
+  - {fileID: 854351704}
+  - {fileID: 430902625}
+  ResultSum: {fileID: 1270843665}
+  ResultSumScore: {fileID: 1186195419}
+  TotalScore: {fileID: 334508500}
+  TitleText: {fileID: 1876346083}

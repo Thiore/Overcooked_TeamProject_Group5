@@ -806,10 +806,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stage_index: 0
-  ScoreText: {fileID: 0}
+  ScoreText: {fileID: 93902734}
   TipText: {fileID: 0}
   ScoreAni: {fileID: 0}
   TargetScore: 000000000000000000000000
+  TotalAddScore: 0
 --- !u!4 &337462932
 Transform:
   m_ObjectHideFlags: 0
@@ -4029,6 +4030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20df17c220a18a745b56d33a34b68863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stage_index: 0
   isPause: 0
   isPlaying: 0
   pauseScreen: {fileID: 99566720}
