@@ -160,12 +160,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3547977258791744772}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8edee71cc0e62624f8f5a8df0d9313a1, type: 3}
+  m_Script: {fileID: 11500000, guid: f6847f30ffb87dd4e8f28f9fab4238fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Ingredient_enum: 0
-  ingredient_prefab:
-  - {fileID: 4758313108777045753, guid: 970f6ad01da22c6469ce81784a8f6433, type: 3}
+  ingredient_prefab: []
 --- !u!1 &3547977258986203295
 GameObject:
   m_ObjectHideFlags: 0

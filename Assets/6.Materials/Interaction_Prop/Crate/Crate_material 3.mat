@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Crate_material 1
+  m_Name: Crate_material 3
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ShaderKeywords: _ALPHATEST_ON
   m_LightmapFlags: 4
@@ -23,7 +23,7 @@ Material:
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: d2f42a8af963ec3488f6b717228181ba, type: 3}
         m_Scale: {x: 0.2, y: 0.2}
-        m_Offset: {x: 0.2, y: 0.4}
+        m_Offset: {x: 0.2, y: -0.000000014901161}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -47,7 +47,7 @@ Material:
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: d2f42a8af963ec3488f6b717228181ba, type: 3}
         m_Scale: {x: 0.2, y: 0.2}
-        m_Offset: {x: 0.2, y: 0.4}
+        m_Offset: {x: 0.2, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
