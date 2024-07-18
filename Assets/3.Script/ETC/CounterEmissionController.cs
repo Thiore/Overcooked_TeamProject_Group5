@@ -19,10 +19,12 @@ public class CounterEmissionController : MonoBehaviour
         if (other.gameObject.CompareTag("Counter") || other.gameObject.CompareTag("Crate")/*||화구||쓰레기통*/)
         {
             pickList.Add(other.gameObject);
-            if (pickQue.Count.Equals(0))
+            if (pickQue.Count.Equals(0) && pickList.Count.Equals(1))
             {
                 pickQue.Enqueue(other.gameObject);
                 ChangeEmission(pickQue.Peek());
+                pickList.Clear();
+                return;
             }
 
             for (int i = 0; i < pickList.Count; i++)
@@ -32,9 +34,13 @@ public class CounterEmissionController : MonoBehaviour
                 
                 if(distance < queDistance)
                 {
+                    if(pickQue.Count != 0)
                     ChangeOriginEmission(pickQue.Dequeue());
+
                     pickQue.Enqueue(pickList[i]);
                     ChangeEmission(pickQue.Peek());
+                    pickList.Clear();
+                    return;
                 }              
             }
 
