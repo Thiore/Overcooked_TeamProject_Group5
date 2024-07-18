@@ -56,7 +56,7 @@ public class Player_StateController : MonoBehaviour
 
         //요리도구 상호작용
         // 굽고 썰고 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKey(KeyCode.LeftControl))
         {
             StartCoroutine(PlayerCookedChage());
         }
@@ -69,7 +69,13 @@ public class Player_StateController : MonoBehaviour
             // 동작만하고 실질적인 처리는 재료가?
 
             animator.SetTrigger("Chop");
-            Debug.Log("찹호출");
+            if(nearcounter.transform.childCount.Equals(2))
+            {
+
+            }
+            Debug.Log(nearcounter.transform.childCount);
+
+
         }
 
         yield return new WaitForSeconds(0.5f);
@@ -148,7 +154,7 @@ public class Player_StateController : MonoBehaviour
             if (nearcounter != null)
             {
                 var counter = nearcounter.transform.GetComponent<CounterController>();
-                if (!counter.IsPutOn && counter.PutOnOb == null)
+                if (!counter.IsPutOn && !counter.PutOnOb)
                 {
                     HandsOnOb.transform.SetParent(nearcounter.transform);
                     HandsOnOb.transform.position = nearcounter.transform.position;
