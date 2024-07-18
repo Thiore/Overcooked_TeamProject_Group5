@@ -11,7 +11,7 @@ public class Player_Ray : MonoBehaviour
         RaycastHit hit;
         int layerMask = ~LayerMask.GetMask("Player");
 
-        if (Physics.Raycast(rayPoint.position, rayPoint.forward, out hit, 3f, layerMask))
+        if (Physics.Raycast(rayPoint.position, rayPoint.forward, out hit, 2f, layerMask))
         {
 
             if (hit.collider.gameObject != null)

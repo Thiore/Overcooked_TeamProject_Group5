@@ -7,13 +7,13 @@ public class NearObject_EmissionController : MonoBehaviour
     private Queue<GameObject> pickQue;
     private List<GameObject> pickList;
 
-    private Player_StateController playerStateController1;
+    private Player_StateController playerStateController;
 
     private void Awake()
     {
         pickQue = new Queue<GameObject>();
         pickList = new List<GameObject>();
-        playerStateController1 = GetComponent<Player_StateController>();
+        playerStateController = GetComponent<Player_StateController>();
     }
 
     private void OnTriggerStay(Collider other)
@@ -26,6 +26,8 @@ public class NearObject_EmissionController : MonoBehaviour
             {
                 pickQue.Enqueue(other.gameObject);
                 ChangeEmission(pickQue.Peek());
+                pickList.Clear();
+                return;
             }
 
             for (int i = 0; i < pickList.Count; i++)
@@ -35,7 +37,8 @@ public class NearObject_EmissionController : MonoBehaviour
 
                 if (distance < queDistance)
                 {
-                    ChangeOriginEmission(pickQue.Dequeue());
+                    if (pickQue.Count != 0)
+                        ChangeOriginEmission(pickQue.Dequeue());
                     pickQue.Enqueue(pickList[i]);
                     ChangeEmission(pickQue.Peek());
                 }

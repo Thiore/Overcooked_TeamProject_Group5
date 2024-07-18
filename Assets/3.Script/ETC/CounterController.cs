@@ -8,4 +8,17 @@ public class CounterController : MonoBehaviour
     private bool isPutOn = false;
     public bool IsPutOn { get => isPutOn; set => isPutOn = value; }
 
+    [SerializeField] private GameObject putonOb;
+    public GameObject PutOnOb { get => putonOb; set => putonOb = value; }
+
+    public void ChangePuton()
+    {
+        isPutOn = !isPutOn;
+    }
+
+    public void PutOnObject(GameObject obj)
+    {
+        putonOb = obj;
+    }
+
 }
