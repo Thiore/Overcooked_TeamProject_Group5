@@ -72,7 +72,7 @@ public class Ingredeint : MonoBehaviour
 
     private bool isChopping;
 
-    private GameObject player;
+    private Animator[] playerAnim = new Animator[2];
 
 
 
@@ -87,6 +87,11 @@ public class Ingredeint : MonoBehaviour
         if (FinishChopTime.Equals(default))
         {
             FinishChopTime = 5f;
+        }
+
+        for(int i = 0; i < playerAnim.Length;i++)
+        {
+            playerAnim[i] = null;
         }
     }
     private void OnEnable()
@@ -138,14 +143,29 @@ public class Ingredeint : MonoBehaviour
     {
         if(other.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
         {
-            player = other.gameObject;
-
+            for(int i = 0; i < playerAnim.Length;i++)
+            {
+                if(playerAnim[i] == null)
+                {
+                    playerAnim[i] = other.gameObject.GetComponent<Animator>();
+                    return;
+                }
+            }
+            
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(player)
+        for(int i = 0; i < playerAnim.Length;i++)
+        {
+            if (playerAnim[i].gameObject.Equals(other.gameObject))
+            {
+                playerAnim[i] = null;
+                return;
+            }
+        }
+        
     }
 
     public void Die()
