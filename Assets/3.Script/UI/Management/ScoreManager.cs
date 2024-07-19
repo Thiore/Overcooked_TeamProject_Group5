@@ -23,7 +23,7 @@ public class ScoreManager : MonoBehaviour
     public Text TipText;      // 팁을 표시할 UI 텍스트
     public Animator ScoreAni; // 점수가 변경될 때 애니메이션을 재생할 애니메이터
     public int Tip_Score { get; private set; }  // 팁으로 인해 얻은 추가 점수를 기록하는 변수
-    public int[] TargetScore { get; private set; } = new int[3]; // 목표 점수 배열
+    public int[] TargetScore = new int[3]; // 목표 점수 배열
     public int Score { get; private set; }       // 현재 점수
 
     private void Awake()
@@ -82,7 +82,7 @@ public class ScoreManager : MonoBehaviour
         for (int i = 0; i < TargetScore.Length; i++)
         {
             TargetScore[i] = 0;
-        }
+        } 
     }
 
     // 점수를 추가하는 메서드

@@ -1,34 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneTemplate;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½È£ï¿½Û¿ï¿½ (ï¿½ï¿½ï¿½ / ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½Û¿ï¿½) 
+//Àü¹ÝÀû ÇÃ·¹ÀÌ¾î »óÈ£ÀÛ¿ë (Àç·á / ¿ä¸® µµ±¸ µîµî »óÈ£ÀÛ¿ë) 
 public class Player_StateController : MonoBehaviour
 {
     private Animator animator;
 
-    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+    //³»°¡ º¸´Â ¿ÀºêÁ§Æ®
     private GameObject nearOb;
-    //ï¿½ï¿½ ï¿½ï¿½Ã³ Ä«ï¿½ï¿½ï¿½ï¿½
+    //³» ±ÙÃ³ Ä«¿îÅÍ
     private GameObject nearcounter;
-    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® 
+    //³»°¡ ÁýÀº ¿ÀºêÁ§Æ® 
     private GameObject HandsOnOb;
-    //ï¿½Ì°ï¿½ ï¿½Î½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¿ï¿½ ï¿½ï¿½ï¿½Ì·ï¿½ï¿½ï¿½ Attach ï¿½Ö¾ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
+    //ÀÌ°Ç ÀÎ½ºÆåÅÍ¿¡¼­ ¼ÎÇÁ ¹Ø¿¡ ½ºÄÌ·¹Åæ Attach ³Ö¾î »ç¿ëÇÏ±â
     [SerializeField] private Transform Attachtransform;
 
-    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ 
+    //³»°¡ µé°í ÀÖ´ÂÁö 
     private bool isHolding = false;
     private bool isChop = false;
 
     public bool IsHolding { get => isHolding; private set => isHolding = value; }
     public bool IsChop { get => isChop; private set => isChop = value; }
 
-    //ï¿½Ú·ï¿½Æ¾ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñµï¿½ 
-    // Startï¿½ï¿½ ï¿½Ò‹ï¿½ ï¿½î¶²ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-    // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½Ï³ï¿½ ï¿½ï¿½î°¥ï¿½ï¿½ï¿½Õ°ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½?
-    private Coroutine coroutine;
+    //ÄÚ·çÆ¾ ¹è¿­µµ °¡´ÉÇÑµ¥ 
+    // Start¶û ÇÒ‹š ¾î¶²°ÇÁö ¹è¿­·Î °ü¸®
+    // °¢ ¿ÀºêÁ§Æ®¸¶´Ù ÇÏ³ªÇÏ³ª µé¾î°¥¼öÀÕ°í ÇÃ·¹ÀÌ¾î°¡ Á» ´õ °ü¸®?
+    private Coroutine coroutine = null;
 
     private CounterEmissionController emissionController;
     private NearObject_EmissionController nearcontroller;
@@ -40,39 +41,42 @@ public class Player_StateController : MonoBehaviour
         nearcontroller = GetComponent<NearObject_EmissionController>();
     }
 
-    //ï¿½Â½ï¿½ï¿½ï¿½ï¿½Ì·ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
+    //¿Â½ºÅ×ÀÌ·Î ÇÃ·¹ÀÌ¾î ¹üÀ§ ³»¿¡¼­ Àü¹ÝÀûÀÎ Ã³¸®
     private void Update()
     {
         nearcounter = emissionController.GetNearCounter();
         nearOb = nearcontroller.GetNearObject();
 
-        // ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ï¿½Ù´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ç¹°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¸ï¿½(ï¿½ï¿½ï¿½, ï¿½ä¸®ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½
-        if (Input.GetKey(KeyCode.Space))
+        // ½ºÆäÀÌ½º¹Ù´Â ÁýÀ»¼ö ÀÖ´Â »ç¹°µéÀº Áý¾î ¿Ã¸²(Àç·á, ¿ä¸®µµ±¸, Á¢½Ã
+        if (coroutine == null)
         {
-            if (coroutine == null)
+            if (Input.GetKey(KeyCode.Space))
             {
                 coroutine = StartCoroutine(PlayerHodingChange());
             }
-        }
 
-        //ï¿½ä¸®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½Û¿ï¿½
-        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-            StartCoroutine(PlayerCookedChage());
+            //¿ä¸®µµ±¸ »óÈ£ÀÛ¿ë
+            // ±Á°í ½ä°í 
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                StartCoroutine(PlayerCookedChage());
+            }
         }
     }
+
 
     private IEnumerator PlayerCookedChage()
     {
         if (nearcounter != null)
         {
-            // ï¿½ï¿½ï¿½Û¸ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½á°¡?
+            var counter = nearcounter.transform.GetComponent<CounterController>();
 
-            animator.SetTrigger("Chop");
-            if(nearcounter.transform.childCount.Equals(2))
+            // µ¿ÀÛ¸¸ÇÏ°í ½ÇÁúÀûÀÎ Ã³¸®´Â Àç·á°¡?
+
+            // µµ¸¶°¡ ÀÖ´ÂÁö, µµ¸¶ ÀÚ½Ä¿¡ ÅÂ±×°¡ Àç·áÀÎ ¿ÀºêÁ§Æ®°¡ ÀÖ´ÂÁö + Àç·á °¡ ½ä ¼öÀÖ´Â booleanÀÎÁö 
+            if (counter.ChoppingBoard != null && counter.ChoppingBoard.transform.GetChild(0).gameObject.CompareTag("Ingredients") /* Àç·á°¡ ½ä¼öÀÖ´ÂÁö  */)
             {
-
+                animator.SetTrigger("Chop");
             }
 
 
@@ -85,18 +89,18 @@ public class Player_StateController : MonoBehaviour
     private IEnumerator PlayerHodingChange()
     {
 
-        // ï¿½ï¿½á¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        // Àç·á¸¦ ³»·Á³õÀ»¶§
         if (isHolding)
         {
             DropObject();
         }
-        else   // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+        else   // ÁýÁö ¾ÊÀº »óÅÂ 
         {
-            if (nearcounter != null) // Ä«ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ 
+            if (nearcounter != null) // Ä«¿îÅÍ ¿·ÀÎÁö È®ÀÎ 
             {
                 var counter = nearcounter.transform.GetComponent<CounterController>();
 
-                // ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¹ï¿½ï¿½Íµï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ 
+                // ¹Ú½º À§¿¡ ¾Æ¹«°Íµµ ¾ø´Ù¸é 
                 if (!counter.IsPutOn)
                 {
                     if (nearcounter.CompareTag("Crate"))
@@ -105,28 +109,25 @@ public class Player_StateController : MonoBehaviour
                         if (ani != null)
                         {
                             ani.SetTrigger("Pick");
-                            Debug.Log("ï¿½ï¿½ï¿½ï¿½");
-                            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½ ï¿½ß°ï¿½ ï¿½Ê¿ï¿½ 
+                            Debug.Log("¿­±â");
+                            // »ý¼ºµÈ Àç·á ¿ÀºêÁ§Æ® ¹Ù·Î Áý´Â ¸Þ¼Òµå Ãß°¡ ÇÊ¿ä 
                             yield return new WaitForSeconds(0.2f);
                         }
                     }
 
-                    //ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ 
+                    //¹Ú½ºÀ§¿¡ ¾ø°í ±ÙÃ³ ¿ÀºêÁ§Æ®°¡ ÀÖ´Ù¸é 
                     if (nearOb != null)
                     {
-                        // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î°¡ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½á¿¡ bool ï¿½ï¿½ ï¿½Ö¾ï¿½ true ï¿½ï¿½ ï¿½×³ï¿½ return ï¿½ï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½
+                        // ÇÃ·¹ÀÌ¾î°¡ ¼­·Î »¯¾î°¡Áö ¸øÇÏ°Ô Àç·á¿¡ bool ÀÌ ÀÖ¾î true ¸é ±×³É return ÇÒ ¼ö ÀÖµµ·Ï
                         TakeHandObject(nearOb);
                         yield return new WaitForSeconds(0.2f);
                     }
                 }
-                else // ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½? 
+                else // ¹Ú½º À§¿¡ ÀÖÀ¸¸é? 
                 {
-                    if(counter.PutOnOb != null)
+                    if (counter.ChoppingBoard != null)
                     {
-                        TakeHandObject(nearOb);
-                        counter.ChangePuton();
-                        counter.PutOnOb = null;
-                        yield return new WaitForSeconds(0.2f);
+                        TakeHandObject(counter.ChoppingBoard.transform.GetChild(0).gameObject);
                     }
                     else
                     {
@@ -140,7 +141,7 @@ public class Player_StateController : MonoBehaviour
                 }
 
             }
-            else
+            else // Ä«¿îÅÍ ¿·ÀÌ ¾Æ´Ï¶ó¸é ¶¥¿¡ ÀÕ´Â°Å¶ó °¡Á¤ 
             {
                 if (nearOb != null)
                 {
@@ -159,13 +160,13 @@ public class Player_StateController : MonoBehaviour
 
     private void DropObject()
     {
-        // ï¿½ï¿½Ã³ï¿½ï¿½ Ä«ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Ö´Ù¸ï¿½ 
+        // ±ÙÃ³¿¡ Ä«¿îÅÍ°¡ ÀÖ´Ù¸é 
         if (nearcounter != null)
         {
             var counter = nearcounter.transform.GetComponent<CounterController>();
-            if (!counter.IsPutOn) // Ä«ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Ù¸ï¿½ 
+            if (!counter.IsPutOn) // Ä«¿îÅÍ¿¡ ¿Ã¶ó°¡ÀÖÁö ¾Ê´Ù¸é 
             {
-                if (counter.ChoppingBoard == null) // Ä«ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ 
+                if (counter.ChoppingBoard == null) // Ä«¿îÅÍ¿¡ µµ¸¶°¡ ¾ø´Â °÷ÀÌ¶ó¸é 
                 {
                     HandsOnOb.transform.SetParent(nearcounter.transform);
                     HandsOnOb.transform.position = nearcounter.transform.position + new Vector3(0, 0.1f, 0);
@@ -173,7 +174,7 @@ public class Player_StateController : MonoBehaviour
                     counter.ChangePuton();
                     counter.PutOnOb = HandsOnOb;
                 }
-                else // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ 
+                else // µµ¸¶°¡ ÀÖ´Ù¸é 
                 {
                     HandsOnOb.transform.SetParent(counter.ChoppingBoard.transform);
                     HandsOnOb.transform.position = counter.ChoppingBoard.transform.position + new Vector3(0, 0.1f, 0);
@@ -185,12 +186,12 @@ public class Player_StateController : MonoBehaviour
                 HandsOnOb = null;
                 isHolding = false;
             }
-            else // Ä«ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½Ã¶ï¿½ ï¿½Ö´Âµï¿½ ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ ï¿½Ï¸ï¿½ 
+            else // Ä«¿îÅÍ¿¡ ¿Ã¶ó°¡ ÀÖ´Âµ¥ µå¶øÇÏ·Á°í ÇÏ¸é 
             {
-                Debug.Log("ï¿½Ì¹Ì¿Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½");
+                Debug.Log("ÀÌ¹Ì¿Ã¶ó°¡ÀÖÀ½");
             }
         }
-        else // ï¿½ï¿½Ã³ï¿½ï¿½ Ä«ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù´ï¿½ 
+        else // ±ÙÃ³¿¡ Ä«¿îÅÍ ¾øÀ¸¸é ¶¥¿¡ ¶³±º´Ù´Â 
         {
             HandsOnOb.transform.SetParent(null);
             var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();

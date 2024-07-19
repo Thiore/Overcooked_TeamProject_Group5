@@ -18,6 +18,11 @@ public class NearObject_EmissionController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            return;
+        }
+
         if (other.gameObject.CompareTag("Ingredients") || other.gameObject.CompareTag("Cooker") 
             || other.gameObject.CompareTag("Plate"))
         {

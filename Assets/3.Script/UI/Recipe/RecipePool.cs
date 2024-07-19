@@ -85,7 +85,7 @@ public class RecipePool : MonoBehaviour
                 if (Time.time - obj.GetComponent<RecipeObject>().activationTime >= 20f)
                 {
                     DeactivateObject(obj); // 오브젝트 비활성화
-                    GameManager.Instance.SubScore(10); // 점수 감소
+                    ScoreManager.Instance.SubScore(10); // 점수 감소
                 }
             }
         }
@@ -131,7 +131,7 @@ public class RecipePool : MonoBehaviour
     {
         obj.GetComponent<Image>().color = Color.green; // 오브젝트 색상 변경
         int points = obj.GetComponent<RecipeObject>().Point; // 점수 가져오기
-        GameManager.Instance.AddScore(points); // 점수 추가
+        ScoreManager.Instance.AddScore(points); // 점수 추가
         StartCoroutine(DeactivateAfterDelay(obj, 0.2f)); // 지연 후 비활성화
     }
 
