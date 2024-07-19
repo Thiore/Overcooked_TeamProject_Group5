@@ -101,11 +101,12 @@ public class Player_Movent : MonoBehaviour
 
             player_rb.MovePosition(Vector3.Lerp(player_rb.position, endPos,elaspedTime / 0.3f));
             elaspedTime += Time.deltaTime;
-            yield return null;
+            yield return null;   
         }
         player_rb.MovePosition(endPos);       
         animator.SetBool("IsWalking", false);
         isJumping = false;
+        yield return null;
     }
 
 }
