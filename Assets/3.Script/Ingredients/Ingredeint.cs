@@ -108,48 +108,52 @@ public class Ingredeint : MonoBehaviour
 
     private void Update()
     {
-        if(transform.parent.CompareTag("ChoppingBoard"))
+        if(transform.parent != null)
         {
-            if (cooking.Equals(eCooked.Normal))
+            if (transform.parent.CompareTag("ChoppingBoard"))
             {
-                for (int i = 0; i < playerAnim.Length; i++)
+                if (cooking.Equals(eCooked.Normal))
                 {
-                    if (playerAnim[i] != null)
+                    for (int i = 0; i < playerAnim.Length; i++)
                     {
-                        AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
-                        if (AnimInfo[i].IsName("New_Chef@Chop"))
+                        if (playerAnim[i] != null)
                         {
-                            if(i.Equals(1)&&AnimInfo[0].IsName("New_Chef@Chop"))
+                            AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
+                            if (AnimInfo[i].IsName("New_Chef@Chop"))
                             {
-                                playerAnim[1].SetTrigger("Finish");
-                            }
-                            ChopTime += Time.deltaTime;
-                            Debug.Log($"잘리는중{ChopTime}");
-                            if (ChopTime > FinishChopTime)
-                            {
-                                ChopTime = 0;
-                                Change_Ingredient(eCooked.Chopping);
+                                if (i.Equals(1) && AnimInfo[0].IsName("New_Chef@Chop"))
+                                {
+                                    playerAnim[1].SetTrigger("Finish");
+                                }
+                                ChopTime += Time.deltaTime;
+                                Debug.Log($"잘리는중{ChopTime}");
+                                if (ChopTime > FinishChopTime)
+                                {
+                                    ChopTime = 0;
+                                    Change_Ingredient(eCooked.Chopping);
+                                }
                             }
                         }
-                    }
 
+                    }
                 }
-            }
-            else
-            {
-                for (int i = 0; i < playerAnim.Length; i++)
+                else
                 {
-                    if (playerAnim[i] != null)
+                    for (int i = 0; i < playerAnim.Length; i++)
                     {
-                        AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
-                        if (AnimInfo[i].IsName("New_Chef@Chop"))
+                        if (playerAnim[i] != null)
                         {
-                            playerAnim[i].SetTrigger("Finish");
+                            AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
+                            if (AnimInfo[i].IsName("New_Chef@Chop"))
+                            {
+                                playerAnim[i].SetTrigger("Finish");
+                            }
                         }
                     }
                 }
             }
         }
+        
     }
 
     public void Change_Ingredient(eCooked cooked)
@@ -188,11 +192,15 @@ public class Ingredeint : MonoBehaviour
     {
         for(int i = 0; i < playerAnim.Length;i++)
         {
-            if (playerAnim[i].gameObject.Equals(other.gameObject))
+            if(playerAnim[i]!=null)
             {
-                playerAnim[i] = null;
-                return;
+                if (playerAnim[i].gameObject.Equals(other.gameObject))
+                {
+                    playerAnim[i] = null;
+                    return;
+                }
             }
+            
         }
         
     }

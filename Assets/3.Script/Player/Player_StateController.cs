@@ -105,10 +105,10 @@ public class Player_StateController : MonoBehaviour
                 {
                     if (nearcounter.CompareTag("Crate"))
                     {
-                        var ani = nearcounter.transform.GetComponent<Animator>();
-                        if (ani != null)
+                        var spawn = nearcounter.transform.GetComponent<spawn_Ingredient>();
+                        if (spawn != null)
                         {
-                            ani.SetTrigger("Pick");
+                            TakeHandObject(spawn.PickAnim());
                             Debug.Log("열기");
                             // 생성된 재료 오브젝트 바로 집는 메소드 추가 필요 
                             yield return new WaitForSeconds(0.2f);

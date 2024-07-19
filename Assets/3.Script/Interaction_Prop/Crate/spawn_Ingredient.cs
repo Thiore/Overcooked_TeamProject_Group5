@@ -10,7 +10,7 @@ public class spawn_Ingredient : MonoBehaviour
 
     private GameObject myIngredient;
     private Queue<Ingredeint> ingredient_queue = new Queue<Ingredeint>();
-    private TestPlayer player;
+    private Player_StateController player;
 
     private Animator anim;
 
@@ -48,29 +48,29 @@ public class spawn_Ingredient : MonoBehaviour
             
         }
     }
-    public void PickAnim()
+    public GameObject PickAnim()
     {
         anim.SetTrigger("Pick");
         isOpen = false;
-        newIngredient();
+        return newIngredient();
     }
 
 
-    public void newIngredient()
+    public GameObject newIngredient()
     {
         Debug.Log(ingredient_queue.Count);
         if(ingredient_queue.Count>0)
         {
             Ingredeint obj = ingredient_queue.Dequeue();
             obj.gameObject.SetActive(true);
-            //player.TakeIngredients(obj.gameObject);
+            return obj.gameObject;
         }
         else
         {
             Ingredeint newobj = Instantiate(myIngredient.GetComponent<Ingredeint>());
             newobj.SetCookProcess(info.CookingProcess, info.Chop_Anim);
-           
-            //player.TakeIngredients(newobj.gameObject);
+
+            return newobj.gameObject;
         }
     }
   
