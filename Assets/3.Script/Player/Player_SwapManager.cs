@@ -24,27 +24,35 @@ public class Player_SwapManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            SwapCharacter();
+           StartCoroutine(SwapCharacter());
         }
     }
 
-    void SwapCharacter()
+    private IEnumerator SwapCharacter()
     {
         if (currentPlayer == player1)
         {
             SetActivePlayer(player2);
             currentMark1.enabled = false;
             currentMark2.enabled = true;
+            var ani = player1.GetComponent<Animator>();      
+            ani.SetBool("IsWalking", false);
+            
+            yield return new WaitForEndOfFrame();
         }
         else
         {
             SetActivePlayer(player1);
             currentMark1.enabled = true;
             currentMark2.enabled = false;
+            var ani = player2.GetComponent<Animator>();
+            ani.SetBool("IsWalking", false);
+
+            yield return new WaitForEndOfFrame();
         }
     }
 
-    void SetActivePlayer(GameObject player)
+    private void SetActivePlayer(GameObject player)
     {
         player1.GetComponent<Player_Movent>().enabled = player == player1;
         player1.GetComponent<Player_StateController>().enabled = player == player1;

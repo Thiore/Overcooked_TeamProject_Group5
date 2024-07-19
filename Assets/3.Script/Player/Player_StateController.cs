@@ -23,6 +23,7 @@ public class Player_StateController : MonoBehaviour
     private bool isHolding = false;
     private bool isChop = false;
 
+    public bool IsHolding { get => isHolding; private set => isHolding = value; }
     public bool IsChop { get => isChop; private set => isChop = value; }
 
     //코루틴 배열도 가능한데 
@@ -77,7 +78,7 @@ public class Player_StateController : MonoBehaviour
             {
                 animator.SetTrigger("Chop");
             }
-       
+
 
         }
 
@@ -117,6 +118,7 @@ public class Player_StateController : MonoBehaviour
                     //박스위에 없고 근처 오브젝트가 있다면 
                     if (nearOb != null)
                     {
+                        // 플레이어가 서로 뺏어가지 못하게 재료에 bool 이 있어 true 면 그냥 return 할 수 있도록
                         TakeHandObject(nearOb);
                         yield return new WaitForSeconds(0.2f);
                     }
@@ -131,7 +133,7 @@ public class Player_StateController : MonoBehaviour
                     {
                         TakeHandObject(counter.transform.GetChild(0).gameObject);
                     }
- 
+
                     counter.ChangePuton();
                     counter.PutOnOb = null;
                     yield return new WaitForSeconds(0.2f);
@@ -158,50 +160,46 @@ public class Player_StateController : MonoBehaviour
 
     private void DropObject()
     {
-        // 무언가 들고 있다면  
-        if (HandsOnOb != null)
+        // 근처에 카운터가 있다면 
+        if (nearcounter != null)
         {
-            // 근처에 카운터가 있다면 
-            if (nearcounter != null)
+            var counter = nearcounter.transform.GetComponent<CounterController>();
+            if (!counter.IsPutOn) // 카운터에 올라가있지 않다면 
             {
-                var counter = nearcounter.transform.GetComponent<CounterController>();
-                if (!counter.IsPutOn) // 카운터에 올라가있지 않다면 
+                if (counter.ChoppingBoard == null) // 카운터에 도마가 없는 곳이라면 
                 {
-                    if (counter.ChoppingBoard == null) // 카운터에 도마가 없는 곳이라면 
-                    {
-                        HandsOnOb.transform.SetParent(nearcounter.transform);
-                        HandsOnOb.transform.position = nearcounter.transform.position + new Vector3(0, 0.1f, 0);
-                        HandsOnOb.transform.rotation = Quaternion.identity;
-                        counter.ChangePuton();
-                        counter.PutOnOb = HandsOnOb;
-                    }
-                    else // 도마가 있다면 
-                    {
-                        HandsOnOb.transform.SetParent(counter.ChoppingBoard.transform);
-                        HandsOnOb.transform.position = counter.ChoppingBoard.transform.position + new Vector3(0, 0.1f, 0);
-                        HandsOnOb.transform.rotation = Quaternion.identity;
-                        counter.ChangePuton();
-                    }
+                    HandsOnOb.transform.SetParent(nearcounter.transform);
+                    HandsOnOb.transform.position = nearcounter.transform.position + new Vector3(0, 0.1f, 0);
+                    HandsOnOb.transform.rotation = Quaternion.identity;
+                    counter.ChangePuton();
+                    counter.PutOnOb = HandsOnOb;
+                }
+                else // 도마가 있다면 
+                {
+                    HandsOnOb.transform.SetParent(counter.ChoppingBoard.transform);
+                    HandsOnOb.transform.position = counter.ChoppingBoard.transform.position + new Vector3(0, 0.1f, 0);
+                    HandsOnOb.transform.rotation = Quaternion.identity;
+                    counter.ChangePuton();
+                }
 
-                    animator.SetBool("IsTake", false);
-                    HandsOnOb = null;
-                    isHolding = false;
-                }
-                else // 카운터에 올라가 있는데 드랍하려고 하면 
-                {
-                    Debug.Log("이미올라가있음");
-                }
-            }
-            else // 근처에 카운터 없으면 땅에 떨군다는 
-            {
-                HandsOnOb.transform.SetParent(null);
-                var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();
-                rb.mass = 0.05f;
-                rb.angularDrag = 0;
                 animator.SetBool("IsTake", false);
                 HandsOnOb = null;
                 isHolding = false;
             }
+            else // 카운터에 올라가 있는데 드랍하려고 하면 
+            {
+                Debug.Log("이미올라가있음");
+            }
+        }
+        else // 근처에 카운터 없으면 땅에 떨군다는 
+        {
+            HandsOnOb.transform.SetParent(null);
+            var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();
+            rb.mass = 0.05f;
+            rb.angularDrag = 0;
+            animator.SetBool("IsTake", false);
+            HandsOnOb = null;
+            isHolding = false;
         }
     }
 
