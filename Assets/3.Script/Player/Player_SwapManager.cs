@@ -16,6 +16,7 @@ public class Player_SwapManager : MonoBehaviour
     {
         currentPlayer = player1;
         currentMark1.enabled = true;
+        currentMark2.enabled = false;
         SetActivePlayer(player1);
     }
 
@@ -32,10 +33,14 @@ public class Player_SwapManager : MonoBehaviour
         if (currentPlayer == player1)
         {
             SetActivePlayer(player2);
+            currentMark1.enabled = false;
+            currentMark2.enabled = true;
         }
         else
         {
             SetActivePlayer(player1);
+            currentMark1.enabled = true;
+            currentMark2.enabled = false;
         }
     }
 
