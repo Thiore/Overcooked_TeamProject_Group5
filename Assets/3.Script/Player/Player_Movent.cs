@@ -37,7 +37,8 @@ public class Player_Movent : MonoBehaviour
         }
 
         player_rb.angularVelocity = Vector3.zero;
-        
+        player_rb.velocity = Vector3.zero;
+        player_rb.angularDrag = 0;
     }
 
     private void Walking()
