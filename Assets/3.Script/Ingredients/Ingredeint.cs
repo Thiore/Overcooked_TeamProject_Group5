@@ -61,7 +61,7 @@ public class Ingredeint : MonoBehaviour
     private MeshFilter Ingredient_Mesh;
 
     public eCooked cooking { get; private set; }
-   // public eIngredients myIngredients;
+    // public eIngredients myIngredients;
     private eCookingProcess CookProcess;
 
     [SerializeField] private bool Chop_Script;
@@ -81,13 +81,13 @@ public class Ingredeint : MonoBehaviour
     {
         TryGetComponent(out Ingredient_renderer);
         TryGetComponent(out Ingredient_Mesh);
-        if(JointBone.Length.Equals(0))
+        if (JointBone.Length.Equals(0))
         {
             CopyBone = JointBone;
         }
-        
 
-        for(int i = 0; i < playerAnim.Length;i++)
+
+        for (int i = 0; i < playerAnim.Length; i++)
         {
             playerAnim[i] = null;
         }
@@ -98,17 +98,17 @@ public class Ingredeint : MonoBehaviour
         isChopping = false;
         ChopTime = 0;
 
-        if(Ingredient_Mesh.mesh.Equals(Change_Mesh[0]))
+        if (Ingredient_Mesh.mesh.Equals(Change_Mesh[0]))
         {
             Change_Ingredient(eCooked.Normal);
             Debug.Log("들어오면안됨");
         }
-       
+
     }
 
     private void Update()
     {
-        if(transform.parent != null)
+        if (transform.parent != null)
         {
             if (transform.parent.CompareTag("ChoppingBoard"))
             {
@@ -121,11 +121,8 @@ public class Ingredeint : MonoBehaviour
                             AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
                             if (AnimInfo[i].IsName("New_Chef@Chop"))
                             {
-                                if (i.Equals(1) && AnimInfo[0].IsName("New_Chef@Chop"))
-                                {
-                                    playerAnim[1].SetTrigger("Finish");
-                                }
-                                ChopTime += Time.deltaTime;
+                                if (playerAnim[i] != null)
+                                    ChopTime += Time.deltaTime;
                                 Debug.Log($"잘리는중{ChopTime}");
                                 if (ChopTime > FinishChopTime)
                                 {
@@ -143,6 +140,7 @@ public class Ingredeint : MonoBehaviour
                     {
                         if (playerAnim[i] != null)
                         {
+                            Debug.Log("어디에들어오니?");
                             AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
                             if (AnimInfo[i].IsName("New_Chef@Chop"))
                             {
@@ -153,17 +151,17 @@ public class Ingredeint : MonoBehaviour
                 }
             }
         }
-        
+
     }
 
     public void Change_Ingredient(eCooked cooked)
     {
         cooking = cooked;
         int CookEnum = (int)cooked;
-        
+
         Ingredient_Mesh.mesh = Change_Mesh[CookEnum];
         Ingredient_renderer.material = Change_Material[CookEnum];
-        
+
     }
 
     public void SetCookProcess(eCookingProcess process, bool Anim)
@@ -174,35 +172,37 @@ public class Ingredeint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
         {
-            for(int i = 0; i < playerAnim.Length;i++)
+            for (int i = 0; i < playerAnim.Length; i++)
             {
-                if(playerAnim[i] == null)
+                if (playerAnim[i] == null)
                 {
                     playerAnim[i] = other.gameObject.GetComponent<Animator>();
+                    if (playerAnim[0] == playerAnim[1])
+                        playerAnim[i] = null;
                     return;
                 }
             }
-            
+
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        for(int i = 0; i < playerAnim.Length;i++)
+        for (int i = 0; i < playerAnim.Length; i++)
         {
-            if(playerAnim[i]!=null)
+            if (playerAnim[i] != null)
             {
                 if (playerAnim[i].gameObject.Equals(other.gameObject))
                 {
-                    playerAnim[i] = null;
+                    playerAnim[i].SetTrigger("Finish");
                     return;
                 }
             }
-            
+
         }
-        
+
     }
 
     public void Die()

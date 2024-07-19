@@ -39,15 +39,6 @@ public class spawn_Ingredient : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-
-        if(Input.GetKeyDown(KeyCode.O)&&isOpen)
-        {
-            PickAnim();
-            
-        }
-    }
     public GameObject PickAnim()
     {
         anim.SetTrigger("Pick");
