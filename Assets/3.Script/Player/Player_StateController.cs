@@ -57,7 +57,7 @@ public class Player_StateController : MonoBehaviour
 
             //요리도구 상호작용
             // 굽고 썰고 
-            if (Input.GetKey(KeyCode.LeftControl))
+            if (Input.GetKeyUp(KeyCode.LeftControl))
             {
                 StartCoroutine(PlayerCookedChage());
             }
@@ -74,7 +74,7 @@ public class Player_StateController : MonoBehaviour
             // 동작만하고 실질적인 처리는 재료가?
 
             // 도마가 있는지, 도마 자식에 태그가 재료인 오브젝트가 있는지 + 재료 가 썰 수있는 boolean인지 
-            if (counter.ChoppingBoard != null && counter.ChoppingBoard.transform.GetChild(0).gameObject.CompareTag("Ingredients") /* 재료가 썰수있는지  */)
+            if (counter.ChoppingBoard != null && counter.ChoppingBoard.transform.GetChild(1).gameObject.CompareTag("Ingredients") /* 재료가 썰수있는지  */)
             {
                 animator.SetTrigger("Chop");
             }
@@ -127,7 +127,9 @@ public class Player_StateController : MonoBehaviour
                 {
                     if (counter.ChoppingBoard != null)
                     {
-                        TakeHandObject(counter.ChoppingBoard.transform.GetChild(0).gameObject);
+                        TakeHandObject(counter.ChoppingBoard.transform.GetChild(1).gameObject);
+                        counter.ChoppingBoard.transform.GetChild(0).gameObject.SetActive(true);
+                        //도마 위 칼도 켜기
                     }
                     else
                     {
@@ -179,6 +181,8 @@ public class Player_StateController : MonoBehaviour
                     HandsOnOb.transform.SetParent(counter.ChoppingBoard.transform);
                     HandsOnOb.transform.position = counter.ChoppingBoard.transform.position + new Vector3(0, 0.1f, 0);
                     HandsOnOb.transform.rotation = Quaternion.identity;
+                    counter.ChoppingBoard.transform.GetChild(0).gameObject.SetActive(false);
+                    //도마도 끄기 
                     counter.ChangePuton();
                 }
 
