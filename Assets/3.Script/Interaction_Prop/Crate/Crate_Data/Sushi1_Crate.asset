@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84881ab2516a30d458727328bc6b823f, type: 3}
+  m_Script: {fileID: 11500000, guid: 64ed250f171ecbe4b832d1bc93d8fcdb, type: 3}
   m_Name: Sushi1_Crate
   m_EditorClassIdentifier: 
-  Install_Pos:
+  Info:
   - Ingredients: 11
     Position: {x: 7.193, y: 0.018, z: -3.613}
     Rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
     CookingProcess: 1
     Chop_Anim: 0
   - Ingredients: 22
-    Position: {x: 21.614, y: -0.018, z: -4.801}
+    Position: {x: 21.614, y: 0.018, z: -4.801}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
     CookingProcess: 1
     Chop_Anim: 0

@@ -15,7 +15,7 @@ public class Crate_Info
 [CreateAssetMenu(fileName = "_Crate", menuName = "ScriptableObjects/Crate_Data", order = 1)]
 public class Crate_Data : ScriptableObject
 {
-    public Crate_Info[] Install_Pos;
+    public Crate_Info[] Info;
 
 
 }

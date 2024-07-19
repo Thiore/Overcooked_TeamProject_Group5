@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4758313108777045750}
   - component: {fileID: 4758313108777045751}
   - component: {fileID: 4758313108777045752}
-  - component: {fileID: 6962618786770187296}
+  - component: {fileID: 3197822107311376744}
   m_Layer: 0
   m_Name: Prawn
   m_TagString: Ingredients
@@ -128,7 +128,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.75
   m_Center: {x: 0.015417516, y: 0.40900698, z: 0.08787966}
---- !u!114 &6962618786770187296
+--- !u!114 &3197822107311376744
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,17 +137,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 4758313108777045753}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92153fd22e16b8648baf4ea9d30e590f, type: 3}
+  m_Script: {fileID: 11500000, guid: 043d3b289cf154846b1d591a1156e6d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   crate: {fileID: 0}
   Change_Mesh:
   - {fileID: 4300000, guid: f88b829bea599a34bafe3194f69d3803, type: 2}
-  - {fileID: 4300000, guid: 6df046f55b0afbb449639787b809aa85, type: 2}
+  - {fileID: 4300000, guid: 530e0ba93beed314385110528a0f3536, type: 2}
   Change_Material:
-  - {fileID: 2100000, guid: 99677dee15b3d3740a09dad841718a48, type: 2}
-  - {fileID: 2100000, guid: 99677dee15b3d3740a09dad841718a48, type: 2}
+  - {fileID: 2100000, guid: 4d2c7e00d097ad74bb3ac9d15bef01bf, type: 2}
+  - {fileID: 2100000, guid: 4d2c7e00d097ad74bb3ac9d15bef01bf, type: 2}
   CotrolBone: []
   JointBone: []
   Chop_Script: 0
-  FinishChopTime: 5
+  FinishChopTime: 0

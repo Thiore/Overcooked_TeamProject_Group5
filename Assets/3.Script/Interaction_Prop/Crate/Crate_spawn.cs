@@ -12,10 +12,10 @@ public class Crate_spawn : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(crate_Data.Install_Pos.Length);
-        for (int i = 0; i < crate_Data.Install_Pos.Length;i++)
+        Debug.Log(crate_Data.Info.Length);
+        for (int i = 0; i < crate_Data.Info.Length;i++)
         {
-            Crate_Tex_Offset(crate_Data.Install_Pos[i], i);
+            Crate_Tex_Offset(crate_Data.Info[i], i);
         }
     }
 

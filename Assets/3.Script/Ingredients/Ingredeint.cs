@@ -68,11 +68,12 @@ public class Ingredeint : MonoBehaviour
     private bool Chop_Anim = false;
 
     private float ChopTime;
-    [SerializeField]private float FinishChopTime = default;
+    private float FinishChopTime = 4f;
 
     private bool isChopping;
 
     private Animator[] playerAnim = new Animator[2];
+    private AnimatorStateInfo[] AnimInfo = new AnimatorStateInfo[2];
 
 
 
@@ -84,10 +85,7 @@ public class Ingredeint : MonoBehaviour
         {
             CopyBone = JointBone;
         }
-        if (FinishChopTime.Equals(default))
-        {
-            FinishChopTime = 5f;
-        }
+        
 
         for(int i = 0; i < playerAnim.Length;i++)
         {
@@ -110,16 +108,47 @@ public class Ingredeint : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.I)&&cooking.Equals(eCooked.Normal))
+        if(transform.parent.CompareTag("ChoppingBoard"))
         {
-            ChopTime += Time.deltaTime;
-            Debug.Log($"잘리는중{ChopTime}");
-            if(ChopTime >FinishChopTime)
+            if (cooking.Equals(eCooked.Normal))
             {
-                ChopTime = 0;
-                Change_Ingredient(eCooked.Chopping);
+                for (int i = 0; i < playerAnim.Length; i++)
+                {
+                    if (playerAnim[i] != null)
+                    {
+                        AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
+                        if (AnimInfo[i].IsName("New_Chef@Chop"))
+                        {
+                            if(i.Equals(1)&&AnimInfo[0].IsName("New_Chef@Chop"))
+                            {
+                                playerAnim[1].SetTrigger("Finish");
+                            }
+                            ChopTime += Time.deltaTime;
+                            Debug.Log($"잘리는중{ChopTime}");
+                            if (ChopTime > FinishChopTime)
+                            {
+                                ChopTime = 0;
+                                Change_Ingredient(eCooked.Chopping);
+                            }
+                        }
+                    }
+
+                }
             }
-            
+            else
+            {
+                for (int i = 0; i < playerAnim.Length; i++)
+                {
+                    if (playerAnim[i] != null)
+                    {
+                        AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
+                        if (AnimInfo[i].IsName("New_Chef@Chop"))
+                        {
+                            playerAnim[i].SetTrigger("Finish");
+                        }
+                    }
+                }
+            }
         }
     }
 
