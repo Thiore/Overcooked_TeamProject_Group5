@@ -41,7 +41,7 @@ public class TimeManager : MonoBehaviour
             }
 
             // 남은 시간이 0 이하일 경우 게임 종료
-            if (remainingTime <= 0)
+            if (remainingTime <= 59)
             {
                 playTime = 0;
                 GameManager.Instance.EndGame();

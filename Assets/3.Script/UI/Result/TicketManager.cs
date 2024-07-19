@@ -22,7 +22,7 @@ public class TicketManager : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            StarTexts[i] = ResultTicket.transform.Find($"Star_{i + 1}/Target_Score_{i+1}").GetComponent<Text>();
+            StarTexts[i] = ResultTicket.transform.Find($"Star_{i + 1}/Target_Score_{i + 1}").GetComponent<Text>();
             FullStars[i] = ResultTicket.transform.Find($"Star_{i + 1}/Full_Star_{i + 1}").GetComponent<Image>();
         }
 
@@ -32,8 +32,17 @@ public class TicketManager : MonoBehaviour
         TotalScore = ResultTicket.transform.Find("Total_Score").GetComponent<Text>();
         TitleText = ResultTicket.transform.Find("Title").GetComponentInChildren<Text>();
 
-        // UI 업데이트
+        // 결과 UI 업데이트
         UpdateResultUI();
+    }
+
+    private void Update()
+    {
+        // 스페이스바를 눌렀을 때 월드 씬으로 돌아가기
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ReturnToWorld();
+        }
     }
 
     // 결과 UI를 업데이트하는 메서드
@@ -41,7 +50,7 @@ public class TicketManager : MonoBehaviour
     {
         int[] targetScores = ScoreManager.Instance.TargetScore; // 목표 점수 배열
         int currentScore = ScoreManager.Instance.score; // 현재 점수
-        TitleText.text=$"{GameManager.Instance.stage_index}";
+        TitleText.text = $"{GameManager.Instance.stage_index}";
         for (int i = 0; i < StarTexts.Length; i++)
         {
             StarTexts[i].text = targetScores[i].ToString();
@@ -58,5 +67,11 @@ public class TicketManager : MonoBehaviour
         ResultSumScore.text = $"{addScore}\n{tipScore}\n{subScore}";
 
         TotalScore.text = $"{currentScore}"; // 총 점수 업데이트
+    }
+
+    // 월드 씬으로 돌아가는 메서드
+    private void ReturnToWorld()
+    {
+        GameManager.Instance.LoadScene(0); // WorldScene으로 로드
     }
 }

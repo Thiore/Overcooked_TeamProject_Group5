@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
     public bool isPlaying = true; // 게임 진행 상태
     public GameObject pauseScreen; // 일시정지 화면
     public bool isInputEnabled = false; // 입력 가능 상태
-    
+
+    private WorldState worldState;
+
 
     private void Awake()
     {
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         isPause = false;
         isPlaying = true;
+        worldState = FindObjectOfType<WorldState>();
     }
 
     private void Update()
@@ -49,11 +52,12 @@ public class GameManager : MonoBehaviour
     // 비동기 로드 코루틴
     private IEnumerator LoadSceneCoroutine(int index)
     {
+        //worldState.RestoreState();
         AsyncOperation asyncLoad = null;
         switch (index)
         {
             case 0:
-                asyncLoad = SceneManager.LoadSceneAsync("MangoScene");
+                asyncLoad = SceneManager.LoadSceneAsync("BSJScene");
                 break;
             case 1:
                 asyncLoad = SceneManager.LoadSceneAsync("MenuScene");
@@ -123,6 +127,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadGame(int stage_index)
     {
+        worldState.SaveState();
         switch (stage_index)
         {
             case 1:
@@ -130,5 +135,6 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
 
 }
