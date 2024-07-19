@@ -810,6 +810,7 @@ MonoBehaviour:
   TipText: {fileID: 0}
   ScoreAni: {fileID: 0}
   TargetScore: 000000000000000000000000
+  TotalAddScore: 0
 --- !u!4 &337462932
 Transform:
   m_ObjectHideFlags: 0
@@ -3229,10 +3230,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ba4505d53543b42b378ec8a25a0267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recipePrefabs:
-  - {fileID: 4134851203775356756, guid: d703df5389365b54f9561142cb7d9a06, type: 3}
-  - {fileID: 1676535915141075299, guid: 54e27e557a63eaf46988d4ba7ab268b0, type: 3}
-  - {fileID: 5915875150680831650, guid: a077e376fa8986e408b22b8547535aed, type: 3}
+  oneIngredientPrefab: {fileID: 4134851203775356756, guid: d703df5389365b54f9561142cb7d9a06, type: 3}
+  twoIngredientsPrefab: {fileID: 1676535915141075299, guid: 54e27e557a63eaf46988d4ba7ab268b0, type: 3}
+  threeIngredientsPrefab: {fileID: 5915875150680831650, guid: a077e376fa8986e408b22b8547535aed, type: 3}
   recipePoolPanel: {fileID: 1307582313}
   moveSpeed: 10000
   maxVisibleObjects: 5
@@ -4029,6 +4029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20df17c220a18a745b56d33a34b68863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stage_index: 1
   isPause: 0
   isPlaying: 0
   pauseScreen: {fileID: 99566720}

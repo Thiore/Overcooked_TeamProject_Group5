@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4134851203775356755}
   - component: {fileID: 7433448536276169594}
+  - component: {fileID: 7679445711027483125}
   m_Layer: 5
   m_Name: One_Ingredient_Recipe
   m_TagString: Untagged
@@ -127,6 +128,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activationTime: 0
   Point: 0
+--- !u!222 &7679445711027483125
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4134851203775356756}
+  m_CullTransparentMesh: 1
 --- !u!1 &4134851204193279063
 GameObject:
   m_ObjectHideFlags: 0

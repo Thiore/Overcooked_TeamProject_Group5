@@ -81,10 +81,10 @@ public class DataManager : MonoBehaviour
         //Debug.Log("Loaded " + recipeData.Count + " recipes from JSON.");
     }
 
-    public List<List<Recipe>> StageRecipeData(int stageNumber)
+    public List<Recipe> StageRecipeData(int stageNumber)
     {
         List<Recipe> stageRecipes = recipeData.Values.Where(recipe => recipe.stage == stageNumber).ToList();
-
+        /*
         List<List<Recipe>> allRecipes = new List<List<Recipe>>(); // 모든 레시피를 담을 리스트 생성
         List<List<string>> allIngredients = new List<List<string>>(); // 모든 재료를 담을 리스트 생성
 
@@ -100,8 +100,8 @@ public class DataManager : MonoBehaviour
             }
             allIngredients.Add(ingredients); // 각 레시피의 재료 리스트를 전체 재료 리스트에 추가
         }
-
-        return allRecipes;
+        */
+        return stageRecipes;
         //// 각 리스트들을 출력하여 확인
         //foreach (var recipes in allRecipes)
         //{

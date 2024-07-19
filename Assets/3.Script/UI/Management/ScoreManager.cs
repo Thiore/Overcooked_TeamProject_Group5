@@ -72,7 +72,6 @@ public class ScoreManager : MonoBehaviour
         if (score.ToString() != ScoreText.text)
         {
             ScoreText.text = $"{score}";
-            ScoreAni.SetTrigger("GetScore");
         }
 
         // 팁 정보를 UI에 업데이트
@@ -109,6 +108,7 @@ public class ScoreManager : MonoBehaviour
         Tip_Score += additionalPoints; // 팁 점수 추가
         addScoreCount += 1;
         score += additionalPoints; // 총 점수 업데이트
+        ScoreAni.SetTrigger("GetScore");
     }
 
     // 점수를 차감하는 메서드
@@ -121,5 +121,6 @@ public class ScoreManager : MonoBehaviour
         }
         subScoreCount += 1;
         subScore += points;
+        ScoreAni.SetTrigger("GetScore");
     }
 }
