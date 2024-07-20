@@ -40,15 +40,13 @@ public enum eCookingProcess
 public enum eCooked
 {
     Normal = 0,
-    Chopping,
-    Cooking1,
-    Cooking2
+    Chopping
 }
 
 public class Ingredeint : MonoBehaviour
 {
     public spawn_Ingredient crate;
-
+    
     [SerializeField] private Mesh[] Change_Mesh;
     [SerializeField] private Material[] Change_Material;
 
@@ -69,8 +67,8 @@ public class Ingredeint : MonoBehaviour
 
     private float ChopTime;
     private float FinishChopTime = 4f;
-
-    private bool isChopping;
+    public bool OnPlate { get; private set; }
+    public bool OnCooker { get; private set; }
 
     private Animator[] playerAnim = new Animator[2];
     private AnimatorStateInfo[] AnimInfo = new AnimatorStateInfo[2];
@@ -91,18 +89,21 @@ public class Ingredeint : MonoBehaviour
         {
             playerAnim[i] = null;
         }
+        cooking = eCooked.Normal;
+        OnIngredients();
     }
     private void OnEnable()
     {
-        cooking = eCooked.Normal;
-        isChopping = false;
+        
         ChopTime = 0;
+        
 
-        if (Ingredient_Mesh.mesh.Equals(Change_Mesh[0]))
+        if (!Ingredient_Mesh.mesh.Equals(Change_Mesh[0]))
         {
             Change_Ingredient(eCooked.Normal);
             Debug.Log("들어오면안됨");
         }
+        
 
     }
 
@@ -149,6 +150,17 @@ public class Ingredeint : MonoBehaviour
                         }
                     }
                 }
+                return;
+            }
+            if(transform.parent.CompareTag("TrashCan"))
+            {
+                transform.Rotate(Vector3.up, 2f);
+                transform.localScale *= 0.98f;
+                if(transform.localScale.x< 0)
+                {
+                    Die();
+                }
+
             }
         }
 
@@ -161,6 +173,7 @@ public class Ingredeint : MonoBehaviour
 
         Ingredient_Mesh.mesh = Change_Mesh[CookEnum];
         Ingredient_renderer.material = Change_Material[CookEnum];
+        OnIngredients();
 
     }
 
@@ -168,6 +181,48 @@ public class Ingredeint : MonoBehaviour
     {
         CookProcess = process;
         Chop_Anim = Anim;
+    }
+
+    public void OnIngredients()
+    {
+        switch (CookProcess)
+        {
+            case eCookingProcess.Normal:
+                OnPlate = true;
+                OnCooker = false;
+                break;
+            case eCookingProcess.Chopping:
+                if(cooking.Equals(eCooked.Normal))
+                {
+                    OnCooker = false;
+                    OnPlate = false;
+                }
+                else
+                {
+                    OnCooker = false;
+                    OnPlate = true;
+                }
+                break;
+            case eCookingProcess.Chop_Cook:
+                if(cooking.Equals(eCooked.Normal))
+                {
+                    OnCooker = false;
+                    OnPlate = false;
+                }
+                else
+                {
+                    OnCooker = true;
+                    OnPlate = false;
+                }
+                break;
+            case eCookingProcess.Cook:
+                if (cooking.Equals(eCooked.Normal))
+                {
+                    OnCooker = true;
+                    OnPlate = false;
+                }               
+                break;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -207,6 +262,8 @@ public class Ingredeint : MonoBehaviour
 
     public void Die()
     {
+        if (transform.parent != null)
+            transform.parent = null;
         gameObject.SetActive(false);
         transform.position = crate.transform.position;
         transform.localScale = new Vector3(1f, 1f, 1f);

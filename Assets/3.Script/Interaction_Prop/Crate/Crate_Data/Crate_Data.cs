@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Crate_Info
+public struct Crate_Info
 {
     public eIngredients Ingredients;
     public Vector3 Position;
