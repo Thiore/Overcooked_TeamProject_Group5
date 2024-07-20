@@ -18,6 +18,9 @@ public class Player_Movent : MonoBehaviour
     private bool isJumping = false;
     private Vector3 jumpvelocity = Vector3.zero;
 
+
+    private readonly int IsWalking = Animator.StringToHash("IsWalking");
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerIntput>();
@@ -45,12 +48,12 @@ public class Player_Movent : MonoBehaviour
     {
         if (playerInput.Move_Value != 0 || playerInput.Rotate_Value != 0)
         {
-            animator.SetBool("IsWalking", true);
+            animator.SetBool(IsWalking, true);
             Move();
         }
         else
         {
-            animator.SetBool("IsWalking", false);
+            animator.SetBool(IsWalking, false);
         }
     }
 
@@ -85,7 +88,7 @@ public class Player_Movent : MonoBehaviour
     private IEnumerator Jump_co()
     {
         isJumping = true;
-        animator.SetBool("IsWalking", true);
+        animator.SetBool(IsWalking, true);
 
         Vector3 endPos = player_rb.position + transform.forward * 2f;
         float elaspedTime = 0f;
@@ -104,7 +107,7 @@ public class Player_Movent : MonoBehaviour
             yield return null;
         }
         player_rb.MovePosition(endPos);       
-        animator.SetBool("IsWalking", false);
+        animator.SetBool(IsWalking, false);
         isJumping = false;
     }
 

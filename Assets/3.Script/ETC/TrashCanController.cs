@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class TrashCanController : CounterController
 {
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.transform.CompareTag("Ingredeint"))
+        if (other.transform.CompareTag("Ingredients"))
         {
-            if(this.IsPutOn == true || this.transform.GetChild(0).CompareTag("Ingredeint"))
+            if (this.IsPutOn == true && this.PutOnOb.CompareTag("Ingredients"))
             {
-
+                StartCoroutine(DropTrash_co());
             }
         }
     }
@@ -19,14 +18,16 @@ public class TrashCanController : CounterController
 
     private IEnumerator DropTrash_co()
     {
-        float totaltime = 5f;
+        float totaltime = 10f;
         float elapsedtime = 0f;
+
+        
 
         while (elapsedtime < totaltime)
         {
-
-
-            yield return null;
+            this.PutOnOb.transform.localScale *= 0.9f;
+            elapsedtime += Time.deltaTime;
+            yield return new WaitForSeconds(totaltime);
         }
 
     }

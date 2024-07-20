@@ -9416,6 +9416,7 @@ GameObject:
   - component: {fileID: 6012852074417544643}
   - component: {fileID: 910034476135634399}
   - component: {fileID: 5580977184824094583}
+  - component: {fileID: 5580977184824094584}
   m_Layer: 0
   m_Name: m_sk_bin_01_0
   m_TagString: TrashCan
@@ -9436,6 +9437,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2125158, y: 0.5490261, z: 1.207332}
   m_Center: {x: 0.0017554467, y: 0.27131805, z: -0.0015172962}
+--- !u!114 &5580977184824094584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5580977184824094582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c389d399a9d2342a3590e849578d46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPutOn: 0
+  putonOb: {fileID: 0}
+  choppingBoard: {fileID: 0}
 --- !u!1 &5608961244175037720
 GameObject:
   m_ObjectHideFlags: 0

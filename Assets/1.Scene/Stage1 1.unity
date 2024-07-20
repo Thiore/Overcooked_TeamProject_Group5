@@ -3552,7 +3552,7 @@ GameObject:
   - component: {fileID: 870412921485303851}
   m_Layer: 10
   m_Name: Chef
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6444,7 +6444,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3837549363364325563}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.00235, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 515162531283699005}
@@ -7086,7 +7086,7 @@ GameObject:
   - component: {fileID: 5510673472239114768}
   m_Layer: 10
   m_Name: Chef (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7147,7 +7147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5510673472385843961}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.00235, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5510673472670851338}
@@ -7200,18 +7200,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5510673472464218378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5510673472464218381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ad7338a02c1f5b4dbbd7c7de0f89978, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &5510673472464218379
 Transform:
   m_ObjectHideFlags: 0
@@ -7237,7 +7225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5510673472464218379}
-  - component: {fileID: 5510673472464218378}
+  - component: {fileID: 5510673472464218382}
   m_Layer: 0
   m_Name: CharaterSwapManager
   m_TagString: Untagged
@@ -7245,6 +7233,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5510673472464218382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5510673472464218381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5bf2599a8900b647a25bd3c35a0404e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1: {fileID: 870412921485303848}
+  player2: {fileID: 5510673472239114770}
+  currentMark1: {fileID: 6758697544655091799}
+  currentMark2: {fileID: 5510673473907400855}
 --- !u!1 &5510673472493238816
 GameObject:
   m_ObjectHideFlags: 0
@@ -9416,6 +9420,7 @@ GameObject:
   - component: {fileID: 6012852074417544643}
   - component: {fileID: 910034476135634399}
   - component: {fileID: 5580977184824094583}
+  - component: {fileID: 5580977184824094584}
   m_Layer: 0
   m_Name: m_sk_bin_01_0
   m_TagString: TrashCan
@@ -9436,6 +9441,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2125158, y: 0.5490261, z: 1.207332}
   m_Center: {x: 0.0017554467, y: 0.27131805, z: -0.0015172962}
+--- !u!114 &5580977184824094584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5580977184824094582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c389d399a9d2342a3590e849578d46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPutOn: 0
+  putonOb: {fileID: 0}
+  choppingBoard: {fileID: 0}
 --- !u!1 &5608961244175037720
 GameObject:
   m_ObjectHideFlags: 0

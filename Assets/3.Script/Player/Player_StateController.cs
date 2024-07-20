@@ -4,6 +4,7 @@ using UnityEditor.SceneTemplate;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 //전반적 플레이어 상호작용 (재료 / 요리 도구 등등 상호작용) 
 public class Player_StateController : MonoBehaviour
@@ -34,6 +35,7 @@ public class Player_StateController : MonoBehaviour
     private CounterEmissionController emissionController;
     private NearObject_EmissionController nearcontroller;
 
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -41,7 +43,6 @@ public class Player_StateController : MonoBehaviour
         nearcontroller = GetComponent<NearObject_EmissionController>();
     }
 
-    //온스테이로 플레이어 범위 내에서 전반적인 처리
     private void Update()
     {
         nearcounter = emissionController.GetNearCounter();
@@ -52,7 +53,7 @@ public class Player_StateController : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                coroutine = StartCoroutine(PlayerHodingChange());
+                coroutine = StartCoroutine(PlayerHodingChange(nearcounter, nearOb));
             }
 
             //요리도구 상호작용
@@ -62,7 +63,157 @@ public class Player_StateController : MonoBehaviour
                 StartCoroutine(PlayerCookedChage());
             }
         }
+
+
+        //// 스페이스바는 집을수 있는 사물들은 집어 올림(재료, 요리도구, 접시
+        //if (coroutine == null)
+        //{
+        //    if (Input.GetKey(KeyCode.Space))
+        //    {
+        //        coroutine = StartCoroutine(PlayerHodingChange());
+        //    }
+
+        //    //요리도구 상호작용
+        //    // 굽고 썰고 
+        //    if (Input.GetKeyUp(KeyCode.LeftControl))
+        //    {
+        //        StartCoroutine(PlayerCookedChage());
+        //    }
+        //}
     }
+
+    private IEnumerator PlayerHodingChange(GameObject nearCount, GameObject nearob)
+    {
+
+        // 근처 카운터가 있고 내가 집은 상태가 아니라면 
+
+        if(!isHolding)
+        {
+            if (nearCount != null)
+            {
+                //카운터 위에 오브젝트가 있는지 없는지 확인 
+                var counter = nearCount.transform.GetComponent<CounterController>();
+                if (counter.IsPutOn)
+                {
+                    if (counter.PutOnOb.CompareTag("Plate"))
+                    {
+                        TakeHandObject(counter.PutOnOb);
+                        yield break;
+                    }
+                    else if (counter.PutOnOb.CompareTag("Cooker"))
+                    {
+                        TakeHandObject(counter.PutOnOb);
+                        yield break;
+                    }
+                    else
+                    {
+                        TakeHandObject(counter.PutOnOb);
+                        yield break;
+                    }
+
+                }
+                else //올라가 있지 않다면 근처 오브젝트겠지
+                {
+                    if (counter.CompareTag("Crate"))
+                    {
+                        var spawn = counter.transform.GetComponent<spawn_Ingredient>();
+                        if (spawn != null)
+                        {
+                            TakeHandObject(spawn.PickAnim());
+                            Debug.Log("열기");
+                            // 생성된 재료 오브젝트 바로 집는 메소드 추가 필요 
+                            yield return new WaitForSeconds(0.2f);
+                        }
+                    }
+                    else
+                    {
+                        TakeHandObject(nearob);
+                        yield break;
+                    }
+                }
+
+            }
+            // 근처 카운터가 없다면(땅바닥이겟지)
+            else
+            {
+                if (nearob.CompareTag("Plate"))
+                {
+                    TakeHandObject(nearob);
+                    yield break;
+                }
+                else if (nearob.CompareTag("Cooker"))
+                {
+                    TakeHandObject(nearob);
+                    yield break;
+                }
+                else
+                {
+                    TakeHandObject(nearob);
+                    yield break;
+                }
+            }
+        }
+        else
+        {
+            DropObject(nearCount, nearob);
+            Debug.Log("이미 집은 상태");
+            yield return new WaitForSeconds(0.3f);
+        }
+
+        coroutine = null;
+        yield return new WaitForSeconds(0.3f);
+    }
+
+    private void DropObject(GameObject nearcounter, GameObject nearob)
+    {
+        Debug.Log("Drop 들ㅇ옴");
+        // 근처에 카운터가 있다면 
+        if (nearcounter != null)
+        {
+            var counter = nearcounter.transform.GetComponent<CounterController>();
+            if (!counter.IsPutOn) // 카운터에 올라가있지 않다면  
+            {
+                if (counter.ChoppingBoard == null) // 카운터에 도마가 없는 곳이라면 
+                {
+                    HandsOnOb.transform.SetParent(nearcounter.transform);
+                    HandsOnOb.transform.position = nearcounter.transform.position + new Vector3(0, 0.1f, 0);
+                    HandsOnOb.transform.rotation = Quaternion.identity;
+                    counter.ChangePuton();
+                    counter.PutOnOb = HandsOnOb;
+                }
+                else // 도마가 있다면 
+                {
+                    HandsOnOb.transform.SetParent(counter.ChoppingBoard.transform);
+                    HandsOnOb.transform.position = counter.ChoppingBoard.transform.position + new Vector3(0, 0.1f, 0);
+                    HandsOnOb.transform.rotation = Quaternion.identity;
+                    counter.ChoppingBoard.transform.GetChild(0).gameObject.SetActive(false);
+                    //도마도 끄기 
+                    counter.ChangePuton();
+                }
+
+                animator.SetBool("IsTake", false);
+                HandsOnOb = null;
+                isHolding = false;
+            }
+            else // 카운터에 올라가 있는데 드랍하려고 하면 
+            {
+                Debug.Log("이미올라가있음");
+            }
+        }
+        else // 근처에 카운터 없으면 땅에 떨군다는 
+        {
+            HandsOnOb.transform.SetParent(null);
+            var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();
+            rb.mass = 0.05f;
+            rb.angularDrag = 0;
+            animator.SetBool("IsTake", false);
+            HandsOnOb = null;
+            isHolding = false;
+        }
+    }
+
+
+
 
 
     private IEnumerator PlayerCookedChage()
@@ -166,7 +317,7 @@ public class Player_StateController : MonoBehaviour
         if (nearcounter != null)
         {
             var counter = nearcounter.transform.GetComponent<CounterController>();
-            if (!counter.IsPutOn) // 카운터에 올라가있지 않다면 
+            if (!counter.IsPutOn) // 카운터에 올라가있지 않다면  
             {
                 if (counter.ChoppingBoard == null) // 카운터에 도마가 없는 곳이라면 
                 {
