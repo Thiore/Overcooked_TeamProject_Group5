@@ -14,7 +14,7 @@ public class spawn_Ingredient : MonoBehaviour
 
     private Animator anim;
 
-    private bool isOpen = false;
+    private bool isOpen;
 
     private Crate_Info info;
 
@@ -37,6 +37,7 @@ public class spawn_Ingredient : MonoBehaviour
             }
 
         }
+        isOpen = false;
     }
 
     public GameObject PickAnim()
@@ -60,7 +61,7 @@ public class spawn_Ingredient : MonoBehaviour
         {
             Ingredeint newobj = Instantiate(myIngredient.GetComponent<Ingredeint>());
             newobj.SetCookProcess(info.CookingProcess, info.Chop_Anim);
-
+            newobj.crate = this;
             return newobj.gameObject;
         }
     }
@@ -83,6 +84,7 @@ public class spawn_Ingredient : MonoBehaviour
     public void DestroyIngredient(Ingredeint ingredeint)
     {
         ingredient_queue.Enqueue(ingredeint);
+        Debug.Log(ingredient_queue.Count);
     }
 
     public void Set_IngredientInfo(Crate_Info info)
