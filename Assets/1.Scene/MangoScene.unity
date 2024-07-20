@@ -776,6 +776,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 237226790}
   m_CullTransparentMesh: 1
+--- !u!1 &337462930
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 337462932}
+  - component: {fileID: 337462931}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &337462931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337462930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c5713f87f2aca4994cf0a742eedc07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stage_index: 0
+  ScoreText: {fileID: 0}
+  TipText: {fileID: 0}
+  ScoreAni: {fileID: 0}
+  TargetScore: 000000000000000000000000
+  TotalAddScore: 0
+--- !u!4 &337462932
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337462930}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.0156653, y: 8.159603, z: 8.037535}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &375138564
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,7 +990,6 @@ GameObject:
   - component: {fileID: 473856936}
   - component: {fileID: 473856938}
   - component: {fileID: 473856937}
-  - component: {fileID: 473856939}
   m_Layer: 5
   m_Name: Coin_Banner
   m_TagString: Untagged
@@ -1010,21 +1058,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473856935}
   m_CullTransparentMesh: 1
---- !u!114 &473856939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473856935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46c5713f87f2aca4994cf0a742eedc07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScoreText: {fileID: 0}
-  TipText: {fileID: 0}
-  ScoreAni: {fileID: 0}
 --- !u!1 &489210808
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,7 +1158,7 @@ RectTransform:
   - {fileID: 99566721}
   - {fileID: 972374816}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1320,7 +1353,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &675400199
 GameObject:
@@ -3197,13 +3230,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ba4505d53543b42b378ec8a25a0267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recipePrefabs:
-  - {fileID: 4134851203775356756, guid: d703df5389365b54f9561142cb7d9a06, type: 3}
-  - {fileID: 1676535915141075299, guid: 54e27e557a63eaf46988d4ba7ab268b0, type: 3}
-  - {fileID: 5915875150680831650, guid: a077e376fa8986e408b22b8547535aed, type: 3}
+  oneIngredientPrefab: {fileID: 4134851203775356756, guid: d703df5389365b54f9561142cb7d9a06, type: 3}
+  twoIngredientsPrefab: {fileID: 1676535915141075299, guid: 54e27e557a63eaf46988d4ba7ab268b0, type: 3}
+  threeIngredientsPrefab: {fileID: 5915875150680831650, guid: a077e376fa8986e408b22b8547535aed, type: 3}
   recipePoolPanel: {fileID: 1307582313}
   moveSpeed: 10000
   maxVisibleObjects: 5
+  activeObjects: []
 --- !u!1 &1318658737
 GameObject:
   m_ObjectHideFlags: 0
@@ -3343,7 +3376,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1333569941
 GameObject:
@@ -3982,7 +4015,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1706283439
 MonoBehaviour:
@@ -3996,15 +4029,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20df17c220a18a745b56d33a34b68863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
-  tip: 1
+  stage_index: 1
   isPause: 0
   isPlaying: 0
   pauseScreen: {fileID: 99566720}
   isInputEnabled: 0
-  addScoreCount: 0
-  subScoreCount: 0
-  subScore: 0
 --- !u!1 &1728263511
 GameObject:
   m_ObjectHideFlags: 0

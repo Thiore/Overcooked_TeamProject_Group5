@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class Sample_Button_Controll : MonoBehaviour
 {
+    RecipePool recipePool;
+    private void Start()
+    {
+        recipePool = GameObject.Find("Canvas/Recipe_Pool").GetComponent<RecipePool>();
+    }
     public void Correct()
     {
-        GameManager.Instance.AllCorrect_Recipe();
+        recipePool.CheckRecipe("Fish_Food");
     }
     public void Incorrect()
     {
-        GameManager.Instance.Incorrect_Recipe();
+        recipePool.CheckRecipe("Prawn_Food");
     }
     public void Wrong()
     {
-        GameManager.Instance.Wrong_Recipe();
+        recipePool.CheckRecipe("Wrong");
     }
 }

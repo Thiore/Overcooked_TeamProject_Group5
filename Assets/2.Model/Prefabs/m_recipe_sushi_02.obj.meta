@@ -3,7 +3,12 @@ guid: bb9a7a11d72ca654a9d2a16ccf42e1fb
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m_recipe_sushi_02_0Mat
+    second: {fileID: 2100000, guid: 91d481b23bd774f43870f89b68bb10f8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

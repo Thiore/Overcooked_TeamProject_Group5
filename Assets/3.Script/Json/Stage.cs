@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 
 
-
-public class Stage : MonoBehaviour
+[System.Serializable]
+public class Stage
 {
 
 

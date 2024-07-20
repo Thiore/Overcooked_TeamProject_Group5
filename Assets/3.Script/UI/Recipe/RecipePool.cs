@@ -6,13 +6,15 @@ using System.Linq;
 
 public class RecipePool : MonoBehaviour
 {
-    public GameObject[] recipePrefabs; // 여러 종류의 RECIPE_OBJECT 프리팹
+    public GameObject oneIngredientPrefab; // 1개의 재료를 가지는 레시피 프리팹
+    public GameObject twoIngredientsPrefab; // 2개의 재료를 가지는 레시피 프리팹
+    public GameObject threeIngredientsPrefab; // 3개의 재료를 가지는 레시피 프리팹
     [SerializeField] private RectTransform recipePoolPanel; // RECIPE_POOL 패널의 RectTransform
     [SerializeField] private float moveSpeed = 100f; // 오브젝트 이동 속도
     [SerializeField] private int maxVisibleObjects = 5; // 화면에 보일 최대 오브젝트 수
 
-    private Queue<GameObject> objectPool = new Queue<GameObject>(); // 오브젝트 풀을 저장하는 큐
-    private List<GameObject> activeObjects = new List<GameObject>(); // 활성화된 오브젝트 목록
+    private List<GameObject> objectPool = new List<GameObject>(); // 오브젝트 풀을 저장하는 리스트
+    public List<GameObject> activeObjects = new List<GameObject>(); // 활성화된 오브젝트 목록
     private List<GameObject> allObjects = new List<GameObject>(); // 생성된 모든 오브젝트 목록
 
     private float spawnInterval = 8f; // 오브젝트 생성 간격 (초)
@@ -22,17 +24,8 @@ public class RecipePool : MonoBehaviour
 
     private void Start()
     {
-        recipes = GetRecipes(); // 레시피 데이터를 가져옴
-
-        // 모든 오브젝트를 초기화하고 풀에 추가
-        for (int i = 0; i < recipes.Count * 3; i++)
-        {
-            GameObject obj = Instantiate(recipePrefabs[i % recipePrefabs.Length], recipePoolPanel);
-            obj.SetActive(false); // 오브젝트를 비활성화
-            objectPool.Enqueue(obj); // 풀에 추가
-            allObjects.Add(obj); // 모든 오브젝트 목록에 추가
-        }
-
+        GetRecipes(); // 레시피 데이터를 가져옴
+        InitializeObjectPool(); // 오브젝트 풀 초기화
         SetRecipeObjectImages(recipes); // 각 오브젝트의 이미지를 설정
         ActivateObject(); // 첫 번째 오브젝트 활성화
     }
@@ -50,6 +43,40 @@ public class RecipePool : MonoBehaviour
             }
 
             MoveActiveObjects(); // 활성화된 오브젝트 이동
+        }
+    }
+
+    // 오브젝트 풀 초기화
+    private void InitializeObjectPool()
+    {
+        foreach (Recipe recipe in recipes)
+        {
+            GameObject prefab = GetPrefabForRecipe(recipe);
+            for (int i = 0; i < 3; i++) // 각 레시피에 대해 3개의 오브젝트 생성
+            {
+                GameObject obj = Instantiate(prefab, recipePoolPanel);
+                obj.name = recipe.recipe;
+                obj.SetActive(false); // 오브젝트를 비활성화
+                objectPool.Add(obj); // 풀에 추가
+                allObjects.Add(obj); // 모든 오브젝트 목록에 추가
+            }
+        }
+    }
+
+    // 레시피에 맞는 프리팹을 반환
+    private GameObject GetPrefabForRecipe(Recipe recipe)
+    {
+        switch (recipe.ingredient.Count)
+        {
+            case 1:
+                return oneIngredientPrefab;
+            case 2:
+                return twoIngredientsPrefab;
+            case 3:
+                return threeIngredientsPrefab;
+            default:
+                Debug.LogError("Unknown number of ingredients: " + recipe.ingredient.Count);
+                return null;
         }
     }
 
@@ -96,12 +123,9 @@ public class RecipePool : MonoBehaviour
     {
         if (objectPool.Count > 0) // 풀에 오브젝트가 남아있을 때
         {
-            int randomIndex = Random.Range(0, objectPool.Count); // 랜덤 인덱스 선택
-            GameObject obj = objectPool.ToArray()[randomIndex]; // 랜덤 오브젝트 선택
-            objectPool = new Queue<GameObject>(objectPool); // 큐 재구성
-            objectPool.Dequeue(); // 선택된 오브젝트 제거
+            GameObject obj = objectPool[0]; // 리스트의 첫 번째 오브젝트 가져오기
+            objectPool.RemoveAt(0); // 리스트에서 제거
             obj.SetActive(true); // 오브젝트 활성화
-
             RectTransform rectTransform = obj.GetComponent<RectTransform>();
             rectTransform.anchoredPosition = new Vector2(recipePoolPanel.rect.width / 2 + rectTransform.rect.width / 2, 0); // 오브젝트 위치 설정
 
@@ -116,6 +140,7 @@ public class RecipePool : MonoBehaviour
                 DeactivateObject(oldestObj); // 오브젝트 비활성화
             }
         }
+        Debug.Log("레시피 활성화");
     }
 
     // 오브젝트 비활성화
@@ -123,17 +148,84 @@ public class RecipePool : MonoBehaviour
     {
         activeObjects.Remove(obj); // 활성화된 목록에서 제거
         obj.SetActive(false); // 오브젝트 비활성화
-        objectPool.Enqueue(obj); // 풀에 다시 추가
+        objectPool.Add(obj); // 풀에 다시 추가
+        Debug.Log("레시피 비활성화");
     }
 
-    // 정답 오브젝트 처리
-    public void CorrectRecipe(GameObject obj)
+
+    //Debug.Log에 적어둔 메서드 추가 구현 필요
+    public void CheckRecipe(string name)
     {
-        obj.GetComponent<Image>().color = Color.green; // 오브젝트 색상 변경
-        int points = obj.GetComponent<RecipeObject>().Point; // 점수 가져오기
-        ScoreManager.Instance.AddScore(points); // 점수 추가
-        StartCoroutine(DeactivateAfterDelay(obj, 0.2f)); // 지연 후 비활성화
+        for (int i = 0; i < activeObjects.Count; i++)
+        {
+            if (activeObjects[i].name == name)
+            {
+                if (i == 0)
+                {
+                    Debug.Log("순서와 레시피 모두 동일");
+                    AllCorrect(i);
+                }
+                else
+                {
+                    Debug.Log("레시피는 맞았으나 순서 틀림");
+                    InCorrect(i);
+                }
+
+                return; // 매칭되는 오브젝트를 찾았으므로 메서드 종료
+            }
+        }
+        Debug.Log("틀림");
+        StartCoroutine(Wrong());
     }
+
+    private void AllCorrect(int index)
+    {
+        // 모든 자식 Image 컴포넌트를 가져와 색상 변경
+        Image[] childImages = activeObjects[index].GetComponentsInChildren<Image>();
+        foreach (Image img in childImages)
+        {
+            img.color = Color.green;
+        }
+
+        Debug.Log(activeObjects[index].name);
+        StartCoroutine(DeactivateAfterDelay(activeObjects[index], 0.2f));
+        GameManager.Instance.AllCorrect_Recipe();
+    }
+
+    private void InCorrect(int index)
+    {
+        // 모든 자식 Image 컴포넌트를 가져와 색상 변경
+        Image[] childImages = activeObjects[index].GetComponentsInChildren<Image>();
+        foreach (Image img in childImages)
+        {
+            img.color = Color.green;
+        }
+        Debug.Log(activeObjects[index].name);
+        StartCoroutine(DeactivateAfterDelay(activeObjects[index], 0.5f));
+        GameManager.Instance.Incorrect_Recipe();
+    }
+    private IEnumerator Wrong()
+    {
+        for(int i = 0; i < activeObjects.Count; i++)
+        {
+            Image[] childImages = activeObjects[i].GetComponentsInChildren<Image>();
+            foreach(Image img in childImages)
+            {
+                img.color = Color.red;
+            }
+        }
+        yield return new WaitForSeconds(0.2f);
+        for (int i = 0; i < activeObjects.Count; i++)
+        {
+            Image[] childImages = activeObjects[i].GetComponentsInChildren<Image>();
+            foreach (Image img in childImages)
+            {
+                img.color = Color.white;
+            }
+        }
+        GameManager.Instance.Wrong_Recipe();
+    }
+
 
     // 지연 후 오브젝트 비활성화
     private IEnumerator DeactivateAfterDelay(GameObject obj, float delay)
@@ -145,37 +237,44 @@ public class RecipePool : MonoBehaviour
     // 각 오브젝트의 이미지를 설정
     private void SetRecipeObjectImages(List<Recipe> recipes)
     {
+        int objectsPerRecipe = allObjects.Count / recipes.Count;
+
         for (int i = 0; i < recipes.Count; i++)
         {
-            Recipe recipe = recipes[i]; // 레시피 데이터
-            GameObject obj = allObjects[i]; // 오브젝트
-            Dictionary<string, string> imageNameMap = new Dictionary<string, string>
+            for (int j = 0; j < objectsPerRecipe; j++)
             {
-                { "Recipe_Icon", recipe.recipe } // 레시피 아이콘 설정
+                int objectIndex = i * objectsPerRecipe + j;
+                GameObject obj = allObjects[objectIndex];
+                Recipe recipe = recipes[i];
+
+                obj.name = recipe.recipe;
+                Dictionary<string, string> imageNameMap = new Dictionary<string, string>
+            {
+                { "Recipe_Icon", recipe.recipe }
             };
 
-            // 재료 아이콘 설정
-            for (int j = 0; j < recipe.ingredient.Count(); j++)
-            {
-                imageNameMap.Add($"Ingredient_Icon_{j + 1}", recipe.ingredient[j]);
-                
-            }
+                for (int k = 0; k < recipe.ingredient.Count; k++)
+                {
+                    if (recipe.ingredient.Count == 1)
+                    {
+                        imageNameMap.Add($"Ingredient_Icon", recipe.ingredient[k]);
+                    }
+                    else
+                    {
+                        imageNameMap.Add($"Ingredient_Icon_{k + 1}", recipe.ingredient[k]);
+                    }
+                }
 
-            RecipeObject recipeObject = obj.GetComponent<RecipeObject>();
-            recipeObject.SetImagesByName(imageNameMap); // 이미지 설정
+                RecipeObject recipeObject = obj.GetComponent<RecipeObject>();
+                recipeObject.SetImagesByName(imageNameMap);
+            }
         }
     }
 
-    // 레시피 데이터를 가져오는 메서드 (더미 데이터)
 
-    private List<Recipe> GetRecipes()
+    // 레시피 데이터를 가져오는 메서드
+    private void GetRecipes()
     {
-        // 실제 데이터 가져오는 코드로 대체해야 함
-        return new List<Recipe>
-        {
-            new Recipe { id = 1, stage = 1, recipe = "recipe1", ingredient = new List<string> { "ingredient1" } },
-            new Recipe { id = 2, stage = 1, recipe = "recipe2", ingredient = new List<string> { "ingredient1", "ingredient2" } },
-            new Recipe { id = 3, stage = 1, recipe = "recipe3", ingredient = new List<string> { "ingredient1", "ingredient2", "ingredient3" } }
-        };
+        recipes = DataManager.Instance.StageRecipeData(GameManager.Instance.stage_index);
     }
 }
