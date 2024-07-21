@@ -329,7 +329,7 @@ GameObject:
   m_Component:
   - component: {fileID: 690597949275243299}
   - component: {fileID: 206795603967629726}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: m_sk_the_pass_red_01
   m_TagString: Pass
   m_Icon: {fileID: 0}
@@ -644,7 +644,7 @@ GameObject:
   - component: {fileID: 424025813153745789}
   - component: {fileID: 424025813153745788}
   - component: {fileID: 5042128894177462915}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -754,7 +754,7 @@ GameObject:
   - component: {fileID: 424025813248931248}
   - component: {fileID: 424025813248931251}
   - component: {fileID: 6200583792721896925}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -850,7 +850,7 @@ GameObject:
   - component: {fileID: 424025813269372098}
   - component: {fileID: 424025813269372109}
   - component: {fileID: 5737651098110610873}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -1121,7 +1121,7 @@ GameObject:
   - component: {fileID: 424025813389197075}
   - component: {fileID: 424025813389197074}
   - component: {fileID: 8166101921696323497}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter_No_Edge
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -1182,7 +1182,7 @@ GameObject:
   - component: {fileID: 424025813417138454}
   - component: {fileID: 424025813417138449}
   - component: {fileID: 7562952495725349461}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -1251,7 +1251,7 @@ GameObject:
   - component: {fileID: 424025813445507244}
   - component: {fileID: 424025813445507247}
   - component: {fileID: 5020031308402805959}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter_No_Edge
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -1401,7 +1401,7 @@ GameObject:
   - component: {fileID: 424025813471369185}
   - component: {fileID: 424025813471369184}
   - component: {fileID: 2327780141295529109}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -1497,7 +1497,7 @@ GameObject:
   - component: {fileID: 424025813519377465}
   - component: {fileID: 424025813519377464}
   - component: {fileID: 7279755943600171988}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -1539,7 +1539,7 @@ GameObject:
   - component: {fileID: 424025813708316991}
   - component: {fileID: 424025813708316990}
   - component: {fileID: 7917122453507063443}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter_No_Edge
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -1663,7 +1663,7 @@ GameObject:
   - component: {fileID: 424025813723629942}
   - component: {fileID: 424025813723629938}
   - component: {fileID: 238593502041145825}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -1855,7 +1855,7 @@ GameObject:
   - component: {fileID: 424025813984066078}
   - component: {fileID: 424025813984066073}
   - component: {fileID: 2205593605230600578}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -2000,7 +2000,7 @@ GameObject:
   - component: {fileID: 424025814149924366}
   - component: {fileID: 424025814149924362}
   - component: {fileID: 5382613827094597965}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -2145,7 +2145,7 @@ GameObject:
   - component: {fileID: 424025814417370402}
   - component: {fileID: 424025814417370413}
   - component: {fileID: 9166303398092335890}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -2227,7 +2227,7 @@ GameObject:
   - component: {fileID: 424025814436142733}
   - component: {fileID: 424025814436142732}
   - component: {fileID: 7233297980370263015}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -2327,7 +2327,7 @@ GameObject:
   - component: {fileID: 424025814444747272}
   - component: {fileID: 424025814444747275}
   - component: {fileID: 424025814444747274}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: WallCol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2347,7 +2347,7 @@ GameObject:
   - component: {fileID: 424025814537546044}
   - component: {fileID: 424025814537546047}
   - component: {fileID: 209894425845058501}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -2615,7 +2615,7 @@ GameObject:
   - component: {fileID: 424025814694270944}
   - component: {fileID: 424025814694270947}
   - component: {fileID: 816464835343720429}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -2635,7 +2635,7 @@ GameObject:
   - component: {fileID: 424025814821193979}
   - component: {fileID: 424025814821193978}
   - component: {fileID: 7693169627060427929}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -2744,7 +2744,7 @@ GameObject:
   - component: {fileID: 424025815072249796}
   - component: {fileID: 424025815072249792}
   - component: {fileID: 1396647588271267502}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -2937,7 +2937,7 @@ GameObject:
   - component: {fileID: 424025815246470043}
   - component: {fileID: 424025815246470019}
   - component: {fileID: 2858778239298398974}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -3075,7 +3075,7 @@ GameObject:
   - component: {fileID: 424025815263439593}
   - component: {fileID: 424025815263439592}
   - component: {fileID: 2431791336862727496}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -3527,7 +3527,7 @@ BoxCollider:
   m_GameObject: {fileID: 870412921585450563}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.7, z: -0.1}
@@ -3585,6 +3585,7 @@ GameObject:
   - component: {fileID: 3563920349194811978}
   - component: {fileID: 870412921585450567}
   - component: {fileID: 870412921585450560}
+  - component: {fileID: 870412921585450565}
   m_Layer: 10
   m_Name: Chef
   m_TagString: Untagged
@@ -3605,6 +3606,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayPoint: {fileID: 1645344865924473925}
+--- !u!135 &870412921585450565
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870412921585450563}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.37
+  m_Center: {x: 0, y: 0.37, z: 0}
 --- !u!136 &870412921585450567
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4170,7 +4184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1645344865924473924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.15, z: 0}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 531287713785242873}
@@ -6566,7 +6580,7 @@ GameObject:
   - component: {fileID: 2375285583328592093}
   - component: {fileID: 5166208919902047801}
   - component: {fileID: 6283403068172695486}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
@@ -6832,7 +6846,7 @@ GameObject:
   - component: {fileID: 2046133477553714272}
   - component: {fileID: 2148444165977368168}
   - component: {fileID: 5420787736136632591}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: m_sk_plate_return_01_0
   m_TagString: Plate_Return
   m_Icon: {fileID: 0}
@@ -7074,6 +7088,7 @@ GameObject:
   - component: {fileID: 5510673472339248229}
   - component: {fileID: 5510673472339248250}
   - component: {fileID: 5510673472339248251}
+  - component: {fileID: 5510673472339248252}
   m_Layer: 10
   m_Name: Chef (1)
   m_TagString: Untagged
@@ -7104,10 +7119,23 @@ BoxCollider:
   m_GameObject: {fileID: 5510673472339248249}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.7, z: -0.1}
+--- !u!135 &5510673472339248252
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5510673472339248249}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.37
+  m_Center: {x: 0, y: 0.37, z: 0}
 --- !u!1 &5510673472354475506
 GameObject:
   m_ObjectHideFlags: 0
@@ -9421,7 +9449,7 @@ GameObject:
   - component: {fileID: 910034476135634399}
   - component: {fileID: 5580977184824094583}
   - component: {fileID: 5580977184824094584}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: m_sk_bin_01_0
   m_TagString: TrashCan
   m_Icon: {fileID: 0}
@@ -9453,9 +9481,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01c389d399a9d2342a3590e849578d46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPutOn: 0
-  putonOb: {fileID: 0}
-  choppingBoard: {fileID: 0}
 --- !u!1 &5608961244175037720
 GameObject:
   m_ObjectHideFlags: 0
@@ -9522,7 +9547,7 @@ GameObject:
   - component: {fileID: 2070887121787012549}
   - component: {fileID: 5039269733381722481}
   - component: {fileID: 978031505417426258}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: m_sk_the_pass_red_01_1
   m_TagString: Pass
   m_Icon: {fileID: 0}
@@ -10432,7 +10457,7 @@ GameObject:
   - component: {fileID: 6976544281550923549}
   - component: {fileID: 8898740390548034547}
   - component: {fileID: 429455826632649142}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: m_sk_the_pass_red_01_0
   m_TagString: Pass
   m_Icon: {fileID: 0}
@@ -10506,7 +10531,7 @@ GameObject:
   - component: {fileID: 7412415824354394643}
   - component: {fileID: 5576262438034396544}
   - component: {fileID: 6748313150581302446}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: m_sk_the_pass_red_01_2
   m_TagString: Pass
   m_Icon: {fileID: 0}
@@ -12197,7 +12222,7 @@ GameObject:
   - component: {fileID: 1280254549577393986}
   - component: {fileID: 8539065385792334244}
   - component: {fileID: 210744650307005082}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Counter_No_Edge
   m_TagString: Counter
   m_Icon: {fileID: 0}

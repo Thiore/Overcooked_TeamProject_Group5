@@ -17,7 +17,7 @@ public class Player_Movent : MonoBehaviour
     private Player_Ray playerRay;
     private bool isJumping = false;
     private Vector3 jumpvelocity = Vector3.zero;
-
+    
 
     private readonly int IsWalking = Animator.StringToHash("IsWalking");
 
@@ -90,6 +90,8 @@ public class Player_Movent : MonoBehaviour
         isJumping = true;
         animator.SetBool(IsWalking, true);
 
+        #region Á¤¹®Dash
+        /*
         Vector3 endPos = player_rb.position + transform.forward * 2f;
         float elaspedTime = 0f;
 
@@ -106,7 +108,24 @@ public class Player_Movent : MonoBehaviour
             elaspedTime += Time.deltaTime;
             yield return null;
         }
-        player_rb.MovePosition(endPos);       
+        player_rb.MovePosition(endPos);     
+        */
+        #endregion
+
+        #region ¿µÈÆDash
+        Vector3 EndPos = playerRay.ShotRayFront();
+
+        float DashDistance = Vector3.Distance(transform.position, EndPos);
+        while (DashDistance > 0.5f)
+        {
+            Debug.Log(DashDistance);
+            player_rb.MovePosition(player_rb.position + transform.forward * moveSpeed * 1.3f*Time.deltaTime);
+            DashDistance = Vector3.Distance(transform.position, EndPos);
+            yield return null;
+        }
+
+        #endregion
+
         animator.SetBool(IsWalking, false);
         isJumping = false;
     }
