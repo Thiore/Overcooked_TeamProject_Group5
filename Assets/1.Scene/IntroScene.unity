@@ -4488,7 +4488,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689800587}
-  m_Mesh: {fileID: 4771411896726511928, guid: 538f5dbbebd29694eae2f5174fb38c7f, type: 3}
+  m_Mesh: {fileID: 4771411896726511928, guid: 1f139262904824a488855825f10d61a7, type: 3}
 --- !u!4 &1689800590
 Transform:
   m_ObjectHideFlags: 0
@@ -4661,7 +4661,7 @@ SpriteRenderer:
   m_Size: {x: 3.87, y: 3.98}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1863218043
@@ -4860,7 +4860,7 @@ SpriteRenderer:
   m_Size: {x: 3.75, y: 4.07}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1926805645

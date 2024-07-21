@@ -84,42 +84,7 @@ public class DataManager : MonoBehaviour
     public List<Recipe> StageRecipeData(int stageNumber)
     {
         List<Recipe> stageRecipes = recipeData.Values.Where(recipe => recipe.stage == stageNumber).ToList();
-        /*
-        List<List<Recipe>> allRecipes = new List<List<Recipe>>(); // 모든 레시피를 담을 리스트 생성
-        List<List<string>> allIngredients = new List<List<string>>(); // 모든 재료를 담을 리스트 생성
-
-        foreach (var recipe in stageRecipes)
-        {
-            // 각 레시피를 담는 리스트에 추가
-            allRecipes.Add(new List<Recipe> { recipe });
-
-            List<string> ingredients = new List<string>();
-            foreach (var ingredient in recipe.ingredient)
-            {
-                ingredients.Add(ingredient); // 각 레시피의 재료를 재료 리스트에 추가
-            }
-            allIngredients.Add(ingredients); // 각 레시피의 재료 리스트를 전체 재료 리스트에 추가
-        }
-        */
         return stageRecipes;
-        //// 각 리스트들을 출력하여 확인
-        //foreach (var recipes in allRecipes)
-        //{
-        //    foreach (var recipe in recipes)
-        //    {
-        //        Debug.Log("Recipe: " + recipe.recipe);
-        //    }
-        //}
-
-        //foreach (var ingredients in allIngredients)
-        //{
-        //    foreach (var ingredient in ingredients)
-        //    {
-        //        Debug.Log("Ingredient: " + ingredient);
-        //    }
-        //}
-
-        // allRecipes를 반환하여 호출한 곳에서 필요한 데이터를 사용
     }
     //public List<Recipe> StageRecipeData(int stageNumber)
     //{                       
