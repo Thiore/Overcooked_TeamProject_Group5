@@ -131,4 +131,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void Menu_Button(int button_index)
+    {
+        switch (button_index)
+        {
+            case 0:
+                SceneManager.LoadScene("Bus_Flag");
+                break;
+            case 1:
+                SceneManager.LoadScene("Arcade_Menu");
+                break;
+            case 2:
+                SceneManager.LoadScene("Character_Menu");
+                break;
+            case 3:
+                SceneManager.LoadScene("Set_Menu");
+                break;
+            default:
+                return;
+        }
+    }
 }
