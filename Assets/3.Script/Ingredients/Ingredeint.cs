@@ -141,10 +141,10 @@ public class Ingredeint : MonoBehaviour
                     {
                         if (playerAnim[i] != null)
                         {
-                            Debug.Log("어디에들어오니?");
                             AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
                             if (AnimInfo[i].IsName("New_Chef@Chop"))
                             {
+                                Debug.Log("어디에들어오니?");
                                 playerAnim[i].SetTrigger("Finish");
                             }
                         }
@@ -156,9 +156,16 @@ public class Ingredeint : MonoBehaviour
             {
                 transform.Rotate(Vector3.up, 2f);
                 transform.localScale *= 0.98f;
-                if(transform.localScale.x< 0)
+                if(transform.localScale.x < 0.2f)
                 {
+                    transform.parent.TryGetComponent(out CounterController counter);
+                    if(counter != null)
+                    {
+                        counter.ChangePuton();
+                        counter.PutOnOb = null;
+                    }
                     Die();
+
                 }
 
             }

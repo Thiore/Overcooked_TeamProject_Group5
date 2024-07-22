@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.SceneTemplate;
 using UnityEditorInternal;
 using UnityEngine;
@@ -60,7 +61,14 @@ public class Player_StateController : MonoBehaviour
             // 굽고 썰고 
             if (Input.GetKeyUp(KeyCode.LeftControl))
             {
-                StartCoroutine(PlayerCookedChage());
+                if (!isChop)
+                {
+                    StartCoroutine(PlayerCookedChage());
+                }
+            }
+            else if (IsChop)
+            {
+                StopChopping();
             }
         }
 
@@ -82,37 +90,29 @@ public class Player_StateController : MonoBehaviour
         //}
     }
 
+    private void StopChopping()
+    {
+        isChop = false;
+        animator.SetTrigger("Finish");
+    }
+
+
     private IEnumerator PlayerHodingChange(GameObject nearCount, GameObject nearob)
     {
+        if (nearCount == null && nearob == null)
+        {
+            yield return null;
+        }
 
         // 근처 카운터가 있고 내가 집은 상태가 아니라면 
-
-        if(!isHolding)
+        if (!isHolding)
         {
             if (nearCount != null)
             {
                 //카운터 위에 오브젝트가 있는지 없는지 확인 
                 var counter = nearCount.transform.GetComponent<CounterController>();
-                if (counter.IsPutOn)
-                {
-                    if (counter.PutOnOb.CompareTag("Plate"))
-                    {
-                        TakeHandObject(counter.PutOnOb);
-                        yield break;
-                    }
-                    else if (counter.PutOnOb.CompareTag("Cooker"))
-                    {
-                        TakeHandObject(counter.PutOnOb);
-                        yield break;
-                    }
-                    else
-                    {
-                        TakeHandObject(counter.PutOnOb);
-                        yield break;
-                    }
 
-                }
-                else //올라가 있지 않다면 근처 오브젝트겠지
+                if (!counter.IsPutOn) //올라가 있지 않다면 근처 오브젝트겠지
                 {
                     if (counter.CompareTag("Crate"))
                     {
@@ -122,14 +122,40 @@ public class Player_StateController : MonoBehaviour
                             TakeHandObject(spawn.PickAnim());
                             Debug.Log("열기");
                             // 생성된 재료 오브젝트 바로 집는 메소드 추가 필요 
-                            yield return new WaitForSeconds(0.2f);
+                            yield return new WaitForSeconds(0.3f);
                         }
                     }
                     else
                     {
-                        TakeHandObject(nearob);
-                        yield break;
+                        if (nearOb != null)
+                        {
+                            TakeHandObject(nearob);
+                        }
+                        yield return new WaitForSeconds(0.3f);
                     }
+
+                }
+                else
+                {
+                    //카운터 집을 수 있는 오브젝트가 있고, 도마가 없을때 
+                    if (counter.PutOnOb.CompareTag("Plate") || counter.PutOnOb.CompareTag("Cooker") /* 소화기 태그 추가 필요 */)
+                    {
+                        TakeHandObject(counter.PutOnOb);
+                    }
+                    //집을 수 있는 오브젝트가 도마 위에 있을때 
+                    else if (counter.ChoppingBoard != null)
+                    {
+                        TakeHandObject(counter.ChoppingBoard.transform.GetChild(1).gameObject);
+                        counter.ChoppingBoard.transform.GetChild(0).gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        TakeHandObject(counter.PutOnOb);
+                    }
+
+                    counter.PutOnOb = null;
+                    counter.ChangePuton();
+                    yield return new WaitForSeconds(0.5f);
                 }
 
                 yield return new WaitForSeconds(0.5f);
@@ -137,20 +163,18 @@ public class Player_StateController : MonoBehaviour
             // 근처 카운터가 없다면(땅바닥이겟지)
             else
             {
-                if (nearob.CompareTag("Plate"))
+                if (nearOb != null)
                 {
-                    TakeHandObject(nearob);
-                    yield break;
-                }
-                else if (nearob.CompareTag("Cooker"))
-                {
-                    TakeHandObject(nearob);
-                    yield break;
-                }
-                else
-                {
-                    TakeHandObject(nearob);
-                    yield break;
+                    if (nearob.CompareTag("Plate") || nearob.CompareTag("Cooker"))
+                    {
+                        TakeHandObject(nearob);
+                    }
+                    else
+                    {
+                        TakeHandObject(nearob);
+                    }
+
+                    yield return new WaitForSeconds(0.3f);
                 }
             }
             yield return new WaitForSeconds(0.5f);
@@ -158,7 +182,6 @@ public class Player_StateController : MonoBehaviour
         else
         {
             DropObject(nearCount, nearob);
-            Debug.Log("이미 집은 상태");
             yield return new WaitForSeconds(0.3f);
         }
 
@@ -168,7 +191,6 @@ public class Player_StateController : MonoBehaviour
 
     private void DropObject(GameObject nearcounter, GameObject nearob)
     {
-        Debug.Log("Drop 들ㅇ옴");
         // 근처에 카운터가 있다면 
         if (nearcounter != null)
         {
@@ -177,11 +199,19 @@ public class Player_StateController : MonoBehaviour
             {
                 if (counter.ChoppingBoard == null) // 카운터에 도마가 없는 곳이라면 
                 {
-                    HandsOnOb.transform.SetParent(nearcounter.transform);
-                    HandsOnOb.transform.position = nearcounter.transform.position + new Vector3(0, 0.1f, 0);
+                    HandsOnOb.transform.SetParent(counter.transform);
+                    if (counter.CompareTag("Crate")) // 계속 박스 위가 아니라 가운데로 들어감 
+                    {
+                        var boxcol = counter.GetComponent<Collider>();
+                        var boxtop = boxcol.bounds.center + new Vector3(0, boxcol.bounds.extents.y, 0);
+                        HandsOnOb.transform.position = boxtop;
+                    }
+                    else
+                    {
+                        HandsOnOb.transform.position = counter.transform.position + new Vector3(0, 0.1f, 0);
+                    }
                     HandsOnOb.transform.rotation = Quaternion.identity;
-                    counter.ChangePuton();
-                    counter.PutOnOb = HandsOnOb;
+
                 }
                 else // 도마가 있다면 
                 {
@@ -189,10 +219,10 @@ public class Player_StateController : MonoBehaviour
                     HandsOnOb.transform.position = counter.ChoppingBoard.transform.position + new Vector3(0, 0.1f, 0);
                     HandsOnOb.transform.rotation = Quaternion.identity;
                     counter.ChoppingBoard.transform.GetChild(0).gameObject.SetActive(false);
-                    //도마도 끄기 
-                    counter.ChangePuton();
                 }
 
+                counter.ChangePuton();
+                counter.PutOnOb = HandsOnOb;
                 animator.SetBool("IsTake", false);
                 HandsOnOb = null;
                 isHolding = false;
@@ -225,17 +255,19 @@ public class Player_StateController : MonoBehaviour
             var counter = nearcounter.transform.GetComponent<CounterController>();
 
             // 동작만하고 실질적인 처리는 재료가?
-
             // 도마가 있는지, 도마 자식에 태그가 재료인 오브젝트가 있는지 + 재료 가 썰 수있는 boolean인지 
             if (counter.ChoppingBoard != null && counter.ChoppingBoard.transform.GetChild(1).gameObject.CompareTag("Ingredients") /* 재료가 썰수있는지  */)
             {
-                animator.SetTrigger("Chop");
+                counter.ChoppingBoard.transform.GetChild(1).gameObject.transform.TryGetComponent(out Ingredeint ingre);
+                if (ingre != null && ingre.cooking.Equals(eCooked.Normal))
+                {
+                    animator.SetTrigger("Chop");
+                }
+                // 재료 eCooked enum에서 받고 노말일때만 
             }
-
-
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
     }
 
 
