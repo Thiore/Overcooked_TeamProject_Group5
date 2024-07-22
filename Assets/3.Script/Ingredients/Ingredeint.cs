@@ -141,10 +141,10 @@ public class Ingredeint : MonoBehaviour
                     {
                         if (playerAnim[i] != null)
                         {
-                            Debug.Log("어디에들어오니?");
                             AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
                             if (AnimInfo[i].IsName("New_Chef@Chop"))
                             {
+                                Debug.Log("어디에들어오니?");
                                 playerAnim[i].SetTrigger("Finish");
                             }
                         }

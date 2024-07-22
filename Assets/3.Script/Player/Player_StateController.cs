@@ -61,7 +61,14 @@ public class Player_StateController : MonoBehaviour
             // 굽고 썰고 
             if (Input.GetKeyUp(KeyCode.LeftControl))
             {
-                StartCoroutine(PlayerCookedChage());
+                if (!isChop)
+                {
+                    StartCoroutine(PlayerCookedChage());
+                }
+            }
+            else if (IsChop)
+            {
+                StopChopping();
             }
         }
 
@@ -83,15 +90,22 @@ public class Player_StateController : MonoBehaviour
         //}
     }
 
+    private void StopChopping()
+    {
+        isChop = false;
+        animator.SetTrigger("Finish");
+    }
+
+
     private IEnumerator PlayerHodingChange(GameObject nearCount, GameObject nearob)
     {
-        if(nearCount == null && nearob == null)
+        if (nearCount == null && nearob == null)
         {
             yield return null;
         }
 
         // 근처 카운터가 있고 내가 집은 상태가 아니라면 
-        if(!isHolding)
+        if (!isHolding)
         {
             if (nearCount != null)
             {
@@ -121,7 +135,7 @@ public class Player_StateController : MonoBehaviour
                     }
 
                 }
-                else 
+                else
                 {
                     //카운터 집을 수 있는 오브젝트가 있고, 도마가 없을때 
                     if (counter.PutOnOb.CompareTag("Plate") || counter.PutOnOb.CompareTag("Cooker") /* 소화기 태그 추가 필요 */)
@@ -148,7 +162,7 @@ public class Player_StateController : MonoBehaviour
             // 근처 카운터가 없다면(땅바닥이겟지)
             else
             {
-                if(nearOb != null)
+                if (nearOb != null)
                 {
                     if (nearob.CompareTag("Plate") || nearob.CompareTag("Cooker"))
                     {
@@ -186,14 +200,12 @@ public class Player_StateController : MonoBehaviour
                     HandsOnOb.transform.SetParent(counter.transform);
                     if (counter.CompareTag("Crate")) // 계속 박스 위가 아니라 가운데로 들어감 
                     {
-                        Debug.Log("여기");
                         var boxcol = counter.GetComponent<Collider>();
                         var boxtop = boxcol.bounds.center + new Vector3(0, boxcol.bounds.extents.y, 0);
                         HandsOnOb.transform.position = boxtop;
                     }
                     else
                     {
-                        Debug.Log("gma");
                         HandsOnOb.transform.position = counter.transform.position + new Vector3(0, 0.1f, 0);
                     }
                     HandsOnOb.transform.rotation = Quaternion.identity;
@@ -244,11 +256,16 @@ public class Player_StateController : MonoBehaviour
             // 도마가 있는지, 도마 자식에 태그가 재료인 오브젝트가 있는지 + 재료 가 썰 수있는 boolean인지 
             if (counter.ChoppingBoard != null && counter.ChoppingBoard.transform.GetChild(1).gameObject.CompareTag("Ingredients") /* 재료가 썰수있는지  */)
             {
-                animator.SetTrigger("Chop");
+                counter.ChoppingBoard.transform.GetChild(1).gameObject.transform.TryGetComponent(out Ingredeint ingre);
+                if (ingre != null && ingre.cooking.Equals(eCooked.Normal))
+                {
+                    animator.SetTrigger("Chop");
+                }
+                // 재료 eCooked enum에서 받고 노말일때만 
             }
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
     }
 
 
