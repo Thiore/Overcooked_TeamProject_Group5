@@ -43,7 +43,7 @@ public enum eCooked
     Chopping
 }
 
-public class Ingredeint : MonoBehaviour
+public class Ingredient : MonoBehaviour
 {
     public spawn_Ingredient crate;
     
@@ -59,7 +59,7 @@ public class Ingredeint : MonoBehaviour
     private MeshFilter Ingredient_Mesh;
 
     public eCooked cooking { get; private set; }
-    // public eIngredients myIngredients;
+    public eIngredients myIngredients;
     private eCookingProcess CookProcess;
 
     [SerializeField] private bool Chop_Script;
@@ -184,10 +184,11 @@ public class Ingredeint : MonoBehaviour
 
     }
 
-    public void SetCookProcess(eCookingProcess process, bool Anim)
+    public void SetCookProcess(eCookingProcess process, bool Anim, eIngredients ingredient)
     {
         CookProcess = process;
         Chop_Anim = Anim;
+        myIngredients = ingredient;
     }
 
     public void OnIngredients()

@@ -6,11 +6,11 @@ public class Plate_Spawn : MonoBehaviour
 {
     [SerializeField] private Transform[] Set_Pos;
     [SerializeField] private BoxCollider ReturnCol;
-    [SerializeField] private Transform Plate_Return;
+    [SerializeField] private Plate_Return plateReturn;
     [SerializeField] private Plate PlatePrefabs;
     [SerializeField] private RecipePool CheckRecipe;
 
-    [SerializeField] public bool isWash;
+    [SerializeField] private bool isWash;
 
     private Plate[] plates;
     private Queue<int> DestroyPlateNum = new Queue<int>();
@@ -23,7 +23,19 @@ public class Plate_Spawn : MonoBehaviour
         for(int i = 0;i<plates.Length;i++)
         {
             plates[i] = Instantiate(PlatePrefabs);
+            plates[i].SetWash(isWash);
             plates[i].transform.SetParent(Set_Pos[i]);
+            if(Set_Pos[i] == plateReturn.transform)
+            {
+                plateReturn.SetPlate(plates[i]);
+            }
+            else
+            {
+                CounterController counter = plates[i].transform.GetComponentInParent<CounterController>();
+                counter.ChangePuton();
+                counter.PutOnOb = plates[i].gameObject;
+            }
+            
         }
     }
 
@@ -59,8 +71,10 @@ public class Plate_Spawn : MonoBehaviour
 
     private IEnumerator SpawnPlate()
     {
+        int plateNum = DestroyPlateNum.Dequeue();
         yield return SpawnTime;
-        //plates[DestroyPlateNum.Dequeue()]
+        plates[plateNum].SetWash(isWash);
+        plateReturn.SetPlate(plates[plateNum]);
     }
 
 }

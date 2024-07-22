@@ -9,12 +9,11 @@ public class spawn_Ingredient : MonoBehaviour
     [SerializeField] private GameObject[] ingredient_prefab;
 
     private GameObject myIngredient;
-    private Queue<Ingredeint> ingredient_queue = new Queue<Ingredeint>();
+    private Queue<Ingredient> ingredient_queue = new Queue<Ingredient>();
     private Player_StateController player;
 
     private Animator anim;
 
-    private bool isOpen;
 
     private Crate_Info info;
 
@@ -37,13 +36,11 @@ public class spawn_Ingredient : MonoBehaviour
             }
 
         }
-        isOpen = false;
     }
 
     public GameObject PickAnim()
     {
         anim.SetTrigger("Pick");
-        isOpen = false;
         return newIngredient();
     }
 
@@ -53,37 +50,21 @@ public class spawn_Ingredient : MonoBehaviour
         Debug.Log(ingredient_queue.Count);
         if(ingredient_queue.Count>0)
         {
-            Ingredeint obj = ingredient_queue.Dequeue();
+            Ingredient obj = ingredient_queue.Dequeue();
             obj.gameObject.SetActive(true);
             return obj.gameObject;
         }
         else
         {
-            Ingredeint newobj = Instantiate(myIngredient.GetComponent<Ingredeint>());
-            newobj.SetCookProcess(info.CookingProcess, info.Chop_Anim);
+            Ingredient newobj = Instantiate(myIngredient.GetComponent<Ingredient>());
+            newobj.SetCookProcess(info.CookingProcess, info.Chop_Anim,info.Ingredients);
             newobj.crate = this;
             return newobj.gameObject;
         }
     }
-  
-
-    private void OnCollisionEnter(Collision other)
+    public void DestroyIngredient(Ingredient ingredient)
     {
-        Debug.Log("µé¾î¿È");
-        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
-        {
-            isOpen = true;
-        }
-    }
-    private void OnCollisionExit(Collision other)
-    {
-        
-        isOpen = false;
-    }
-
-    public void DestroyIngredient(Ingredeint ingredeint)
-    {
-        ingredient_queue.Enqueue(ingredeint);
+        ingredient_queue.Enqueue(ingredient);
         Debug.Log(ingredient_queue.Count);
     }
 

@@ -256,7 +256,7 @@ public class Player_StateController : MonoBehaviour
             // 도마가 있는지, 도마 자식에 태그가 재료인 오브젝트가 있는지 + 재료 가 썰 수있는 boolean인지 
             if (counter.ChoppingBoard != null && counter.ChoppingBoard.transform.GetChild(1).gameObject.CompareTag("Ingredients") /* 재료가 썰수있는지  */)
             {
-                counter.ChoppingBoard.transform.GetChild(1).gameObject.transform.TryGetComponent(out Ingredeint ingre);
+                counter.ChoppingBoard.transform.GetChild(1).gameObject.transform.TryGetComponent(out Ingredient ingre);
                 if (ingre != null && ingre.cooking.Equals(eCooked.Normal))
                 {
                     animator.SetTrigger("Chop");
