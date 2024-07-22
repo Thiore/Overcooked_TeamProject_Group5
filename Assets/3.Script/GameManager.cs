@@ -121,8 +121,10 @@ public class GameManager : MonoBehaviour
         Debug.Log("Wrong_Recipe »£√‚");
     }
 
+    //Game Load
     public void LoadGame(int stage_index)
     {
+        this.stage_index = stage_index;
         switch (stage_index)
         {
             case 1:
@@ -131,6 +133,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //IntroScene Button Onclick Method
     public void Menu_Button(int button_index)
     {
         switch (button_index)
