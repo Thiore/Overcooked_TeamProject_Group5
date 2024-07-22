@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public bool isPause = false; // 일시정지 상태
     public bool isPlaying = true; // 게임 진행 상태
     public GameObject pauseScreen; // 일시정지 화면
-    public bool isInputEnabled = false; // 입력 가능 상태
+    public int isInputEnabled = 0; // 입력 가능 상태
     
 
     private void Awake()

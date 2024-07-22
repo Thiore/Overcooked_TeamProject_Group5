@@ -826,8 +826,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000bf619ee6b2cd4886743fda4e4f2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selected_stage: 1
-  moveSpeed: 5
 --- !u!1 &540996520
 GameObject:
   m_ObjectHideFlags: 0

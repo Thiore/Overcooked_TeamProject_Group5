@@ -18,6 +18,7 @@ public class Stage_Select : MonoBehaviour
         }
         Buttons[0] = GameObject.Find("Left_Button");
         Buttons[1] = GameObject.Find("Right_Button");
+        Buttons[0].SetActive(false);
     }
 
     private void Update()
@@ -33,29 +34,32 @@ public class Stage_Select : MonoBehaviour
             {
                 case 1:
                     Buttons[0].SetActive(false);
+                    Buttons[1].SetActive(true);
+                    
                     if (Input.GetKeyDown(KeyCode.RightArrow))
                     {
                         Change_Stage(1);
-                        Buttons[0].SetActive(true);
                     }
                     else if (Input.GetKeyDown(KeyCode.Space))
                     {
-                        Load_Stage();
+                        GameManager.Instance.LoadGame(selected_stage);
                     }
                     break;
                 case 5:
+                    Buttons[0].SetActive(true);
                     Buttons[1].SetActive(false);
                     if (Input.GetKeyDown(KeyCode.LeftArrow))
                     {
                         Change_Stage(-1);
-                        Buttons[1].SetActive(true);
                     }
                     else if (Input.GetKeyDown(KeyCode.Space))
                     {
-                        Load_Stage();
+                        GameManager.Instance.LoadGame(selected_stage);
                     }
                     break;
                 default:
+                    Buttons[0].SetActive(true);
+                    Buttons[1].SetActive(true);
                     if (Input.GetKeyDown(KeyCode.LeftArrow))
                     {
                         Change_Stage(-1);
@@ -66,12 +70,12 @@ public class Stage_Select : MonoBehaviour
                     }
                     else if (Input.GetKeyDown(KeyCode.Space))
                     {
-                        Load_Stage();
+                        GameManager.Instance.LoadGame(selected_stage);
                     }
                     break;
             }
         }
-        
+
     }
 
     private void Change_Stage(int index)
@@ -90,6 +94,10 @@ public class Stage_Select : MonoBehaviour
     private IEnumerator MoveStages(float offset)
     {
         InputAble = false;
+        for (int i = 0; i < 2; i++)
+        {
+            Buttons[i].SetActive(false);
+        }
         float elapsedTime = 0;
         Vector2[] startPos = new Vector2[Stage.Length];
         Vector2[] targetPos = new Vector2[Stage.Length];
@@ -121,28 +129,4 @@ public class Stage_Select : MonoBehaviour
         InputAble = true;
     }
 
-    private void Load_Stage()
-    {
-        switch (selected_stage)
-        {
-            case 1:
-                GameManager.Instance.LoadGame(selected_stage);
-                break;
-            case 2:
-                GameManager.Instance.LoadGame(selected_stage);
-                break;
-            case 3:
-                GameManager.Instance.LoadGame(selected_stage);
-                break;
-            case 4:
-                GameManager.Instance.LoadGame(selected_stage);
-                break;
-            case 5:
-                GameManager.Instance.LoadGame(selected_stage);
-                break;
-
-            default:
-                return;
-        }
-    }
 }
