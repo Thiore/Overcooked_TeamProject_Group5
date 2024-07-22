@@ -156,9 +156,16 @@ public class Ingredeint : MonoBehaviour
             {
                 transform.Rotate(Vector3.up, 2f);
                 transform.localScale *= 0.98f;
-                if(transform.localScale.x< 0)
+                if(transform.localScale.x < 0.2f)
                 {
+                    transform.parent.TryGetComponent(out CounterController counter);
+                    if(counter != null)
+                    {
+                        counter.ChangePuton();
+                        counter.PutOnOb = null;
+                    }
                     Die();
+
                 }
 
             }
