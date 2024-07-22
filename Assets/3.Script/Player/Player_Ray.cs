@@ -23,6 +23,7 @@ public class Player_Ray : MonoBehaviour
         {
             if (hit.collider.gameObject != null)
             {
+                Debug.Log(hit.collider.gameObject);
                 hitPoint = hit.point;
                 return true;
             }

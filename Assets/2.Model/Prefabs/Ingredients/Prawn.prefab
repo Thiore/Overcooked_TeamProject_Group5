@@ -126,7 +126,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 0.55
   m_Center: {x: 0.015417516, y: 0.40900698, z: 0.08787966}
 --- !u!114 &3197822107311376744
 MonoBehaviour:
@@ -150,4 +150,3 @@ MonoBehaviour:
   CotrolBone: []
   JointBone: []
   Chop_Script: 0
-  FinishChopTime: 0

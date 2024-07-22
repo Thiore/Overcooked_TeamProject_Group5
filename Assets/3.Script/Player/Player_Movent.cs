@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class Player_Movent : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float rotateSpeed = 160f;
+    [SerializeField] private float rotateSpeed = 540f;
     [SerializeField] private PlayerIntput playerInput;
 
     private Rigidbody player_rb;
@@ -109,7 +109,8 @@ public class Player_Movent : MonoBehaviour
             player_rb.MovePosition(Vector3.Lerp(player_rb.position, endPos,elaspedTime / 0.3f));
             elaspedTime += Time.deltaTime;
             yield return null;
-        }   
+        }
+        player_rb.MovePosition(player_rb.position);
         
         #endregion
 
