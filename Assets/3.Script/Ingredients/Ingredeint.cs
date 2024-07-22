@@ -46,7 +46,7 @@ public enum eCooked
 public class Ingredeint : MonoBehaviour
 {
     public spawn_Ingredient crate;
-    
+
     [SerializeField] private Mesh[] Change_Mesh;
     [SerializeField] private Material[] Change_Material;
 
@@ -94,16 +94,16 @@ public class Ingredeint : MonoBehaviour
     }
     private void OnEnable()
     {
-        
+
         ChopTime = 0;
-        
+
 
         if (!Ingredient_Mesh.mesh.Equals(Change_Mesh[0]))
         {
             Change_Ingredient(eCooked.Normal);
             Debug.Log("들어오면안됨");
         }
-        
+
 
     }
 
@@ -128,6 +128,7 @@ public class Ingredeint : MonoBehaviour
                                 if (ChopTime > FinishChopTime)
                                 {
                                     ChopTime = 0;
+                                    playerAnim[i].SetTrigger("Finish");
                                     Change_Ingredient(eCooked.Chopping);
                                 }
                             }
@@ -135,31 +136,16 @@ public class Ingredeint : MonoBehaviour
 
                     }
                 }
-                else
-                {
-                    for (int i = 0; i < playerAnim.Length; i++)
-                    {
-                        if (playerAnim[i] != null)
-                        {
-                            AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
-                            if (AnimInfo[i].IsName("New_Chef@Chop"))
-                            {
-                                Debug.Log("어디에들어오니?");
-                                playerAnim[i].SetTrigger("Finish");
-                            }
-                        }
-                    }
-                }
                 return;
             }
-            if(transform.parent.CompareTag("TrashCan"))
+            if (transform.parent.CompareTag("TrashCan"))
             {
                 transform.Rotate(Vector3.up, 2f);
                 transform.localScale *= 0.98f;
-                if(transform.localScale.x < 0.2f)
+                if (transform.localScale.x < 0.2f)
                 {
                     transform.parent.TryGetComponent(out CounterController counter);
-                    if(counter != null)
+                    if (counter != null)
                     {
                         counter.ChangePuton();
                         counter.PutOnOb = null;
@@ -199,7 +185,7 @@ public class Ingredeint : MonoBehaviour
                 OnCooker = false;
                 break;
             case eCookingProcess.Chopping:
-                if(cooking.Equals(eCooked.Normal))
+                if (cooking.Equals(eCooked.Normal))
                 {
                     OnCooker = false;
                     OnPlate = false;
@@ -211,7 +197,7 @@ public class Ingredeint : MonoBehaviour
                 }
                 break;
             case eCookingProcess.Chop_Cook:
-                if(cooking.Equals(eCooked.Normal))
+                if (cooking.Equals(eCooked.Normal))
                 {
                     OnCooker = false;
                     OnPlate = false;
@@ -227,7 +213,7 @@ public class Ingredeint : MonoBehaviour
                 {
                     OnCooker = true;
                     OnPlate = false;
-                }               
+                }
                 break;
         }
     }
@@ -250,22 +236,7 @@ public class Ingredeint : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        for (int i = 0; i < playerAnim.Length; i++)
-        {
-            if (playerAnim[i] != null)
-            {
-                if (playerAnim[i].gameObject.Equals(other.gameObject))
-                {
-                    playerAnim[i].SetTrigger("Finish");
-                    return;
-                }
-            }
 
-        }
-
-    }
 
     public void Die()
     {

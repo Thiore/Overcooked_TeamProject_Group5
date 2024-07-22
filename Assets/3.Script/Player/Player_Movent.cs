@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class Player_Movent : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float rotateSpeed = 380f;
+    [SerializeField] private float rotateSpeed = 160f;
     [SerializeField] private PlayerIntput playerInput;
 
     private Rigidbody player_rb;
@@ -15,9 +15,7 @@ public class Player_Movent : MonoBehaviour
     private Vector3 moveDirection;
 
     private Player_Ray playerRay;
-    private bool isJumping = false;
-    private Vector3 jumpvelocity = Vector3.zero;
-    
+    private bool isJumping = false; 
 
     private readonly int IsWalking = Animator.StringToHash("IsWalking");
 
@@ -60,7 +58,7 @@ public class Player_Movent : MonoBehaviour
     private void Move()
     {
         // 이동 전 회전을 주고 비교
-        moveDirection = new Vector3(playerInput.Rotate_Value, 0, playerInput.Move_Value) * moveSpeed * Time.deltaTime;
+        moveDirection = new Vector3(playerInput.Rotate_Value, 0, playerInput.Move_Value).normalized * moveSpeed * Time.deltaTime;
 
         if (moveDirection != Vector3.zero)
         {
@@ -68,7 +66,7 @@ public class Player_Movent : MonoBehaviour
             float angleDifference = Quaternion.Angle(transform.rotation, targetRotation);
 
             // 일정 각도 이상 차이나는 경우에만 회전
-            if (angleDifference > 0.3f)
+            if (angleDifference > 0.1f)
             {
                 float step = rotateSpeed * Time.deltaTime;
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, step);
@@ -77,7 +75,6 @@ public class Player_Movent : MonoBehaviour
         }
  
         player_rb.MovePosition(player_rb.position + moveDirection);
-
     }
 
     private void Jump()
@@ -91,7 +88,7 @@ public class Player_Movent : MonoBehaviour
         animator.SetBool(IsWalking, true);
 
         #region 정문Dash
-        /*
+         
         Vector3 endPos = player_rb.position + transform.forward * 2f;
         float elaspedTime = 0f;
 
@@ -99,30 +96,34 @@ public class Player_Movent : MonoBehaviour
         {    
             if(playerRay.ShotRayFront(out Vector3 hitPoint))
             {
-                endPos = hitPoint - transform.forward * 0.2f;
-                endPos.y = 0f;
-                break;
+                if(hitPoint != null)
+                {
+                    var dis = Vector3.Distance(player_rb.position, hitPoint);
+                    if(dis < 0.5f)
+                    {
+                        endPos = player_rb.position;
+                    }
+                }              
             }
 
             player_rb.MovePosition(Vector3.Lerp(player_rb.position, endPos,elaspedTime / 0.3f));
             elaspedTime += Time.deltaTime;
             yield return null;
-        }
-        player_rb.MovePosition(endPos);     
-        */
+        }   
+        
         #endregion
 
         #region 영훈Dash
-        Vector3 EndPos = playerRay.ShotRayFront();
+        //Vector3 EndPos = playerRay.ShotRayFront();
 
-        float DashDistance = Vector3.Distance(transform.position, EndPos);
-        while (DashDistance > 0.5f)
-        {
-            Debug.Log(DashDistance);
-            player_rb.MovePosition(player_rb.position + transform.forward * moveSpeed * 1.3f*Time.deltaTime);
-            DashDistance = Vector3.Distance(transform.position, EndPos);
-            yield return null;
-        }
+        //float DashDistance = Vector3.Distance(transform.position, EndPos);
+        //while (DashDistance > 0.5f)
+        //{
+        //    Debug.Log(DashDistance);
+        //    player_rb.MovePosition(player_rb.position + transform.forward * moveSpeed * 1.3f*Time.deltaTime);
+        //    DashDistance = Vector3.Distance(transform.position, EndPos);
+        //    yield return null;
+        //}
 
         #endregion
 

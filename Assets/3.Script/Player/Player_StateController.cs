@@ -61,41 +61,19 @@ public class Player_StateController : MonoBehaviour
             // 굽고 썰고 
             if (Input.GetKeyUp(KeyCode.LeftControl))
             {
-                if (!isChop)
-                {
-                    StartCoroutine(PlayerCookedChage());
-                }
+                StartCoroutine(PlayerCookedChage());
             }
-            else if (IsChop)
-            {
-                StopChopping();
-            }
+
         }
-
-
-        //// 스페이스바는 집을수 있는 사물들은 집어 올림(재료, 요리도구, 접시
-        //if (coroutine == null)
-        //{
-        //    if (Input.GetKey(KeyCode.Space))
-        //    {
-        //        coroutine = StartCoroutine(PlayerHodingChange());
-        //    }
-
-        //    //요리도구 상호작용
-        //    // 굽고 썰고 
-        //    if (Input.GetKeyUp(KeyCode.LeftControl))
-        //    {
-        //        StartCoroutine(PlayerCookedChage());
-        //    }
-        //}
     }
 
-    private void StopChopping()
+    private void OnTriggerExit(Collider other)
     {
-        isChop = false;
-        animator.SetTrigger("Finish");
+        if(other.transform.CompareTag("ChoppingBoard") && animator.GetCurrentAnimatorStateInfo(0).IsName("New_Chef@Chop"))
+        {
+            animator.SetTrigger("Finish");
+        }
     }
-
 
     private IEnumerator PlayerHodingChange(GameObject nearCount, GameObject nearob)
     {
@@ -198,8 +176,9 @@ public class Player_StateController : MonoBehaviour
                 if (counter.ChoppingBoard == null) // 카운터에 도마가 없는 곳이라면 
                 {
                     HandsOnOb.transform.SetParent(counter.transform);
-                    if (counter.CompareTag("Crate")) // 계속 박스 위가 아니라 가운데로 들어감 
+                    if (counter.transform.CompareTag("Crate")) // 계속 박스 위가 아니라 가운데로 들어감 
                     {
+                        Debug.Log("크레이트일때");
                         var boxcol = counter.GetComponent<Collider>();
                         var boxtop = boxcol.bounds.center + new Vector3(0, boxcol.bounds.extents.y, 0);
                         HandsOnOb.transform.position = boxtop;
@@ -224,6 +203,10 @@ public class Player_StateController : MonoBehaviour
                 animator.SetBool("IsTake", false);
                 HandsOnOb = null;
                 isHolding = false;
+            }
+            else if(counter.transform.CompareTag("Plate_Return"))
+            {
+                Debug.Log("드랍못함");
             }
             else // 카운터에 올라가 있는데 드랍하려고 하면 
             {
@@ -254,18 +237,24 @@ public class Player_StateController : MonoBehaviour
 
             // 동작만하고 실질적인 처리는 재료가?
             // 도마가 있는지, 도마 자식에 태그가 재료인 오브젝트가 있는지 + 재료 가 썰 수있는 boolean인지 
-            if (counter.ChoppingBoard != null && counter.ChoppingBoard.transform.GetChild(1).gameObject.CompareTag("Ingredients") /* 재료가 썰수있는지  */)
+            if (counter.ChoppingBoard != null)
             {
-                counter.ChoppingBoard.transform.GetChild(1).gameObject.transform.TryGetComponent(out Ingredeint ingre);
-                if (ingre != null && ingre.cooking.Equals(eCooked.Normal))
+                if (counter.ChoppingBoard.transform.childCount.Equals(2))
                 {
-                    animator.SetTrigger("Chop");
+                    if (counter.ChoppingBoard.transform.GetChild(1).gameObject.CompareTag("Ingredients") /* 재료가 썰수있는지  */)
+                    {
+                        counter.ChoppingBoard.transform.GetChild(1).gameObject.transform.TryGetComponent(out Ingredeint ingre);
+                        if (ingre != null && ingre.cooking.Equals(eCooked.Normal))
+                        {
+                            animator.SetTrigger("Chop");
+                        }
+                        // 재료 eCooked enum에서 받고 노말일때만 }
+                    }
                 }
-                // 재료 eCooked enum에서 받고 노말일때만 
             }
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return null;
     }
 
 
@@ -395,7 +384,10 @@ public class Player_StateController : MonoBehaviour
         animator.SetBool("IsTake", true);
         HandsOnOb = gameObject;
         nearcontroller.ChangeOriginEmission(HandsOnOb);
-        Destroy(HandsOnOb.transform.GetComponent<Rigidbody>());
+        if(HandsOnOb.transform.TryGetComponent(out Rigidbody rigi))
+        {
+          Destroy(rigi);
+        }
         HandsOnOb.transform.SetParent(Attachtransform);
         HandsOnOb.transform.rotation = Attachtransform.rotation;
         HandsOnOb.transform.position = Attachtransform.position;

@@ -16,7 +16,7 @@ public class CounterEmissionController : MonoBehaviour
     //카운터나 화구 등등 설치된거 검별 나중에 if || 추가하기 (태그를 나눠도 똑같이 queue로 검사하기 위해)
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Counter") || other.gameObject.CompareTag("Crate") || other.gameObject.CompareTag("TrashCan")/*||화구*/)
+        if (other.gameObject.CompareTag("Counter") || other.gameObject.CompareTag("Crate") || other.gameObject.CompareTag("TrashCan") || other.gameObject.transform.CompareTag("Plate_Return")/*||화구*/)
         {
             pickList.Add(other.gameObject);
             if (pickQue.Count.Equals(0) && pickList.Count.Equals(1))
