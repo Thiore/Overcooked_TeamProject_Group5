@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene("Arcade_Menu");
                 break;
             case 2:
-                SceneManager.LoadScene("Character_Menu");
+                SceneManager.LoadScene("BSJScene");
                 break;
             case 3:
                 SceneManager.LoadScene("Set_Menu");
