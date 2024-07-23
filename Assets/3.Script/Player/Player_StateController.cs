@@ -119,6 +119,7 @@ public class Player_StateController : MonoBehaviour
         // 근처 카운터가 있고 내가 집은 상태가 아니라면 
         if(isHolding)
         {
+            Debug.Log("홀딩");
             DropObject(nearCount, nearob);
             yield return new WaitForSeconds(0.3f);
         }
@@ -126,6 +127,7 @@ public class Player_StateController : MonoBehaviour
         {
             if (nearCount != null)
             {
+                Debug.Log("여긴 안대는데");
                 //카운터 위에 오브젝트가 있는지 없는지 확인 
                 var counter = nearCount.transform.GetComponent<CounterController>();
 
