@@ -36,6 +36,14 @@ public class TicketManager : MonoBehaviour
         UpdateResultUI();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameManager.Instance.LoadScene("Bus_Flag");
+        }
+    }
+
     // 결과 UI를 업데이트하는 메서드
     public void UpdateResultUI()
     {
@@ -47,7 +55,7 @@ public class TicketManager : MonoBehaviour
             DataManager.Instance.GetStageInformation(GameManager.Instance.stage_index).bestScore = currentScore;
             TotalScore.text = $"BEST Score !! {currentScore}"; // 총 점수 업데이트
         }
-        TitleText.text=$"{GameManager.Instance.stage_index}";
+        TitleText.text=$"Stage {GameManager.Instance.stage_index}";
         for (int i = 0; i < StarTexts.Length; i++)
         {
             StarTexts[i].text = targetScores[i].ToString();
