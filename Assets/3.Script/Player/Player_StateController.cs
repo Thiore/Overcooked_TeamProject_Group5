@@ -25,7 +25,7 @@ public class Player_StateController : MonoBehaviour
     [SerializeField] private Transform Attachtransform;
 
     //내가 들고 있는지 
-    private bool isHolding = false;
+    [SerializeField] private bool isHolding = false;
     private bool isChop = false;
 
     public bool IsHolding { get => isHolding; private set => isHolding = value; }
@@ -52,10 +52,11 @@ public class Player_StateController : MonoBehaviour
         nearcounter = emissionController.GetNearCounter();
         nearOb = nearcontroller.GetNearObject();
 
+        // 집고 놓는건 일반 코루틴 / 조리도구나 접시는 이벤트??? 고려
         // 스페이스바는 집을수 있는 사물들은 집어 올림(재료, 요리도구, 접시
         if (coroutine == null)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space))
             {
                 coroutine = StartCoroutine(PlayerHodingChange(nearcounter, nearOb));
             }
@@ -122,7 +123,6 @@ public class Player_StateController : MonoBehaviour
         {
             Debug.Log("홀딩");
             DropObject(nearCount, nearob);
-            yield return new WaitForSeconds(0.3f);
         }
         else 
         {
@@ -142,7 +142,6 @@ public class Player_StateController : MonoBehaviour
                             TakeHandObject(spawn.PickAnim());
                             Debug.Log("열기");
                             // 생성된 재료 오브젝트 바로 집는 메소드 추가 필요 
-                            yield return new WaitForSeconds(0.3f);
                         }
                     }
                     else
@@ -151,7 +150,6 @@ public class Player_StateController : MonoBehaviour
                         {
                             TakeHandObject(nearob);
                         }
-                        yield return new WaitForSeconds(0.3f);
                     }
 
                 }
@@ -177,8 +175,6 @@ public class Player_StateController : MonoBehaviour
                     counter.ChangePuton();
                     yield return new WaitForSeconds(0.5f);
                 }
-
-                yield return new WaitForSeconds(0.5f);
             }
             // 근처 카운터가 없다면(땅바닥이겟지)
             else
@@ -214,7 +210,7 @@ public class Player_StateController : MonoBehaviour
             {
                 if (counter.ChoppingBoard == null) // 카운터에 도마가 없는 곳이라면 
                 {
-                    if (counter.gameObject.CompareTag("Crate")) // 계속 박스 위가 아니라 가운데로 들어감 
+                    if (counter.gameObject.CompareTag("Crate"))
                     {
                         HandsOnOb.transform.SetParent(counter.transform);
                         var boxcol = counter.transform.GetComponent<BoxCollider>();
@@ -238,9 +234,6 @@ public class Player_StateController : MonoBehaviour
                 HandsOnOb.transform.rotation = Quaternion.identity;
                 counter.ChangePuton();
                 counter.PutOnOb = HandsOnOb;
-                animator.SetBool("IsTake", false);
-                HandsOnOb = null;
-                isHolding = false;
             }
             else if (counter.transform.CompareTag("Plate_Return"))
             {
@@ -258,10 +251,11 @@ public class Player_StateController : MonoBehaviour
             var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();
             rb.mass = 0.05f;
             rb.angularDrag = 0;
-            animator.SetBool("IsTake", false);
-            HandsOnOb = null;
-            isHolding = false;
         }
+
+        animator.SetBool("IsTake", false);
+        HandsOnOb = null;
+        isHolding = false;
     }
 
 
