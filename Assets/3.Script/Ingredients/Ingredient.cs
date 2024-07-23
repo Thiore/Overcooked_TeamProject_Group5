@@ -59,6 +59,7 @@ public class Ingredient : MonoBehaviour
 
     private Renderer Ingredient_renderer;
     private MeshFilter Ingredient_Mesh;
+    private MeshCollider Ingredient_Col;
 
     public eCooked cooking { get; private set; }
     public eIngredients myIngredients;
@@ -82,6 +83,7 @@ public class Ingredient : MonoBehaviour
     {
         TryGetComponent(out Ingredient_renderer);
         TryGetComponent(out Ingredient_Mesh);
+        TryGetComponent(out Ingredient_Col);
         if (JointBone.Length.Equals(0))
         {
             CopyBone = JointBone;
@@ -197,6 +199,7 @@ public class Ingredient : MonoBehaviour
 
         Ingredient_Mesh.mesh = Change_Mesh[CookEnum];
         Ingredient_renderer.material = Change_Material[CookEnum];
+        Ingredient_Col.sharedMesh = Change_Mesh[CookEnum];
         OnIngredients();
 
     }

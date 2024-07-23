@@ -282,7 +282,7 @@ public class Player_StateController : MonoBehaviour
                     if (counter.ChoppingBoard.transform.GetChild(1).gameObject.CompareTag("Ingredients") /* 재료가 썰수있는지  */)
                     {
                         counter.ChoppingBoard.transform.GetChild(1).gameObject.transform.TryGetComponent(out Ingredient ingre);
-                        if (ingre != null && ingre.cooking.Equals(eCooked.Normal))
+                        if (ingre != null && ingre.OnChopping)
                         {
                             animator.SetTrigger("Chop");
                         }

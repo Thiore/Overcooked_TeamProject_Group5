@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 99677dee15b3d3740a09dad841718a48, type: 2}
+  - {fileID: 2100000, guid: 4d2c7e00d097ad74bb3ac9d15bef01bf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4758313108777045753}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 043d3b289cf154846b1d591a1156e6d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 31942c03d54f6d4448d3a3383325c09c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   crate: {fileID: 0}
@@ -149,4 +149,5 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 4d2c7e00d097ad74bb3ac9d15bef01bf, type: 2}
   CotrolBone: []
   JointBone: []
+  myIngredients: 0
   Chop_Script: 0
