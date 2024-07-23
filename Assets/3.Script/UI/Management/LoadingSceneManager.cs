@@ -5,56 +5,44 @@ using UnityEngine.UI;
 
 public class LoadingSceneManager : MonoBehaviour
 {
-    public static LoadingSceneManager Instance { get; private set; }
     public static string nextScene;
     private Text Title;
     private Text Complete_Text;
+    private Image Tutorial;
+    private Image Shift;
 
-    private void Awake()
-    {
-        // 싱글톤 패턴 구현
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
-        }
-    }
 
     private void Start()
+    {
+        InitializeUI();
+        StartCoroutine(LoadScene());
+    }
+
+    private void InitializeUI()
     {
         // Title과 Complete_Text 변수 할당
         Title = GameObject.Find("Title").GetComponent<Text>();
         Complete_Text = GameObject.Find("Complete_Text").GetComponent<Text>();
+        Tutorial = GameObject.Find("Tutorial").GetComponent<Image>();
+        Shift = GameObject.Find("Shift").GetComponent<Image>();
 
-        if (Title != null)
+
+        if (Title != null && Tutorial != null && Shift != null)
         {
-            if (GameManager.Instance.stage_index != 0) { 
+            if (GameManager.Instance.stage_index != 0)
+            {
                 Title.text = $"Stage {GameManager.Instance.stage_index}";
+                Debug.Log($"Stage{GameManager.Instance.stage_index}_Tutorial");
+                Tutorial.sprite = Resources.Load<Sprite>($"Stage{GameManager.Instance.stage_index}_Tutorial");
+                Shift.gameObject.SetActive(false);
             }
             else
             {
                 Title.text = "L Shift to Switch";
+                Tutorial.sprite = Resources.Load<Sprite>("Default_Tutorial");
+                Shift.gameObject.SetActive(true);
             }
         }
-        else
-        {
-            Debug.LogError("Title 오브젝트를 찾을 수 없습니다.");
-        }
-
-        if (Complete_Text != null)
-        {
-            Complete_Text.gameObject.SetActive(false);
-        }
-        else
-        {
-            Debug.LogError("Complete_Text 오브젝트를 찾을 수 없습니다.");
-        }
-
-        StartCoroutine(LoadScene());
     }
 
     public static void LoadScene(string sceneName)
@@ -66,6 +54,7 @@ public class LoadingSceneManager : MonoBehaviour
     private IEnumerator LoadScene()
     {
         yield return null;
+
         AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
         op.allowSceneActivation = false;
 
@@ -84,6 +73,7 @@ public class LoadingSceneManager : MonoBehaviour
                 {
                     yield return null;
                 }
+
                 // Space 키 입력 후 씬 활성화
                 op.allowSceneActivation = true;
             }
