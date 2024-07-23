@@ -47,33 +47,6 @@ public class GameManager : MonoBehaviour
         LoadingSceneManager.LoadScene(SceneName);
     }
 
-    // 비동기 로드 코루틴
-    private IEnumerator LoadSceneCoroutine(int index)
-    {
-        AsyncOperation asyncLoad = null;
-        switch (index)
-        {
-            case 0:
-                asyncLoad = SceneManager.LoadSceneAsync("MangoScene");
-                break;
-            case 1:
-                asyncLoad = SceneManager.LoadSceneAsync("MenuScene");
-                break;
-        }
-
-        if (asyncLoad != null)
-        {
-            while (!asyncLoad.isDone)
-            {
-                yield return null;
-            }
-
-            pauseScreen = GameObject.Find("Pause_Screen");
-            isPause = false;
-            isPlaying = true;
-        }
-    }
-
     // 게임 씬으로 진입하는 메서드
     public void EnterGame()
     {
@@ -141,7 +114,7 @@ public class GameManager : MonoBehaviour
         switch (button_index)
         {
             case 0:
-                LoadingSceneManager.LoadScene("Bus_Flag");
+                LoadingSceneManager.LoadScene("BSJScene");
                 break;
             case 1:
                 LoadingSceneManager.LoadScene("Arcade_Menu");

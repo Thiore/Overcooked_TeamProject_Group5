@@ -40,7 +40,8 @@ public class TicketManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameManager.Instance.LoadScene("Bus_Flag");
+            GameManager.Instance.stage_index = 0;
+            GameManager.Instance.LoadScene("BSJScene");
         }
     }
 
