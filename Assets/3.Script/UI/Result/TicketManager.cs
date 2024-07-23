@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TicketManager : MonoBehaviour
 {
@@ -34,6 +35,15 @@ public class TicketManager : MonoBehaviour
 
         // UI 업데이트
         UpdateResultUI();
+    }
+
+    //임시로 만들어두겠습니다. (승주)
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            SceneManager.LoadScene("BSJScene");
+        }
     }
 
     // 결과 UI를 업데이트하는 메서드
