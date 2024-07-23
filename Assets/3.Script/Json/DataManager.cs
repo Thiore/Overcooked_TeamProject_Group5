@@ -35,7 +35,7 @@ public class DataManager : MonoBehaviour
             return instance;
         }
     }
-
+    
     private void Recipe_DataManager()
     {
         //·¹½ÃÇÇ
