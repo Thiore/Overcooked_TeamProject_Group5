@@ -23,6 +23,7 @@ public class Plate_Spawn : MonoBehaviour
         for(int i = 0;i<plates.Length;i++)
         {
             plates[i] = Instantiate(PlatePrefabs);
+            plates[i].gameObject.name = "Plate";
             plates[i].SetWash(isWash);
             plates[i].transform.SetParent(Set_Pos[i]);
             if(Set_Pos[i] == plateReturn.transform)
@@ -31,7 +32,8 @@ public class Plate_Spawn : MonoBehaviour
             }
             else
             {
-                CounterController counter = plates[i].transform.GetComponentInParent<CounterController>();
+                CounterController counter = 
+                    plates[i].transform.GetComponentInParent<CounterController>();
                 counter.ChangePuton();
                 counter.PutOnOb = plates[i].gameObject;
             }
@@ -53,18 +55,14 @@ public class Plate_Spawn : MonoBehaviour
         {
             if(plate == plates[i].gameObject)
             {
-                for (int j = 0; j < plate.transform.childCount; j++)
+                Transform childobj = plate.transform.GetChild(0);
+                if (childobj.gameObject.activeSelf)
                 {
-                    Transform childobj = plate.transform.GetChild(i);
-                    if (childobj.gameObject.activeSelf)
-                    {
-                        CheckRecipe.CheckRecipe($"{childobj.gameObject.name}_Food");
-                        DestroyPlateNum.Enqueue(i);
-                        plates[i].gameObject.SetActive(false);
-                        return;
-                    }
+                    CheckRecipe.CheckRecipe($"{childobj.gameObject.name}_Food");
+                    DestroyPlateNum.Enqueue(i);
+                    plates[i].gameObject.SetActive(false);
+                    return;
                 }
-                
             }
         }
     }
