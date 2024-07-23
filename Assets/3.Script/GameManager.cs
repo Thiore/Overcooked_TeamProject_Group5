@@ -78,21 +78,18 @@ public class GameManager : MonoBehaviour
         {
             ScoreManager.Instance.tip += 1;
         }
-        Debug.Log("AllCorrect_Recipe 호출");
     }
 
     public void Incorrect_Recipe()
     {
         ScoreManager.Instance.tip = 1;
         ScoreManager.Instance.AddScore(10);
-        Debug.Log("InCorrect_Recipe 호출");
     }
 
     public void Wrong_Recipe()
     {
         ScoreManager.Instance.SubScore(10);
         ScoreManager.Instance.tip = 1;
-        Debug.Log("Wrong_Recipe 호출");
     }
 
     //Game Load

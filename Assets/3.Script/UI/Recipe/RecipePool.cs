@@ -202,6 +202,10 @@ public class RecipePool : MonoBehaviour
         }
         Debug.Log(activeObjects[index].name);
         StartCoroutine(DeactivateAfterDelay(activeObjects[index], 0.5f));
+        foreach (Image img in childImages)
+        {
+            img.color = Color.white;
+        }
         GameManager.Instance.Incorrect_Recipe();
     }
     private IEnumerator Wrong()
