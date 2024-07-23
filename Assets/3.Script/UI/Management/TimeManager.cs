@@ -40,7 +40,7 @@ public class TimeManager : MonoBehaviour
                 tipTime = 0f;
             }
 
-            // 남은 시간이 0 이하일 경우 게임 종료
+            // 남은 시간이 0 이하일 경우 게임 종료 / //임시로 만들어두겠습니다. (승주)
             if (remainingTime <= 0)
             {
                 playTime = 0;

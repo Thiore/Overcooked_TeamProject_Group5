@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     public bool isPlaying = true; // 게임 진행 상태
     public GameObject pauseScreen; // 일시정지 화면
     public int isInputEnabled = 0; // 입력 가능 상태
-    
+
+    public WorldState worldState;
 
     private void Awake()
     {
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
     {
         isPause = false;
         isPlaying = true;
+        worldState = FindObjectOfType<WorldState>();
     }
 
     private void Update()
@@ -124,6 +126,7 @@ public class GameManager : MonoBehaviour
     //Game Load
     public void LoadGame(int stage_index)
     {
+        worldState.SaveState();
         this.stage_index = stage_index;
         switch (stage_index)
         {

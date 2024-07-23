@@ -8,6 +8,7 @@ public class BusController : MonoBehaviour
     private int stage_index;
     private FlagUIController flag_ui;
     
+
     private void OnCollisionStay(Collision col)
     {
         if (col.gameObject.name.Contains("Flag"))
@@ -19,6 +20,7 @@ public class BusController : MonoBehaviour
             {
                 GameManager.Instance.stage_index = stage_index;
                 GameManager.Instance.LoadGame(stage_index);
+                
             }
         }
     }
