@@ -18,6 +18,9 @@ public class Player_StateController : MonoBehaviour
     private GameObject nearcounter;
     //내가 집은 오브젝트 
     private GameObject HandsOnOb;
+
+    public GameObject HandsOnObject {  get => HandsOnOb; }
+
     //이건 인스펙터에서 셰프 밑에 스켈레톤 Attach 넣어 사용하기
     [SerializeField] private Transform Attachtransform;
 
@@ -52,19 +55,25 @@ public class Player_StateController : MonoBehaviour
         // 스페이스바는 집을수 있는 사물들은 집어 올림(재료, 요리도구, 접시
         if (coroutine == null)
         {
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 coroutine = StartCoroutine(PlayerHodingChange(nearcounter, nearOb));
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftControl))
+            if (Input.GetKeyUp(KeyCode.LeftControl))
             {
                 //던지기 조준 
                 if (isHolding && HandsOnOb.CompareTag("Ingredients"))
                 {
+                    //회전하는건 Movement에. 던지는건 여기에
                     Debug.Log("던지기");
+                    ThrowIngredients();
                 }
+            }
 
+
+            if(Input.GetKeyDown(KeyCode.LeftControl))
+            {
                 //요리도구 상호작용
                 // 굽고 썰고 
                 if (!IsHolding)
@@ -72,6 +81,7 @@ public class Player_StateController : MonoBehaviour
                     StartCoroutine(PlayerCookedChage());
                 }
             }
+            
 
         }
     }
@@ -85,6 +95,18 @@ public class Player_StateController : MonoBehaviour
         }
     }
 
+    private void ThrowIngredients()
+    {
+        HandsOnOb.transform.SetParent(null);
+        var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();
+        rb.mass = 0.2f;
+        rb.angularDrag = 0;
+        rb.AddForce(transform.forward * 100f);
+        animator.SetBool("IsTake", false);
+        HandsOnOb = null;
+        isHolding = false;
+    }
+
 
     private IEnumerator PlayerHodingChange(GameObject nearCount, GameObject nearob)
     {
@@ -95,7 +117,12 @@ public class Player_StateController : MonoBehaviour
         }
 
         // 근처 카운터가 있고 내가 집은 상태가 아니라면 
-        if (!isHolding)
+        if(isHolding)
+        {
+            DropObject(nearCount, nearob);
+            yield return new WaitForSeconds(0.3f);
+        }
+        else 
         {
             if (nearCount != null)
             {
@@ -167,11 +194,6 @@ public class Player_StateController : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            DropObject(nearCount, nearob);
-            yield return new WaitForSeconds(0.3f);
-        }
 
         coroutine = null;
         yield return new WaitForSeconds(0.3f);
@@ -226,6 +248,7 @@ public class Player_StateController : MonoBehaviour
         }
         else // 근처에 카운터 없으면 땅에 떨군다는 
         {
+            Debug.Log("emfdjdhsk");
             HandsOnOb.transform.SetParent(null);
             var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();
             rb.mass = 0.05f;
