@@ -18,7 +18,7 @@ public class MenuController : MonoBehaviour
     private Button[] buttons;
     private int currentButtonIndex = 0;
 
-    private Animator camera;
+    private Animator camera_ani;
 
     private void Start()
     {
@@ -35,7 +35,7 @@ public class MenuController : MonoBehaviour
         // 첫 번째 버튼 선택
         SelectButton(currentButtonIndex);
 
-        camera = GameObject.Find("Cameraman").GetComponent<Animator>();
+        camera_ani = GameObject.Find("Cameraman").GetComponent<Animator>();
 
         characterButtonPanel = GameObject.Find("Character_Button_Panel");
         // Character_Button 패널 비활성화
@@ -87,7 +87,7 @@ public class MenuController : MonoBehaviour
     {
         if (currentButtonIndex == 3)
         {
-            camera.SetTrigger("Zoom");
+            camera_ani.SetTrigger("Zoom");
             // Character_Button 패널 활성화
             characterButtonPanel.SetActive(true);
             // MenuController 입력 비활성화
@@ -104,6 +104,6 @@ public class MenuController : MonoBehaviour
     {
         characterButtonPanel.SetActive(false);
         GameManager.Instance.isInputEnabled -=1;
-        camera.SetTrigger("GameStart");
+        camera_ani.SetTrigger("GameStart");
     }
 }

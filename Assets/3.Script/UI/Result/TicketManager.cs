@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class TicketManager : MonoBehaviour
 {
@@ -37,12 +36,12 @@ public class TicketManager : MonoBehaviour
         UpdateResultUI();
     }
 
-    //임시로 만들어두겠습니다. (승주)
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene("BSJScene");
+            GameManager.Instance.stage_index = 0;
+            GameManager.Instance.LoadScene("BSJScene");
         }
     }
 
@@ -51,7 +50,13 @@ public class TicketManager : MonoBehaviour
     {
         int[] targetScores = ScoreManager.Instance.TargetScore; // 목표 점수 배열
         int currentScore = ScoreManager.Instance.score; // 현재 점수
-        TitleText.text=$"{GameManager.Instance.stage_index}";
+        TotalScore.text = $"{currentScore}"; // 총 점수 업데이트
+        if (currentScore > DataManager.Instance.GetStageInformation(GameManager.Instance.stage_index).bestScore)
+        {
+            DataManager.Instance.GetStageInformation(GameManager.Instance.stage_index).bestScore = currentScore;
+            TotalScore.text = $"BEST Score !! {currentScore}"; // 총 점수 업데이트
+        }
+        TitleText.text=$"Stage {GameManager.Instance.stage_index}";
         for (int i = 0; i < StarTexts.Length; i++)
         {
             StarTexts[i].text = targetScores[i].ToString();
@@ -67,6 +72,5 @@ public class TicketManager : MonoBehaviour
         int subScore = ScoreManager.Instance.subScore; // 차감된 점수
         ResultSumScore.text = $"{addScore}\n{tipScore}\n{subScore}";
 
-        TotalScore.text = $"{currentScore}"; // 총 점수 업데이트
     }
 }
