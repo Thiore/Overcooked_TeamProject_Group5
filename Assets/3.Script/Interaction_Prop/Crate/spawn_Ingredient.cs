@@ -6,9 +6,9 @@ public class spawn_Ingredient : MonoBehaviour
 {
     private eIngredients Ingredient_enum;
 
-    [SerializeField] private GameObject[] ingredient_prefab;
+    [SerializeField] private Ingredient[] ingredient_prefab;
 
-    private GameObject myIngredient;
+    private Ingredient myIngredient;
     private Queue<Ingredient> ingredient_queue = new Queue<Ingredient>();
     private Player_StateController player;
 
@@ -56,8 +56,9 @@ public class spawn_Ingredient : MonoBehaviour
         }
         else
         {
-            Ingredient newobj = Instantiate(myIngredient.GetComponent<Ingredient>());
-            newobj.SetCookProcess(info.CookingProcess, info.Chop_Anim,info.Ingredients);
+            Ingredient newobj = Instantiate(myIngredient);
+            newobj.SetCookProcess(info.CookingProcess, info.Chop_Anim, info.Ingredients);
+            
             newobj.crate = this;
             return newobj.gameObject;
         }

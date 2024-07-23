@@ -13,13 +13,13 @@ public class ButtonController : MonoBehaviour
 
     public void Restart_Click()
     {
-        GameManager.Instance.LoadScene(0);
+        GameManager.Instance.LoadScene("MangoScene");
         pauseScreen.SetActive(false);
     }
 
     public void Quit_Click()
     {
-        GameManager.Instance.LoadScene(1);
+        GameManager.Instance.LoadScene("Bus_Flag");
         pauseScreen.SetActive(false);
     }
 

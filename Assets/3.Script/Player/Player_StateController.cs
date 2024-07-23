@@ -280,6 +280,7 @@ public class Player_StateController : MonoBehaviour
                     {
                         Debug.Log("재료 태그  파악했을때");
                         counter.ChoppingBoard.transform.GetChild(1).gameObject.transform.TryGetComponent(out Ingredient ingre);
+                        
                         if (ingre != null && ingre.OnChopping)
                         {
                             Debug.Log("애니멩션");

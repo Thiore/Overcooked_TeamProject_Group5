@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     public bool isPlaying = true; // 게임 진행 상태
     public GameObject pauseScreen; // 일시정지 화면
     public int isInputEnabled = 0; // 입력 가능 상태
-    
+    public WorldState worldState;
+
 
     private void Awake()
     {
@@ -41,36 +42,9 @@ public class GameManager : MonoBehaviour
     }
 
     // 특정 씬을 비동기 로드하는 메서드
-    public void LoadScene(int index)
+    public void LoadScene(string SceneName)
     {
-        StartCoroutine(LoadSceneCoroutine(index));
-    }
-
-    // 비동기 로드 코루틴
-    private IEnumerator LoadSceneCoroutine(int index)
-    {
-        AsyncOperation asyncLoad = null;
-        switch (index)
-        {
-            case 0:
-                asyncLoad = SceneManager.LoadSceneAsync("MangoScene");
-                break;
-            case 1:
-                asyncLoad = SceneManager.LoadSceneAsync("MenuScene");
-                break;
-        }
-
-        if (asyncLoad != null)
-        {
-            while (!asyncLoad.isDone)
-            {
-                yield return null;
-            }
-
-            pauseScreen = GameObject.Find("Pause_Screen");
-            isPause = false;
-            isPlaying = true;
-        }
+        LoadingSceneManager.LoadScene(SceneName);
     }
 
     // 게임 씬으로 진입하는 메서드
@@ -124,11 +98,12 @@ public class GameManager : MonoBehaviour
     //Game Load
     public void LoadGame(int stage_index)
     {
+        //worldState.SaveState();
         this.stage_index = stage_index;
         switch (stage_index)
         {
             case 1:
-                SceneManager.LoadScene("MangoScene");
+                LoadingSceneManager.LoadScene("MangoScene");
                 break;
         }
     }
@@ -139,10 +114,10 @@ public class GameManager : MonoBehaviour
         switch (button_index)
         {
             case 0:
-                SceneManager.LoadScene("Bus_Flag");
+                LoadingSceneManager.LoadScene("BSJScene");
                 break;
             case 1:
-                SceneManager.LoadScene("Arcade_Menu");
+                LoadingSceneManager.LoadScene("Arcade_Menu");
                 break;
             case 2:
                 SceneManager.LoadScene("BSJScene");
