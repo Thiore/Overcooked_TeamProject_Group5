@@ -41,6 +41,7 @@ public class Character_Btn_Controller : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.Space))
             {
+
                 FindObjectOfType<MenuController>().CloseCharacterButtonPanel();
             }
         }
