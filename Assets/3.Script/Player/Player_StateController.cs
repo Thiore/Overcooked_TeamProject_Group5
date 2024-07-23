@@ -62,10 +62,7 @@ public class Player_StateController : MonoBehaviour
                 //던지기 조준 
                 if (isHolding && HandsOnOb.CompareTag("Ingredients"))
                 {
-                    if (Input.GetKeyDown(KeyCode.LeftControl))
-                    {
-
-                    }
+                    Debug.Log("던지기");
                 }
 
                 //요리도구 상호작용
@@ -83,7 +80,8 @@ public class Player_StateController : MonoBehaviour
     {
         if (other.transform.CompareTag("ChoppingBoard") && animator.GetCurrentAnimatorStateInfo(0).IsName("New_Chef@Chop"))
         {
-            animator.SetTrigger("Finish");
+            animator.SetBool("IsWalking", true);
+            animator.SetBool("IsWalking", false);
         }
     }
 
@@ -187,19 +185,21 @@ public class Player_StateController : MonoBehaviour
             var counter = nearcounter.transform.GetComponent<CounterController>();
             if (!counter.IsPutOn) // 카운터에 올라간게 없다면  
             {
-                if (counter.gameObject.CompareTag("Crate")) // 계속 박스 위가 아니라 가운데로 들어감 
-                {
-                    HandsOnOb.transform.SetParent(counter.transform);
-                    //var boxcol = counter.transform.GetComponent<BoxCollider>();
-                    //Vector3 boxtop = boxcol.bounds.center + new Vector3(0, boxcol.bounds.size.y + 0.5f, 0);
-                    var boxtop = Vector3.up * (counter.transform.localScale.y / 2f + HandsOnOb.transform.localScale.y / 2f);
-                    HandsOnOb.transform.localPosition = boxtop;
-                }
-
                 if (counter.ChoppingBoard == null) // 카운터에 도마가 없는 곳이라면 
                 {
-                    HandsOnOb.transform.SetParent(counter.transform);
-                    HandsOnOb.transform.position = counter.transform.position + new Vector3(0, 0.1f, 0);
+                    if (counter.gameObject.CompareTag("Crate")) // 계속 박스 위가 아니라 가운데로 들어감 
+                    {
+                        HandsOnOb.transform.SetParent(counter.transform);
+                        var boxcol = counter.transform.GetComponent<BoxCollider>();
+                        Vector3 boxtop = boxcol.bounds.center + new Vector3(0, boxcol.bounds.extents.y, 0);
+                        HandsOnOb.transform.position = boxtop;
+                    }
+                    else
+                    {
+                        HandsOnOb.transform.SetParent(counter.transform);
+                        HandsOnOb.transform.position = counter.transform.position + new Vector3(0, 0.1f, 0);
+                    }
+
                 }
                 else // 도마가 있다면 
                 {
