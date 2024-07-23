@@ -33,11 +33,11 @@ public class Bus_MV : MonoBehaviour
     {
         Walking();
 
-        Debug.DrawRay(transform.position, transform.forward * 3f, Color.red);
-        if (Input.GetKeyDown(KeyCode.V) && isJumping.Equals(false))
-        {
-            Jump();
-        }
+        //Debug.DrawRay(transform.position, transform.forward * 3f, Color.red);
+        //if (Input.GetKeyDown(KeyCode.V) && isJumping.Equals(false))
+        //{
+        //    Jump();
+        //}
 
         player_rb.angularVelocity = Vector3.zero;
         player_rb.velocity = Vector3.zero;
@@ -80,55 +80,55 @@ public class Bus_MV : MonoBehaviour
 
     }
 
-    private void Jump()
-    {
-        StartCoroutine(Jump_co());
-    }
+    //private void Jump()
+    //{
+    //    StartCoroutine(Jump_co());
+    //}
 
-    private IEnumerator Jump_co()
-    {
-        isJumping = true;
-        //animator.SetBool(IsWalking, true);
+    //private IEnumerator Jump_co()
+    //{
+    //    isJumping = true;
+    //    //animator.SetBool(IsWalking, true);
 
-        #region Á¤¹®Dash
-        /*
-        Vector3 endPos = player_rb.position + transform.forward * 2f;
-        float elaspedTime = 0f;
+    //    #region Á¤¹®Dash
+    //    /*
+    //    Vector3 endPos = player_rb.position + transform.forward * 2f;
+    //    float elaspedTime = 0f;
 
-        while (elaspedTime < 0.3f)
-        {    
-            if(playerRay.ShotRayFront(out Vector3 hitPoint))
-            {
-                endPos = hitPoint - transform.forward * 0.2f;
-                endPos.y = 0f;
-                break;
-            }
+    //    while (elaspedTime < 0.3f)
+    //    {    
+    //        if(playerRay.ShotRayFront(out Vector3 hitPoint))
+    //        {
+    //            endPos = hitPoint - transform.forward * 0.2f;
+    //            endPos.y = 0f;
+    //            break;
+    //        }
 
-            player_rb.MovePosition(Vector3.Lerp(player_rb.position, endPos,elaspedTime / 0.3f));
-            elaspedTime += Time.deltaTime;
-            yield return null;
-        }
-        player_rb.MovePosition(endPos);     
-        */
-        #endregion
+    //        player_rb.MovePosition(Vector3.Lerp(player_rb.position, endPos,elaspedTime / 0.3f));
+    //        elaspedTime += Time.deltaTime;
+    //        yield return null;
+    //    }
+    //    player_rb.MovePosition(endPos);     
+    //    */
+    //    #endregion
 
-        #region ¿µÈÆDash
-        Vector3 EndPos = playerRay.ShotRayFront();
+    //    //#region ¿µÈÆDash
+    //    //Vector3 EndPos = playerRay.ShotRayFront();
 
-        float DashDistance = Vector3.Distance(transform.position, EndPos);
-        while (DashDistance > 0.5f)
-        {
-            Debug.Log(DashDistance);
-            player_rb.MovePosition(player_rb.position + transform.forward * moveSpeed * 1.3f * Time.deltaTime);
-            DashDistance = Vector3.Distance(transform.position, EndPos);
-            yield return null;
-        }
+    //    //float DashDistance = Vector3.Distance(transform.position, EndPos);
+    //    //while (DashDistance > 0.5f)
+    //    //{
+    //    //    Debug.Log(DashDistance);
+    //    //    player_rb.MovePosition(player_rb.position + transform.forward * moveSpeed * 1.3f * Time.deltaTime);
+    //    //    DashDistance = Vector3.Distance(transform.position, EndPos);
+    //    //    yield return null;
+    //    //}
 
-        #endregion
+    //    //#endregion
 
-        //animator.SetBool(IsWalking, false);
-        isJumping = false;
-    }
+    //    //animator.SetBool(IsWalking, false);
+    //    isJumping = false;
+    //}
 
     
 }
