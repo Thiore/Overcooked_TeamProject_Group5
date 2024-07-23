@@ -21,7 +21,7 @@ public class ShutterControll : MonoBehaviour
             Debug.Log("´­¸²");
             shutter_ani.SetTrigger("Open");
             camera_ani.SetTrigger("GameStart");
-            GameManager.Instance.isInputEnabled = true;
+            GameManager.Instance.isInputEnabled +=1;
         }
         else
         {

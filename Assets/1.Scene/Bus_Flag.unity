@@ -129689,9 +129689,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4373457227679807809}
+  - component: {fileID: 4033664517061239806}
   - component: {fileID: 4033664517061239805}
   - component: {fileID: 4033664517061239804}
-  - component: {fileID: 4033664517061239806}
   m_Layer: 0
   m_Name: Sample_Flag
   m_TagString: Untagged
@@ -129708,10 +129708,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4033664517061239803}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ef4c07fee0d4fe488794a4bd5a441aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 909bbac4e9018264793c871f4b25b2fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stage_index: 1
 --- !u!114 &4033664517061239805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129721,9 +129720,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4033664517061239803}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03f78f36edb86a644bdff300953a57d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c628c5868521034f823d2e794f9a846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stage_index: 1
 --- !u!136 &4033664517061239806
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -130936,7 +130936,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7591072853530458982}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 801063bc8475ee34b80df2b1238ed4cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 035d1f18d3eee8e48a7a94ba88b6575b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &7591072853530459002
