@@ -1,8 +1,41 @@
 fileFormatVersion: 2
-guid: 7ce4a63da5dd3114887a0e2487910e3f
+guid: 7d59deefa4ce4174fbcf3abd8c6e9f38
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 5528920237007543721
+    second: FrontEnd_MapVan_01_LandIdle
+  - first:
+      74: -1116936025486819499
+    second: FrontEnd_MapVan_02_LandToSea
+  - first:
+      74: -1785728144269051550
+    second: FrontEnd_MapVan_03_Sea_Stationary
+  - first:
+      74: -890088468647926815
+    second: FrontEnd_MapVan_04_SeaToLand
+  - first:
+      74: -4695266751632940290
+    second: FrontEnd_MapVan_05_LandToAir
+  - first:
+      74: 4403955157192426025
+    second: FrontEnd_MapVan_06_AirStationary
+  - first:
+      74: 7335836469850641609
+    second: FrontEnd_MapVan_07_AirToLand
+  - first:
+      74: -1917929422895458805
+    second: FrontEnd_MapVan_06_AirMoving
+  - first:
+      74: -5840067283507355651
+    second: FrontEnd_MapVan_03_Sea_Moving
+  - first:
+      74: 855737585340964385
+    second: FrontEnd_MapVan_08_SeaToAir
+  - first:
+      74: 8049614871154825054
+    second: FrontEnd_MapVan_09_AirToSea
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -14,7 +47,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    motionNodeName: 
+    motionNodeName: <Root Transform>
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
@@ -23,7 +56,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -31,7 +64,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1

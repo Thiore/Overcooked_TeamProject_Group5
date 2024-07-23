@@ -175,6 +175,7 @@ public class Player_StateController : MonoBehaviour
                     yield return new WaitForSeconds(0.5f);
                 }
 
+                yield return new WaitForSeconds(0.5f);
             }
             // 근처 카운터가 없다면(땅바닥이겟지)
             else
@@ -193,6 +194,7 @@ public class Player_StateController : MonoBehaviour
                     yield return new WaitForSeconds(0.3f);
                 }
             }
+            yield return new WaitForSeconds(0.5f);
         }
 
         coroutine = null;

@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public bool isPause = false; // 일시정지 상태
     public bool isPlaying = true; // 게임 진행 상태
     public GameObject pauseScreen; // 일시정지 화면
-    public bool isInputEnabled = false; // 입력 가능 상태
+    public int isInputEnabled = 0; // 입력 가능 상태
     
 
     private void Awake()
@@ -121,8 +121,10 @@ public class GameManager : MonoBehaviour
         Debug.Log("Wrong_Recipe 호출");
     }
 
+    //Game Load
     public void LoadGame(int stage_index)
     {
+        this.stage_index = stage_index;
         switch (stage_index)
         {
             case 1:
@@ -131,4 +133,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //IntroScene Button Onclick Method
+    public void Menu_Button(int button_index)
+    {
+        switch (button_index)
+        {
+            case 0:
+                SceneManager.LoadScene("Bus_Flag");
+                break;
+            case 1:
+                SceneManager.LoadScene("Arcade_Menu");
+                break;
+            case 2:
+                SceneManager.LoadScene("BSJScene");
+                break;
+            case 3:
+                SceneManager.LoadScene("Set_Menu");
+                break;
+            default:
+                return;
+        }
+    }
 }
