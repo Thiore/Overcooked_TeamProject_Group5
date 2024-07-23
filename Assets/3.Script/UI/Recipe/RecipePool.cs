@@ -125,6 +125,11 @@ public class RecipePool : MonoBehaviour
         {
             GameObject obj = objectPool[0]; // 리스트의 첫 번째 오브젝트 가져오기
             objectPool.RemoveAt(0); // 리스트에서 제거
+            Image[] childImages = obj.GetComponentsInChildren<Image>();
+            foreach (Image img in childImages)
+            {
+                img.color = Color.white;
+            }
             obj.SetActive(true); // 오브젝트 활성화
             RectTransform rectTransform = obj.GetComponent<RectTransform>();
             rectTransform.anchoredPosition = new Vector2(recipePoolPanel.rect.width / 2 + rectTransform.rect.width / 2, 0); // 오브젝트 위치 설정
@@ -202,10 +207,7 @@ public class RecipePool : MonoBehaviour
         }
         Debug.Log(activeObjects[index].name);
         StartCoroutine(DeactivateAfterDelay(activeObjects[index], 0.5f));
-        foreach (Image img in childImages)
-        {
-            img.color = Color.white;
-        }
+        
         GameManager.Instance.Incorrect_Recipe();
     }
     private IEnumerator Wrong()

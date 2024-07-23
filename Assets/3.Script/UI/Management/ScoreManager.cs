@@ -62,10 +62,6 @@ public class ScoreManager : MonoBehaviour
         addScoreCount = 0;
         subScoreCount = 0;
         subScore = 0;
-        for (int i = 0; i < TargetScore.Length; i++)
-        {
-            TargetScore[i] = 0;
-        }
     }
 
     public void UpdateTargetScore()
