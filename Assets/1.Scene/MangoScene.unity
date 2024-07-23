@@ -806,9 +806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stage_index: 0
-  ScoreText: {fileID: 0}
-  TipText: {fileID: 0}
-  ScoreAni: {fileID: 0}
+  score_ui: {fileID: 0}
   TargetScore: 000000000000000000000000
   TotalAddScore: 0
 --- !u!4 &337462932
@@ -1070,6 +1068,7 @@ GameObject:
   - component: {fileID: 489210811}
   - component: {fileID: 489210810}
   - component: {fileID: 489210809}
+  - component: {fileID: 489210813}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1165,6 +1164,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &489210813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489210808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f0d24ba889ebe042b31a027457f2a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScoreAni: {fileID: 0}
 --- !u!1 &628640050
 GameObject:
   m_ObjectHideFlags: 0
@@ -4034,6 +4046,7 @@ MonoBehaviour:
   isPlaying: 0
   pauseScreen: {fileID: 99566720}
   isInputEnabled: 0
+  worldState: {fileID: 0}
 --- !u!1 &1728263511
 GameObject:
   m_ObjectHideFlags: 0

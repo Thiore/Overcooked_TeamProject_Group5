@@ -19,10 +19,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
     public int stage_index;
-    public Text ScoreText;    // 점수를 표시할 UI 텍스트
-    public Text TipText;      // 팁을 표시할 UI 텍스트
-    public Animator ScoreAni; // 점수가 변경될 때 애니메이션을 재생할 애니메이터
-    private GameObject coinbanner;
+    public Score_UI_Manager score_ui;
     public int Tip_Score { get; private set; }  // 팁으로 인해 얻은 추가 점수를 기록하는 변수
     public int[] TargetScore = new int[3]; // 목표 점수 배열
     public int score { get; private set; } // 현재 점수
@@ -49,34 +46,12 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        coinbanner = FindObjectOfType<Canvas>().gameObject.transform.Find("Coin_Banner").GetComponent<Image>().gameObject;
-        
-        // 자식 오브젝트 중 이름이 "ScoreText"인 Text 컴포넌트를 가져옵니다.
-        ScoreText = coinbanner.transform.Find("ScoreText").GetComponent<Text>();
-
-        // 자식 오브젝트 중 이름이 "TipText"인 Text 컴포넌트를 가져옵니다.
-        TipText = coinbanner.transform.Find("DarkBack").GetComponentInChildren<Text>();
-
-        // 자식 오브젝트 중 이름이 "Coin_Image"인 Animator 컴포넌트를 가져옵니다.
-        ScoreAni = coinbanner.transform.Find("Coin_Image").GetComponent<Animator>();
         stage_index = GameManager.Instance.stage_index;
-
         // 점수 초기화
         InitializeScores();
         UpdateTargetScore();
     }
 
-    private void Update()
-    {
-        // 현재 점수를 UI에 업데이트
-        if (score.ToString() != ScoreText.text)
-        {
-            ScoreText.text = $"{score}";
-        }
-
-        // 팁 정보를 UI에 업데이트
-        TipText.text = $"팁 x {tip}";
-    }
 
     // 점수를 초기화하는 메서드
     public void InitializeScores()
@@ -87,10 +62,6 @@ public class ScoreManager : MonoBehaviour
         addScoreCount = 0;
         subScoreCount = 0;
         subScore = 0;
-        for (int i = 0; i < TargetScore.Length; i++)
-        {
-            TargetScore[i] = 0;
-        }
     }
 
     public void UpdateTargetScore()
@@ -108,7 +79,7 @@ public class ScoreManager : MonoBehaviour
         Tip_Score += additionalPoints; // 팁 점수 추가
         addScoreCount += 1;
         score += additionalPoints; // 총 점수 업데이트
-        ScoreAni.SetTrigger("GetScore");
+        score_ui.ScoreAni.SetTrigger("GetScore");
     }
 
     // 점수를 차감하는 메서드
@@ -121,6 +92,6 @@ public class ScoreManager : MonoBehaviour
         }
         subScoreCount += 1;
         subScore += points;
-        ScoreAni.SetTrigger("GetScore");
+        score_ui.ScoreAni.SetTrigger("GetScore");
     }
 }
