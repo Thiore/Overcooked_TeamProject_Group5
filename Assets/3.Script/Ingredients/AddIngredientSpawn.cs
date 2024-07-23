@@ -35,76 +35,21 @@ public class AddIngredientSpawn : MonoBehaviour
         if(Ingre.OnPlate)
         {
             int recipe_Num = 0;
-            if (targetObj.TryGetComponent(out AddIngredient add))
+            if (targetObj.TryGetComponent(out Ingredient targetIngre))
             {
-                
-                for (int i = 0; i < recipes.Count; i++)
-                {
-                    for (int j = 0; j < recipes[i].ingredient.Count; j++)
-                    {
-                        if (targetObj.name.Contains(recipes[i].ingredient[j]))
-                        {
-                            if (recipes[i].ingredient.Contains(gameObject.name))
-                            {
-                                i = recipes.Count;
-                                recipe_Num = i;
-                                break;
-                            }
-                            else
-                            {
-                                Debug.Log("레시피가 다릅니다.");
-                                return false;
-                            }
-                        }
-                    }
-                }
-                for (int i = 0; i < add.transform.childCount; i++)
-                {
-                    if (add.transform.GetChild(i).name.Equals(add.name))
-                    {
-                        add.transform.GetChild(i).gameObject.SetActive(false);
-                        break;
-                    }
-                }
-                add.name = $"{add.name}_{gameObject.name}";
-                for (int i = 0; i < add.transform.childCount; i++)
-                {
-                    if (add.transform.GetChild(i).name.Equals(add.name))
-                    {
-                        add.transform.GetChild(i).gameObject.SetActive(true);
-                        for(int j = 0; j < recipes[recipe_Num].ingredient.Count;j++)
-                        {
-                            if(!add.name.Contains(recipes[recipe_Num].ingredient[j]))
-                            {
-                                break;
-                            }
-                            if(j == recipes[recipe_Num].ingredient.Count-1)
-                            {
-                                add.name = recipes[recipe_Num].recipe;
-                                break;
-                            }
 
-                        }
-                        return true;
-                    }
-                }
-                
-            }
-            else
-            {
-                targetObj.TryGetComponent(out Ingredient targetIngre);
                 if (!targetIngre.OnPlate)
                 {
                     Debug.Log($"{targetObj.name}이 아직 손질되지 않았습니다.");
                     return false;
                 }
-                    
+
                 if (targetObj.name.Contains(gameObject.name))
                 {
                     Debug.Log("동일한 재료입니다.");
                     return false;
                 }
-                
+
                 for (int i = 0; i < recipes.Count; i++)
                 {
                     for (int j = 0; j < recipes[i].ingredient.Count; j++)
@@ -135,9 +80,9 @@ public class AddIngredientSpawn : MonoBehaviour
                 newcol.radius = targetcol.radius;
                 newcol.isTrigger = targetcol.isTrigger;
                 targetObj.TryGetComponent(out AddIngredientSpawn targetadd);
-                for(int i = 0; i < targetadd.IngreList.Count;i++)
+                for (int i = 0; i < targetadd.IngreList.Count; i++)
                 {
-                    if(targetadd.IngreList[i].name.StartsWith(Obj.name))
+                    if (targetadd.IngreList[i].name.StartsWith(Obj.name))
                     {
                         GameObject childObj = Instantiate(IngreList[i], Vector3.zero, Quaternion.identity, Obj.transform);
                         if (!childObj.name.Equals(Obj.name))
@@ -147,7 +92,7 @@ public class AddIngredientSpawn : MonoBehaviour
                     }
                 }
                 targetIngre.Die();
-                if(recipes[recipe_Num].ingredient.Count.Equals(2))
+                if (recipes[recipe_Num].ingredient.Count.Equals(2))
                 {
                     for (int i = 0; i < recipes[recipe_Num].ingredient.Count; i++)
                     {
@@ -157,7 +102,7 @@ public class AddIngredientSpawn : MonoBehaviour
                         }
                         if (i == recipes[recipe_Num].ingredient.Count - 1)
                         {
-                            add.name = recipes[recipe_Num].recipe;
+                            Obj.name = recipes[recipe_Num].recipe;
                             break;
                         }
                     }
@@ -165,6 +110,62 @@ public class AddIngredientSpawn : MonoBehaviour
                 return true;
 
             }
+            else
+            {
+                
+                for (int i = 0; i < recipes.Count; i++)
+                {
+                    for (int j = 0; j < recipes[i].ingredient.Count; j++)
+                    {
+                        if (targetObj.name.Contains(recipes[i].ingredient[j]))
+                        {
+                            if (recipes[i].ingredient.Contains(gameObject.name))
+                            {
+                                i = recipes.Count;
+                                recipe_Num = i;
+                                break;
+                            }
+                            else
+                            {
+                                Debug.Log("레시피가 다릅니다.");
+                                return false;
+                            }
+                        }
+                    }
+                }
+                for (int i = 0; i < targetObj.transform.childCount; i++)
+                {
+                    if (targetObj.transform.GetChild(i).name.Equals(targetObj.name))
+                    {
+                        targetObj.transform.GetChild(i).gameObject.SetActive(false);
+                        break;
+                    }
+                }
+                targetObj.name = $"{targetObj.name}_{gameObject.name}";
+                for (int i = 0; i < targetObj.transform.childCount; i++)
+                {
+                    if (targetObj.transform.GetChild(i).name.Equals(targetObj.name))
+                    {
+                        targetObj.transform.GetChild(i).gameObject.SetActive(true);
+                        for(int j = 0; j < recipes[recipe_Num].ingredient.Count;j++)
+                        {
+                            if(!targetObj.name.Contains(recipes[recipe_Num].ingredient[j]))
+                            {
+                                break;
+                            }
+                            if(j == recipes[recipe_Num].ingredient.Count-1)
+                            {
+                                targetObj.name = recipes[recipe_Num].recipe;
+                                break;
+                            }
+
+                        }
+                        return true;
+                    }
+                }
+                
+            }
+            
         }
         return false;
     }
