@@ -39,7 +39,7 @@ public class Player_Movent : MonoBehaviour
             Jump();
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftControl) && !playerStateController.IsHolding && playerStateController.HandsOnObject == null)
+        if (Input.GetKeyUp(KeyCode.LeftControl) && isRotation)
         {
             isRotation = false;
             directionArrow.gameObject.SetActive(false);

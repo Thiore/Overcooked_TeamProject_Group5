@@ -72,12 +72,13 @@ public class Player_StateController : MonoBehaviour
             }
 
 
-            if(Input.GetKeyDown(KeyCode.LeftControl))
+            if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 //요리도구 상호작용
                 // 굽고 썰고 
                 if (!IsHolding)
                 {
+                    Debug.Log("처음 컨트롤 들어오냐");
                     StartCoroutine(PlayerCookedChage());
                 }
             }
@@ -119,6 +120,7 @@ public class Player_StateController : MonoBehaviour
         // 근처 카운터가 있고 내가 집은 상태가 아니라면 
         if(isHolding)
         {
+            Debug.Log("홀딩");
             DropObject(nearCount, nearob);
             yield return new WaitForSeconds(0.3f);
         }
@@ -126,6 +128,7 @@ public class Player_StateController : MonoBehaviour
         {
             if (nearCount != null)
             {
+                Debug.Log("여긴 안대는데");
                 //카운터 위에 오브젝트가 있는지 없는지 확인 
                 var counter = nearCount.transform.GetComponent<CounterController>();
 
@@ -269,6 +272,7 @@ public class Player_StateController : MonoBehaviour
     {
         if (nearcounter != null)
         {
+            Debug.Log("카운터 없을때");
             var counter = nearcounter.transform.GetComponent<CounterController>();
 
             // 동작만하고 실질적인 처리는 재료가?
@@ -277,11 +281,14 @@ public class Player_StateController : MonoBehaviour
             {
                 if (counter.ChoppingBoard.transform.childCount.Equals(2))
                 {
+                    Debug.Log("도마 차일드 2일때");
                     if (counter.ChoppingBoard.transform.GetChild(1).gameObject.CompareTag("Ingredients") /* 재료가 썰수있는지  */)
                     {
+                        Debug.Log("재료 태그  파악했을때");
                         counter.ChoppingBoard.transform.GetChild(1).gameObject.transform.TryGetComponent(out Ingredient ingre);
                         if (ingre != null && ingre.OnChopping)
                         {
+                            Debug.Log("애니멩션");
                             animator.SetTrigger("Chop");
                         }
                         // 재료 eCooked enum에서 받고 노말일때만 }
