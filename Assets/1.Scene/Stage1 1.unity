@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3811,6 +3811,7 @@ MonoBehaviour:
   moveSpeed: 5
   rotateSpeed: 540
   playerInput: {fileID: 0}
+  directionArrow: {fileID: 811901260}
 --- !u!114 &870412921585450591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7214,6 +7215,7 @@ MonoBehaviour:
   moveSpeed: 5
   rotateSpeed: 380
   playerInput: {fileID: 0}
+  directionArrow: {fileID: 1695426575}
 --- !u!114 &5510673472339248225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12773,16 +12775,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 043d3b289cf154846b1d591a1156e6d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crate: {fileID: 0}
-  Change_Mesh:
-  - {fileID: 4300000, guid: f88b829bea599a34bafe3194f69d3803, type: 2}
-  - {fileID: 4300000, guid: 530e0ba93beed314385110528a0f3536, type: 2}
-  Change_Material:
-  - {fileID: 2100000, guid: 4d2c7e00d097ad74bb3ac9d15bef01bf, type: 2}
-  - {fileID: 2100000, guid: 4d2c7e00d097ad74bb3ac9d15bef01bf, type: 2}
-  CotrolBone: []
-  JointBone: []
-  Chop_Script: 0
 --- !u!33 &8850253865984017094
 MeshFilter:
   m_ObjectHideFlags: 0
