@@ -95,7 +95,7 @@ public class Ingredient : MonoBehaviour
             playerAnim[i] = null;
         }
         cooking = eCooked.Normal;
-        OnIngredients();
+        
     }
     private void OnEnable()
     {
@@ -140,26 +140,11 @@ public class Ingredient : MonoBehaviour
                                     {
                                         ChopTime = 0;
                                         Change_Ingredient(eCooked.Cooking);
+                                        playerAnim[i].SetTrigger("Finish");
                                     }
                                 }
                             }
 
-                        }
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < playerAnim.Length; i++)
-                    {
-                        if (playerAnim[i] != null)
-                        {
-                            AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
-                            if (AnimInfo[i].IsName("New_Chef@Chop"))
-                            {
-                                Debug.Log("어디에들어오니?");
-                                playerAnim[i].SetTrigger("Finish");
-                                playerAnim[i].ResetTrigger("Finish");
-                            }
                         }
                     }
                 }
@@ -196,7 +181,8 @@ public class Ingredient : MonoBehaviour
     {
         cooking = cooked;
         int CookEnum = (int)cooked;
-
+        if (CookEnum > 0)
+            CookEnum -= 1;
         Ingredient_Mesh.mesh = Change_Mesh[CookEnum];
         Ingredient_renderer.material = Change_Material[CookEnum];
         Ingredient_Col.sharedMesh = Change_Mesh[CookEnum];
@@ -209,6 +195,7 @@ public class Ingredient : MonoBehaviour
         CookProcess = process;
         Chop_Anim = Anim;
         myIngredients = ingredient;
+        OnIngredients();
     }
 
     public void OnIngredients()

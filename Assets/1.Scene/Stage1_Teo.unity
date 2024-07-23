@@ -3661,6 +3661,7 @@ MonoBehaviour:
   moveSpeed: 5
   rotateSpeed: 380
   playerInput: {fileID: 0}
+  directionArrow: {fileID: 0}
 --- !u!114 &870412921585450591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6953,6 +6954,7 @@ MonoBehaviour:
   moveSpeed: 5
   rotateSpeed: 380
   playerInput: {fileID: 0}
+  directionArrow: {fileID: 0}
 --- !u!114 &5510673472339248225
 MonoBehaviour:
   m_ObjectHideFlags: 0
