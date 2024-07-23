@@ -40,13 +40,15 @@ public enum eCookingProcess
 public enum eCooked
 {
     Normal = 0,
-    Chopping
+    Chopping,
+    Cooking,
+    ReadyCook
 }
 
-public class Ingredeint : MonoBehaviour
+public class Ingredient : MonoBehaviour
 {
     public spawn_Ingredient crate;
-
+    
     [SerializeField] private Mesh[] Change_Mesh;
     [SerializeField] private Material[] Change_Material;
 
@@ -59,7 +61,7 @@ public class Ingredeint : MonoBehaviour
     private MeshFilter Ingredient_Mesh;
 
     public eCooked cooking { get; private set; }
-    // public eIngredients myIngredients;
+    public eIngredients myIngredients;
     private eCookingProcess CookProcess;
 
     [SerializeField] private bool Chop_Script;
@@ -68,6 +70,7 @@ public class Ingredeint : MonoBehaviour
     private float ChopTime;
     private float FinishChopTime = 4f;
     public bool OnPlate { get; private set; }
+    public bool OnChopping { get; private set; }
     public bool OnCooker { get; private set; }
 
     private Animator[] playerAnim = new Animator[2];
@@ -94,16 +97,16 @@ public class Ingredeint : MonoBehaviour
     }
     private void OnEnable()
     {
-
+        
         ChopTime = 0;
-
+        
 
         if (!Ingredient_Mesh.mesh.Equals(Change_Mesh[0]))
         {
             Change_Ingredient(eCooked.Normal);
             Debug.Log("들어오면안됨");
         }
-
+        
 
     }
 
@@ -113,7 +116,36 @@ public class Ingredeint : MonoBehaviour
         {
             if (transform.parent.CompareTag("ChoppingBoard"))
             {
-                if (cooking.Equals(eCooked.Normal))
+                if(OnChopping)
+                {
+                    if (cooking.Equals(eCooked.Normal))
+                    {
+                        cooking = eCooked.Chopping;
+                    }
+                    if(cooking.Equals(eCooked.Chopping))
+                    { 
+                        for (int i = 0; i < playerAnim.Length; i++)
+                        {
+                            if (playerAnim[i] != null)
+                            {
+                                AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
+                                if (AnimInfo[i].IsName("New_Chef@Chop"))
+                                {
+                                    if (playerAnim[i] != null)
+                                        ChopTime += Time.deltaTime;
+                                    Debug.Log($"잘리는중{ChopTime}");
+                                    if (ChopTime > FinishChopTime)
+                                    {
+                                        ChopTime = 0;
+                                        Change_Ingredient(eCooked.Cooking);
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+                else
                 {
                     for (int i = 0; i < playerAnim.Length; i++)
                     {
@@ -122,36 +154,35 @@ public class Ingredeint : MonoBehaviour
                             AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
                             if (AnimInfo[i].IsName("New_Chef@Chop"))
                             {
-                                if (playerAnim[i] != null)
-                                    ChopTime += Time.deltaTime;
-                                Debug.Log($"잘리는중{ChopTime}");
-                                if (ChopTime > FinishChopTime)
-                                {
-                                    ChopTime = 0;
-                                    playerAnim[i].SetTrigger("Finish");
-                                    Change_Ingredient(eCooked.Chopping);
-                                }
+                                Debug.Log("어디에들어오니?");
+                                playerAnim[i].SetTrigger("Finish");
+                                playerAnim[i].ResetTrigger("Finish");
                             }
                         }
-
                     }
                 }
                 return;
             }
-            if (transform.parent.CompareTag("TrashCan"))
+            else if(transform.parent.CompareTag("Cooker"))
+            {
+                if(transform.parent.parent != null)
+                {
+                    //if(transform.parent.parent.CompareTag(""))
+                }
+            }
+            if(transform.parent.CompareTag("TrashCan"))
             {
                 transform.Rotate(Vector3.up, 2f);
                 transform.localScale *= 0.98f;
-                if (transform.localScale.x < 0.2f)
+                if(transform.localScale.x < 0.2f)
                 {
                     transform.parent.TryGetComponent(out CounterController counter);
-                    if (counter != null)
+                    if(counter != null)
                     {
                         counter.ChangePuton();
                         counter.PutOnOb = null;
                     }
                     Die();
-
                 }
 
             }
@@ -159,7 +190,7 @@ public class Ingredeint : MonoBehaviour
 
     }
 
-    public void Change_Ingredient(eCooked cooked)
+    private void Change_Ingredient(eCooked cooked)
     {
         cooking = cooked;
         int CookEnum = (int)cooked;
@@ -170,10 +201,11 @@ public class Ingredeint : MonoBehaviour
 
     }
 
-    public void SetCookProcess(eCookingProcess process, bool Anim)
+    public void SetCookProcess(eCookingProcess process, bool Anim, eIngredients ingredient)
     {
         CookProcess = process;
         Chop_Anim = Anim;
+        myIngredients = ingredient;
     }
 
     public void OnIngredients()
@@ -182,29 +214,46 @@ public class Ingredeint : MonoBehaviour
         {
             case eCookingProcess.Normal:
                 OnPlate = true;
+                OnChopping = false;
                 OnCooker = false;
                 break;
             case eCookingProcess.Chopping:
-                if (cooking.Equals(eCooked.Normal))
+                if(cooking.Equals(eCooked.Normal))
                 {
                     OnCooker = false;
+                    OnChopping = true;
+                    OnPlate = false;
+                }
+                else if(cooking.Equals(eCooked.Chopping))
+                {
+                    OnCooker = false;
+                    OnChopping = true;
                     OnPlate = false;
                 }
                 else
                 {
                     OnCooker = false;
+                    OnChopping = false;
                     OnPlate = true;
                 }
                 break;
             case eCookingProcess.Chop_Cook:
-                if (cooking.Equals(eCooked.Normal))
+                if(cooking.Equals(eCooked.Normal))
                 {
                     OnCooker = false;
+                    OnChopping = true;
                     OnPlate = false;
                 }
-                else
+                else if(cooking.Equals(eCooked.Chopping))
+                {
+                    OnCooker = false;
+                    OnChopping = true;
+                    OnPlate = false;
+                }
+                else if(cooking.Equals(eCooked.Cooking))
                 {
                     OnCooker = true;
+                    OnChopping = false;
                     OnPlate = false;
                 }
                 break;
@@ -212,7 +261,14 @@ public class Ingredeint : MonoBehaviour
                 if (cooking.Equals(eCooked.Normal))
                 {
                     OnCooker = true;
+                    OnChopping = false;
                     OnPlate = false;
+                }
+                else
+                {
+                    OnCooker = false;
+                    OnChopping = false;
+                    OnPlate = true;
                 }
                 break;
         }
@@ -236,7 +292,22 @@ public class Ingredeint : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        for (int i = 0; i < playerAnim.Length; i++)
+        {
+            if (playerAnim[i] != null)
+            {
+                if (playerAnim[i].gameObject.Equals(other.gameObject))
+                {
+                    playerAnim[i] = null;
+                    return;
+                }
+            }
 
+        }
+
+    }
 
     public void Die()
     {
