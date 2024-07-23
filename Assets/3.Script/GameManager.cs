@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
     //Game Load
     public void LoadGame(int stage_index)
     {
-        //worldState.SaveState();
+        //worldState.ResetState(1);
         this.stage_index = stage_index;
         switch (stage_index)
         {
