@@ -57,6 +57,10 @@ public class TicketManager : MonoBehaviour
             DataManager.Instance.GetStageInformation(GameManager.Instance.stage_index).bestScore = currentScore;
             TotalScore.text = $"BEST Score !! {currentScore}"; // 총 점수 업데이트
         }
+        else
+        {
+            TotalScore.text = $"{currentScore}";
+        }
         TitleText.text=$"Stage {GameManager.Instance.stage_index}";
         for (int i = 0; i < StarTexts.Length; i++)
         {
