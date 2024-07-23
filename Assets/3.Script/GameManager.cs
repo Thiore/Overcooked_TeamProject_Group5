@@ -139,10 +139,10 @@ public class GameManager : MonoBehaviour
         switch (button_index)
         {
             case 0:
-                SceneManager.LoadScene("Bus_Flag");
+                LoadingSceneManager.LoadScene("Bus_Flag");
                 break;
             case 1:
-                SceneManager.LoadScene("Arcade_Menu");
+                LoadingSceneManager.LoadScene("Arcade_Menu");
                 break;
             case 2:
                 SceneManager.LoadScene("BSJScene");

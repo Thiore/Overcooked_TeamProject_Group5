@@ -41,6 +41,12 @@ public class TicketManager : MonoBehaviour
     {
         int[] targetScores = ScoreManager.Instance.TargetScore; // 목표 점수 배열
         int currentScore = ScoreManager.Instance.score; // 현재 점수
+        TotalScore.text = $"{currentScore}"; // 총 점수 업데이트
+        if (currentScore > DataManager.Instance.GetStageInformation(GameManager.Instance.stage_index).bestScore)
+        {
+            DataManager.Instance.GetStageInformation(GameManager.Instance.stage_index).bestScore = currentScore;
+            TotalScore.text = $"BEST Score !! {currentScore}"; // 총 점수 업데이트
+        }
         TitleText.text=$"{GameManager.Instance.stage_index}";
         for (int i = 0; i < StarTexts.Length; i++)
         {
@@ -57,6 +63,5 @@ public class TicketManager : MonoBehaviour
         int subScore = ScoreManager.Instance.subScore; // 차감된 점수
         ResultSumScore.text = $"{addScore}\n{tipScore}\n{subScore}";
 
-        TotalScore.text = $"{currentScore}"; // 총 점수 업데이트
     }
 }

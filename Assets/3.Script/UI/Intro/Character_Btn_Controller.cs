@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Character_Btn_Controller : MonoBehaviour
 {
     public GameObject[] characterButtons;
-    private int currentIndex = 0;
 
     private GameObject[] CharacterFace = new GameObject[5];
     public int current_face_index=0;
