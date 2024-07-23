@@ -52,7 +52,7 @@ public class Player_StateController : MonoBehaviour
         // 스페이스바는 집을수 있는 사물들은 집어 올림(재료, 요리도구, 접시
         if (coroutine == null)
         {
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 coroutine = StartCoroutine(PlayerHodingChange(nearcounter, nearOb));
             }
@@ -158,6 +158,7 @@ public class Player_StateController : MonoBehaviour
                     yield return new WaitForSeconds(0.5f);
                 }
 
+                yield return new WaitForSeconds(0.5f);
             }
             // 근처 카운터가 없다면(땅바닥이겟지)
             else
@@ -176,6 +177,7 @@ public class Player_StateController : MonoBehaviour
                     yield return new WaitForSeconds(0.3f);
                 }
             }
+            yield return new WaitForSeconds(0.5f);
         }
         else
         {
