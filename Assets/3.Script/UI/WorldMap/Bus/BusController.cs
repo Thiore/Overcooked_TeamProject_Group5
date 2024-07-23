@@ -7,7 +7,7 @@ public class BusController : MonoBehaviour
 {
     private int stage_index;
     private FlagUIController flag_ui;
-    
+    private WorldState worldState;
 
     private void OnCollisionStay(Collision col)
     {
@@ -19,7 +19,9 @@ public class BusController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 GameManager.Instance.stage_index = stage_index;
+                worldState.ResetState(stage_index);
                 GameManager.Instance.LoadGame(stage_index);
+                
                 
             }
         }
