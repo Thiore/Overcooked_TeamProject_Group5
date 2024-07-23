@@ -11,23 +11,16 @@ public class MenuController : MonoBehaviour
     public Button characterButton;
     public Button setButton;
 
-    // 서브 패널
-    public GameObject storyPanel;
-    public GameObject arcadePanel;
-    public GameObject battlePanel;
-
-    // 서브 패널 버튼들
-    private Button[] storyButtons;
-    private Button[] arcadeButtons;
-    private Button[] battleButtons;
+    // Character_Button 패널
+    public GameObject characterButtonPanel;
 
     // 메인 메뉴 버튼 배열
     private Button[] buttons;
     private int currentButtonIndex = 0;
-    private Button[] currentSubButtons;
-    private int currentSubButtonIndex = 0;
 
-    private void Awake()
+    private Animator camera;
+
+    private void Start()
     {
         // 메인 메뉴 버튼 배열 초기화
         buttons = new Button[]
@@ -41,11 +34,17 @@ public class MenuController : MonoBehaviour
 
         // 첫 번째 버튼 선택
         SelectButton(currentButtonIndex);
+
+        camera = GameObject.Find("Cameraman").GetComponent<Animator>();
+
+        characterButtonPanel = GameObject.Find("Character_Button_Panel");
+        // Character_Button 패널 비활성화
+        characterButtonPanel.SetActive(false);
     }
 
     private void Update()
     {
-        if (GameManager.Instance.isInputEnabled)
+        if (GameManager.Instance.isInputEnabled==1)
         {
             // 좌우 방향키 입력 처리
             if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -61,7 +60,6 @@ public class MenuController : MonoBehaviour
                 HandleButtonPress();
             }
         }
-        
     }
 
     // 버튼 선택 변경
@@ -77,7 +75,6 @@ public class MenuController : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(buttons[index].gameObject);
         buttons[index].GetComponentInChildren<Text>().color = Color.yellow;
-        TogglePanel(index);
     }
 
     // 버튼 색상 초기화
@@ -86,91 +83,27 @@ public class MenuController : MonoBehaviour
         buttons[index].GetComponentInChildren<Text>().color = Color.white;
     }
 
-    // 패널 활성화/비활성화
-    private void TogglePanel(int index)
-    {
-        storyPanel.SetActive(index == 0);
-        arcadePanel.SetActive(index == 1);
-        battlePanel.SetActive(index == 2);
-
-        if (index < 3)
-        {
-            ActivateSubPanel(index);
-        }
-    }
-
-    // 버튼 클릭 처리
     private void HandleButtonPress()
     {
-        if (currentSubButtons != null && currentSubButtons.Length > 0)
+        if (currentButtonIndex == 3)
         {
-            currentSubButtons[currentSubButtonIndex].onClick.Invoke();
+            camera.SetTrigger("Zoom");
+            // Character_Button 패널 활성화
+            characterButtonPanel.SetActive(true);
+            // MenuController 입력 비활성화
+            GameManager.Instance.isInputEnabled +=1;
         }
         else
         {
-            buttons[currentButtonIndex].onClick.Invoke();
+            GameManager.Instance.Menu_Button(currentButtonIndex);
         }
     }
 
-    // 서브 패널 버튼 초기화
-    public void InitializeSubPanelButtons()
+    // Character_Button 패널 비활성화 및 MenuController 입력 활성화
+    public void CloseCharacterButtonPanel()
     {
-        if (storyPanel != null)
-        {
-            storyButtons = storyPanel.GetComponentsInChildren<Button>(true);
-        }
-        if (arcadePanel != null)
-        {
-            arcadeButtons = arcadePanel.GetComponentsInChildren<Button>(true);
-        }
-        if (battlePanel != null)
-        {
-            battleButtons = battlePanel.GetComponentsInChildren<Button>(true);
-        }
-    }
-
-    // 서브 패널 활성화
-    private void ActivateSubPanel(int index)
-    {
-        switch (index)
-        {
-            case 0:
-                currentSubButtons = storyButtons;
-                break;
-            case 1:
-                currentSubButtons = arcadeButtons;
-                break;
-            case 2:
-                currentSubButtons = battleButtons;
-                break;
-            default:
-                currentSubButtons = null;
-                break;
-        }
-
-        if (currentSubButtons != null)
-        {
-            currentSubButtonIndex = 0;
-            SelectSubButton(currentSubButtonIndex);
-        }
-    }
-
-    // 서브 패널 버튼 선택
-    private void SelectSubButton(int index)
-    {
-        EventSystem.current.SetSelectedGameObject(currentSubButtons[index].gameObject);
-        currentSubButtons[index].GetComponentInChildren<Text>().color = Color.yellow;
-    }
-
-    // 서브 패널 버튼 색상 초기화
-    private void ResetSubButtonColor(int index)
-    {
-        currentSubButtons[index].GetComponentInChildren<Text>().color = Color.white;
-    }
-
-    // 서브 패널 버튼 클릭 처리
-    private void HandleSubButtonPress()
-    {
-        currentSubButtons[currentSubButtonIndex].onClick.Invoke();
+        characterButtonPanel.SetActive(false);
+        GameManager.Instance.isInputEnabled -=1;
+        camera.SetTrigger("GameStart");
     }
 }
