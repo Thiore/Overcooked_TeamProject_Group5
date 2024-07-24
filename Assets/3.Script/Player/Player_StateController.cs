@@ -1,11 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.SceneTemplate;
-using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 //전반적 플레이어 상호작용 (재료 / 요리 도구 등등 상호작용) 
 public class Player_StateController : MonoBehaviour

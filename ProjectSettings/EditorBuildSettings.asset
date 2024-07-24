@@ -8,12 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1.Scene/IntroScene.unity
     guid: 2f52a72c523b38846877a033d1f2a339
-  - enabled: 1
+  - enabled: 0
     path: Assets/1.Scene/Bus_Flag.unity
     guid: a8968960f3fda234cb98041442a90bb5
   - enabled: 1
     path: Assets/1.Scene/BSJScene.unity
     guid: 048d84d0a5a4d8f42a552dedc32bcaac
+  - enabled: 1
+    path: Assets/1.Scene/AnotherScene.unity
+    guid: 74830a88b409cf745b1a5602867c77ad
   - enabled: 1
     path: Assets/1.Scene/Arcade_Menu.unity
     guid: bc45272a269dd0d4ea6d99fe342ac74b

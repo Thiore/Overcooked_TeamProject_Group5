@@ -7,7 +7,7 @@ public class Sample_Button_Controll : MonoBehaviour
     RecipePool recipePool;
     private void Start()
     {
-        recipePool = GameObject.Find("Canvas/Recipe_Pool").GetComponent<RecipePool>();
+        recipePool = GameObject.Find("Ingame_UI/Recipe_Pool").GetComponent<RecipePool>();
     }
     public void Correct()
     {
