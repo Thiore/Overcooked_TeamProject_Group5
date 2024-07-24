@@ -13716,7 +13716,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2745643254857684013}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0205, y: 0, z: 0.0004}
+  m_LocalPosition: {x: -0.0205, y: -0.01187, z: 0.0004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 918684085490053398}
@@ -67972,8 +67972,8 @@ GameObject:
   - component: {fileID: 2815077216934562543}
   - component: {fileID: 2815077216934562532}
   - component: {fileID: 2815077216934562533}
-  - component: {fileID: 2815077216934562534}
   - component: {fileID: 2815077216934562535}
+  - component: {fileID: 2815077216934562534}
   m_Layer: 30
   m_Name: Van_Mesh (1)
   m_TagString: Untagged
@@ -67995,7 +67995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rotateSpeed: 380
-  playerInput: {fileID: 0}
+  playerInput: {fileID: 2815077216934562541}
 --- !u!114 &2815077216934562533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68024,7 +68024,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 16
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &2815077216934562535
 MonoBehaviour:
@@ -68082,8 +68082,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.008693281, y: 0.00602841, z: 0.018152598}
-  m_Center: {x: 0.00063788745, y: 0.007334596, z: -0.005}
+  m_Size: {x: 0.008693281, y: 0.0060214396, z: 0.018152598}
+  m_Center: {x: 0.00063788745, y: -0.0052558277, z: -0.005}
 --- !u!137 &2838789946807722578
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -68264,7 +68264,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2815077216934562531}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.062, y: -0.604, z: 1.406}
+  m_LocalPosition: {x: -1.527, y: -0.144, z: 3.443}
   m_LocalScale: {x: 40, y: 40, z: 40}
   m_Children:
   - {fileID: 6440007559984527483}
@@ -72692,7 +72692,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8768511591385739519}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.611, z: 1.764}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 818281889009223610}
