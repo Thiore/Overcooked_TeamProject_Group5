@@ -111,20 +111,15 @@ public class Player_StateController : MonoBehaviour
 
     private IEnumerator PlayerHodingChange(GameObject nearCount, GameObject nearob)
     {
-        if (nearCount == null && nearob == null)
-        {
-            coroutine = null;
-            yield break;          
-        }
 
         // 근처 카운터가 있고 내가 집은 상태가 아니라면 
-        if(isHolding)
+        if (isHolding)
         {
             Debug.Log("홀딩");
             DropObject(nearCount, nearob);
-            yield return new WaitForSeconds(0.3f);
+            yield break;
         }
-        else 
+        else
         {
             if (nearCount != null)
             {
@@ -142,7 +137,7 @@ public class Player_StateController : MonoBehaviour
                             TakeHandObject(spawn.PickAnim());
                             Debug.Log("열기");
                             // 생성된 재료 오브젝트 바로 집는 메소드 추가 필요 
-                            yield return new WaitForSeconds(0.3f);
+                            yield break;
                         }
                     }
                     else
@@ -151,7 +146,7 @@ public class Player_StateController : MonoBehaviour
                         {
                             TakeHandObject(nearob);
                         }
-                        yield return new WaitForSeconds(0.3f);
+                        yield break;
                     }
 
                 }
@@ -175,10 +170,10 @@ public class Player_StateController : MonoBehaviour
 
                     counter.PutOnOb = null;
                     counter.ChangePuton();
-                    yield return new WaitForSeconds(0.5f);
+                    yield break;
                 }
 
-                yield return new WaitForSeconds(0.5f);
+                yield break;
             }
             // 근처 카운터가 없다면(땅바닥이겟지)
             else
@@ -194,10 +189,16 @@ public class Player_StateController : MonoBehaviour
                         TakeHandObject(nearob);
                     }
 
-                    yield return new WaitForSeconds(0.3f);
+                    yield break;
                 }
             }
             yield return new WaitForSeconds(0.5f);
+        }
+
+        if (nearCount == null && nearob == null)
+        {
+            coroutine = null;
+            yield break;
         }
 
         coroutine = null;
