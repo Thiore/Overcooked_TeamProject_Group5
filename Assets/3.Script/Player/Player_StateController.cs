@@ -118,7 +118,6 @@ public class Player_StateController : MonoBehaviour
         {
             if (nearCount != null)
             {
-                Debug.Log("여긴 안대는데");
                 //카운터 위에 오브젝트가 있는지 없는지 확인 
                 var counter = nearCount.transform.GetComponent<CounterController>();
 
@@ -135,7 +134,7 @@ public class Player_StateController : MonoBehaviour
                             yield break;
                         }
                     }
-                    else
+                    else // 올라가 있지 않고 근처 오브젝트가 아닐때 근처 주워오기
                     {
                         if (nearOb != null)
                         {
@@ -158,7 +157,7 @@ public class Player_StateController : MonoBehaviour
                         TakeHandObject(counter.ChoppingBoard.transform.GetChild(1).gameObject);
                         counter.ChoppingBoard.transform.GetChild(0).gameObject.SetActive(true);
                     }
-                    else
+                    else // 아예 나머지들?? 
                     {
                         TakeHandObject(counter.PutOnOb);
                     }
@@ -175,15 +174,7 @@ public class Player_StateController : MonoBehaviour
             {
                 if (nearOb != null)
                 {
-                    if (nearob.CompareTag("Plate") || nearob.CompareTag("Cooker"))
-                    {
-                        TakeHandObject(nearob);
-                    }
-                    else
-                    {
-                        TakeHandObject(nearob);
-                    }
-
+                    TakeHandObject(nearob);
                     yield break;
                 }
             }
@@ -210,23 +201,23 @@ public class Player_StateController : MonoBehaviour
             {
                 if (counter.ChoppingBoard == null) // 카운터에 도마가 없는 곳이라면 
                 {
-                    if (counter.gameObject.CompareTag("Crate")) // 계속 박스 위가 아니라 가운데로 들어감 
+                    if (counter.gameObject.CompareTag("Crate")) // 들고 있기 때문에 도마가 없고 재료 박스 앞이라면 박스 위에 올린다 
                     {
                         HandsOnOb.transform.SetParent(counter.transform);
                         var boxcol = counter.transform.GetComponent<BoxCollider>();
                         Vector3 boxtop = boxcol.bounds.center + new Vector3(0, boxcol.bounds.extents.y, 0);
                         HandsOnOb.transform.position = boxtop;
                     }
-                    else
+                    else // 들고 있고 도마가 없다면 일반 카운터이기때문에 그냥 둔다, 재료들은 살짝 올려준다 
                     {
                         HandsOnOb.transform.SetParent(counter.transform);
                         if (HandsOnOb.CompareTag("Ingredients"))
                         {
-                            HandsOnOb.transform.position = counter.transform.position;
+                            HandsOnOb.transform.position = counter.transform.position + new Vector3(0, 0.1f, 0);
                         }
                         else
                         {
-                            HandsOnOb.transform.position = counter.transform.position + new Vector3(0, 0.1f, 0);
+                            HandsOnOb.transform.position = counter.transform.position;
                         }
                     }
 
@@ -256,33 +247,18 @@ public class Player_StateController : MonoBehaviour
                 {
                     HandsOnOb.TryGetComponent(out Ingredient ingre);
                     HandsOnOb.TryGetComponent(out AddIngredientSpawn addingre);
+                    HandsOnOb.TryGetComponent(out SphereCollider col);
                     if (ingre.OnPlate)
                     {
-                        Debug.Log("처음 : " + ingre.OnPlate);
                         HandsOnOb.transform.SetParent(counter.PutOnOb.transform);
                         HandsOnOb.transform.position = counter.PutOnOb.transform.position;
                         HandsOnOb.transform.rotation = counter.PutOnOb.transform.rotation;
-                        HandsOnOb.transform.tag = "Untagged";
+                        col.enabled = false;
                         animator.SetBool("IsTake", false);
                         HandsOnOb = null;
                         isHolding = false;
                     }
-                    else if(!ingre.OnPlate)
-                    {
-                        if (!addingre.SetAddIngredient(HandsOnOb))
-                        {
-                            Debug.Log("두번 : " + ingre.OnPlate);
-                            HandsOnOb.transform.tag = "Untagged";
-                            animator.SetBool("IsTake", false);
-                            HandsOnOb = null;
-                            isHolding = false;
-                            ingre.Die();
-                        }
-                        else
-                        {
 
-                        }
-                    }
                 }
             }
         }
@@ -297,9 +273,6 @@ public class Player_StateController : MonoBehaviour
             isHolding = false;
         }
     }
-
-
-
 
 
     private IEnumerator PlayerCookedChage()
@@ -329,54 +302,6 @@ public class Player_StateController : MonoBehaviour
         }
 
         yield return null;
-    }
-
-
-    private void DropObject()
-    {
-        // 근처에 카운터가 있다면 
-        if (nearcounter != null)
-        {
-            var counter = nearcounter.transform.GetComponent<CounterController>();
-            if (!counter.IsPutOn) // 카운터에 올라가있지 않다면  
-            {
-                if (counter.ChoppingBoard == null) // 카운터에 도마가 없는 곳이라면 
-                {
-                    HandsOnOb.transform.SetParent(nearcounter.transform);
-                    HandsOnOb.transform.position = nearcounter.transform.position + new Vector3(0, 0.1f, 0);
-                    HandsOnOb.transform.rotation = Quaternion.identity;
-                    counter.ChangePuton();
-                    counter.PutOnOb = HandsOnOb;
-                }
-                else // 도마가 있다면 
-                {
-                    HandsOnOb.transform.SetParent(counter.ChoppingBoard.transform);
-                    HandsOnOb.transform.position = counter.ChoppingBoard.transform.position + new Vector3(0, 0.1f, 0);
-                    HandsOnOb.transform.rotation = Quaternion.identity;
-                    counter.ChoppingBoard.transform.GetChild(0).gameObject.SetActive(false);
-                    //도마도 끄기 
-                    counter.ChangePuton();
-                }
-
-                animator.SetBool("IsTake", false);
-                HandsOnOb = null;
-                isHolding = false;
-            }
-            else // 카운터에 올라가 있는데 드랍하려고 하면 
-            {
-                Debug.Log("이미올라가있음");
-            }
-        }
-        else // 근처에 카운터 없으면 땅에 떨군다는 
-        {
-            HandsOnOb.transform.SetParent(null);
-            var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();
-            rb.mass = 0.05f;
-            rb.angularDrag = 0;
-            animator.SetBool("IsTake", false);
-            HandsOnOb = null;
-            isHolding = false;
-        }
     }
 
     private void TakeHandObject(GameObject gameObject)
