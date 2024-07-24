@@ -60,8 +60,10 @@ public class Plate_Spawn : MonoBehaviour
                     if(plates[i].transform.childCount>0)
                     {
                         Transform childobj = plates[i].transform.GetChild(0);
-                        CheckRecipe.CheckRecipe($"{childobj.gameObject.name}_Food");
+                        //CheckRecipe.CheckRecipe($"{childobj.gameObject.name}_Food");
+                        //나중에 활성화해줘야합니다.
                         DestroyPlateNum.Enqueue(i);
+                        plates[i].transform.SetParent(null);
                         if (childobj.TryGetComponent(out Ingredient Ingre))
                         {
                             Ingre.Die();
@@ -71,7 +73,15 @@ public class Plate_Spawn : MonoBehaviour
 
                         plates[i].gameObject.SetActive(false);
                         return true;
-                    }                
+                    }  
+                    else
+                    {
+                        plates[i].transform.SetParent(null);
+                        DestroyPlateNum.Enqueue(i);
+                        plates[i].gameObject.SetActive(false);
+                        
+                        return true;
+                    }
                 }
                 return false;
             }
