@@ -54,7 +54,7 @@ public class WorldState : MonoBehaviour
     public void ResetState(int stageNumber)
     {
         bestScore = DataManager.Instance.GetStageInformation(stageNumber).bestScore;
-        if (bestScore == 0)
+        if (bestScore == 70)
         {
             //PlayerPrefs.DeleteKey("AnimatorState");
             SaveState();

@@ -13,7 +13,7 @@ public class FlagUIController : MonoBehaviour
     private Text BestScore;
     private Text[] Target_Score = new Text[3];
     private Image[] FullStar = new Image[3];
-    private void Awake()
+    private void OnEnable()
     {
         InitUI();
         SetUI();
@@ -42,6 +42,13 @@ public class FlagUIController : MonoBehaviour
     private void SetUI()
     {
         target_Score = DataManager.Instance.GetStageInformation(flag.stage_index).targetScore;
+        /*for(int i = 0; i < 3; i++)
+        {
+            Debug.Log($"{flag.stage_index}");
+            Debug.Log($"{DataManager.Instance.GetStageInformation(flag.stage_index).targetScore[i]}");
+            Debug.Log($"{target_Score[i]}");
+        }
+        */
         bestScore = DataManager.Instance.GetStageInformation(flag.stage_index).bestScore;
         BestScore.text = bestScore.ToString();
         for (int i = 0; i < 3; i++)
