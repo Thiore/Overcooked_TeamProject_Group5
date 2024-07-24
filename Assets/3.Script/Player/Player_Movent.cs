@@ -158,7 +158,9 @@ public class Player_Movent : MonoBehaviour
             elaspedTime += Time.deltaTime;
             yield return null;
         }
-        player_rb.MovePosition(player_rb.position);
+        Vector3 last = new Vector3(player_rb.position.x, 0f, player_rb.position.z);
+        player_rb.MovePosition(last);
+
 
         #endregion
 
