@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Plate_Return : MonoBehaviour
 {
-    [SerializeField] private BoxCollider PlateCol;
+    //[SerializeField] private BoxCollider PlateCol;
     
     private Stack<Plate> Plate_Stack = new Stack<Plate>();
     private float PlateY;
     private CounterController counter;
     private void Awake()
     {
-        PlateY = PlateCol.bounds.size.y;
+        PlateY = 0.08f;
         TryGetComponent(out counter);
     }
 
@@ -23,8 +23,8 @@ public class Plate_Return : MonoBehaviour
         }
         plate.transform.SetParent(transform);
         counter.PutOnOb = plate.gameObject;
-        plate.transform.position = Vector3.zero + Vector3.up * (Plate_Stack.Count - 1) * PlateY;
         plate.gameObject.SetActive(true);
+        plate.transform.position += Vector3.up * (Plate_Stack.Count - 1) * PlateY;
         Plate_Stack.Push(plate);
     }
 

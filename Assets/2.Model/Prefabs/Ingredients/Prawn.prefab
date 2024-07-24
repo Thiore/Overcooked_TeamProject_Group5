@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4758313108777045751}
   - component: {fileID: 4758313108777045752}
   - component: {fileID: 3197822107311376744}
+  - component: {fileID: 8504660235819941486}
   m_Layer: 0
   m_Name: Prawn
   m_TagString: Ingredients
@@ -151,3 +152,17 @@ MonoBehaviour:
   JointBone: []
   myIngredients: 0
   Chop_Script: 0
+--- !u!114 &8504660235819941486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4758313108777045753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8c705191dcf2d4c8f9f8beb343348d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AddIngrePrefabs: []
+  Ingredients_Info: {fileID: 0}

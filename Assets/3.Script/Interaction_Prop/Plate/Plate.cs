@@ -4,32 +4,31 @@ using UnityEngine;
 
 public class Plate : MonoBehaviour
 {
-    [SerializeField] private Crate_Data Ingredients_Info;
-    [SerializeField] private Ingredient[] IngrePrefabs;
-    [SerializeField] private AddIngredient[] AddIngrePrefabs;
-
     [SerializeField] private Transform[] Sink_Pos;
     [SerializeField] private Mesh[] Plate_Mesh;
-    [SerializeField] private Material[] Plate_Materials;
 
     private MeshFilter mesh;
     private Renderer renderer;
+    private MeshCollider meshcol;
 
-    public bool isWash { get; private set; }
+    public bool isWash { get; private set; }//true면 설거지를 해야하는상태 false면 올릴 수 있는상태
 
     private List<Recipe> recipes;
 
 
     private void Awake()
     {
-        recipes = DataManager.Instance.StageRecipeData(GameManager.Instance.stage_index);
+        
         TryGetComponent(out mesh);
         TryGetComponent(out renderer);
+        TryGetComponent(out meshcol);
     }
 
     private void OnEnable()
     {
+        
         Change_Plate(isWash);
+        
     }
 
     private void Update()
@@ -49,12 +48,14 @@ public class Plate : MonoBehaviour
         if (!isWash)
         {
             mesh.mesh = Plate_Mesh[0];
-            renderer.material = Plate_Materials[0];
+            renderer.material.SetFloat("_DetailAlbedoMapScale", 0f);
+            meshcol.sharedMesh = Plate_Mesh[0];
         }
         else
         {
             mesh.mesh = Plate_Mesh[1];
-            renderer.material = Plate_Materials[1];
+            renderer.material.SetFloat("_DetailAlbedoMapScale", 1f);
+            meshcol.sharedMesh = Plate_Mesh[1];
         }
     }
 }
