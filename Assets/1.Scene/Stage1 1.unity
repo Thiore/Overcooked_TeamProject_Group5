@@ -8159,7 +8159,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 0.4, z: 1}
-  m_Center: {x: 0, y: 0.4, z: -0.1}
+  m_Center: {x: 0, y: 0.35, z: -0.1}
 --- !u!54 &870412921585450561
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8275,6 +8275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Attachtransform: {fileID: 4983511800017289461}
+  Cleaver: {fileID: 8165074965244364014}
 --- !u!114 &870412921585450590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9488,6 +9489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Attachtransform: {fileID: 5510673472418880669}
+  Cleaver: {fileID: 5510673473865880414}
 --- !u!4 &5510673472339248248
 Transform:
   m_ObjectHideFlags: 0
@@ -11893,7 +11895,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e6ae7d7804bd9104484047f949968a2a, type: 2}
+  - {fileID: 2100000, guid: d62480150ce0292458e9d237064cadc6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -18,6 +18,8 @@ public class Player_StateController : MonoBehaviour
 
     //이건 인스펙터에서 셰프 밑에 스켈레톤 Attach 넣어 사용하기
     [SerializeField] private Transform Attachtransform;
+    [SerializeField] private GameObject Cleaver;
+    public GameObject CleaverOb { get => Cleaver; }
 
     //내가 들고 있는지 
     private bool isHolding = false;
@@ -88,6 +90,7 @@ public class Player_StateController : MonoBehaviour
         {
             animator.SetBool("IsWalking", true);
             animator.SetBool("IsWalking", false);
+            Cleaver.SetActive(false);
         }
     }
 
@@ -146,12 +149,13 @@ public class Player_StateController : MonoBehaviour
                 else
                 {
                     //카운터 집을 수 있는 오브젝트가 있고, 도마가 없을때 
-                    if (counter.PutOnOb.CompareTag("Plate") || counter.PutOnOb.CompareTag("Cooker") /* 소화기 태그 추가 필요 */)
-                    {
-                        TakeHandObject(counter.PutOnOb);
-                    }
-                    //집을 수 있는 오브젝트가 도마 위에 있을때 
-                    else if (counter.ChoppingBoard != null)
+                    //if (counter.PutOnOb.CompareTag("Plate") || counter.PutOnOb.CompareTag("Cooker") /* 소화기 태그 추가 필요 */)
+                    //{
+                    //    TakeHandObject(counter.PutOnOb);
+                    //}
+                    ////집을 수 있는 오브젝트가 도마 위에 있을때 
+                    //else 
+                    if (counter.ChoppingBoard != null)
                     {
                         TakeHandObject(counter.ChoppingBoard.transform.GetChild(1).gameObject);
                         counter.ChoppingBoard.transform.GetChild(0).gameObject.SetActive(true);
@@ -198,7 +202,6 @@ public class Player_StateController : MonoBehaviour
             var counter = nearcounter.transform.GetComponent<CounterController>();
             if (!counter.IsPutOn) // 카운터에 올라간게 없다면  
             {
-                Debug.Log("카운터에 올라간게 없다면");
                 if (counter.ChoppingBoard == null) // 카운터에 도마가 없는 곳이라면 
                 {
                     if (counter.gameObject.CompareTag("Crate")) // 들고 있기 때문에 도마가 없고 재료 박스 앞이라면 박스 위에 올린다 
@@ -213,11 +216,9 @@ public class Player_StateController : MonoBehaviour
                         
                         if(HandsOnOb.TryGetComponent(out Plate plate))
                         {
-                            Debug.Log("접시를 듬");
                             counter.transform.TryGetComponent(out Plate_Spawn plate_spawn);
                             if (plate_spawn.PassPlate(plate))
                             {
-                                Debug.Log("판단햇음");
                                 animator.SetBool("IsTake", false);
                                 HandsOnOb = null;
                                 isHolding = false;                                
@@ -226,6 +227,38 @@ public class Player_StateController : MonoBehaviour
                         }
                         
 
+                    }
+                    else if (counter.transform.CompareTag("Plate_Return")) //플레이트 쌓이는데는 집는것만 됨 
+                    {
+                        Debug.Log("드랍못함");
+                        return;
+                    }
+                    else if (counter.transform.CompareTag("TrashCan")) // 쓰레기통은 재료만  
+                    {
+                        if(HandsOnOb.CompareTag("Plate") /*조리기구 추가*/)
+                        {
+                            if(HandsOnOb.transform.childCount.Equals(1) && HandsOnOb.name.Contains("_"))
+                            {
+                                Destroy(HandsOnOb.transform.GetChild(0));
+                                return;
+                            }
+                            else if(HandsOnOb.transform.childCount.Equals(1))
+                            {
+                                if(HandsOnOb.transform.GetChild(0).TryGetComponent(out Ingredient ingre))
+                                {
+                                    ingre.Die();
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            HandsOnOb.transform.SetParent(counter.transform);
+                        }
                     }
                     else // 들고 있고 도마가 없다면 일반 카운터이기때문에 그냥 둔다, 재료들은 살짝 올려준다 
                     {
@@ -254,10 +287,6 @@ public class Player_StateController : MonoBehaviour
                 animator.SetBool("IsTake", false);
                 HandsOnOb = null;
                 isHolding = false;
-            }
-            else if (counter.transform.CompareTag("Plate_Return")) //플레이트 쌓이는데는 집는것만 됨 
-            {
-                Debug.Log("드랍못함");
             }
             else // 카운터에 올라가 있는데 드랍하려고 하면 
             {
@@ -349,6 +378,7 @@ public class Player_StateController : MonoBehaviour
                         if (ingre != null && ingre.OnChopping)
                         {
                             animator.SetTrigger("Chop");
+                            Cleaver.SetActive(true);
                         }
                         // 재료 eCooked enum에서 받고 노말일때만 }
                     }
