@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Newtonsoft.Json;
 using System.Linq;
+using Newtonsoft.Json;
 
 
 public class DataManager : MonoBehaviour
