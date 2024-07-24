@@ -14,7 +14,8 @@ public class Plate_Spawn : MonoBehaviour
     private Plate[] plates;
     private Queue<int> DestroyPlateNum = new Queue<int>();
 
-    private WaitForSeconds SpawnTime = new WaitForSeconds(5f);
+    private WaitForSeconds SpawnTime = new WaitForSeconds(1f);
+    
 
     private void Start()
     {
@@ -41,11 +42,13 @@ public class Plate_Spawn : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if(DestroyPlateNum.Count>0)
         {
-            StartCoroutine(SpawnPlate());
+            Debug.Log(DestroyPlateNum.Count);
+            Debug.Log((int)DestroyPlateNum.Peek());
+            StartCoroutine(SpawnPlate(DestroyPlateNum.Dequeue()));
         }
     }
 
@@ -62,8 +65,8 @@ public class Plate_Spawn : MonoBehaviour
                         Transform childobj = plates[i].transform.GetChild(0);
                         //CheckRecipe.CheckRecipe($"{childobj.gameObject.name}_Food");
                         //나중에 활성화해줘야합니다.
-                        DestroyPlateNum.Enqueue(i);
                         plates[i].transform.SetParent(null);
+                        DestroyPlateNum.Enqueue(i);
                         if (childobj.TryGetComponent(out Ingredient Ingre))
                         {
                             Ingre.Die();
@@ -89,10 +92,11 @@ public class Plate_Spawn : MonoBehaviour
         return false;
     }
 
-    private IEnumerator SpawnPlate()
+    private IEnumerator SpawnPlate(int plateNum)
     {
-        int plateNum = DestroyPlateNum.Dequeue();
+        
         yield return SpawnTime;
+        Debug.Log($"{DestroyPlateNum.Count}");
         plates[plateNum].SetWash(isWash);
         plateReturn.SetPlate(plates[plateNum]);
     }
