@@ -1,11 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.SceneTemplate;
-using UnityEditorInternal;
-using UnityEngine;
-using UnityEngine.Rendering.Universal;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
+using UnityEngine; 
 
 //전반적 플레이어 상호작용 (재료 / 요리 도구 등등 상호작용) 
 public class Player_StateController : MonoBehaviour
@@ -243,7 +238,7 @@ public class Player_StateController : MonoBehaviour
                 HandsOnOb = null;
                 isHolding = false;
             }
-            else if (counter.transform.CompareTag("Plate_Return"))
+            else if (counter.transform.CompareTag("Plate_Return")) //플레이트 쌓이는데는 집는것만 됨 
             {
                 Debug.Log("드랍못함");
             }
@@ -273,7 +268,6 @@ public class Player_StateController : MonoBehaviour
     {
         if (nearcounter != null)
         {
-            Debug.Log("카운터 없을때");
             var counter = nearcounter.transform.GetComponent<CounterController>();
 
             // 동작만하고 실질적인 처리는 재료가?
@@ -282,15 +276,12 @@ public class Player_StateController : MonoBehaviour
             {
                 if (counter.ChoppingBoard.transform.childCount.Equals(2))
                 {
-                    Debug.Log("도마 차일드 2일때");
                     if (counter.ChoppingBoard.transform.GetChild(1).gameObject.CompareTag("Ingredients") /* 재료가 썰수있는지  */)
                     {
-                        Debug.Log("재료 태그  파악했을때");
                         counter.ChoppingBoard.transform.GetChild(1).gameObject.transform.TryGetComponent(out Ingredient ingre);
                         
                         if (ingre != null && ingre.OnChopping)
                         {
-                            Debug.Log("애니멩션");
                             animator.SetTrigger("Chop");
                         }
                         // 재료 eCooked enum에서 받고 노말일때만 }

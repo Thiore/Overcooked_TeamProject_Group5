@@ -64,7 +64,7 @@ public class Player_Movent : MonoBehaviour
         }
 
         player_rb.angularVelocity = Vector3.zero;
-        player_rb.velocity = Vector3.zero;
+        player_rb.velocity = new Vector3(0f, player_rb.velocity.y, 0f);
 
     }
 
