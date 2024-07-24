@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine; 
+using UnityEngine;
 
 //전반적 플레이어 상호작용 (재료 / 요리 도구 등등 상호작용) 
 public class Player_StateController : MonoBehaviour
@@ -14,7 +14,7 @@ public class Player_StateController : MonoBehaviour
     //내가 집은 오브젝트 
     private GameObject HandsOnOb;
 
-    public GameObject HandsOnObject {  get => HandsOnOb; }
+    public GameObject HandsOnObject { get => HandsOnOb; }
 
     //이건 인스펙터에서 셰프 밑에 스켈레톤 Attach 넣어 사용하기
     [SerializeField] private Transform Attachtransform;
@@ -77,7 +77,7 @@ public class Player_StateController : MonoBehaviour
                     StartCoroutine(PlayerCookedChage());
                 }
             }
-            
+
 
         }
     }
@@ -220,7 +220,14 @@ public class Player_StateController : MonoBehaviour
                     else
                     {
                         HandsOnOb.transform.SetParent(counter.transform);
-                        HandsOnOb.transform.position = counter.transform.position + new Vector3(0, 0.1f, 0);
+                        if (HandsOnOb.CompareTag("Ingredients"))
+                        {
+                            HandsOnOb.transform.position = counter.transform.position;
+                        }
+                        else
+                        {
+                            HandsOnOb.transform.position = counter.transform.position + new Vector3(0, 0.1f, 0);
+                        }
                     }
 
                 }
@@ -248,8 +255,10 @@ public class Player_StateController : MonoBehaviour
                 if (counter.PutOnOb.CompareTag("Plate") && HandsOnOb.CompareTag("Ingredients"))
                 {
                     HandsOnOb.TryGetComponent(out Ingredient ingre);
-                    if(ingre.OnPlate)
+                    HandsOnOb.TryGetComponent(out AddIngredientSpawn addingre);
+                    if (ingre.OnPlate)
                     {
+                        Debug.Log("처음 : " + ingre.OnPlate);
                         HandsOnOb.transform.SetParent(counter.PutOnOb.transform);
                         HandsOnOb.transform.position = counter.PutOnOb.transform.position;
                         HandsOnOb.transform.rotation = counter.PutOnOb.transform.rotation;
@@ -258,9 +267,21 @@ public class Player_StateController : MonoBehaviour
                         HandsOnOb = null;
                         isHolding = false;
                     }
-                    else
+                    else if(!ingre.OnPlate)
                     {
-                        Debug.Log("이미올라가있음");
+                        if (!addingre.SetAddIngredient(HandsOnOb))
+                        {
+                            Debug.Log("두번 : " + ingre.OnPlate);
+                            HandsOnOb.transform.tag = "Untagged";
+                            animator.SetBool("IsTake", false);
+                            HandsOnOb = null;
+                            isHolding = false;
+                            ingre.Die();
+                        }
+                        else
+                        {
+
+                        }
                     }
                 }
             }
@@ -296,7 +317,7 @@ public class Player_StateController : MonoBehaviour
                     if (counter.ChoppingBoard.transform.GetChild(1).gameObject.CompareTag("Ingredients") /* 재료가 썰수있는지  */)
                     {
                         counter.ChoppingBoard.transform.GetChild(1).gameObject.transform.TryGetComponent(out Ingredient ingre);
-                        
+
                         if (ingre != null && ingre.OnChopping)
                         {
                             animator.SetTrigger("Chop");
