@@ -110,7 +110,6 @@ public class Player_StateController : MonoBehaviour
         // 근처 카운터가 있고 내가 집은 상태가 아니라면 
         if (isHolding)
         {
-            Debug.Log("홀딩");
             DropObject(nearCount, nearob);
             yield break;
         }
@@ -199,6 +198,7 @@ public class Player_StateController : MonoBehaviour
             var counter = nearcounter.transform.GetComponent<CounterController>();
             if (!counter.IsPutOn) // 카운터에 올라간게 없다면  
             {
+                Debug.Log("카운터에 올라간게 없다면");
                 if (counter.ChoppingBoard == null) // 카운터에 도마가 없는 곳이라면 
                 {
                     if (counter.gameObject.CompareTag("Crate")) // 들고 있기 때문에 도마가 없고 재료 박스 앞이라면 박스 위에 올린다 
@@ -207,6 +207,25 @@ public class Player_StateController : MonoBehaviour
                         var boxcol = counter.transform.GetComponent<BoxCollider>();
                         Vector3 boxtop = boxcol.bounds.center + new Vector3(0, boxcol.bounds.extents.y, 0);
                         HandsOnOb.transform.position = boxtop;
+                    }
+                    else if(counter.gameObject.CompareTag("Pass"))
+                    {
+                        
+                        if(HandsOnOb.TryGetComponent(out Plate plate))
+                        {
+                            Debug.Log("접시를 듬");
+                            counter.transform.TryGetComponent(out Plate_Spawn plate_spawn);
+                            if (plate_spawn.PassPlate(plate))
+                            {
+                                Debug.Log("판단햇음");
+                                animator.SetBool("IsTake", false);
+                                HandsOnOb = null;
+                                isHolding = false;                                
+                            }
+                            return;                         
+                        }
+                        
+
                     }
                     else // 들고 있고 도마가 없다면 일반 카운터이기때문에 그냥 둔다, 재료들은 살짝 올려준다 
                     {
@@ -243,23 +262,59 @@ public class Player_StateController : MonoBehaviour
             else // 카운터에 올라가 있는데 드랍하려고 하면 
             {
                 //플레이트에 넣을때 
-                if (counter.PutOnOb.CompareTag("Plate") && HandsOnOb.CompareTag("Ingredients"))
+                // 접시만(재료 X) / 접시(재료 O) / 재료 + 재료
+                if ((counter.PutOnOb.CompareTag("Plate") || counter.PutOnOb.CompareTag("Ingredients")) && HandsOnOb.CompareTag("Ingredients"))
                 {
                     HandsOnOb.TryGetComponent(out Ingredient ingre);
                     HandsOnOb.TryGetComponent(out AddIngredientSpawn addingre);
                     HandsOnOb.TryGetComponent(out SphereCollider col);
                     if (ingre.OnPlate)
                     {
-                        HandsOnOb.transform.SetParent(counter.PutOnOb.transform);
-                        HandsOnOb.transform.position = counter.PutOnOb.transform.position;
-                        HandsOnOb.transform.rotation = counter.PutOnOb.transform.rotation;
-                        col.enabled = false;
-                        animator.SetBool("IsTake", false);
-                        HandsOnOb = null;
-                        isHolding = false;
-                    }
+                        //손에 재료들고 접시만 
+                        if (counter.PutOnOb.CompareTag("Plate"))
+                        {
 
+                            //접시 재료 ㅇ 
+                            if(counter.PutOnOb.transform.childCount > 0)
+                            {
+                                if (addingre.SetAddIngredient(counter.PutOnOb.transform.GetChild(0).gameObject))
+                                {
+                                    ingre.Die();
+                                    animator.SetBool("IsTake", false);
+                                    HandsOnOb = null;
+                                    isHolding = false;
+                                }
+                             
+                            }
+                            else // 접시 재료 X 
+                            {
+                                HandsOnOb.transform.SetParent(counter.PutOnOb.transform);
+                                HandsOnOb.transform.position = counter.PutOnOb.transform.position;
+                                HandsOnOb.transform.rotation = counter.PutOnOb.transform.rotation;
+                                col.enabled = false;
+                                animator.SetBool("IsTake", false);
+                                HandsOnOb = null;
+                                isHolding = false;
+                            }
+                        }
+                        else // 재료재료
+                        {
+                            if (addingre.SetAddIngredient(counter.PutOnOb))
+                            {
+                                ingre.Die();
+                                animator.SetBool("IsTake", false);
+                                HandsOnOb = null;
+                                isHolding = false;
+                            }
+                            else
+                            {
+                                Debug.Log("못내림");
+                            }
+                        }
+                    }
                 }
+
+
             }
         }
         else // 근처에 카운터 없으면 땅에 떨군다는 
