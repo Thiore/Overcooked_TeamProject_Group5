@@ -58,7 +58,7 @@ public class spawn_Ingredient : MonoBehaviour
         {
             Ingredient newobj = Instantiate(myIngredient);
             newobj.SetCookProcess(info.CookingProcess, info.Chop_Anim, info.Ingredients);
-            
+            newobj.name = myIngredient.name;
             newobj.crate = this;
             return newobj.gameObject;
         }
