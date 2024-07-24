@@ -24,6 +24,10 @@ public class Stage_Select : MonoBehaviour
     private void Update()
     {
         Select_Stage();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            LoadingSceneManager.LoadScene("AnotherScene");
+        }
     }
 
     private void Select_Stage()

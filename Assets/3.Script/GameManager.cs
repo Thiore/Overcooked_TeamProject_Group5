@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public int isInputEnabled = 0; // 입력 가능 상태
     public WorldState worldState;
 
-
+    
     private void Awake()
     {
         if (Instance == null)
@@ -117,7 +117,10 @@ public class GameManager : MonoBehaviour
                 LoadingSceneManager.LoadScene("Arcade_Menu");
                 break;
             case 2:
-                SceneManager.LoadScene("BSJScene");
+                GameObject shutter = GameObject.Find("m_van_02").transform.Find("m_vanshutter_01_0").gameObject ;
+                
+                shutter.SetActive(true);
+                shutter.GetComponent<Animator>().SetTrigger("Close");
                 break;
             case 3:
                 SceneManager.LoadScene("Set_Menu");
