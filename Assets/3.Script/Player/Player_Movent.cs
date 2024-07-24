@@ -64,7 +64,7 @@ public class Player_Movent : MonoBehaviour
         }
 
         player_rb.angularVelocity = Vector3.zero;
-        player_rb.velocity = Vector3.zero;
+        player_rb.velocity = new Vector3(0f, player_rb.velocity.y + 0.1f, 0f);
 
     }
 
@@ -158,7 +158,7 @@ public class Player_Movent : MonoBehaviour
             elaspedTime += Time.deltaTime;
             yield return null;
         }
-        Vector3 last = new Vector3(player_rb.position.x, 0f, player_rb.position.z);
+        Vector3 last = new Vector3(player_rb.position.x, 0.1f, player_rb.position.z);
         player_rb.MovePosition(last);
 
 

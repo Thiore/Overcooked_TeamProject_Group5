@@ -18,41 +18,17 @@ public class NearObject_EmissionController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Ingredients") || other.gameObject.CompareTag("Cooker") 
-            || other.gameObject.CompareTag("Plate"))
+        if (other.gameObject.CompareTag("Plate"))
         {
-            pickList.Add(other.gameObject);
-            if (pickQue.Count.Equals(0))
-            {
-                pickQue.Enqueue(other.gameObject);
-                ChangeEmission(pickQue.Peek());
-                pickList.Clear();
-                return;
-            }
-
-            for (int i = 0; i < pickList.Count; i++)
-            {
-                float queDistance = Vector3.Distance(transform.position, pickQue.Peek().transform.position);
-                float distance = Vector3.Distance(transform.position, pickList[i].transform.position);
-
-                if (distance < queDistance)
-                {
-                    if (pickQue.Count != 0)
-                        ChangeOriginEmission(pickQue.Dequeue());
-                    pickQue.Enqueue(pickList[i]);
-                    ChangeEmission(pickQue.Peek());
-                }
-
-
-                if (pickQue.Count.Equals(0))
-                {
-                    pickQue.Enqueue(pickList[i]);
-                    ChangeEmission(pickQue.Peek());
-                }
-
-            }
-
-            pickList.Clear();
+            NearObCheck(other);           
+        }
+        else if (other.gameObject.CompareTag("Cooker"))
+        {
+            NearObCheck(other);
+        }
+        else if (other.gameObject.CompareTag("Ingredients"))
+        {
+            NearObCheck(other);
         }
 
 
@@ -70,7 +46,42 @@ public class NearObject_EmissionController : MonoBehaviour
     }
 
 
-    public void ChangeEmission(GameObject gameObject)
+    private void NearObCheck(Collider other)
+    {
+        pickList.Add(other.gameObject);
+        if (pickQue.Count.Equals(0))
+        {
+            pickQue.Enqueue(other.gameObject);
+            ChangeEmission(pickQue.Peek());
+            pickList.Clear();
+            return;
+        }
+
+        for (int i = 0; i < pickList.Count; i++)
+        {
+            float queDistance = Vector3.Distance(transform.position, pickQue.Peek().transform.position);
+            float distance = Vector3.Distance(transform.position, pickList[i].transform.position);
+
+            if (distance < queDistance)
+            {
+                if (pickQue.Count != 0)
+                    ChangeOriginEmission(pickQue.Dequeue());
+                pickQue.Enqueue(pickList[i]);
+                ChangeEmission(pickQue.Peek());
+            }
+
+
+            if (pickQue.Count.Equals(0))
+            {
+                pickQue.Enqueue(pickList[i]);
+                ChangeEmission(pickQue.Peek());
+            }
+        }
+        pickList.Clear();
+    }
+
+
+        public void ChangeEmission(GameObject gameObject)
     {
         // 충돌한 오브젝트의 렌더러 가져오기
         Renderer renderer = gameObject.GetComponent<Renderer>();
