@@ -31,13 +31,7 @@ public class Plate : MonoBehaviour
         
     }
 
-    private void Update()
-    {
-        if(!transform.childCount.Equals(0))
-        {
-            gameObject.name = transform.GetChild(0).name;
-        }
-    }
+   
     public void SetWash(bool isWash)
     {
         this.isWash = isWash;

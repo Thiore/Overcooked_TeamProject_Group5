@@ -25,7 +25,6 @@ public class Plate_Spawn : MonoBehaviour
             {
                 plates[i] = Instantiate(PlatePrefabs,plateReturn.transform.position,plateReturn.transform.rotation);
                 plateReturn.SetPlate(plates[i]);
-                plates[i].gameObject.name = "Plate";
                 plates[i].SetWash(false);
 
             }
@@ -36,7 +35,6 @@ public class Plate_Spawn : MonoBehaviour
                     plates[i].transform.GetComponentInParent<CounterController>();
                 counter.ChangePuton();
                 counter.PutOnOb = plates[i].gameObject;
-                plates[i].gameObject.name = "Plate";
                 plates[i].SetWash(false);
             }
             
@@ -64,7 +62,6 @@ public class Plate_Spawn : MonoBehaviour
                         Transform childobj = plates[i].transform.GetChild(0);
                         CheckRecipe.CheckRecipe($"{childobj.gameObject.name}_Food");
                         DestroyPlateNum.Enqueue(i);
-                        plates[i].gameObject.name = "Plate";
                         if (childobj.TryGetComponent(out Ingredient Ingre))
                         {
                             Ingre.Die();
