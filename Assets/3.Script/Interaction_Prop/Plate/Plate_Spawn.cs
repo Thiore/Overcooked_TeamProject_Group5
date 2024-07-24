@@ -19,11 +19,11 @@ public class Plate_Spawn : MonoBehaviour
     private void Start()
     {
         plates = new Plate[Set_Pos.Length];
-        for (int i = 0; i < plates.Length; i++)
+        for(int i = 0;i<plates.Length;i++)
         {
             if (Set_Pos[i] == plateReturn.transform)
             {
-                plates[i] = Instantiate(PlatePrefabs, plateReturn.transform.position, plateReturn.transform.rotation);
+                plates[i] = Instantiate(PlatePrefabs,plateReturn.transform.position,plateReturn.transform.rotation);
                 plateReturn.SetPlate(plates[i]);
                 plates[i].SetWash(false);
 
@@ -31,19 +31,19 @@ public class Plate_Spawn : MonoBehaviour
             else
             {
                 plates[i] = Instantiate(PlatePrefabs, Set_Pos[i].position, Set_Pos[i].rotation, Set_Pos[i]);
-                CounterController counter =
+                CounterController counter = 
                     plates[i].transform.GetComponentInParent<CounterController>();
                 counter.ChangePuton();
                 counter.PutOnOb = plates[i].gameObject;
                 plates[i].SetWash(false);
             }
-
+            
         }
     }
 
     private void Update()
     {
-        if (DestroyPlateNum.Count > 0)
+        if(DestroyPlateNum.Count>0)
         {
             StartCoroutine(SpawnPlate());
         }
@@ -51,18 +51,19 @@ public class Plate_Spawn : MonoBehaviour
 
     public bool PassPlate(Plate plate)//false가 반환되면 접시를 내지못함
     {
-        for (int i = 0; i < plates.Length; i++)
+        for(int i = 0; i< plates.Length; i++)
         {
-            if (plate == plates[i])
+            if(plate == plates[i])
             {
-                if (!plate.isWash)
+                if(!plate.isWash)
                 {
-                    if (plates[i].transform.childCount > 0)
+                    if(plates[i].transform.childCount>0)
                     {
                         Transform childobj = plates[i].transform.GetChild(0);
                         //CheckRecipe.CheckRecipe($"{childobj.gameObject.name}_Food");
                         //나중에 활성화해줘야합니다.
                         DestroyPlateNum.Enqueue(i);
+                        plates[i].transform.SetParent(null);
                         if (childobj.TryGetComponent(out Ingredient Ingre))
                         {
                             Ingre.Die();
@@ -72,11 +73,13 @@ public class Plate_Spawn : MonoBehaviour
 
                         plates[i].gameObject.SetActive(false);
                         return true;
-                    }
+                    }  
                     else
                     {
+                        plates[i].transform.SetParent(null);
                         DestroyPlateNum.Enqueue(i);
                         plates[i].gameObject.SetActive(false);
+                        
                         return true;
                     }
                 }
