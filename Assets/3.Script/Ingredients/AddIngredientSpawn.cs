@@ -15,7 +15,7 @@ public class AddIngredientSpawn : MonoBehaviour
     private void Awake()
     {
         TryGetComponent(out Ingre);
-        recipes = DataManager.Instance.StageRecipeData(GameManager.Instance.stage_index);
+        recipes = DataManager.Instance.StageRecipeData(1);
 
         for(int i = 0; i < Ingredients_Info.Info.Length; i++)
         {
@@ -30,7 +30,7 @@ public class AddIngredientSpawn : MonoBehaviour
         }
     }
 
-    public bool SetAddIngredient(GameObject targetObj)
+    public bool SetAddIngredient(GameObject targetObj) //false가 반환되면 합치지못함
     {
         if(Ingre.OnPlate)
         {
@@ -73,7 +73,7 @@ public class AddIngredientSpawn : MonoBehaviour
                     }
                 }
                 GameObject Obj = new GameObject($"{targetObj.name}_{gameObject.name}");
-                Obj.AddComponent<AddIngredient>();
+                
                 TryGetComponent(out SphereCollider targetcol);
                 SphereCollider newcol = Obj.AddComponent<SphereCollider>();
                 newcol.center = targetcol.center;
