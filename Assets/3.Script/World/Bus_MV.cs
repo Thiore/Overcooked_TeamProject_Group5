@@ -14,18 +14,18 @@ public class Bus_MV : MonoBehaviour
     //private Animator animator;
     private Vector3 moveDirection;
 
-    private Player_Ray playerRay;
-    private bool isJumping = false;
-    private Vector3 jumpvelocity = Vector3.zero;
+    //private Player_Ray playerRay;
+    //private bool isJumping = false;
+    //private Vector3 jumpvelocity = Vector3.zero;
 
 
-    private readonly int IsWalking = Animator.StringToHash("IsWalking");
+    //private readonly int IsWalking = Animator.StringToHash("IsWalking");
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerIntput>();
         player_rb = GetComponent<Rigidbody>();
-        playerRay = GetComponent<Player_Ray>();
+        //playerRay = GetComponent<Player_Ray>();
         //animator = GetComponent<Animator>();
     }
 
