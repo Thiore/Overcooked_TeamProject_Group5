@@ -244,12 +244,29 @@ public class Player_StateController : MonoBehaviour
             }
             else // 카운터에 올라가 있는데 드랍하려고 하면 
             {
-                Debug.Log("이미올라가있음");
+                //플레이트에 넣을때 
+                if (counter.PutOnOb.CompareTag("Plate") && HandsOnOb.CompareTag("Ingredients"))
+                {
+                    HandsOnOb.TryGetComponent(out Ingredient ingre);
+                    if(ingre.OnPlate)
+                    {
+                        HandsOnOb.transform.SetParent(counter.PutOnOb.transform);
+                        HandsOnOb.transform.position = counter.PutOnOb.transform.position;
+                        HandsOnOb.transform.rotation = counter.PutOnOb.transform.rotation;
+                        HandsOnOb.transform.tag = "Untagged";
+                        animator.SetBool("IsTake", false);
+                        HandsOnOb = null;
+                        isHolding = false;
+                    }
+                    else
+                    {
+                        Debug.Log("이미올라가있음");
+                    }
+                }
             }
         }
         else // 근처에 카운터 없으면 땅에 떨군다는 
         {
-            Debug.Log("emfdjdhsk");
             HandsOnOb.transform.SetParent(null);
             var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();
             rb.mass = 0.05f;

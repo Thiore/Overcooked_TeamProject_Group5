@@ -479,6 +479,7 @@ GameObject:
   m_Component:
   - component: {fileID: 690597949275243299}
   - component: {fileID: 206795603967629726}
+  - component: {fileID: 206795603967629722}
   m_Layer: 31
   m_Name: m_sk_the_pass_red_01
   m_TagString: Pass
@@ -486,6 +487,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &206795603967629722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206795603967629721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebdd485626db9d42a61a9f6fc179d00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Set_Pos:
+  - {fileID: 591930638712601244}
+  - {fileID: 424025813389197085}
+  - {fileID: 424025813445507246}
+  - {fileID: 424025813708316985}
+  plateReturn: {fileID: 5420787736136632592}
+  PlatePrefabs: {fileID: 5570174263193704086, guid: ad0ad28da228afc489fb53a777d96ea9, type: 3}
+  CheckRecipe: {fileID: 0}
+  isWash: 0
 --- !u!65 &206795603967629726
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3677,10 +3699,10 @@ BoxCollider:
   m_GameObject: {fileID: 870412921585450563}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.7, z: -0.1}
+  m_Size: {x: 1, y: 0.4, z: 1}
+  m_Center: {x: 0, y: 0.4, z: -0.1}
 --- !u!54 &870412921585450561
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3690,12 +3712,12 @@ Rigidbody:
   m_GameObject: {fileID: 870412921585450563}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 3
-  m_AngularDrag: 5
+  m_Drag: 0
+  m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 2
-  m_Constraints: 84
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!95 &870412921585450562
 Animator:
@@ -3765,7 +3787,7 @@ SphereCollider:
   m_GameObject: {fileID: 870412921585450563}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.37
   m_Center: {x: 0, y: 0.37, z: 0}
@@ -6997,6 +7019,7 @@ GameObject:
   - component: {fileID: 2046133477553714272}
   - component: {fileID: 2148444165977368168}
   - component: {fileID: 5420787736136632591}
+  - component: {fileID: 5420787736136632592}
   m_Layer: 31
   m_Name: m_sk_plate_return_01_0
   m_TagString: Plate_Return
@@ -7017,6 +7040,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.1981226, y: 0.43590936, z: 1.199719}
   m_Center: {x: 0.0008819103, y: 0.21795468, z: -0.0001039505}
+--- !u!114 &5420787736136632592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5420787736136632590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c97dee6a53d63064299006720297818e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5436359816023241302
 GameObject:
   m_ObjectHideFlags: 0
@@ -7271,7 +7306,7 @@ BoxCollider:
   m_GameObject: {fileID: 5510673472339248249}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.7, z: -0.1}
@@ -7284,7 +7319,7 @@ SphereCollider:
   m_GameObject: {fileID: 5510673472339248249}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.37
   m_Center: {x: 0, y: 0.37, z: 0}
