@@ -13,7 +13,7 @@ public class TestCamera : MonoBehaviour
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         camera.transform.position = player.position + new Vector3(0, 6, -4);
         camera.transform.LookAt(player);
