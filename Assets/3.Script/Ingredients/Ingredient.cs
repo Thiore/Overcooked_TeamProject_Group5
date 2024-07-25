@@ -104,80 +104,80 @@ public class Ingredient : MonoBehaviour
         ChopTime = 0;
         
 
-        if (!Ingredient_Mesh.mesh.Equals(Change_Mesh[0]))
-        {
-            Change_Ingredient(eCooked.Normal);
-            Debug.Log("들어오면안됨");
-        }
+        //if (!Ingredient_Mesh.mesh.Equals(Change_Mesh[0]))
+        //{
+        //    Change_Ingredient(eCooked.Normal);
+        //    Debug.Log("들어오면안됨");
+        //}
         
 
     }
 
-    private void Update()
-    {
-        if (transform.parent != null)
-        {
-            if (transform.parent.CompareTag("ChoppingBoard"))
-            {
-                if(OnChopping)
-                {
-                    if (cooking.Equals(eCooked.Normal))
-                    {
-                        cooking = eCooked.Chopping;
-                    }
-                    if(cooking.Equals(eCooked.Chopping))
-                    { 
-                        for (int i = 0; i < playerAnim.Length; i++)
-                        {
-                            if (playerAnim[i] != null)
-                            {
-                                AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
-                                if (AnimInfo[i].IsName("New_Chef@Chop"))
-                                {
-                                    if (playerAnim[i] != null)
-                                        ChopTime += Time.deltaTime;
-                                    Debug.Log($"잘리는중{ChopTime}");
-                                    if (ChopTime > FinishChopTime)
-                                    {
-                                        ChopTime = 0;
-                                        Change_Ingredient(eCooked.Cooking);
-                                        playerAnim[i].SetTrigger("Finish");
-                                        playerAnim[i].transform.GetComponent<Player_StateController>().CleaverOb.SetActive(false);
-                                    }
-                                }
-                            }
+    //private void Update()
+    //{
+    //    if (transform.parent != null)
+    //    {
+    //        if (transform.parent.CompareTag("ChoppingBoard"))
+    //        {
+    //            if(OnChopping)
+    //            {
+    //                if (cooking.Equals(eCooked.Normal))
+    //                {
+    //                    cooking = eCooked.Chopping;
+    //                }
+    //                if(cooking.Equals(eCooked.Chopping))
+    //                { 
+    //                    for (int i = 0; i < playerAnim.Length; i++)
+    //                    {
+    //                        if (playerAnim[i] != null)
+    //                        {
+    //                            AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
+    //                            if (AnimInfo[i].IsName("New_Chef@Chop"))
+    //                            {
+    //                                if (playerAnim[i] != null)
+    //                                    ChopTime += Time.deltaTime;
+    //                                Debug.Log($"잘리는중{ChopTime}");
+    //                                if (ChopTime > FinishChopTime)
+    //                                {
+    //                                    ChopTime = 0;
+    //                                    Change_Ingredient(eCooked.Cooking);
+    //                                    playerAnim[i].SetTrigger("Finish");
+    //                                    playerAnim[i].transform.GetComponent<Player_StateController>().CleaverOb.SetActive(false);
+    //                                }
+    //                            }
+    //                        }
 
-                        }
-                    }
-                }
-                return;
-            }
-            else if(transform.parent.CompareTag("Cooker"))
-            {
-                if(transform.parent.parent != null)
-                {
-                    Ingredient_Mesh = null;
-                }
-            }
-            if(transform.parent.CompareTag("TrashCan"))
-            {
-                transform.Rotate(Vector3.up, 2f);
-                transform.localScale *= 0.98f;
-                if(transform.localScale.x < 0.2f)
-                {
-                    transform.parent.TryGetComponent(out CounterController counter);
-                    if(counter != null)
-                    {
-                        counter.ChangePuton();
-                        counter.PutOnOb = null;
-                    }
-                    Die();
-                }
+    //                    }
+    //                }
+    //            }
+    //            return;
+    //        }
+    //        else if(transform.parent.CompareTag("Cooker"))
+    //        {
+    //            if(transform.parent.parent != null)
+    //            {
+    //                Ingredient_Mesh = null;
+    //            }
+    //        }
+    //        if(transform.parent.CompareTag("TrashCan"))
+    //        {
+    //            transform.Rotate(Vector3.up, 2f);
+    //            transform.localScale *= 0.98f;
+    //            if(transform.localScale.x < 0.2f)
+    //            {
+    //                transform.parent.TryGetComponent(out CounterController counter);
+    //                if(counter != null)
+    //                {
+    //                    counter.ChangePuton();
+    //                    counter.PutOnOb = null;
+    //                }
+    //                Die();
+    //            }
 
-            }
-        }
+    //        }
+    //    }
 
-    }
+    //}
 
     public void Change_Ingredient(eCooked cooked)
     {
