@@ -63,8 +63,7 @@ public class Plate_Spawn : MonoBehaviour
                     if(plates[i].transform.childCount>0)
                     {
                         Transform childobj = plates[i].transform.GetChild(0);
-                        //CheckRecipe.CheckRecipe($"{childobj.gameObject.name}_Food");
-                        //나중에 활성화해줘야합니다.
+                        CheckRecipe.CheckRecipe($"{childobj.gameObject.name}_Food");
                         plates[i].transform.SetParent(null);
                         DestroyPlateNum.Enqueue(i);
                         if (childobj.TryGetComponent(out Ingredient Ingre))

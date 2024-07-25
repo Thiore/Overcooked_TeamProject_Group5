@@ -42,7 +42,8 @@ public enum eCooked
     Normal = 0,
     Chopping,
     Cooking,
-    ReadyCook
+    ReadyCook,
+    trash
 }
 
 public class Ingredient : MonoBehaviour
@@ -61,7 +62,7 @@ public class Ingredient : MonoBehaviour
     private MeshFilter Ingredient_Mesh;
     private MeshCollider Ingredient_Col;
 
-    public eCooked cooking { get; private set; }
+    public eCooked cooking;
     public eIngredients myIngredients;
     private eCookingProcess CookProcess;
 
@@ -69,7 +70,7 @@ public class Ingredient : MonoBehaviour
     private bool Chop_Anim = false;
 
     private float ChopTime;
-    private float FinishChopTime = 4f;
+    private readonly float FinishChopTime = 4f;
     public bool OnPlate { get; private set; }
     public bool OnChopping { get; private set; }
     public bool OnCooker { get; private set; }
@@ -155,7 +156,7 @@ public class Ingredient : MonoBehaviour
             {
                 if(transform.parent.parent != null)
                 {
-                    //if(transform.parent.parent.CompareTag(""))
+                    Ingredient_Mesh = null;
                 }
             }
             if(transform.parent.CompareTag("TrashCan"))
@@ -178,7 +179,7 @@ public class Ingredient : MonoBehaviour
 
     }
 
-    private void Change_Ingredient(eCooked cooked)
+    public void Change_Ingredient(eCooked cooked)
     {
         cooking = cooked;
         int CookEnum = (int)cooked;
@@ -199,7 +200,7 @@ public class Ingredient : MonoBehaviour
         OnIngredients();
     }
 
-    public void OnIngredients()
+    private void OnIngredients()
     {
         switch (CookProcess)
         {
@@ -247,6 +248,18 @@ public class Ingredient : MonoBehaviour
                     OnChopping = false;
                     OnPlate = false;
                 }
+                else if(cooking.Equals(eCooked.ReadyCook))
+                {
+                    OnCooker = false;
+                    OnChopping = false;
+                    OnPlate = true;
+                }
+                else
+                {
+                    OnCooker = false;
+                    OnChopping = false;
+                    OnPlate = false;
+                }
                 break;
             case eCookingProcess.Cook:
                 if (cooking.Equals(eCooked.Normal))
@@ -255,11 +268,17 @@ public class Ingredient : MonoBehaviour
                     OnChopping = false;
                     OnPlate = false;
                 }
-                else
+                else if(cooking.Equals(eCooked.ReadyCook))
                 {
                     OnCooker = false;
                     OnChopping = false;
                     OnPlate = true;
+                }
+                else if (cooking.Equals(eCooked.trash))
+                {
+                    OnCooker = false;
+                    OnChopping = false;
+                    OnPlate = false;
                 }
                 break;
         }

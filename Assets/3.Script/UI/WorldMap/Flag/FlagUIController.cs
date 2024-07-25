@@ -9,7 +9,7 @@ public class FlagUIController : MonoBehaviour
     private GameObject ui;
     private Canvas flag_canvas;
     private int[] target_Score = new int[3];
-    private int bestScore;
+    public int bestScore;
     private Text BestScore;
     private Text[] Target_Score = new Text[3];
     private Image[] FullStar = new Image[3];

@@ -5,17 +5,19 @@ using UnityEngine;
 public class WorldState : MonoBehaviour
 {
     private Animator animator;
-    
-    private int bestScore;
+
+    private FlagUIController flagController;
+    private int bestScore_W;
 
     private void Start()
     {
+        flagController = FindObjectOfType<FlagUIController>();
         animator = GetComponent<Animator>();
         if (animator == null)
         {
             Debug.LogError("Animator 컴포넌트를 찾을 수 없습니다!");
         }
-        float savedTime = PlayerPrefs.GetFloat("AnimatorState", 0);
+        //float savedTime = PlayerPrefs.GetFloat("AnimatorState", 0);
         //if (savedTime < 2)
             //SaveState();
         //if (savedTime > 1f)
@@ -33,7 +35,8 @@ public class WorldState : MonoBehaviour
             float normalizedTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
             //현재 애니메이션의 재생 시간(normalizedTime) 저장
             PlayerPrefs.SetFloat("AnimatorState", animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-            Debug.Log("애니메이션 재생 시간 저장됨: " + PlayerPrefs.GetFloat("AnimatorState", 0));
+            //Debug.Log("애니메이션 재생 시간 저장됨: " + PlayerPrefs.GetFloat("AnimatorState", 0));
+            Debug.Log("애니메이션 재생 시간 저장됨: " + normalizedTime);
         }
         else
         {
@@ -53,12 +56,13 @@ public class WorldState : MonoBehaviour
 
     public void ResetState(int stageNumber)
     {
-        bestScore = DataManager.Instance.GetStageInformation(stageNumber).bestScore;
-        if (bestScore == 70)
+        //bestScore = DataManager.Instance.GetStageInformation(stageNumber).bestScore;
+        bestScore_W = flagController.bestScore;
+        if (bestScore_W <= 39)
         {
             //PlayerPrefs.DeleteKey("AnimatorState");
             SaveState();
-            Debug.Log("애니메이션 리셋");
+            Debug.Log("ResetState 메서드 들어왔다.");
         }
         else
         {
