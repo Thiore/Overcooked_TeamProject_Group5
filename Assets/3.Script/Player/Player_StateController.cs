@@ -164,12 +164,25 @@ public class Player_StateController : MonoBehaviour
                     //else 
                     if (counter.ChoppingBoard != null)
                     {
+                        Debug.Log("들어오긴해?");
                         TakeHandObject(counter.ChoppingBoard.transform.GetChild(1).gameObject);
                         counter.ChoppingBoard.transform.GetChild(0).gameObject.SetActive(true);
                     }
                     else // 아예 나머지들?? 
                     {
-                        TakeHandObject(counter.PutOnOb);
+                        if(counter.CompareTag("Plate_Return"))
+                        {
+                            if(counter.TryGetComponent(out Plate_Return platereturn))
+                            {
+                                TakeHandObject(platereturn.GetPlate());
+                                yield break;
+                            }          
+                            
+                        }
+                        else
+                        {
+                            TakeHandObject(counter.PutOnOb);
+                        }
                     }
 
                     counter.PutOnOb = null;
