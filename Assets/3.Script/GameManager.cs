@@ -133,4 +133,16 @@ public class GameManager : MonoBehaviour
                 return;
         }
     }
+
+    public void Enter_Game(int button_index)
+    {
+        if (button_index == 0)
+        {
+            //새로운 게임 시작하는 로직
+        }
+        else
+        {
+            //이전 게임 이어서 하는 로직
+        }
+    }
 }
