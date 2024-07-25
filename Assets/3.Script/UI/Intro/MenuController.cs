@@ -11,6 +11,8 @@ public class MenuController : MonoBehaviour
     public Button characterButton;
     public Button setButton;
 
+    private GameObject Enter_Game;
+
     // Character_Button 패널
     public GameObject characterButtonPanel;
 
@@ -35,6 +37,9 @@ public class MenuController : MonoBehaviour
             characterButton,
             setButton
         };
+
+        Enter_Game = GameObject.Find("Enter_GameMode");
+        Enter_Game.SetActive(false);
 
         // 첫 번째 버튼 선택
         SelectButton(currentButtonIndex);
@@ -69,13 +74,27 @@ public class MenuController : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.Space))
             {
                 audio_source.PlayOneShot(audio_source.clip);
+                if (currentButtonIndex == 0)
+                {
+                    Active_Enter_Game();
+                    return;
+                }
                 HandleButtonPress();
             }
         }else if (GameManager.Instance.isInputEnabled == 2)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                if (Enter_Game.activeInHierarchy)
+                {
+                DeActive_Enter_Game();
+                }
+                else
+                {
                 DeActive_Audio_UI();
+
+                }
+                
             }
         }
     }
@@ -122,6 +141,17 @@ public class MenuController : MonoBehaviour
         characterButtonPanel.SetActive(true);
         // MenuController 입력 비활성화
         GameManager.Instance.isInputEnabled += 1;
+    }
+    private void Active_Enter_Game()
+    {
+        Enter_Game.SetActive(true);
+        GameManager.Instance.isInputEnabled += 1;
+
+    }
+    private void DeActive_Enter_Game()
+    {
+        Enter_Game.SetActive(false);
+        GameManager.Instance.isInputEnabled -= 1;
     }
 
     public void Active_Audio_UI()
