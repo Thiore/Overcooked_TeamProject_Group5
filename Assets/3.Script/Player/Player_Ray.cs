@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class Player_Ray : MonoBehaviour
 {
-    #region Á¤¹®Dash
-
     [SerializeField] Transform rayPoint;
-
-    private LayerMask InteractionLayer;
 
     private void Awake()
     {
@@ -31,39 +27,5 @@ public class Player_Ray : MonoBehaviour
         hitPoint = Vector3.zero;
         return false;
     }
-
-    #endregion
-
-
-    #region ¿µÈÆDash
-    //[SerializeField] private Transform rayPoint;
-
-    //private LayerMask InteractionLayer;
-
-    //private void Awake()
-    //{
-    //    InteractionLayer = LayerMask.GetMask("InteractionProp");
-    //}
-
-    //public Vector3 ShotRayFront()
-    //{
-    //    RaycastHit hit;
-    //    Vector3 hitPos = rayPoint.position + rayPoint.forward * 3f ;
-    //    Debug.Log("PlayerTrans : " + transform.position);
-    //    Debug.Log(hitPos);
-    //    Debug.DrawRay(rayPoint.position, transform.forward * 3f, Color.red);
-    //    if (Physics.Raycast(rayPoint.position, transform.forward, out hit, 3f, InteractionLayer))
-    //    {
-            
-    //        if (hit.collider.gameObject != null)
-    //        {
-    //            hitPos = hit.point;
-    //        }
-    //    }
-        
-    //    return hitPos;
-    //}
-
-    #endregion
 
 }

@@ -135,8 +135,6 @@ public class Player_Movent : MonoBehaviour
         isJumping = true;
         animator.SetBool(IsWalking, true);
 
-        #region Á¤¹®Dash
-
         Vector3 endPos = player_rb.position + transform.forward * 2f;
         float elaspedTime = 0f;
 
@@ -146,6 +144,7 @@ public class Player_Movent : MonoBehaviour
             {
                 if (hitPoint != null)
                 {
+                    Debug.Log(hitPoint);
                     var dis = Vector3.Distance(player_rb.position, hitPoint);
                     if (dis < 0.5f)
                     {
@@ -154,29 +153,11 @@ public class Player_Movent : MonoBehaviour
                 }
             }
 
-            player_rb.MovePosition(Vector3.Lerp(player_rb.position, endPos, elaspedTime / 0.3f));
+            player_rb.AddForce(transform.forward * 2f, ForceMode.VelocityChange);
+           // player_rb.MovePosition(Vector3.Lerp(player_rb.position, endPos, elaspedTime / 0.3f));
             elaspedTime += Time.deltaTime;
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
-        Vector3 last = new Vector3(player_rb.position.x, 0.1f, player_rb.position.z);
-        player_rb.MovePosition(last);
-
-
-        #endregion
-
-        #region ¿µÈÆDash
-        //Vector3 EndPos = playerRay.ShotRayFront();
-
-        //float DashDistance = Vector3.Distance(transform.position, EndPos);
-        //while (DashDistance > 0.5f)
-        //{
-        //    Debug.Log(DashDistance);
-        //    player_rb.MovePosition(player_rb.position + transform.forward * moveSpeed * 1.3f*Time.deltaTime);
-        //    DashDistance = Vector3.Distance(transform.position, EndPos);
-        //    yield return null;
-        //}
-
-        #endregion
 
         animator.SetBool(IsWalking, false);
         isJumping = false;

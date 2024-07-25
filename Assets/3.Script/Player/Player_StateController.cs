@@ -101,6 +101,14 @@ public class Player_StateController : MonoBehaviour
         rb.mass = 0.2f;
         rb.angularDrag = 0;
         rb.AddForce(transform.forward * 100f);
+        if (HandsOnOb.transform.TryGetComponent(out MeshCollider mesh))
+        {
+            mesh.enabled = true;
+        }
+        if (HandsOnOb.transform.TryGetComponent(out SphereCollider col))
+        {
+            col.enabled = true;
+        }
         animator.SetBool("IsTake", false);
         HandsOnOb = null;
         isHolding = false;
@@ -131,7 +139,6 @@ public class Player_StateController : MonoBehaviour
                         if (spawn != null)
                         {
                             TakeHandObject(spawn.PickAnim());
-                            Debug.Log("열기");
                             // 생성된 재료 오브젝트 바로 집는 메소드 추가 필요 
                             yield break;
                         }
@@ -225,6 +232,11 @@ public class Player_StateController : MonoBehaviour
                             }
                             return;                         
                         }
+                        else
+                        {
+                            //접시가 아니면 뭐 패스 
+                            return;
+                        }
                         
 
                     }
@@ -279,6 +291,14 @@ public class Player_StateController : MonoBehaviour
                     HandsOnOb.transform.SetParent(counter.ChoppingBoard.transform);
                     HandsOnOb.transform.position = counter.ChoppingBoard.transform.position + new Vector3(0, 0.1f, 0);
                     counter.ChoppingBoard.transform.GetChild(0).gameObject.SetActive(false);
+                    if (HandsOnOb.transform.TryGetComponent(out MeshCollider mesh))
+                    {
+                        mesh.enabled = true;
+                    }
+                    if (HandsOnOb.transform.TryGetComponent(out SphereCollider col))
+                    {
+                        col.enabled = true;
+                    }
                 }
 
                 HandsOnOb.transform.rotation = Quaternion.identity;
@@ -352,6 +372,14 @@ public class Player_StateController : MonoBehaviour
             var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();
             rb.mass = 0.05f;
             rb.angularDrag = 0;
+            if (HandsOnOb.transform.TryGetComponent(out MeshCollider mesh))
+            {
+                mesh.enabled = true;
+            }
+            if (HandsOnOb.transform.TryGetComponent(out SphereCollider col))
+            {
+                col.enabled = true;
+            }
             animator.SetBool("IsTake", false);
             HandsOnOb = null;
             isHolding = false;
@@ -397,6 +425,14 @@ public class Player_StateController : MonoBehaviour
         if (HandsOnOb.transform.TryGetComponent(out Rigidbody rigi))
         {
             Destroy(rigi);
+        }
+        if (HandsOnOb.transform.TryGetComponent(out MeshCollider mesh))
+        {
+            mesh.enabled = false;
+        }
+        if(HandsOnOb.transform.TryGetComponent(out SphereCollider col))
+        {
+            col.enabled = false;
         }
         HandsOnOb.transform.SetParent(Attachtransform);
         HandsOnOb.transform.rotation = Attachtransform.rotation;
