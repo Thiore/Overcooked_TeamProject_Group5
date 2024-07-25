@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
         switch (stage_index)
         {
             case 1:
-                LoadingSceneManager.LoadScene("MangoScene");
+                LoadingSceneManager.LoadScene("Stage1");
                 break;
         }
     }
