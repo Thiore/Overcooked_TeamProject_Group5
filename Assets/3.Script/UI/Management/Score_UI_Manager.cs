@@ -12,10 +12,11 @@ public class Score_UI_Manager : MonoBehaviour
     private GameObject coinbanner;
     private void Start()
     {
-        coinbanner = FindObjectOfType<Canvas>().gameObject.transform.Find("Coin_Banner").GetComponent<Image>().gameObject;
+        coinbanner = GameObject.Find("Coin_Banner").GetComponent<Image>().gameObject;
 
         // 자식 오브젝트 중 이름이 "ScoreText"인 Text 컴포넌트를 가져옵니다.
         ScoreText = coinbanner.transform.Find("ScoreText").GetComponent<Text>();
+        Debug.Log($"ScoreText : {ScoreText.gameObject.name}");
 
         // 자식 오브젝트 중 이름이 "TipText"인 Text 컴포넌트를 가져옵니다.
         TipText = coinbanner.transform.Find("DarkBack").GetComponentInChildren<Text>();
