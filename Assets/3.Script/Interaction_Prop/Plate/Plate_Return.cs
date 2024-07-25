@@ -24,7 +24,7 @@ public class Plate_Return : MonoBehaviour
         plate.transform.SetParent(transform);
         counter.PutOnOb = plate.gameObject;
         plate.gameObject.SetActive(true);
-        plate.transform.position += Vector3.up * (Plate_Stack.Count - 1) * PlateY;
+        plate.transform.position = transform.position + Vector3.up*0.5f + Vector3.up * (Plate_Stack.Count - 1) * PlateY;
         Plate_Stack.Push(plate);
     }
 
