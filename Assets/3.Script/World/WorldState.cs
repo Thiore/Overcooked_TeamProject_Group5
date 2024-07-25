@@ -58,7 +58,7 @@ public class WorldState : MonoBehaviour
     {
         //bestScore = DataManager.Instance.GetStageInformation(stageNumber).bestScore;
         bestScore_W = flagController.bestScore;
-        if (bestScore_W == 0)
+        if (bestScore_W <= 39)
         {
             //PlayerPrefs.DeleteKey("AnimatorState");
             SaveState();

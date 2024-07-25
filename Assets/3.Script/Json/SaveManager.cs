@@ -9,6 +9,7 @@ public class SaveManager : MonoBehaviour
     private void Start()
     {
         //json형태로 gamedata 파일의 이름 정의 / 파일 경로 지정
+        //C:\Users\[Username]\AppData\LocalLow\[CompanyName]\[ProductName]
         filePath = Application.persistentDataPath + "/gamedata.json";
     }
 
@@ -33,10 +34,11 @@ public class SaveManager : MonoBehaviour
             //json 문자열을 GameSaveData 구조체로 변환
             return JsonConvert.DeserializeObject<GameSaveData>(json);
         }
-        return new GameSaveData//파일이 없는 경우 기본값 반환
+        //파일이 없는 경우 기본값 반환
+        return new GameSaveData 
         {
             clearedStage = 0,
-            targetScore = new int[] { 40, 60, 100 },
+            targetScore =0,
             bestScore = 0
         };
     }
