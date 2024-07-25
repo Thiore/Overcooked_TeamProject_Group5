@@ -162,12 +162,12 @@ public class DataManager : MonoBehaviour
     {
         if (stageData.ContainsKey(stageNumber))
         {
-            Debug.Log($"stage Number : {stageNumber}");
-            for(int i = 0; i < 3; i++)
-            {
-                Debug.Log($"targetscore : {stageData[stageNumber].targetScore[i]}");
-            }
-                Debug.Log($"targetscore : {stageData[stageNumber].bestScore}");
+            //Debug.Log($"stage Number : {stageNumber}");
+            //for(int i = 0; i < 3; i++)
+            //{
+            //    Debug.Log($"targetscore : {stageData[stageNumber].targetScore[i]}");
+            //}
+            //    Debug.Log($"targetscore : {stageData[stageNumber].bestScore}");
             
             return stageData[stageNumber];
         }

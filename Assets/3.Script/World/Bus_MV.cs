@@ -19,7 +19,7 @@ public class Bus_MV : MonoBehaviour
     //private Vector3 jumpvelocity = Vector3.zero;
 
 
-    //private readonly int IsWalking = Animator.StringToHash("IsWalking");
+    
 
     private void Awake()
     {
@@ -130,5 +130,5 @@ public class Bus_MV : MonoBehaviour
     //    isJumping = false;
     //}
 
-    
+
 }
