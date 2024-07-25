@@ -75,8 +75,20 @@ public class Player_StateController : MonoBehaviour
                 // 굽고 썰고 
                 if (!IsHolding)
                 {
-                    Debug.Log("처음 컨트롤 들어오냐");
-                    StartCoroutine(PlayerCookedChage());
+                    // 썰기
+                    if (nearcounter.transform.GetChild(0) != null)
+                    {
+                        if (nearcounter.transform.GetChild(0).gameObject.CompareTag("ChoppingBoard"))
+                        {
+                            StartCoroutine(PlayerCookedChage());
+                        }
+                    }
+                    // 싱크대
+                    // else if (nearcounter.CompareTag("싱크대"))
+                    //{
+
+                    //}
+
                 }
             }
 
@@ -92,6 +104,11 @@ public class Player_StateController : MonoBehaviour
             animator.SetBool("IsWalking", false);
             Cleaver.SetActive(false);
         }
+    }
+
+    private void WashingPlate()
+    {
+
     }
 
     private void ThrowIngredients()
@@ -374,6 +391,11 @@ public class Player_StateController : MonoBehaviour
                             }
                         }
                     }
+                }
+                //여기는 조리도구 안에 넣을때?
+                else if(counter.PutOnOb.CompareTag("Cooker") && HandsOnOb.CompareTag("Ingredients"))
+                {
+                     //추가적인 조리도구 메소드가 나오면 추가하면 됨 
                 }
 
 
