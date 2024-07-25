@@ -17,8 +17,12 @@ public class MenuController : MonoBehaviour
     // 메인 메뉴 버튼 배열
     private Button[] buttons;
     private int currentButtonIndex = 0;
+    private AudioSource audio_source;
 
-    private Animator camera_ani;
+    private Canvas Audio_UI;
+
+
+    public Animator camera_ani;
 
     private void Start()
     {
@@ -38,6 +42,11 @@ public class MenuController : MonoBehaviour
         camera_ani = GameObject.Find("Cameraman").GetComponent<Animator>();
 
         characterButtonPanel = GameObject.Find("Character_Button_Panel");
+
+        audio_source = GetComponentInChildren<AudioSource>();
+        Audio_UI = GameObject.Find("Sound_Setting").GetComponent<Canvas>();
+        Audio_UI.gameObject.SetActive(false);
+
         // Character_Button 패널 비활성화
         characterButtonPanel.SetActive(false);
     }
@@ -49,15 +58,24 @@ public class MenuController : MonoBehaviour
             // 좌우 방향키 입력 처리
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
+                audio_source.PlayOneShot(audio_source.clip);
                 ChangeButtonSelection(-1);
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
+                audio_source.PlayOneShot(audio_source.clip);
                 ChangeButtonSelection(1);
             }
             else if (Input.GetKeyDown(KeyCode.Space))
             {
+                audio_source.PlayOneShot(audio_source.clip);
                 HandleButtonPress();
+            }
+        }else if (GameManager.Instance.isInputEnabled == 2)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                DeActive_Audio_UI();
             }
         }
     }
@@ -85,18 +103,9 @@ public class MenuController : MonoBehaviour
 
     private void HandleButtonPress()
     {
-        if (currentButtonIndex == 3)
-        {
-            camera_ani.SetTrigger("Zoom");
-            // Character_Button 패널 활성화
-            characterButtonPanel.SetActive(true);
-            // MenuController 입력 비활성화
-            GameManager.Instance.isInputEnabled +=1;
-        }
-        else
-        {
+        
             GameManager.Instance.Menu_Button(currentButtonIndex);
-        }
+        
     }
 
     // Character_Button 패널 비활성화 및 MenuController 입력 활성화
@@ -105,5 +114,24 @@ public class MenuController : MonoBehaviour
         characterButtonPanel.SetActive(false);
         GameManager.Instance.isInputEnabled -=1;
         camera_ani.SetTrigger("GameStart");
+    }
+    public void CharacterChoose()
+    {
+        camera_ani.SetTrigger("Zoom");
+        // Character_Button 패널 활성화
+        characterButtonPanel.SetActive(true);
+        // MenuController 입력 비활성화
+        GameManager.Instance.isInputEnabled += 1;
+    }
+
+    public void Active_Audio_UI()
+    {
+        Audio_UI.gameObject.SetActive(true);
+        GameManager.Instance.isInputEnabled += 1;
+    }
+    private void DeActive_Audio_UI()
+    {
+        Audio_UI.gameObject.SetActive(false);
+        GameManager.Instance.isInputEnabled -= 1;
     }
 }

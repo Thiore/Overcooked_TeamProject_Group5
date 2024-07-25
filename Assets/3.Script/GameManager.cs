@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
     //IntroScene Button Onclick Method
     public void Menu_Button(int button_index)
     {
+        MenuController menu = GameObject.Find("Menu_Panel").GetComponent<MenuController>();
         switch (button_index)
         {
             case 0:
@@ -117,13 +118,16 @@ public class GameManager : MonoBehaviour
                 LoadingSceneManager.LoadScene("Arcade_Menu");
                 break;
             case 2:
-                GameObject shutter = GameObject.Find("m_van_02").transform.Find("m_vanshutter_01_0").gameObject ;
-                
-                shutter.SetActive(true);
-                shutter.GetComponent<Animator>().SetTrigger("Close");
+                menu.CharacterChoose();
                 break;
             case 3:
-                SceneManager.LoadScene("Set_Menu");
+                menu.Active_Audio_UI();
+                break;
+            case 4:
+                GameObject shutter = GameObject.Find("m_van_02").transform.Find("m_vanshutter_01_0").gameObject;
+
+                shutter.SetActive(true);
+                shutter.GetComponent<Animator>().SetTrigger("Close");
                 break;
             default:
                 return;
