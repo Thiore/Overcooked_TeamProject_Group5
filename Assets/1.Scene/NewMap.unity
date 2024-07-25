@@ -11524,7 +11524,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6504745219871680951}
-  - component: {fileID: 5840799266874815246}
   m_Layer: 0
   m_Name: Sushi1_3
   m_TagString: Untagged
@@ -11532,22 +11531,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5840799266874815246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5840799266874815245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 728720c7fffcbc44f829b80d061cdac5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crate: {fileID: 0}
-  crate_Material: []
-  crate_Data: {fileID: 0}
-  crate_Prefabs: {fileID: 3547977258791744772, guid: 4ed2471b8aa55914194a397a97a53ddc, type: 3}
 --- !u!1 &5859336089362055918
 GameObject:
   m_ObjectHideFlags: 0
