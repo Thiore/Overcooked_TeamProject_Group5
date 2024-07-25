@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -139,10 +140,20 @@ public class GameManager : MonoBehaviour
         if (button_index == 0)
         {
             //새로운 게임 시작하는 로직
+            GameSaveData data = new GameSaveData
+            {
+                clearedStage = 0,
+                targetScore = 0,
+                bestScore = 0
+            };
+            DataManager.Instance.SaveGame(data);
+            Menu_Button(0);
         }
         else
         {
             //이전 게임 이어서 하는 로직
+            GameSaveData data = DataManager.Instance.LoadGame();
+            Menu_Button(0);
         }
     }
 }
