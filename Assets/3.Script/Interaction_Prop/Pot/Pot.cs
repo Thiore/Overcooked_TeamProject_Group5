@@ -12,10 +12,10 @@ public class Pot : MonoBehaviour
     private Transform SaveRange = null;//가스레인지에서 떨어진 후 해당 가스레인지를 끄기위해
     private Ingredient Ingre = null;//냄비가 들고있는 재료
 
-    private float CookTime;
-    private readonly float FinishCookTime = 4f;
-    private readonly float OverCookTime = 6f;
-    private readonly float FireTime = 10f;
+    public float CookTime;
+    public readonly float FinishCookTime = 4f;
+    public readonly float OverCookTime = 6f;
+    public readonly float FireTime = 10f;
     private Color BaseColor;
 
     private void Awake()
