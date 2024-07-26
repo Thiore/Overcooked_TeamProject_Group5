@@ -10,5 +10,5 @@ public class Recipe
     public int stage;
     public string recipe;
     public List<string> ingredient;
-
+    public int cookingmethod;
 }

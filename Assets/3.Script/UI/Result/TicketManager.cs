@@ -10,7 +10,7 @@ public class TicketManager : MonoBehaviour
     public Text ResultSumScore; // 결과 점수 요약 텍스트
     public Text TotalScore; // 총 점수 텍스트
     public Text TitleText;
-
+    public WorldState worldState;
     private void Start()
     {
         // Result_Ticket 오브젝트 찾기
