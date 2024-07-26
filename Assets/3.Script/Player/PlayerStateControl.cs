@@ -76,6 +76,13 @@ public class PlayerStateControl : MonoBehaviour
         {
             // 카운터가 널이 아닐때 카운터 위에 체크 
             var counter = nearCounter.GetComponent<CounterController>();
+
+            //접시 줍는곳은 드랍은 일절 X 
+            if (counter.CompareTag("Plate_Return"))
+            {
+                yield break;
+            }
+
             // 카운터에 올라간게 null 이 아니면 올라간거 쿠킹툴인지, 손에 쥔걸 내릴수있는지 판단
             if (counter.PutOnOb != null && counter.PutOnOb.TryGetComponent(out Cookingtool tool))
             {
@@ -94,10 +101,10 @@ public class PlayerStateControl : MonoBehaviour
                     yield break;
                 }
             }
-            else if (counter.PutOnOb != null && /*counter.PutOnOb.TryGetComponent(out Dish dish)*/)
-            {
-                // 디쉬가 판단하는 메소드
-            }
+            //else if (counter.PutOnOb != null /*&& counter.PutOnOb.TryGetComponent(out Plate plate)*/)
+            //{
+            //    // 디쉬가 판단하는 메소드
+            //}
             else if (counter.PutOnOb == null)
             //카운터가 근처에 있고, 카운터가 쿠킹툴이 아닐때(일반이겠지, 싱크대도 고려해야하나)
             {
@@ -135,7 +142,17 @@ public class PlayerStateControl : MonoBehaviour
                 else
                 {
                     HandsOnOb.transform.SetParent(counter.transform);
-                    HandsOnOb.transform.position = counter.transform.position;
+
+                    if (counter.CompareTag("Crate"))
+                    {
+                        var boxcol = counter.transform.GetComponent<BoxCollider>();
+                        Vector3 boxtop = boxcol.bounds.center + new Vector3(0, boxcol.bounds.extents.y, 0);
+                        HandsOnOb.transform.position = boxtop;
+                    }
+                    else
+                    {
+                        HandsOnOb.transform.position = counter.transform.position;
+                    }
                     HandsOnOb.transform.rotation = counter.transform.rotation;
                     yield return new WaitForSeconds(0.3f);
                 }
@@ -226,7 +243,8 @@ public class PlayerStateControl : MonoBehaviour
         }
         else
         {
-            PickUpDbject(nearOb);
+            if (nearOb != null)
+                PickUpDbject(nearOb);
             yield break;
         }
     }

@@ -52,4 +52,12 @@ public class Plate : MonoBehaviour
             meshcol.sharedMesh = Plate_Mesh[1];
         }
     }
+
+    private void Check()
+    {
+        if (!isWash)
+        {
+            
+        }
+    }
 }
