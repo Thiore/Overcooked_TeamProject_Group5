@@ -16,13 +16,11 @@ public class TrashCanController : CounterController
     }
 
 
-    private IEnumerator DropTrash_co()
+    public IEnumerator DropTrash_co()
     {
         float totaltime = 10f;
         float elapsedtime = 0f;
-
-        
-
+       
         while (elapsedtime < totaltime)
         {
             this.PutOnOb.transform.localScale *= 0.9f;
@@ -32,6 +30,14 @@ public class TrashCanController : CounterController
 
     }
 
+
+    public void DropTrash(GameObject gameObject)
+    {
+        if(gameObject.transform.CompareTag("Ingredients"))
+        {
+            
+        }
+    }
 
 
 }

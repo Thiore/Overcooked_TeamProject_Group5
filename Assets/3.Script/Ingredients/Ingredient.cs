@@ -142,7 +142,7 @@ public class Ingredient : MonoBehaviour
                                         ChopTime = 0;
                                         Change_Ingredient(eCooked.Cooking);
                                         playerAnim[i].SetTrigger("Finish");
-                                        playerAnim[i].transform.GetComponent<Player_StateController>().CleaverOb.SetActive(false);
+                                        playerAnim[i].transform.GetComponent<PlayerStateControl>().Cleaver.SetActive(false);
                                     }
                                 }
                             }

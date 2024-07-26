@@ -51,7 +51,7 @@ public class Player_SwapManager : MonoBehaviour
     void SetActivePlayer(GameObject player)
     {
         player1.GetComponent<Player_Movent>().enabled = player == player1;
-        player1.GetComponent<Player_StateController>().enabled = player == player1;
+        player1.GetComponent<PlayerStateControl>().enabled = player == player1;
 
         player2.GetComponent<Player_Movent>().enabled = player == player2;
         player2.GetComponent<Player_StateController>().enabled = player == player2;
