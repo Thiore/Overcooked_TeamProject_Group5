@@ -40,7 +40,7 @@ public class ShutterControll : MonoBehaviour
     private IEnumerator InputDelay()
     {
         GameManager.Instance.isInputEnabled = -1;
-        yield return shutter_ani.GetCurrentAnimatorClipInfo(0).Length;
+        yield return new WaitForSeconds(0.5f);
         GameManager.Instance.isInputEnabled = 1;
     }
     private void Change_Text()
