@@ -71,7 +71,9 @@ public class RecipePool : MonoBehaviour
             case 1:
                 return oneIngredientPrefab;
             case 2:
-                return twoIngredientsPrefab;
+                        return twoIngredientsPrefab;
+                
+                
             case 3:
                 return threeIngredientsPrefab;
             default:
@@ -169,12 +171,13 @@ public class RecipePool : MonoBehaviour
                 if (i == 0)
                 {
                     Debug.Log("순서와 레시피 모두 동일");
-                    AllCorrect(i);
+                    
+                    AllCorrect(i, activeObjects[i].GetComponent<Recipe>().ingredient.Count*10);
                 }
                 else
                 {
                     Debug.Log("레시피는 맞았으나 순서 틀림");
-                    InCorrect(i);
+                    InCorrect(i, activeObjects[i].GetComponent<Recipe>().ingredient.Count * 10);
                 }
 
                 return; // 매칭되는 오브젝트를 찾았으므로 메서드 종료
@@ -184,7 +187,7 @@ public class RecipePool : MonoBehaviour
         StartCoroutine(Wrong());
     }
 
-    private void AllCorrect(int index)
+    private void AllCorrect(int index,int point)
     {
         // 모든 자식 Image 컴포넌트를 가져와 색상 변경
         Image[] childImages = activeObjects[index].GetComponentsInChildren<Image>();
@@ -195,14 +198,14 @@ public class RecipePool : MonoBehaviour
 
         Debug.Log(activeObjects[index].name);
         StartCoroutine(DeactivateAfterDelay(activeObjects[index], 0.2f));
-        GameManager.Instance.AllCorrect_Recipe();
+        GameManager.Instance.AllCorrect_Recipe(point);
         if (activeObjects.Count == 0)
         {
             ActivateObject();
         }
     }
 
-    private void InCorrect(int index)
+    private void InCorrect(int index, int point)
     {
         // 모든 자식 Image 컴포넌트를 가져와 색상 변경
         Image[] childImages = activeObjects[index].GetComponentsInChildren<Image>();
@@ -213,7 +216,7 @@ public class RecipePool : MonoBehaviour
         Debug.Log(activeObjects[index].name);
         StartCoroutine(DeactivateAfterDelay(activeObjects[index], 0.5f));
         
-        GameManager.Instance.Incorrect_Recipe();
+        GameManager.Instance.Incorrect_Recipe(point);
     }
     private IEnumerator Wrong()
     {

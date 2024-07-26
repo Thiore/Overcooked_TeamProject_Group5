@@ -72,16 +72,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AllCorrect_Recipe()
+    public void AllCorrect_Recipe(int object_point)
     {
-        ScoreManager.Instance.AddScore(10);
+        ScoreManager.Instance.AddScore(object_point);
         if (ScoreManager.Instance.tip < 4)
         {
             ScoreManager.Instance.tip += 1;
         }
     }
 
-    public void Incorrect_Recipe()
+    public void Incorrect_Recipe(int object_point)
     {
         ScoreManager.Instance.tip = 1;
         ScoreManager.Instance.AddScore(10);
