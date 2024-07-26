@@ -77,6 +77,6 @@ public class TicketManager : MonoBehaviour
         int tipScore = ScoreManager.Instance.Tip_Score; // 팁 점수
         int subScore = ScoreManager.Instance.subScore; // 차감된 점수
         ResultSumScore.text = $"{addScore}\n{tipScore}\n{subScore}";
-
+        DataManager.Instance.SaveGame();
     }
 }
