@@ -31,7 +31,7 @@ public class FlagUIController : MonoBehaviour
     private void InitUI()
     {
         TryGetComponent(out flag);
-        ui = GetComponentInChildren<Canvas>().gameObject;
+        ui = GameObject.Find($"{this.gameObject.name}/UI");
         BestScore = GameObject.Find($"{this.gameObject.name}/UI/UI_Canvas/Main_Panel/Player_Info_Panel/Player_Score").GetComponent<Text>();
         for (int i = 0; i < 3; i++)
         {
