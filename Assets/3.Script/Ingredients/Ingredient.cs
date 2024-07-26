@@ -37,6 +37,13 @@ public enum eCookingProcess
     Cook
 }
 
+public enum eCookutensils
+{
+    Normal = 0,
+    Pot,
+    Pan
+}
+
 public enum eCooked
 {
     Normal = 0,
@@ -50,47 +57,26 @@ public class Ingredient : MonoBehaviour
 {
     public spawn_Ingredient crate;
     
-    [SerializeField] private Mesh[] Change_Mesh;
-    [SerializeField] private Material[] Change_Material;
-
-    [SerializeField] private Transform[] CotrolBone;
-    [SerializeField] private Transform[] JointBone;
-    private Transform[] CopyBone;
-
-
-    private Renderer Ingredient_renderer;
-    private MeshFilter Ingredient_Mesh;
-    private MeshCollider Ingredient_Col;
-
     public eCooked cooking;
     public eIngredients myIngredients;
-    private eCookingProcess CookProcess;
+    public eCookutensils utensils;
+    protected eCookingProcess CookProcess;
 
-    [SerializeField] private bool Chop_Script;
-    private bool Chop_Anim = false;
+    protected bool Chop_Anim;
 
-    private float ChopTime;
-    private readonly float FinishChopTime = 4f;
-    public bool OnPlate { get; private set; }
-    public bool OnChopping { get; private set; }
-    public bool OnCooker { get; private set; }
+    public float ChopTime;
+    protected readonly float FinishChopTime = 4f;
+    public bool isPlate { get; private set; }
+    public bool isChopping { get; private set; }
+    public bool isCooker { get; private set; }
 
-    private Animator[] playerAnim = new Animator[2];
-    private AnimatorStateInfo[] AnimInfo = new AnimatorStateInfo[2];
+    protected Animator[] playerAnim = new Animator[2];
+    protected AnimatorStateInfo[] AnimInfo = new AnimatorStateInfo[2];
 
 
 
     private void Awake()
     {
-        TryGetComponent(out Ingredient_renderer);
-        TryGetComponent(out Ingredient_Mesh);
-        TryGetComponent(out Ingredient_Col);
-        if (JointBone.Length.Equals(0))
-        {
-            CopyBone = JointBone;
-        }
-
-
         for (int i = 0; i < playerAnim.Length; i++)
         {
             playerAnim[i] = null;
@@ -102,14 +88,14 @@ public class Ingredient : MonoBehaviour
     {
         
         ChopTime = 0;
-        
+
 
         //if (!Ingredient_Mesh.mesh.Equals(Change_Mesh[0]))
         //{
         //    Change_Ingredient(eCooked.Normal);
         //    Debug.Log("들어오면안됨");
         //}
-        
+
 
     }
 
@@ -119,14 +105,14 @@ public class Ingredient : MonoBehaviour
     //    {
     //        if (transform.parent.CompareTag("ChoppingBoard"))
     //        {
-    //            if(OnChopping)
+    //            if (isChopping)
     //            {
     //                if (cooking.Equals(eCooked.Normal))
     //                {
     //                    cooking = eCooked.Chopping;
     //                }
-    //                if(cooking.Equals(eCooked.Chopping))
-    //                { 
+    //                if (cooking.Equals(eCooked.Chopping))
+    //                {
     //                    for (int i = 0; i < playerAnim.Length; i++)
     //                    {
     //                        if (playerAnim[i] != null)
@@ -152,21 +138,18 @@ public class Ingredient : MonoBehaviour
     //            }
     //            return;
     //        }
-    //        else if(transform.parent.CompareTag("Cooker"))
+    //        else if (transform.parent.CompareTag("Cooker") && Ingredient_Mesh != null)
     //        {
-    //            if(transform.parent.parent != null)
-    //            {
-    //                Ingredient_Mesh = null;
-    //            }
+    //            Ingredient_Mesh = null;
     //        }
-    //        if(transform.parent.CompareTag("TrashCan"))
+    //        if (transform.parent.CompareTag("TrashCan"))
     //        {
     //            transform.Rotate(Vector3.up, 2f);
     //            transform.localScale *= 0.98f;
-    //            if(transform.localScale.x < 0.2f)
+    //            if (transform.localScale.x < 0.2f)
     //            {
     //                transform.parent.TryGetComponent(out CounterController counter);
-    //                if(counter != null)
+    //                if (counter != null)
     //                {
     //                    counter.ChangePuton();
     //                    counter.PutOnOb = null;
@@ -185,11 +168,10 @@ public class Ingredient : MonoBehaviour
         int CookEnum = (int)cooked;
         if (CookEnum > 0)
             CookEnum -= 1;
-        Ingredient_Mesh.mesh = Change_Mesh[CookEnum];
-        Ingredient_renderer.material = Change_Material[CookEnum];
-        Ingredient_Col.sharedMesh = Change_Mesh[CookEnum];
+        //Ingredient_Mesh.mesh = Change_Mesh[CookEnum];
+        //Ingredient_renderer.material = Change_Material[CookEnum];
+        //Ingredient_Col.sharedMesh = Change_Mesh[CookEnum];
         OnIngredients();
-
     }
 
     public void SetCookProcess(eCookingProcess process, bool Anim, eIngredients ingredient)
@@ -200,85 +182,85 @@ public class Ingredient : MonoBehaviour
         OnIngredients();
     }
 
-    private void OnIngredients()
+    protected void OnIngredients()
     {
         switch (CookProcess)
         {
             case eCookingProcess.Normal:
-                OnPlate = true;
-                OnChopping = false;
-                OnCooker = false;
+                isPlate = true;
+                isChopping = false;
+                isCooker = false;
                 break;
             case eCookingProcess.Chopping:
                 if(cooking.Equals(eCooked.Normal))
                 {
-                    OnCooker = false;
-                    OnChopping = true;
-                    OnPlate = false;
+                    isCooker = false;
+                    isChopping = true;
+                    isPlate = false;
                 }
                 else if(cooking.Equals(eCooked.Chopping))
                 {
-                    OnCooker = false;
-                    OnChopping = true;
-                    OnPlate = false;
+                    isCooker = false;
+                    isChopping = true;
+                    isPlate = false;
                 }
                 else
                 {
-                    OnCooker = false;
-                    OnChopping = false;
-                    OnPlate = true;
+                    isCooker = false;
+                    isChopping = false;
+                    isPlate = true;
                 }
                 break;
             case eCookingProcess.Chop_Cook:
                 if(cooking.Equals(eCooked.Normal))
                 {
-                    OnCooker = false;
-                    OnChopping = true;
-                    OnPlate = false;
+                    isCooker = false;
+                    isChopping = true;
+                    isPlate = false;
                 }
                 else if(cooking.Equals(eCooked.Chopping))
                 {
-                    OnCooker = false;
-                    OnChopping = true;
-                    OnPlate = false;
+                    isCooker = false;
+                    isChopping = true;
+                    isPlate = false;
                 }
                 else if(cooking.Equals(eCooked.Cooking))
                 {
-                    OnCooker = true;
-                    OnChopping = false;
-                    OnPlate = false;
+                    isCooker = true;
+                    isChopping = false;
+                    isPlate = false;
                 }
                 else if(cooking.Equals(eCooked.ReadyCook))
                 {
-                    OnCooker = false;
-                    OnChopping = false;
-                    OnPlate = true;
+                    isCooker = false;
+                    isChopping = false;
+                    isPlate = true;
                 }
                 else
                 {
-                    OnCooker = false;
-                    OnChopping = false;
-                    OnPlate = false;
+                    isCooker = false;
+                    isChopping = false;
+                    isPlate = false;
                 }
                 break;
             case eCookingProcess.Cook:
                 if (cooking.Equals(eCooked.Normal))
                 {
-                    OnCooker = true;
-                    OnChopping = false;
-                    OnPlate = false;
+                    isCooker = true;
+                    isChopping = false;
+                    isPlate = false;
                 }
                 else if(cooking.Equals(eCooked.ReadyCook))
                 {
-                    OnCooker = false;
-                    OnChopping = false;
-                    OnPlate = true;
+                    isCooker = false;
+                    isChopping = false;
+                    isPlate = true;
                 }
                 else if (cooking.Equals(eCooked.trash))
                 {
-                    OnCooker = false;
-                    OnChopping = false;
-                    OnPlate = false;
+                    isCooker = false;
+                    isChopping = false;
+                    isPlate = false;
                 }
                 break;
         }
@@ -302,6 +284,11 @@ public class Ingredient : MonoBehaviour
         }
     }
 
+    //public bool Chop()
+    //{
+
+    //}
+
     private void OnTriggerExit(Collider other)
     {
         for (int i = 0; i < playerAnim.Length; i++)
@@ -319,7 +306,7 @@ public class Ingredient : MonoBehaviour
 
     }
 
-    public void Die()
+    public virtual void Die()
     {
         if (transform.parent != null)
             transform.parent = null;

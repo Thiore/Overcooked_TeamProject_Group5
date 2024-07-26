@@ -317,7 +317,7 @@ public class Player_StateController : MonoBehaviour
                     HandsOnOb.TryGetComponent(out Ingredient ingre);
                     HandsOnOb.TryGetComponent(out AddIngredientSpawn addingre);
                     HandsOnOb.TryGetComponent(out SphereCollider col);
-                    if (ingre.OnPlate)
+                    if (ingre.isPlate)
                     {
                         //손에 재료들고 접시만 
                         if (counter.PutOnOb.CompareTag("Plate"))
@@ -403,7 +403,7 @@ public class Player_StateController : MonoBehaviour
                     {
                         counter.ChoppingBoard.transform.GetChild(1).gameObject.transform.TryGetComponent(out Ingredient ingre);
 
-                        if (ingre != null && ingre.OnChopping)
+                        if (ingre != null && ingre.isChopping)
                         {
                             animator.SetTrigger("Chop");
                             Cleaver.SetActive(true);

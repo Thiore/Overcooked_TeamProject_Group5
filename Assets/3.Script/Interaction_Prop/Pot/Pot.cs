@@ -24,7 +24,7 @@ public class Pot : MonoBehaviour
     {
         BaseColor = renderer[0].material.GetColor("_BaseColor");
         isSoup = false;
-
+        CookTime = 0;
 
     }
     private void Update()
@@ -41,9 +41,11 @@ public class Pot : MonoBehaviour
                     SaveRange = transform.parent;
                     transform.parent.GetChild(0).gameObject.SetActive(true);
                     transform.GetChild(1).TryGetComponent(out Ingre);
+                    gameObject.name = transform.GetChild(1).name;
                 }
                 
                 CookTime += Time.deltaTime;
+                Debug.Log(CookTime);
                 if(CookTime > FireTime)
                 {
                     if(!isSoup)
@@ -104,6 +106,7 @@ public class Pot : MonoBehaviour
                 Ingre = null;
                 CookTime = 0f;
                 isSoup = false;
+                gameObject.name = "Pot";
             }
             
         }

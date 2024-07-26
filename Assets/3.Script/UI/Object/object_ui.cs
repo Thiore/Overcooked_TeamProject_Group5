@@ -22,7 +22,7 @@ public class object_ui : MonoBehaviour
     }
     private void Active_UI()
     {
-        if (ingredient.OnPlate)
+        if (ingredient.isPlate)
         {
             ingredient_ui.SetActive(true);
         }
