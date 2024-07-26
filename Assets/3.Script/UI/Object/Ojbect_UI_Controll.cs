@@ -12,6 +12,9 @@ public class Ojbect_UI_Controll : MonoBehaviour
      * 주의 사항 *********************************
      * 냄비에는 각자 모두 Pot 태그가 붙어있어야함
      * 소화기에도 Extinguisher 태그가 붙어있어야함
+     * 재료 오브젝트가 생길 때 같이 호출해야하는 Method Public으로 선언되어있음
+     * 
+     * 
      * 
     */
 
@@ -21,7 +24,6 @@ public class Ojbect_UI_Controll : MonoBehaviour
     [SerializeField] private GameObject pot_slider_prefab;
     [SerializeField] private GameObject ingredient_img;
     [SerializeField] private GameObject warning_img;
-    [SerializeField] private GameObject burn_img;
     [SerializeField] private GameObject done_img;
     [SerializeField] private GameObject respawn_img;
     [SerializeField] private GameObject hold_ext;
@@ -31,7 +33,6 @@ public class Ojbect_UI_Controll : MonoBehaviour
     private List<GameObject> ingredient_img_List = new List<GameObject>();
     private List<GameObject> pot_ingredient_img_List = new List<GameObject>();
     private List<GameObject> warning_img_List = new List<GameObject>();
-    private List<GameObject> burn_img_List = new List<GameObject>();
     private List<GameObject> done_img_List = new List<GameObject>();
     public List<GameObject> ingredient_object_List = new List<GameObject>();
 
@@ -76,14 +77,11 @@ public class Ojbect_UI_Controll : MonoBehaviour
             slider_List.Add(pot_slider);
             warning_img_List[i] = Instantiate(warning_img,pot_objects[i].transform.position, Quaternion.identity, transform);
             warning_img_List[i].SetActive(false);
-            burn_img_List[i] = Instantiate(burn_img, pot_objects[i].transform.position, Quaternion.identity, transform);
-            burn_img_List[i].SetActive(false);
             done_img_List[i] = Instantiate(done_img, pot_objects[i].transform.position, Quaternion.identity, transform);
             done_img_List[i].SetActive(false);
             
         }
         hold_ext.SetActive(false);
-
 
     }
 
