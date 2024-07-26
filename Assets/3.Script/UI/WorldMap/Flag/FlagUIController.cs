@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class FlagUIController : MonoBehaviour
 {
     private Flag flag;
-    private GameObject ui;
+    [SerializeField]private GameObject ui;
     private Canvas flag_canvas;
     private int[] target_Score = new int[3];
     public int bestScore;
@@ -31,7 +31,7 @@ public class FlagUIController : MonoBehaviour
     private void InitUI()
     {
         TryGetComponent(out flag);
-        ui = GameObject.Find("UI");
+        
         BestScore = GameObject.Find("UI/UI_Canvas/Main_Panel/Player_Info_Panel/Player_Score").GetComponent<Text>();
         for (int i = 0; i < 3; i++)
         {
