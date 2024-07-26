@@ -19,7 +19,7 @@ public class FlagUIController : MonoBehaviour
         SetUI();
         DeActiveUI();
     }
-    
+
     public void ActiveUI()
     {
         ui.SetActive(true);
@@ -31,7 +31,7 @@ public class FlagUIController : MonoBehaviour
     private void InitUI()
     {
         TryGetComponent(out flag);
-        ui = GetComponentInChildren<Canvas>().gameObject;
+        ui = GameObject.Find($"{this.gameObject.name}/UI");
         BestScore = GameObject.Find($"{this.gameObject.name}/UI/UI_Canvas/Main_Panel/Player_Info_Panel/Player_Score").GetComponent<Text>();
         for (int i = 0; i < 3; i++)
         {
@@ -42,13 +42,13 @@ public class FlagUIController : MonoBehaviour
     private void SetUI()
     {
         target_Score = DataManager.Instance.GetStageInformation(flag.stage_index).targetScore;
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
             Debug.Log($"{flag.stage_index}");
             Debug.Log($"{DataManager.Instance.GetStageInformation(flag.stage_index).targetScore[i]}");
             Debug.Log($"{target_Score[i]}");
         }
-        
+
         bestScore = DataManager.Instance.GetStageInformation(flag.stage_index).bestScore;
         BestScore.text = bestScore.ToString();
         for (int i = 0; i < 3; i++)

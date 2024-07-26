@@ -69,7 +69,7 @@ public class Ingredient : MonoBehaviour
     [SerializeField] private bool Chop_Script;
     private bool Chop_Anim = false;
 
-    private float ChopTime;
+    public float ChopTime;
     private readonly float FinishChopTime = 4f;
     public bool OnPlate { get; private set; }
     public bool OnChopping { get; private set; }

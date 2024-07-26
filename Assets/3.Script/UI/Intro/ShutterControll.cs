@@ -21,17 +21,27 @@ public class ShutterControll : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (GameManager.Instance.isInputEnabled == 0)
         {
-            Debug.Log("눌림");
-            shutter_ani.SetTrigger("Open");
-            camera_ani.SetTrigger("GameStart");
-            GameManager.Instance.isInputEnabled += 1;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log("눌림");
+                shutter_ani.SetTrigger("Open");
+                camera_ani.SetTrigger("GameStart");
+                StartCoroutine(InputDelay());
+            }
+            else
+            {
+                return;
+            }
         }
-        else
-        {
-            return;
-        }
+        
+    }
+    private IEnumerator InputDelay()
+    {
+        GameManager.Instance.isInputEnabled = -1;
+        yield return shutter_ani.GetCurrentAnimatorClipInfo(0).Length;
+        GameManager.Instance.isInputEnabled = 1;
     }
     private void Change_Text()
     {

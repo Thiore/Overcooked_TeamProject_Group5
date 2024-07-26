@@ -35,6 +35,8 @@ public class Ojbect_UI_Controll : MonoBehaviour
     private List<GameObject> warning_img_List = new List<GameObject>();
     private List<GameObject> done_img_List = new List<GameObject>();
     public List<GameObject> ingredient_object_List = new List<GameObject>();
+    private List<GameObject> ingredient_slider_List = new List<GameObject>();
+
 
     //현재 조리중인 pot index
     public List<int> cooking_pot_index;
@@ -51,14 +53,14 @@ public class Ojbect_UI_Controll : MonoBehaviour
     {
         main_cam = Camera.main;
         Initialize();
-        
+
     }
     private void Update()
     {
         Pot_UI_Update();
         Ingredient_UI_Active();
         Pot_Ingredient_Img();
-        if (0 < GameManager.Instance.isFire)
+        if (GameManager.Instance.isFire > 0)
         {
             Extinguisher_UI_Active();
         }
@@ -68,18 +70,18 @@ public class Ojbect_UI_Controll : MonoBehaviour
     private void Initialize()
     {
         //pot이랑 pot slider 리스트에 넣기
-        GameObject[] pot_objects = GameObject.FindGameObjectsWithTag("Pot");
+        GameObject[] pot_objects = GameObject.FindGameObjectsWithTag("Cooker");
         for (int i = 0; i < pot_objects.Length; i++)
         {
             pot_object_List.Add(pot_objects[i].transform);
             GameObject pot_slider = Instantiate(pot_slider_prefab, pot_objects[i].transform.position, Quaternion.identity, transform);
             pot_slider.SetActive(false);
             slider_List.Add(pot_slider);
-            warning_img_List[i] = Instantiate(warning_img,pot_objects[i].transform.position, Quaternion.identity, transform);
+            warning_img_List.Add(Instantiate(warning_img, pot_objects[i].transform.position, Quaternion.identity, transform));
             warning_img_List[i].SetActive(false);
-            done_img_List[i] = Instantiate(done_img, pot_objects[i].transform.position, Quaternion.identity, transform);
+            done_img_List.Add(Instantiate(done_img, pot_objects[i].transform.position, Quaternion.identity, transform));
             done_img_List[i].SetActive(false);
-            
+            pot_ingredient_img_List.Add(Instantiate(ingredient_img, pot_objects[i].transform.position, Quaternion.identity, transform));
         }
         hold_ext.SetActive(false);
 
@@ -88,53 +90,72 @@ public class Ojbect_UI_Controll : MonoBehaviour
     //냄비 슬라이더
     private void PotSlider_Active(int pot_index)
     {
+        if (!slider_List[pot_index].activeSelf)
             slider_List[pot_index].SetActive(true);
-            slider_List[pot_index].transform.position = main_cam.WorldToScreenPoint(pot_object_List[pot_index].position + new Vector3(0, -1, 0));
-            slider_List[pot_index].GetComponent<Slider>().value = pot_object_List[pot_index].GetComponent<Pot>().CookTime;
+        slider_List[pot_index].transform.position = main_cam.WorldToScreenPoint(pot_object_List[pot_index].position + new Vector3(0, -1, 0));
+        slider_List[pot_index].GetComponent<Slider>().value = pot_object_List[pot_index].GetComponent<Pot>().CookTime;
     }
 
     private void Pot_UI_Update()
     {
-        for(int i = 0; i < pot_object_List.Count; i++)
+        for (int i = 0; i < pot_object_List.Count; i++)
         {
-            if (pot_object_List[i].GetComponent<Pot>().CookTime==0)
+            Pot_Ingredient_Follow(i);
+            if (pot_object_List[i].TryGetComponent(out Pot pot))
             {
-                return;
-            }//요리중일때
-            else if(pot_object_List[i].GetComponent<Pot>().CookTime > pot_object_List[i].GetComponent<Pot>().FinishCookTime)
-            {
-                PotSlider_Active(i);
-            }//알람 띠링
-            else if((int)pot_object_List[i].GetComponent<Pot>().CookTime == (int)pot_object_List[i].GetComponent<Pot>().FinishCookTime)
-            {
-                slider_List[i].SetActive(false);
-                StartCoroutine(Pot_Finish_Cook(i));
-            }//경고
-            else if ((int)pot_object_List[i].GetComponent<Pot>().CookTime+0.3f < (int)pot_object_List[i].GetComponent<Pot>().FireTime)
-            {
-                Pot_Waring_Active(i);
-            }//불남
-            else if((int)pot_object_List[i].GetComponent<Pot>().CookTime > (int)pot_object_List[i].GetComponent<Pot>().FireTime)
-            {
-                warning_img_List[i].SetActive(false);
+                if (pot.CookTime < 0.1f)
+                {
+                    return;
+                }//요리중일때
+                else if (pot.CookTime < pot.FinishCookTime)
+                {
+                    PotSlider_Active(i);
+                }
+                else if (pot.CookTime < 4.5f)
+                {
+                    slider_List[i].SetActive(false);
+                    Pot_Finish_Cook(i);
+                }
+                else if (pot.CookTime < 5.0f)
+                {
+                    done_img_List[i].SetActive(false);
+                }
+                //경고
+                else if (pot.CookTime + 0.3f < (int)pot_object_List[i].GetComponent<Pot>().FireTime)
+                {
+
+                    Pot_Warning_Active(i);
+                }//불남
+                else if (pot.CookTime > pot.FireTime)
+                {
+                    pot.name = "Burn";
+                    warning_img_List[i].SetActive(false);
+                }
             }
+
         }
     }
 
     //요리 다 되면 알림
-    private IEnumerator Pot_Finish_Cook(int pot_index)
+    private void Pot_Finish_Cook(int pot_index)
     {
         done_img_List[pot_index].SetActive(true);
-        yield return new WaitForSeconds(0.2f);
-        done_img_List[pot_index].SetActive(false);
+        done_img_List[pot_index].transform.position =
+            main_cam.WorldToScreenPoint(pot_object_List[pot_index].position + new Vector3(0, -1, 0));
+    }
+
+    private void Pot_Ingredient_Follow(int pot_index)
+    {
+        pot_ingredient_img_List[pot_index].transform.position = main_cam.WorldToScreenPoint(pot_object_List[pot_index].position + new Vector3(0, 2, 0));
+
     }
 
 
     //냄비 경고
-    private void Pot_Waring_Active(int pot_index)
+    private void Pot_Warning_Active(int pot_index)
     {
-            warning_img_List[pot_index].SetActive(true);
-            warning_img_List[pot_index].transform.position= main_cam.WorldToScreenPoint(pot_object_List[pot_index].position + new Vector3(0, -1, 0));
+        warning_img_List[pot_index].SetActive(true);
+        warning_img_List[pot_index].transform.position = main_cam.WorldToScreenPoint(pot_object_List[pot_index].position + new Vector3(0, -1, 0));
     }
 
 
@@ -142,7 +163,7 @@ public class Ojbect_UI_Controll : MonoBehaviour
     private void Extinguisher_UI_Active()
     {
         hold_ext.SetActive(true);
-        hold_ext.transform.position = main_cam.WorldToScreenPoint(GameObject.FindGameObjectWithTag("Extinguisher").transform.position+new Vector3(0,1,0));
+        hold_ext.transform.position = main_cam.WorldToScreenPoint(GameObject.FindGameObjectWithTag("Extinguisher").transform.position + new Vector3(0, 1, 0));
     }
 
 
@@ -154,17 +175,27 @@ public class Ojbect_UI_Controll : MonoBehaviour
         ingredient_img_object.GetComponent<Image>().sprite = Resources.Load<Sprite>($"{ingredient.gameObject.name}");
         ingredient_img_object.SetActive(false);
         ingredient_img_List.Add(ingredient_img_object);
+        GameObject ingredient_slider_object = Instantiate(pot_slider_prefab, ingredient.transform.position, Quaternion.identity, transform);
+        ingredient_slider_List.Add(ingredient_slider_object);
+        ingredient_slider_object.SetActive(false);
+
     }
 
     //onplate 가능 이미지 생성
     private void Ingredient_UI_Active()
     {
-        for(int i = 0; i < ingredient_object_List.Count; i++)
+        for (int i = 0; i < ingredient_object_List.Count; i++)
         {
             if (ingredient_object_List[i].GetComponent<Ingredient>().OnPlate)
             {
                 ingredient_img_List[i].SetActive(true);
                 ingredient_img_List[i].transform.position = main_cam.WorldToScreenPoint(ingredient_object_List[i].transform.position + new Vector3(0, -1, 0));
+            }
+            if (ingredient_object_List[i].GetComponent<Ingredient>().OnChopping)
+            {
+                ingredient_slider_List[i].SetActive(true);
+                //Ingredient에서 써는거 시간 value로 넣어줘야함
+                ingredient_slider_List[i].GetComponent<Slider>().value = ingredient_object_List[i].GetComponent<Ingredient>().ChopTime;
             }
         }
     }
@@ -172,20 +203,21 @@ public class Ojbect_UI_Controll : MonoBehaviour
     //냄비 상단 UI
     private void Pot_Ingredient_Img()
     {
-        for(int i = 0; i < pot_object_List.Count; i++)
+        for (int i = 0; i < pot_object_List.Count; i++)
         {
-            if (pot_object_List[i].name=="Pot")
+            if (pot_object_List[i].gameObject.name == "Pot")
             {
                 pot_ingredient_img_List[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Empty");
             }
-            else{
-                pot_ingredient_img_List[i].GetComponent<Image>().sprite = Resources.Load<Sprite>($"{pot_object_List[i].name}");
+            else
+            {
+                pot_ingredient_img_List[i].GetComponent<Image>().sprite = Resources.Load<Sprite>(pot_object_List[i].name);
             }
-            
+
         }
     }
 
-    
+
 
 
 }
