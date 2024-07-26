@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject pauseScreen; // 일시정지 화면
     public int isInputEnabled = 0; // 입력 가능 상태
     public WorldState worldState;
+    public int isFire = 0;
 
     
     private void Awake()
