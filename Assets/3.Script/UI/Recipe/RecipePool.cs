@@ -9,6 +9,10 @@ public class RecipePool : MonoBehaviour
     public GameObject oneIngredientPrefab; // 1개의 재료를 가지는 레시피 프리팹
     public GameObject twoIngredientsPrefab; // 2개의 재료를 가지는 레시피 프리팹
     public GameObject threeIngredientsPrefab; // 3개의 재료를 가지는 레시피 프리팹
+    public GameObject twoIngredient_onetool_Prefab;
+    public GameObject twoIngredient_twotool_Prefab;
+    public GameObject threeIngredient_onetool_Prefab;
+    public GameObject threeIngredient_twotool_Prefab;
     [SerializeField] private RectTransform recipePoolPanel; // RECIPE_POOL 패널의 RectTransform
     [SerializeField] private float moveSpeed = 100f; // 오브젝트 이동 속도
     [SerializeField] private int maxVisibleObjects = 5; // 화면에 보일 최대 오브젝트 수
@@ -71,11 +75,36 @@ public class RecipePool : MonoBehaviour
             case 1:
                 return oneIngredientPrefab;
             case 2:
-                        return twoIngredientsPrefab;
+
+                if (recipe.tool_count ==1)
+                {
+                    return twoIngredient_onetool_Prefab;
+                }else if (recipe.tool_count == 2)
+                {
+                    return twoIngredient_twotool_Prefab;
+                }
+                else
+                {
+                    return twoIngredientsPrefab;
+                }
+                
                 
                 
             case 3:
-                return threeIngredientsPrefab;
+
+                if (recipe.tool_count == 1)
+                {
+                    return threeIngredient_onetool_Prefab;
+                }
+                else if (recipe.tool_count == 2)
+                {
+                    return threeIngredient_twotool_Prefab;
+                }
+                else
+                {
+                    return threeIngredientsPrefab;
+                }
+                
             default:
                 Debug.LogError("Unknown number of ingredients: " + recipe.ingredient.Count);
                 return null;
