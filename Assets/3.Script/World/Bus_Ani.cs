@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bus_Controller : MonoBehaviour
+public class Bus_Ani : MonoBehaviour
 {
     public GameObject inflatableObject;
     public GameObject propellerObject;

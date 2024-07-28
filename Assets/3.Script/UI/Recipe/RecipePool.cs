@@ -143,6 +143,7 @@ public class RecipePool : MonoBehaviour
                 GameObject oldestObj = activeObjects[0]; // 가장 오래된 오브젝트 선택
                 activeObjects.RemoveAt(0); // 목록에서 제거
                 DeactivateObject(oldestObj); // 오브젝트 비활성화
+                
             }
         }
         Debug.Log("레시피 활성화");
@@ -195,6 +196,10 @@ public class RecipePool : MonoBehaviour
         Debug.Log(activeObjects[index].name);
         StartCoroutine(DeactivateAfterDelay(activeObjects[index], 0.2f));
         GameManager.Instance.AllCorrect_Recipe();
+        if (activeObjects.Count == 0)
+        {
+            ActivateObject();
+        }
     }
 
     private void InCorrect(int index)

@@ -18,6 +18,7 @@ public class DataManager : MonoBehaviour
 
     // 선택된 스테이지 점수 담는 리스트
     private List<Stage> stageScore;
+    private string filePath;
 
     public static DataManager Instance
     {
@@ -42,7 +43,7 @@ public class DataManager : MonoBehaviour
     {
         //레시피
         LoadRecipeFromJson();
-        StageRecipeData(1); //스테이지 + 레시피 + 재료 데이터 부르는 메서드
+        StageRecipeData(GameManager.Instance.stage_index); //스테이지 + 레시피 + 재료 데이터 부르는 메서드
 
     }
 
@@ -67,9 +68,30 @@ public class DataManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
+        
+        filePath = Path.Combine(Application.dataPath, "gamedata.json");
+        LoadRecipeFromJson();
 
-        Recipe_DataManager();
-        Stage_DataManager();
+        if (!File.Exists(filePath))
+        {
+            Debug.Log("json 생기지 않음");
+            
+            LoadStageFromJson();
+            //파일에서 json문자열 읽기
+            string json = JsonConvert.SerializeObject(stageData, Formatting.Indented);
+
+            //json 문자열을 파일에 저장
+            File.WriteAllText(filePath, json);
+        }
+        else
+        {
+            LoadGame();
+
+        }
+
+
+        //Stage_DataManager();
     }
 
     private void LoadRecipeFromJson()
@@ -77,7 +99,11 @@ public class DataManager : MonoBehaviour
         string recipe_jsonFile = Resources.Load<TextAsset>("Data/Recipe_JDB").text;
         var recipes = JsonConvert.DeserializeObject<Recipe[]>(recipe_jsonFile);
 
-
+        //요리도구
+        foreach (var recipe in recipes)
+        {
+            recipe.cookingmethod = recipe.ingredient.Count(ingredient => ingredient.EndsWith("Pot") || ingredient.EndsWith("Pan") || ingredient.EndsWith("Fry"));
+        }
         // recipes 배열을 Dictionary로 변환
         recipeData = recipes.ToDictionary(x => x.id, x => x);
         //Debug.Log("Loaded " + recipeData.Count + " recipes from JSON.");
@@ -91,13 +117,7 @@ public class DataManager : MonoBehaviour
 
     //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
     // 스테이지 스코어
-    private void LoadStageFromJson()
-    {
-        string score_jsonFile = Resources.Load<TextAsset>("Data/Stage_JDB").text;
-        var stages = JsonConvert.DeserializeObject<Stage[]>(score_jsonFile);
-
-        stageData = stages.ToDictionary(x => x.stage, x => x);
-    }
+    
 
     public void StageScoreData(int stageNumber)
     {
@@ -139,44 +159,63 @@ public class DataManager : MonoBehaviour
 
     //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
     // 세이브
-    private string filePath;
+    
 
-    private void Start()
-    {
-        //json형태로 gamedata 파일의 이름 정의 / 파일 경로 지정
-        //C:\Users\[Username]\AppData\LocalLow\[CompanyName]\[ProductName]
-        filePath = Path.Combine(Application.dataPath,"gamedata.json");
-    }
+    //private void Start()
+    //{
+    //    //json형태로 gamedata 파일의 이름 정의 / 파일 경로 지정
+    //    //C:\Users\[Username]\AppData\LocalLow\[CompanyName]\[ProductName]
+    //    filePath = Path.Combine(Application.dataPath,"gamedata.json");
+        
+    //}
 
     //게임 데이터 저장
-    public void SaveGame(GameSaveData data)
+    public void SaveGame()
     {
         //GameSaveData 구조체를 json 문자열로 변환
-        string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+        string json = JsonConvert.SerializeObject(stageData, Formatting.Indented);
 
         //json 문자열을 파일에 저장
         File.WriteAllText(filePath, json);
     }
 
-    //json파일에서 게임 데이터 로드
-    public GameSaveData LoadGame()
+    public void NewGame()
     {
+        LoadStageFromJson();
+        //파일에서 json문자열 읽기
+        string json = JsonConvert.SerializeObject(stageData, Formatting.Indented);
+
+        //json 문자열을 파일에 저장
+        File.WriteAllText(filePath, json);
+
+        LoadGame();
+    }
+    //json파일에서 게임 데이터 로드
+    public void  LoadGame()
+    {
+
         if (File.Exists(filePath))
         {
-            //파일에서 json문자열 읽기
+            // 파일에서 json 문자열 읽기
             string json = File.ReadAllText(filePath);
 
-            //json 문자열을 GameSaveData 구조체로 변환
-            return JsonConvert.DeserializeObject<GameSaveData>(json);
+            // json 문자열을 Dictionary<int, Stage> 구조체로 변환
+            stageData = JsonConvert.DeserializeObject<Dictionary<int, Stage>>(json);
         }
-        
-        
-        //파일이 없는 경우 기본값 반환
-        return new GameSaveData
+        else
         {
-            clearedStage = 0,
-            targetScore = 0,
-            bestScore = 0
-        };
+            Debug.LogError("Save file not found.");
+        }
+
+
+
+    }
+
+    private void LoadStageFromJson()
+    {
+        string score_jsonFile = Resources.Load<TextAsset>("Data/Stage_JDB").text;
+        var stages = JsonConvert.DeserializeObject<Stage[]>(score_jsonFile);
+
+        stageData = stages.ToDictionary(x => x.stage, x => x);
     }
 }
