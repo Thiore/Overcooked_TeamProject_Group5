@@ -352,6 +352,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activationTime: 0
   Point: 0
+  Tool_img_1: {fileID: 3503090151880834439}
+  Tool_img_2: {fileID: 5592854726781403689}
 --- !u!1 &5915875151282769018
 GameObject:
   m_ObjectHideFlags: 0

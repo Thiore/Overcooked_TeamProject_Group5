@@ -70,6 +70,8 @@ public class RecipePool : MonoBehaviour
     // 레시피에 맞는 프리팹을 반환
     private GameObject GetPrefabForRecipe(Recipe recipe)
     {
+        RecipeObject recipeObject = new RecipeObject();
+        
         switch (recipe.ingredient.Count)
         {
             case 1:
@@ -289,7 +291,7 @@ public class RecipePool : MonoBehaviour
                 int objectIndex = i * objectsPerRecipe + j;
                 GameObject obj = allObjects[objectIndex];
                 Recipe recipe = recipes[i];
-
+                RecipeObject recipeObject = obj.GetComponent<RecipeObject>();
                 obj.name = recipe.recipe;
                 Dictionary<string, string> imageNameMap = new Dictionary<string, string>
             {
@@ -306,10 +308,19 @@ public class RecipePool : MonoBehaviour
                     {
                         imageNameMap.Add($"Ingredient_Icon_{k + 1}", recipe.ingredient[k]);
                     }
+
+                    if (recipe.ingredient[k].Contains("pot")|| recipe.ingredient[k].Contains("pan")||recipe.ingredient[k].Contains("fry"))
+                    {
+                        string tool = obj.GetComponent<Recipe>().ingredient[k].Substring(recipe.ingredient[0].Length - 3);
+                        recipeObject.SetToolImage(k,tool);
+                    }
+                    
                 }
 
-                RecipeObject recipeObject = obj.GetComponent<RecipeObject>();
+
+                
                 recipeObject.SetImagesByName(imageNameMap);
+                
             }
         }
     }
