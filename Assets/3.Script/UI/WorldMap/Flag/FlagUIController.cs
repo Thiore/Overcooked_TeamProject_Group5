@@ -13,7 +13,7 @@ public class FlagUIController : MonoBehaviour
     private Text BestScore;
     private Text[] Target_Score = new Text[3];
     private Image[] FullStar = new Image[3];
-    private void OnEnable()
+    private void Start()
     {
         InitUI();
         SetUI();
@@ -41,6 +41,7 @@ public class FlagUIController : MonoBehaviour
     }
     private void SetUI()
     {
+        Debug.Log($"{this.gameObject.name} : {DataManager.Instance.GetStageInformation(flag.stage_index).targetScore[0]}");
         target_Score = DataManager.Instance.GetStageInformation(flag.stage_index).targetScore;
         for (int i = 0; i < 3; i++)
         {

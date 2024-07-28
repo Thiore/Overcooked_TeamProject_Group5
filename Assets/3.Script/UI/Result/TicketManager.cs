@@ -10,7 +10,7 @@ public class TicketManager : MonoBehaviour
     public Text ResultSumScore; // 결과 점수 요약 텍스트
     public Text TotalScore; // 총 점수 텍스트
     public Text TitleText;
-
+    public WorldState worldState;
     private void Start()
     {
         // Result_Ticket 오브젝트 찾기
@@ -42,6 +42,7 @@ public class TicketManager : MonoBehaviour
         {
             GameManager.Instance.stage_index = 0;
             GameManager.Instance.LoadScene("BSJScene");
+            
             ScoreManager.Instance.InitializeScores();
         }
     }
@@ -76,6 +77,6 @@ public class TicketManager : MonoBehaviour
         int tipScore = ScoreManager.Instance.Tip_Score; // 팁 점수
         int subScore = ScoreManager.Instance.subScore; // 차감된 점수
         ResultSumScore.text = $"{addScore}\n{tipScore}\n{subScore}";
-
+        DataManager.Instance.SaveGame();
     }
 }

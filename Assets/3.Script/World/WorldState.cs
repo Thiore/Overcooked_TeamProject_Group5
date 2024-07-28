@@ -17,14 +17,9 @@ public class WorldState : MonoBehaviour
         {
             Debug.LogError("Animator 컴포넌트를 찾을 수 없습니다!");
         }
-        //float savedTime = PlayerPrefs.GetFloat("AnimatorState", 0);
-        //if (savedTime < 2)
-            //SaveState();
-        //if (savedTime > 1f)
-            //RestoreState();
-        //PlayerPrefs.DeleteKey("AnimatorState");
+        
         ResetState(1);
-        //SaveState();
+        
 
     }
 
@@ -67,6 +62,9 @@ public class WorldState : MonoBehaviour
         else
         {
             RestoreState();
+            Debug.Log("else에서 ResetState 메서드 들어왔다.");
         }
     }
+
+   
 }

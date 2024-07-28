@@ -1,0 +1,38 @@
+{
+  "1": {
+    "stage": 1,
+    "targetScore": [
+      40,
+      60,
+      100
+    ],
+    "bestScore": 92
+  },
+  "2": {
+    "stage": 2,
+    "targetScore": [
+      100,
+      130,
+      200
+    ],
+    "bestScore": 0
+  },
+  "3": {
+    "stage": 3,
+    "targetScore": [
+      100,
+      200,
+      300
+    ],
+    "bestScore": 0
+  },
+  "4": {
+    "stage": 4,
+    "targetScore": [
+      120,
+      220,
+      310
+    ],
+    "bestScore": 0
+  }
+}
