@@ -102,7 +102,7 @@ public class DataManager : MonoBehaviour
         //요리도구
         foreach (var recipe in recipes)
         {
-            recipe.cookingmethod = recipe.ingredient.Count(ingredient => ingredient.EndsWith("Pot") || ingredient.EndsWith("Pan") || ingredient.EndsWith("Fry"));
+            recipe.tool_count = recipe.ingredient.Count(ingredient => ingredient.EndsWith("Pot") || ingredient.EndsWith("Pan") || ingredient.EndsWith("Fry"));
         }
         // recipes 배열을 Dictionary로 변환
         recipeData = recipes.ToDictionary(x => x.id, x => x);
