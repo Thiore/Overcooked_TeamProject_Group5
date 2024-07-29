@@ -12,4 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ed250f171ecbe4b832d1bc93d8fcdb, type: 3}
   m_Name: Sushi2_Crate
   m_EditorClassIdentifier: 
-  Info: []
+  Info:
+  - Ingredients: 13
+    Position: {x: 7.801, y: -0.49, z: -1.859}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+    CookingProcess: 1
+    Chop_Anim: 1
+    OnPlate: 1
+    utensils: 0
+  - Ingredients: 8
+    Position: {x: -7.799, y: -0.49, z: -1.859}
+    Rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+    CookingProcess: 3
+    Chop_Anim: 0
+    OnPlate: 0
+    utensils: 1
+  - Ingredients: 22
+    Position: {x: -7.799, y: -0.49, z: -3.059}
+    Rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+    CookingProcess: 1
+    Chop_Anim: 0
+    OnPlate: 0
+    utensils: 0
+  - Ingredients: 4
+    Position: {x: -7.799, y: -0.49, z: -4.259}
+    Rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+    CookingProcess: 0
+    Chop_Anim: 0
+    OnPlate: 0
+    utensils: 0

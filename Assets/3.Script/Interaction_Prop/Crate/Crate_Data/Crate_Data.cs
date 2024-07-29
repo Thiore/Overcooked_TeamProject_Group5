@@ -10,6 +10,8 @@ public struct Crate_Info
     public Quaternion Rotation;
     public eCookingProcess CookingProcess;
     public bool Chop_Anim;
+    public bool OnPlate;
+    public eCookutensils utensils;
 }
 
 [CreateAssetMenu(fileName = "_Crate", menuName = "ScriptableObjects/Crate_Data", order = 1)]
