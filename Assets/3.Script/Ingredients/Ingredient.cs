@@ -86,7 +86,7 @@ public class Ingredient : MonoBehaviour
 
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         TryGetComponent(out Ingredient_renderer);
         TryGetComponent(out Ingredient_Mesh);
@@ -99,7 +99,7 @@ public class Ingredient : MonoBehaviour
         cooking = eCooked.Normal;
         
     }
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         
         ChopTime = 0;
