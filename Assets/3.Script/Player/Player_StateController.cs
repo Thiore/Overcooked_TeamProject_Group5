@@ -403,7 +403,7 @@ public class Player_StateController : MonoBehaviour
                     {
                         counter.ChoppingBoard.transform.GetChild(1).gameObject.transform.TryGetComponent(out Ingredient ingre);
 
-                        if (ingre != null && ingre.isChopping)
+                        if (ingre != null && ingre.isChop)
                         {
                             animator.SetTrigger("Chop");
                             Cleaver.SetActive(true);
