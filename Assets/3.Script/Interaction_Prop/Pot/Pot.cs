@@ -22,7 +22,7 @@ public class Pot : Cookingtool
 
     private void Awake()
     {
-        BaseColor = renderer[0].material.GetColor("_BaseColor");
+        BaseColor = this.renderer[0].material.GetColor("_BaseColor");
         isSoup = false;
         CookTime = 0;
 
@@ -95,11 +95,11 @@ public class Pot : Cookingtool
         }
         else
         {
-            if (BaseColor != renderer[0].material.GetColor("_BaseColor"))
+            if (BaseColor != this.renderer[0].material.GetColor("_BaseColor"))
             {
-                for (int i = 0; i < renderer.Length; i++)
+                for (int i = 0; i < this.renderer.Length; i++)
                 {
-                    renderer[i].material.SetColor("_BaseColor", BaseColor);
+                    this.renderer[i].material.SetColor("_BaseColor", BaseColor);
                 }
                 transform.GetChild(0).gameObject.SetActive(false);
                 Ingre.Change_Ingredient(Ingre.cooking);
@@ -125,9 +125,9 @@ public class Pot : Cookingtool
     private void ChangeSoupMaterial(float alpha)
     {
         Color newColor = BaseColor * alpha;
-        for (int i = 0; i < renderer.Length; i++)
+        for (int i = 0; i < this.renderer.Length; i++)
         {
-            renderer[i].material.SetColor("_BaseColor", newColor);
+            this.renderer[i].material.SetColor("_BaseColor", newColor);
         }
 
     }

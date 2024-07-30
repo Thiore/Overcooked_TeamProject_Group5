@@ -20,7 +20,7 @@ public class Plate : MonoBehaviour
     {
         
         TryGetComponent(out mesh);
-        TryGetComponent(out renderer);
+        TryGetComponent(out this.renderer);
         TryGetComponent(out meshcol);
     }
 

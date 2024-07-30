@@ -9,13 +9,13 @@ public class TestCamera : MonoBehaviour
 
     private void Awake()
     {
-        camera = Camera.main;
+        this.camera = Camera.main;
 
     }
 
     private void FixedUpdate()
     {
-        camera.transform.position = player.position + new Vector3(0, 4, -3);
-        camera.transform.LookAt(player);
+        this.camera.transform.position = player.position + new Vector3(0, 4, -3);
+        this.camera.transform.LookAt(player);
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1051,16 +1051,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31942c03d54f6d4448d3a3383325c09c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crate: {fileID: 0}
   Change_Mesh:
   - {fileID: 4300000, guid: f88b829bea599a34bafe3194f69d3803, type: 2}
   - {fileID: 4300000, guid: 530e0ba93beed314385110528a0f3536, type: 2}
   Change_Material:
   - {fileID: 2100000, guid: 4d2c7e00d097ad74bb3ac9d15bef01bf, type: 2}
   - {fileID: 2100000, guid: 4d2c7e00d097ad74bb3ac9d15bef01bf, type: 2}
-  CotrolBone: []
-  JointBone: []
+  crate: {fileID: 0}
   cooking: 0
-  myIngredients: 0
-  Chop_Script: 0
+  utensils: 0
+  CookProcess: 0
   ChopTime: 0
+  OnPlate: 0

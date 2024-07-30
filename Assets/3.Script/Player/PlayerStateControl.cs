@@ -18,12 +18,14 @@ public class PlayerStateControl : MonoBehaviour
 
     private CounterEmissionController counterEmissionController;
     private NearObject_EmissionController nearObjectEmissionController;
+    [SerializeField] private Player_SwapManager playerSwapManager;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         counterEmissionController = GetComponent<CounterEmissionController>();
-        nearObjectEmissionController = GetComponentInParent<NearObject_EmissionController>();
+        nearObjectEmissionController = GetComponent<NearObject_EmissionController>();
+        playerSwapManager = GetComponentInParent<Player_SwapManager>();
     }
 
     private void Update()
@@ -290,7 +292,7 @@ public class PlayerStateControl : MonoBehaviour
                     {
                         counter.ChoppingBoard.transform.GetChild(1).gameObject.transform.TryGetComponent(out Ingredient ingre);
 
-                        if (ingre != null && ingre.OnChopping)
+                        if (ingre.Chopable())
                         {
                             animator.SetTrigger("Chop");
                             Cleaver.SetActive(true);
