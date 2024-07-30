@@ -7,16 +7,17 @@ public class spawn_Ingredient : MonoBehaviour
     private eIngredients Ingredient_enum;
 
     [SerializeField] private Ingredient[] ingredient_prefab;
-
+    public GameObject[] AddIngredient_Prefabs;
     private Ingredient myIngredient;
     
     private Queue<Ingredient> ingredient_queue = new Queue<Ingredient>();
     private Queue<GameObject> Recipe_queue;
+    
     //private Player_StateController player;
 
     private Animator anim;
 
-    private Crate_Data Data;
+    public Crate_Data Data { get; private set; }
     private Crate_Info info;
 
     private void Awake()
@@ -60,16 +61,18 @@ public class spawn_Ingredient : MonoBehaviour
         else
         {
             GameObject newobj = new GameObject();
+            newobj.SetActive(false);
             AddIngredient AddIn = newobj.AddComponent<AddIngredient>();
+            newobj.tag = "AddIngredient";
             AddIn.info = Data.Info;
-            GameObject AddObj = new GameObject("AddObj");
-            AddObj.transform.SetParent(newobj.transform);
-            AddObj.transform.position = newobj.transform.position;
+           
             GameObject IngreList = new GameObject("IngreList");
+            IngreList.transform.SetParent(newobj.transform);
             IngreList.transform.position = newobj.transform.position;
             ChildIngredient(IngreList.transform);
             newobj.name = IngreList.transform.GetChild(0).name;
             AddIn.crate = this;
+            newobj.SetActive(true);
             return newobj.gameObject;
         }
 
@@ -88,6 +91,7 @@ public class spawn_Ingredient : MonoBehaviour
         }
         else
         {
+            Debug.Log(myIngredient);
             Ingredient newobj = Instantiate(myIngredient,parent.position,parent.rotation,parent);
             newobj.SetCookProcess(info);
             if (info.utensils.Equals(eCookutensils.Normal))
@@ -123,11 +127,10 @@ public class spawn_Ingredient : MonoBehaviour
         ingredient_queue.Enqueue(ingredient);
     }
 
-    public void Set_IngredientInfo(Crate_Info info, Crate_Data data, Queue<GameObject> recipe)
+    public void Set_IngredientInfo(Crate_Info info, Crate_Data data)
     {
         this.info = info;
         this.Data = data;
-        this.Recipe_queue = recipe;
     }
     
 

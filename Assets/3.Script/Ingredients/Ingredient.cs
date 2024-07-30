@@ -59,9 +59,9 @@ public class Ingredient : MonoBehaviour
     [SerializeField] protected Mesh[] Change_Mesh;
     [SerializeField] protected Material[] Change_Material;
 
-    protected Renderer Ingredient_renderer;
-    protected MeshFilter Ingredient_Mesh;
-    protected MeshCollider Ingredient_Col;
+    [SerializeField] protected Renderer Ingredient_renderer = null;
+    [SerializeField] protected MeshFilter Ingredient_Mesh = null;
+    [SerializeField] protected MeshCollider Ingredient_Col = null;
 
     public spawn_Ingredient crate;
     
@@ -88,6 +88,7 @@ public class Ingredient : MonoBehaviour
 
     protected virtual void Awake()
     {
+        
         TryGetComponent(out Ingredient_renderer);
         TryGetComponent(out Ingredient_Mesh);
         TryGetComponent(out Ingredient_Col);
@@ -106,10 +107,9 @@ public class Ingredient : MonoBehaviour
         isChop = false;
         isCook = false;
         OnPlate = false;
-        if (!Ingredient_Mesh.mesh.Equals(Change_Mesh[0]))
-        {
+       
             Change_Ingredient(eCooked.Normal);
-        }
+        
         if(CookProcess.Equals(eCookingProcess.Normal))
         {
             cooking = eCooked.ReadyCook;
@@ -124,11 +124,11 @@ public class Ingredient : MonoBehaviour
         {
             Chop();
         }
-
+        Chop();
 
     }
 
-    public void Change_Ingredient(eCooked cooked)
+    public virtual void Change_Ingredient(eCooked cooked)
     {
         cooking = cooked;
         int CookEnum = (int)cooked;
@@ -185,6 +185,10 @@ public class Ingredient : MonoBehaviour
                 return true;
             else if (cooking.Equals(eCooked.Normal))
             {
+                if(Chop_Anim)
+                {
+                    Chop_Change_obj();
+                }
                 cooking = eCooked.Chopping;
                 isChop = true;
                 return true;
@@ -228,6 +232,11 @@ public class Ingredient : MonoBehaviour
         return false;
     }
     public void SetisCook() => isCook = !isCook;
+
+    protected virtual void Chop_Change_obj()
+    {
+
+    }
     
 
     private void Chop()
@@ -312,6 +321,7 @@ public class Ingredient : MonoBehaviour
         gameObject.SetActive(false);
         transform.position = crate.transform.position;
         transform.localScale = new Vector3(1f, 1f, 1f);
+        Ingredient_Col.enabled = true;
         crate.DestroyIngredient(this);
     }
 }

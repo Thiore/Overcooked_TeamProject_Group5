@@ -9,6 +9,13 @@ public class Cucumber : Ingredient
     [SerializeField] private Transform[] JointBone;
     private Transform[] CopyBone;
 
+    [SerializeField] private SkinnedMeshRenderer ChopIngre_renderer;
+    [SerializeField] private MeshCollider ChopIngre_Col;
+
+    
+
+    [SerializeField] private Mesh Chop_Mesh;
+
     [SerializeField] private Mesh Plate_Mesh;
     [SerializeField] private Material Plate_Material;
     [SerializeField] private GameObject[] Ingre;
@@ -16,6 +23,9 @@ public class Cucumber : Ingredient
 
     protected override void Awake()
     {
+        Ingredient_renderer = Ingredient_renderer as SkinnedMeshRenderer;
+        Chop_Anim = true;
+        
         if (Chop_Anim)
         {
             CopyBone = JointBone;
@@ -29,13 +39,11 @@ public class Cucumber : Ingredient
         isChop = false;
         isCook = false;
         OnPlate = false;
+        ChopIngre_renderer.sharedMesh = null;
+        ChopIngre_Col.enabled = false;
         if (!Ingredient_Mesh.mesh.Equals(Change_Mesh[0]))
         {
             Change_Ingredient(eCooked.Normal);
-        }
-        if (CookProcess.Equals(eCookingProcess.Normal))
-        {
-            cooking = eCooked.ReadyCook;
         }
     }
 
@@ -46,7 +54,7 @@ public class Cucumber : Ingredient
             LastTime = Mathf.CeilToInt(ChopTime * 2f);
             StartCoroutine(ChopAnim_co(Mathf.FloorToInt(ChopTime * 2f)));
         }
-        if(LastTime>7f)
+        if(LastTime>6f)
         {
             LastTime = 0f;
         }
@@ -57,15 +65,30 @@ public class Cucumber : Ingredient
         float ChoppingTime = 0;
         while(ChoppingTime<1f)
         {
-            Vector3.Lerp(JointBone[BoneIndex].position, CotrolBone[BoneIndex].position, ChoppingTime);
-            Vector3.Slerp(JointBone[BoneIndex].position, CotrolBone[BoneIndex].position, ChoppingTime);
+            ChoppingTime += Time.deltaTime;
+            
+            JointBone[BoneIndex].RotateAround(CotrolBone[BoneIndex].position, CotrolBone[BoneIndex].right, ChoppingTime);
             yield return null;
         }
+    }
+
+    protected override void Chop_Change_obj()
+    {
+        Ingredient_Mesh.mesh = null;
+        Ingredient_Col.enabled = false;
+        ChopIngre_renderer.sharedMesh = Chop_Mesh;
+        ChopIngre_Col.enabled = true;
     }
 
     public override void Change_PlateIngredient()
     {
         OnPlate = true;
+
+        if(ChopIngre_renderer.sharedMesh != null)
+        {
+            ChopIngre_renderer.sharedMesh = null;
+            ChopIngre_Col.enabled = false;
+        }
 
         Ingredient_Mesh.mesh = Plate_Mesh;
         Ingredient_renderer.material = Plate_Material;
