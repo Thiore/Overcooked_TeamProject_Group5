@@ -9,6 +9,10 @@ public class RecipePool : MonoBehaviour
     public GameObject oneIngredientPrefab; // 1개의 재료를 가지는 레시피 프리팹
     public GameObject twoIngredientsPrefab; // 2개의 재료를 가지는 레시피 프리팹
     public GameObject threeIngredientsPrefab; // 3개의 재료를 가지는 레시피 프리팹
+    public GameObject twoIngredient_onetool_Prefab;
+    public GameObject twoIngredient_twotool_Prefab;
+    public GameObject threeIngredient_onetool_Prefab;
+    public GameObject threeIngredient_twotool_Prefab;
     [SerializeField] private RectTransform recipePoolPanel; // RECIPE_POOL 패널의 RectTransform
     [SerializeField] private float moveSpeed = 100f; // 오브젝트 이동 속도
     [SerializeField] private int maxVisibleObjects = 5; // 화면에 보일 최대 오브젝트 수
@@ -71,9 +75,36 @@ public class RecipePool : MonoBehaviour
             case 1:
                 return oneIngredientPrefab;
             case 2:
-                return twoIngredientsPrefab;
+
+                if (recipe.tool_count ==1)
+                {
+                    return twoIngredient_onetool_Prefab;
+                }else if (recipe.tool_count == 2)
+                {
+                    return twoIngredient_twotool_Prefab;
+                }
+                else
+                {
+                    return twoIngredientsPrefab;
+                }
+                
+                
+                
             case 3:
-                return threeIngredientsPrefab;
+
+                if (recipe.tool_count == 1)
+                {
+                    return threeIngredient_onetool_Prefab;
+                }
+                else if (recipe.tool_count == 2)
+                {
+                    return threeIngredient_twotool_Prefab;
+                }
+                else
+                {
+                    return threeIngredientsPrefab;
+                }
+                
             default:
                 Debug.LogError("Unknown number of ingredients: " + recipe.ingredient.Count);
                 return null;
@@ -143,6 +174,7 @@ public class RecipePool : MonoBehaviour
                 GameObject oldestObj = activeObjects[0]; // 가장 오래된 오브젝트 선택
                 activeObjects.RemoveAt(0); // 목록에서 제거
                 DeactivateObject(oldestObj); // 오브젝트 비활성화
+                
             }
         }
         Debug.Log("레시피 활성화");
@@ -168,12 +200,13 @@ public class RecipePool : MonoBehaviour
                 if (i == 0)
                 {
                     Debug.Log("순서와 레시피 모두 동일");
-                    AllCorrect(i);
+                    
+                    AllCorrect(i, activeObjects[i].GetComponent<Recipe>().ingredient.Count*10);
                 }
                 else
                 {
                     Debug.Log("레시피는 맞았으나 순서 틀림");
-                    InCorrect(i);
+                    InCorrect(i, activeObjects[i].GetComponent<Recipe>().ingredient.Count * 10);
                 }
 
                 return; // 매칭되는 오브젝트를 찾았으므로 메서드 종료
@@ -183,7 +216,7 @@ public class RecipePool : MonoBehaviour
         StartCoroutine(Wrong());
     }
 
-    private void AllCorrect(int index)
+    private void AllCorrect(int index,int point)
     {
         // 모든 자식 Image 컴포넌트를 가져와 색상 변경
         Image[] childImages = activeObjects[index].GetComponentsInChildren<Image>();
@@ -194,10 +227,14 @@ public class RecipePool : MonoBehaviour
 
         Debug.Log(activeObjects[index].name);
         StartCoroutine(DeactivateAfterDelay(activeObjects[index], 0.2f));
-        GameManager.Instance.AllCorrect_Recipe();
+        GameManager.Instance.AllCorrect_Recipe(point);
+        if (activeObjects.Count == 0)
+        {
+            ActivateObject();
+        }
     }
 
-    private void InCorrect(int index)
+    private void InCorrect(int index, int point)
     {
         // 모든 자식 Image 컴포넌트를 가져와 색상 변경
         Image[] childImages = activeObjects[index].GetComponentsInChildren<Image>();
@@ -208,7 +245,7 @@ public class RecipePool : MonoBehaviour
         Debug.Log(activeObjects[index].name);
         StartCoroutine(DeactivateAfterDelay(activeObjects[index], 0.5f));
         
-        GameManager.Instance.Incorrect_Recipe();
+        GameManager.Instance.Incorrect_Recipe(point);
     }
     private IEnumerator Wrong()
     {

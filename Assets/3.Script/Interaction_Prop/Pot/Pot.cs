@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pot : Cookingtool
 {
-    [SerializeField] private SkinnedMeshRenderer[] renderer;
+    [SerializeField] private Renderer[] renderer;
     [SerializeField] private Texture2D FalloffTexture;
 
     [SerializeField] private Animator Soup_Anim;
@@ -12,16 +12,20 @@ public class Pot : Cookingtool
     private Transform SaveRange = null;//°¡½º·¹ÀÎÁö¿¡¼­ ¶³¾îÁø ÈÄ ÇØ´ç °¡½º·¹ÀÎÁö¸¦ ²ô±âÀ§ÇØ
     private Ingredient Ingre = null;//³¿ºñ°¡ µé°íÀÖ´Â Àç·á
 
-    private float CookTime;
-    private readonly float FinishCookTime = 4f;
-    private readonly float OverCookTime = 6f;
-    private readonly float FireTime = 10f;
+    public float CookTime;
+    public readonly float FinishCookTime = 4f;
+    public readonly float OverCookTime = 6f;
+    public readonly float FireTime = 10f;
     private Color BaseColor;
+
+    private bool isSoup;
 
     private void Awake()
     {
         BaseColor = renderer[0].material.GetColor("_BaseColor");
-        
+        isSoup = false;
+        CookTime = 0;
+
     }
     private void Update()
     {
@@ -37,25 +41,48 @@ public class Pot : Cookingtool
                     SaveRange = transform.parent;
                     transform.parent.GetChild(0).gameObject.SetActive(true);
                     transform.GetChild(1).TryGetComponent(out Ingre);
+                    gameObject.name = transform.GetChild(1).name;
                 }
                 
                 CookTime += Time.deltaTime;
+                Debug.Log(CookTime);
                 if(CookTime > FireTime)
                 {
-                    Ingre.cooking = eCooked.trash;
+                    if(!isSoup)
+                    {
+                        Soup_Anim.SetTrigger("Cook");
+                        Ingre.cooking = eCooked.trash;
+                        isSoup = true;
+                        Debug.Log("Fire");
+                    }
                     //ºÒ³²
+                    return;
                 }
                 else if(CookTime > OverCookTime)
                 {
-                    //»¡°£ UI±ôºý±ôºý
+                    if (isSoup)
+                    {
+                        isSoup = false;
+                        Debug.Log("±ôºý±ôºý");
+                    }
+                    //»¡°£ UI±ôºý±ôºý  
+                    return;
                 }
                 else if (CookTime > FinishCookTime)
                 {
-                    Ingre.cooking = eCooked.ReadyCook;
+                    if(!isSoup)
+                    {
+                        Ingre.cooking = eCooked.ReadyCook;
+                        Soup_Anim.SetTrigger("Cook");
+                        isSoup = true;
+                        Debug.Log("Á¶¸®³¡");
+                    }
+                    
                     //ÃÊ·Ï UI ¶ì¸µ
+                    return;
                 }
 
-
+                return;
             }
             else
             {
@@ -78,6 +105,8 @@ public class Pot : Cookingtool
                 Ingre.Change_Ingredient(Ingre.cooking);
                 Ingre = null;
                 CookTime = 0f;
+                isSoup = false;
+                gameObject.name = "Pot";
             }
             
         }
@@ -85,10 +114,11 @@ public class Pot : Cookingtool
 
     private void FixedUpdate()
     {
-        float Timerange = CookTime * 0.1f;
+        float Timerange = CookTime * 0.06f;
         if (Timerange > 0.11 && Timerange < 0.89f)
         {
-            float alpha = FalloffTexture.GetPixelBilinear(Timerange, 0.5f).a;
+            Color alphaColor = FalloffTexture.GetPixelBilinear(Timerange, 0.5f);
+            float alpha = alphaColor.a;
             ChangeSoupMaterial(alpha);
         }
     }

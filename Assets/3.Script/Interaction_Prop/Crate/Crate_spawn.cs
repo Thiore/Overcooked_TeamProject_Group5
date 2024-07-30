@@ -9,6 +9,8 @@ public class Crate_spawn : MonoBehaviour
     [SerializeField] private Crate_Data crate_Data;
     [SerializeField] private GameObject crate_Prefabs;
 
+    private Queue<GameObject> Recipe_queue = new Queue<GameObject>();
+
 
     private void Awake()
     {
@@ -39,7 +41,7 @@ public class Crate_spawn : MonoBehaviour
                     newMat[0] = crate;
                     newMat[1] = crate_Material[num];
                     crate_renderer.materials = newMat;
-                    obj.GetComponent<spawn_Ingredient>().Set_IngredientInfo(info);
+                    obj.GetComponent<spawn_Ingredient>().Set_IngredientInfo(info, crate_Data, Recipe_queue);
                     
                     return;
                 }

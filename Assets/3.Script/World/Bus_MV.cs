@@ -129,6 +129,31 @@ public class Bus_MV : MonoBehaviour
     //    //animator.SetBool(IsWalking, false);
     //    isJumping = false;
     //}
+    public void SaveVanPosition()
+    {
+        Vector3 playerPosition = transform.position;
+        PlayerPrefs.SetFloat("PlayerPosX", playerPosition.x);
+        PlayerPrefs.SetFloat("PlayerPosY", playerPosition.y);
+        PlayerPrefs.SetFloat("PlayerPosZ", playerPosition.z);
+        //저장
+        PlayerPrefs.Save();
+        Debug.Log("벤 위치 저장");
+    }
 
+    public void LoadVanPosition()
+    {
+        if (PlayerPrefs.HasKey("PlayerPosX") && PlayerPrefs.HasKey("PlayerPosY") && PlayerPrefs.HasKey("PlayerPosZ"))
+        {
+            float x = PlayerPrefs.GetFloat("PlayerPosX");
+            float y = PlayerPrefs.GetFloat("PlayerPosY");
+            float z = PlayerPrefs.GetFloat("PlayerPosZ");
+            transform.position = new Vector3(x, y, z);
+            Debug.Log("플레이어 벤 위치");
+        }
+        else
+        {
+            Debug.Log("플레이어 위치 로드 못 함");
+        }
+    }
 
 }

@@ -37,7 +37,7 @@ public class AddIngredientSpawn : MonoBehaviour
 
     public bool SetAddIngredient(GameObject targetObj) //false가 반환되면 합치지못함
     {// targetObj는 접시 또는 counter위에 올라가있는 재료입니다.(tag가 ingredient인것을 넣어주면 될것같습니다.)
-        if(Ingre.OnPlate)
+        if(Ingre.isPlate)
         {
             if (targetObj.TryGetComponent(out Ingredient targetIngre))
             {
@@ -58,7 +58,7 @@ public class AddIngredientSpawn : MonoBehaviour
                     }
                 }
 
-                if (!targetIngre.OnPlate)
+                if (!targetIngre.isPlate)
                 {
                     Debug.Log($"{targetObj.transform.parent.name}위에 있는 {targetObj.name}이 아직 손질되지 않았습니다.");
                     return false;
