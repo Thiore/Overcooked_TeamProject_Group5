@@ -186,12 +186,12 @@ public class Ojbect_UI_Controll : MonoBehaviour
     {
         for (int i = 0; i < ingredient_object_List.Count; i++)
         {
-            if (ingredient_object_List[i].GetComponent<Ingredient>().OnPlate)
+            if (ingredient_object_List[i].GetComponent<Ingredient>().cooking.Equals(eCooked.ReadyCook))
             {
                 ingredient_img_List[i].SetActive(true);
                 ingredient_img_List[i].transform.position = main_cam.WorldToScreenPoint(ingredient_object_List[i].transform.position + new Vector3(0, -1, 0));
             }
-            if (ingredient_object_List[i].GetComponent<Ingredient>().OnChopping)
+            if (ingredient_object_List[i].GetComponent<Ingredient>().cooking.Equals(eCooked.Chopping))
             {
                 ingredient_slider_List[i].SetActive(true);
                 //Ingredient에서 써는거 시간 value로 넣어줘야함

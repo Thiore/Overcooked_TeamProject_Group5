@@ -4,132 +4,77 @@ using UnityEngine;
 
 public class Cucumber : Ingredient
 {
-    //[SerializeField] private Mesh[] Change_Mesh;
-    //[SerializeField] private Material[] Change_Material;
 
     [SerializeField] private Transform[] CotrolBone;
     [SerializeField] private Transform[] JointBone;
     private Transform[] CopyBone;
 
-    private Renderer Ingredient_renderer;
-    private MeshFilter Ingredient_Mesh;
-    private MeshCollider Ingredient_Col;
+    [SerializeField] private Mesh Plate_Mesh;
+    [SerializeField] private Material Plate_Material;
+    [SerializeField] private GameObject[] Ingre;
+    private float LastTime;
 
-    private void Awake()
+    protected override void Awake()
     {
-        //TryGetComponent(out Ingredient_renderer);
-        //TryGetComponent(out Ingredient_Mesh);
-        //TryGetComponent(out Ingredient_Col);
         if (Chop_Anim)
         {
             CopyBone = JointBone;
         }
-
-
-        //for (int i = 0; i < playerAnim.Length; i++)
-        //{
-        //    playerAnim[i] = null;
-        //}
-        cooking = eCooked.Normal;
+        LastTime = 0;
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
-
         ChopTime = 0;
-
-
-        //if (!Ingredient_Mesh.mesh.Equals(Change_Mesh[0]))
-        //{
-        //    Change_Ingredient(eCooked.Normal);
-        //    Debug.Log("들어오면안됨");
-        //}
-
-
+        isChop = false;
+        isCook = false;
+        OnPlate = false;
+        if (!Ingredient_Mesh.mesh.Equals(Change_Mesh[0]))
+        {
+            Change_Ingredient(eCooked.Normal);
+        }
+        if (CookProcess.Equals(eCookingProcess.Normal))
+        {
+            cooking = eCooked.ReadyCook;
+        }
     }
 
-    private void Update()
+    protected override void ChildChopAnim(float chopTime)
     {
-        //if (transform.parent != null)
-        //{
-        //    if (transform.parent.CompareTag("ChoppingBoard"))
-        //    {
-        //        if (isChopping)
-        //        {
-        //            if (cooking.Equals(eCooked.Normal))
-        //            {
-        //                cooking = eCooked.Chopping;
-        //            }
-        //            if (cooking.Equals(eCooked.Chopping))
-        //            {
-        //                for (int i = 0; i < playerAnim.Length; i++)
-        //                {
-        //                    if (playerAnim[i] != null)
-        //                    {
-        //                        AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
-        //                        if (AnimInfo[i].IsName("New_Chef@Chop"))
-        //                        {
-        //                            if (playerAnim[i] != null)
-        //                                ChopTime += Time.deltaTime;
-        //                            Debug.Log($"잘리는중{ChopTime}");
-        //                            if (ChopTime > FinishChopTime)
-        //                            {
-        //                                ChopTime = 0;
-        //                                Change_Ingredient(eCooked.Cooking);
-        //                                playerAnim[i].SetTrigger("Finish");
-        //                                playerAnim[i].transform.GetComponent<Player_StateController>().CleaverOb.SetActive(false);
-        //                            }
-        //                        }
-        //                    }
-
-        //                }
-        //            }
-        //        }
-        //        return;
-        //    }
-        //}
-
-      
-                            ChopTime += Time.deltaTime;
-                        Debug.Log($"잘리는중{ChopTime}");
-                        if (ChopTime > FinishChopTime)
-                        {
-                            ChopTime = 0;
-                            Change_Ingredient(eCooked.Cooking);
-                            
-                        }
-            
-        
+        if (ChopTime * 2f > LastTime)
+        {
+            LastTime = Mathf.CeilToInt(ChopTime * 2f);
+            StartCoroutine(ChopAnim_co(Mathf.FloorToInt(ChopTime * 2f)));
+        }
+        if(LastTime>7f)
+        {
+            LastTime = 0f;
+        }
     }
 
-    //private void ChopAnim()
-    //{
-    //    int LastTime = 1;
-    //    if(ChopTime*2f>Mathf.Ceil(ChopTime*2f))
-    //        {
-
-    //    }
-    //}
-
-    //private IEnumerator ChopAnim_co(int)
-    //{
-
-    //}
-
-    private void Change_Ingredient(eCooked cooked)
+    private IEnumerator ChopAnim_co(int BoneIndex)
     {
-        cooking = cooked;
-        int CookEnum = (int)cooked;
-        if (CookEnum > 0)
-            CookEnum -= 1;
-        //Ingredient_Mesh.mesh = Change_Mesh[CookEnum];
-        //Ingredient_renderer.material = Change_Material[CookEnum];
-        //Ingredient_Col.sharedMesh = Change_Mesh[CookEnum];
-        
+        float ChoppingTime = 0;
+        while(ChoppingTime<1f)
+        {
+            Vector3.Lerp(JointBone[BoneIndex].position, CotrolBone[BoneIndex].position, ChoppingTime);
+            Vector3.Slerp(JointBone[BoneIndex].position, CotrolBone[BoneIndex].position, ChoppingTime);
+            yield return null;
+        }
+    }
+
+    public override void Change_PlateIngredient()
+    {
+        OnPlate = true;
+
+        Ingredient_Mesh.mesh = Plate_Mesh;
+        Ingredient_renderer.material = Plate_Material;
+        Ingredient_Col.sharedMesh = Plate_Mesh;
     }
 
     public override void Die()
     {
-
+        JointBone = CopyBone;
+        base.Die();
     }
 }
