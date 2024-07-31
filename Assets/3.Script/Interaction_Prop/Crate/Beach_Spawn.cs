@@ -12,7 +12,7 @@ public class Beach_Spawn : MonoBehaviour
     [SerializeField] private Transform[] Crate_Pos2;
     [SerializeField] private Transform[] Crate_Pos3;
     [SerializeField] private Transform[] Section_Pos;
-    private Transform[] CopySection;
+    private Vector3[] CopySection;
 
     private GameObject[][] CrateArray;
     
@@ -22,7 +22,12 @@ public class Beach_Spawn : MonoBehaviour
 
     private void Awake()
     {
-        CopySection = Section_Pos;
+        CopySection = new Vector3[Section_Pos.Length];
+        for(int i = 0; i < Section_Pos.Length;i++)
+        {
+            CopySection[i] = Section_Pos[i].position;
+
+        }
 
         CrateArray = new GameObject[3][];
         
@@ -35,7 +40,7 @@ public class Beach_Spawn : MonoBehaviour
         {
             CrateArray[0][i] = New_Crate1(i);
         }
-        for (int i = 0; i < Crate_Pos3.Length; i++)
+        for (int i = 0; i < Crate_Pos2.Length; i++)
         {
             CrateArray[1][i] = New_Crate2(i);
         }
@@ -49,7 +54,7 @@ public class Beach_Spawn : MonoBehaviour
     private void Update()
     {
         MoveingPlatform();
-        Debug.Log("¿Ö¾È¿Í");
+        
 
     }
     
@@ -58,10 +63,13 @@ public class Beach_Spawn : MonoBehaviour
         
         for(int i = 0; i < Section_Pos.Length;i++)
         {
-            Section_Pos[i].Translate(Vector3.right * Time.deltaTime * 3f);
-            if(Section_Pos[i].position.x>CopySection[2].position.x)
+            Section_Pos[i].Translate(Vector3.right * Time.deltaTime * 2f);
+            Debug.Log(Section_Pos[i].name);
+            Debug.Log(Section_Pos[i].position);
+            if (Section_Pos[i].position.x>CopySection[2].x+13.8f)
             {
-                Section_Pos[i] = CopySection[0];
+                
+                Section_Pos[i].position = CopySection[0]+Vector3.left*13.8f;
                 for(int j = 0; j<CrateArray[i].Length;j++)
                 {
                     CrateArray[i][j].SetActive(false);
