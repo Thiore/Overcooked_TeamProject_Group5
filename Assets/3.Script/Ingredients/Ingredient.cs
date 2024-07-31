@@ -59,15 +59,15 @@ public class Ingredient : MonoBehaviour
     [SerializeField] protected Mesh[] Change_Mesh;
     [SerializeField] protected Material[] Change_Material;
 
-    protected Renderer Ingredient_renderer;
-    protected MeshFilter Ingredient_Mesh;
-    protected MeshCollider Ingredient_Col;
+    [SerializeField] protected Renderer Ingredient_renderer = null;
+    [SerializeField] protected MeshFilter Ingredient_Mesh = null;
+    [SerializeField] protected MeshCollider Ingredient_Col = null;
 
     public spawn_Ingredient crate;
     
-    public eCooked cooking;
-    public eCookutensils utensils;
-    public eCookingProcess CookProcess;
+    public eCooked cooking { get; protected set; }
+    public eCookutensils utensils { get; protected set; }
+    public eCookingProcess CookProcess { get; protected set; }
 
     protected bool Chop_Anim;
 
@@ -79,8 +79,6 @@ public class Ingredient : MonoBehaviour
     public bool isCook { get; protected set; }
     public bool isPlate { get; protected set; }
 
-    public bool OnPlate;
-
     protected Animator[] playerAnim = new Animator[2];
     protected AnimatorStateInfo[] AnimInfo = new AnimatorStateInfo[2];
 
@@ -88,6 +86,7 @@ public class Ingredient : MonoBehaviour
 
     protected virtual void Awake()
     {
+        
         TryGetComponent(out Ingredient_renderer);
         TryGetComponent(out Ingredient_Mesh);
         TryGetComponent(out Ingredient_Col);
@@ -105,17 +104,14 @@ public class Ingredient : MonoBehaviour
         ChopTime = 0;
         isChop = false;
         isCook = false;
-        OnPlate = false;
-        if (!Ingredient_Mesh.mesh.Equals(Change_Mesh[0]))
-        {
-            Change_Ingredient(eCooked.Normal);
-        }
+       
+       
+        Change_Ingredient(eCooked.Normal);
+        
         if(CookProcess.Equals(eCookingProcess.Normal))
         {
             cooking = eCooked.ReadyCook;
         }
-
-
     }
 
     private void Update()
@@ -124,11 +120,11 @@ public class Ingredient : MonoBehaviour
         {
             Chop();
         }
-
+        Chop();
 
     }
 
-    public void Change_Ingredient(eCooked cooked)
+    public virtual void Change_Ingredient(eCooked cooked)
     {
         cooking = cooked;
         int CookEnum = (int)cooked;
@@ -145,10 +141,6 @@ public class Ingredient : MonoBehaviour
         Ingredient_Col.enabled = false;
     }
 
-    public virtual void Change_PlateIngredient()
-    {
-        OnPlate = true;
-    }
 
     public void SetCookProcess(Crate_Info Info)
     {
@@ -185,6 +177,10 @@ public class Ingredient : MonoBehaviour
                 return true;
             else if (cooking.Equals(eCooked.Normal))
             {
+                if(Chop_Anim)
+                {
+                    Chop_Change_obj();
+                }
                 cooking = eCooked.Chopping;
                 isChop = true;
                 return true;
@@ -228,6 +224,21 @@ public class Ingredient : MonoBehaviour
         return false;
     }
     public void SetisCook() => isCook = !isCook;
+
+    public void SetReadyCook()
+    {
+        cooking = eCooked.ReadyCook;
+    }
+
+    public void SetTrash()
+    {
+        cooking = eCooked.trash;
+    }
+
+    protected virtual void Chop_Change_obj()
+    {
+
+    }
     
 
     private void Chop()
@@ -252,10 +263,14 @@ public class Ingredient : MonoBehaviour
                         {
                             isChop = false;
                             ChopTime = 0;
-                            if (CookProcess.Equals(eCookingProcess.Chopping))
-                                Change_Ingredient(eCooked.ReadyCook);
-                            else
-                                Change_Ingredient(eCooked.Cooking);
+                            if (!Chop_Anim)
+                            {
+                                if (CookProcess.Equals(eCookingProcess.Chopping))
+                                    Change_Ingredient(eCooked.ReadyCook);
+                                else
+                                    Change_Ingredient(eCooked.Cooking);
+                            }
+                               
 
                             playerAnim[i].SetTrigger("Finish");
                             playerAnim[i].transform.GetComponent<Player_StateController>().CleaverOb.SetActive(false);
@@ -306,12 +321,13 @@ public class Ingredient : MonoBehaviour
 
     }
 
-    public virtual void Die()
+    protected virtual void OnDisable()
     {
         transform.parent = null;
         gameObject.SetActive(false);
         transform.position = crate.transform.position;
         transform.localScale = new Vector3(1f, 1f, 1f);
+        Ingredient_Col.enabled = true;
         crate.DestroyIngredient(this);
     }
 }

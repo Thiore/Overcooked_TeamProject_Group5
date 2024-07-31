@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Cucumber : Ingredient
 {
-
-    [SerializeField] private Transform[] CotrolBone;
     [SerializeField] private Transform[] JointBone;
-    private Transform[] CopyBone;
+
+    [SerializeField] private SkinnedMeshRenderer ChopIngre_renderer;
+    [SerializeField] private MeshCollider ChopIngre_Col;
+
+    
+
+    [SerializeField] private Mesh Chop_Mesh;
 
     [SerializeField] private Mesh Plate_Mesh;
     [SerializeField] private Material Plate_Material;
@@ -16,9 +20,12 @@ public class Cucumber : Ingredient
 
     protected override void Awake()
     {
+        TryGetComponent(out ChopIngre_renderer);
+        Chop_Anim = true;
+        
         if (Chop_Anim)
         {
-            CopyBone = JointBone;
+            ChopIngre_renderer.bones = JointBone;
         }
         LastTime = 0;
     }
@@ -28,15 +35,27 @@ public class Cucumber : Ingredient
         ChopTime = 0;
         isChop = false;
         isCook = false;
-        OnPlate = false;
-        if (!Ingredient_Mesh.mesh.Equals(Change_Mesh[0]))
-        {
-            Change_Ingredient(eCooked.Normal);
-        }
-        if (CookProcess.Equals(eCookingProcess.Normal))
-        {
-            cooking = eCooked.ReadyCook;
-        }
+        
+        //ChopIngre_renderer.sharedMesh = null;
+        //ChopIngre_Col.enabled = false;
+        //if (!ChopIngre_renderer.sharedMesh.Equals(Change_Mesh[0]))
+        //{
+        //    Change_Ingredient(eCooked.Normal);
+        //}
+    }
+
+    public virtual void Change_Ingredient(eCooked cooked)
+    {
+        cooking = cooked;
+        int CookEnum = (int)cooked;
+        if (CookEnum > 0)
+            CookEnum -= 1;
+
+
+        ChopIngre_renderer.sharedMesh = Change_Mesh[CookEnum];
+        ChopIngre_renderer.material = Change_Material[CookEnum];
+        ChopIngre_Col.sharedMesh = Change_Mesh[CookEnum];
+
     }
 
     protected override void ChildChopAnim(float chopTime)
@@ -46,7 +65,7 @@ public class Cucumber : Ingredient
             LastTime = Mathf.CeilToInt(ChopTime * 2f);
             StartCoroutine(ChopAnim_co(Mathf.FloorToInt(ChopTime * 2f)));
         }
-        if(LastTime>7f)
+        if(LastTime>6f)
         {
             LastTime = 0f;
         }
@@ -54,27 +73,43 @@ public class Cucumber : Ingredient
 
     private IEnumerator ChopAnim_co(int BoneIndex)
     {
-        float ChoppingTime = 0;
-        while(ChoppingTime<1f)
-        {
-            Vector3.Lerp(JointBone[BoneIndex].position, CotrolBone[BoneIndex].position, ChoppingTime);
-            Vector3.Slerp(JointBone[BoneIndex].position, CotrolBone[BoneIndex].position, ChoppingTime);
-            yield return null;
-        }
+        //float ChoppingTime = 0;
+        //while(ChoppingTime<1f)
+        //{
+        //    ChoppingTime += Time.deltaTime;
+
+        //    JointBone[BoneIndex].RotateAround(CotrolBone[BoneIndex].position, CotrolBone[BoneIndex].right, ChoppingTime);
+        //    yield return null;
+        //}
+        yield return null;
     }
 
-    public override void Change_PlateIngredient()
+    protected override void Chop_Change_obj()
     {
-        OnPlate = true;
-
-        Ingredient_Mesh.mesh = Plate_Mesh;
-        Ingredient_renderer.material = Plate_Material;
-        Ingredient_Col.sharedMesh = Plate_Mesh;
+        Ingredient_Mesh.mesh = null;
+        Ingredient_Col.enabled = false;
+        ChopIngre_renderer.sharedMesh = Chop_Mesh;
+        ChopIngre_Col.enabled = true;
     }
 
-    public override void Die()
+    //public override void Change_PlateIngredient()
+    //{
+    //    OnPlate = true;
+
+    //    if(ChopIngre_renderer.sharedMesh != null)
+    //    {
+    //        ChopIngre_renderer.sharedMesh = null;
+    //        ChopIngre_Col.enabled = false;
+    //    }
+
+    //    Ingredient_Mesh.mesh = Plate_Mesh;
+    //    Ingredient_renderer.material = Plate_Material;
+    //    Ingredient_Col.sharedMesh = Plate_Mesh;
+    //}
+
+    protected override void OnDisable()
     {
-        JointBone = CopyBone;
-        base.Die();
+        //JointBone = CopyBone;
+        base.OnDisable();
     }
 }

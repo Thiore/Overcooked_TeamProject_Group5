@@ -288,7 +288,7 @@ public class Player_StateController : MonoBehaviour
                             {
                                 if(HandsOnOb.transform.GetChild(0).TryGetComponent(out Ingredient ingre))
                                 {
-                                    ingre.Die();
+                                    ingre.gameObject.SetActive(false);
                                     return;
                                 }
                             }
@@ -358,7 +358,7 @@ public class Player_StateController : MonoBehaviour
                             {
                                 if (addingre.SetAddIngredient(counter.PutOnOb.transform.GetChild(0).gameObject))
                                 {
-                                    ingre.Die();
+                                    ingre.gameObject.SetActive(false);
                                     animator.SetBool("IsTake", false);
                                     HandsOnOb = null;
                                     isHolding = false;
@@ -380,7 +380,7 @@ public class Player_StateController : MonoBehaviour
                         {
                             if (addingre.SetAddIngredient(counter.PutOnOb))
                             {
-                                ingre.Die();
+                                ingre.gameObject.SetActive(false);
                                 animator.SetBool("IsTake", false);
                                 HandsOnOb = null;
                                 isHolding = false;

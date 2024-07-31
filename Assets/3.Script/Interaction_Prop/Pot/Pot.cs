@@ -51,7 +51,7 @@ public class Pot : Cookingtool
                     if(!isSoup)
                     {
                         Soup_Anim.SetTrigger("Cook");
-                        Ingre.cooking = eCooked.trash;
+                        Ingre.SetTrash();
                         isSoup = true;
                         Debug.Log("Fire");
                     }
@@ -72,7 +72,7 @@ public class Pot : Cookingtool
                 {
                     if(!isSoup)
                     {
-                        Ingre.cooking = eCooked.ReadyCook;
+                        Ingre.SetReadyCook();
                         Soup_Anim.SetTrigger("Cook");
                         isSoup = true;
                         Debug.Log("Á¶¸®³¡");
