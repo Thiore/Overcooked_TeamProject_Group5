@@ -48,14 +48,27 @@ public class PlayerStateControl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
+
             if (HandsOnOb == null && nearCounter != null)
             {
-                if (nearCounter.transform.GetChild(0) != null &&
-                   nearCounter.transform.GetChild(0).transform.GetChild(1).CompareTag("Ingredients"))
+                if (nearCounter.TryGetComponent(out CounterController counter))
                 {
-                    StartCoroutine(PlayerCookedChage());
+                    if (counter.ChoppingBoard != null && counter.PutOnOb.CompareTag("Ingredients"))
+                    {
+                        StartCoroutine(PlayerCookedChage());
+                    }
                 }
+            }
 
+            if (HandsOnOb == null && nearCounter != null)
+            {
+                if (nearCounter.CompareTag("Sink"))
+                {
+                    if (nearCounter.TryGetComponent(out Sink sink))
+                    {
+                        StartCoroutine(PlayerWashPlate());
+                    }
+                }
             }
         }
 
@@ -83,6 +96,23 @@ public class PlayerStateControl : MonoBehaviour
             if (counter.CompareTag("Plate_Return"))
             {
                 yield break;
+            }
+
+            if (counter.CompareTag("Sink"))
+            {
+                if (counter.TryGetComponent(out Sink sink))
+                {
+                    if (!sink.CheckInWaterPlate(HandsOnOb))
+                    {
+                        yield break;
+                    }
+                    else
+                    {
+                        animator.SetBool("IsTake", false);
+                        HandsOnOb = null;
+                        yield break;
+                    }
+                }
             }
 
             // 카운터에 올라간게 null 이 아니면 올라간거 쿠킹툴인지, 손에 쥔걸 내릴수있는지 판단
@@ -305,5 +335,24 @@ public class PlayerStateControl : MonoBehaviour
 
         yield return null;
     }
+
+    public IEnumerator PlayerWashPlate()
+    {
+        //이미 싱크대인거 검수하고 들어옴 
+        if (nearCounter != null)
+        {
+            if (nearCounter.TryGetComponent(out Sink sink))
+            {
+                if (sink.transform.GetChild(0).childCount > 0)
+                {
+                    animator.SetTrigger("Wash");
+                }
+            }
+        }
+
+        yield return null;
+    }
+
+
 
 }
