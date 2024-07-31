@@ -10,18 +10,18 @@
 
     "stage": 2,
     "targetScore": [100, 130, 200 ],
-    "bestScore":99
+    "bestScore":0
   },
   {
     "stage": 3,
     "targetScore": [ 100, 200, 300 ],
-    "bestScore": 0
+    "bestScore":0
 
   },
   {
     "stage": 4,
     "targetScore": [ 120, 220, 310 ],
-    "bestScore": 0
+    "bestScore":0
 
   }
 ]

@@ -7,7 +7,7 @@ public class WorldState : MonoBehaviour
     [SerializeField] private Animator cameraAnimator;
     [SerializeField] private TestCamera testCamera; // 카메라 스크립트
     [SerializeField] private Animator stage2;
-    private Stage2_Ani stage2_Ani;
+    
     private FlagUIController flagController;
     private Animator animator;
     private int bestScore_W;
