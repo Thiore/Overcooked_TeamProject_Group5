@@ -39,7 +39,7 @@ public class WorldState : MonoBehaviour
         }
 
         // 지연 호출로 FlagUIController 초기화를 기다림
-        StartCoroutine(DelayedResetState());
+        //StartCoroutine(DelayedResetState());
     }
 
     private void OnFlagUISet()
