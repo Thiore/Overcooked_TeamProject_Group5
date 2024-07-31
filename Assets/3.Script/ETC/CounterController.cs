@@ -16,7 +16,8 @@ public class CounterController : MonoBehaviour
 
     private void Awake()
     {
-        if (transform.childCount.Equals(1) && !transform.CompareTag("Crate"))
+        if (transform.childCount.Equals(1) && !transform.CompareTag("Crate")
+            && !transform.CompareTag("GasRange") && !transform.CompareTag("Sink"))
         {
             choppingBoard = transform.GetChild(0).gameObject;
         }

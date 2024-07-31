@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class Joystick : MonoBehaviour
@@ -7,8 +8,9 @@ public class Joystick : MonoBehaviour
     private Animator Anim;
     [SerializeField] private Transform[] pivot;
 
-    private Player_StateController player1;
-    private Player_StateController player2;
+    private Player_SwapManager controlPlayer;
+
+    private bool iscontrol = false;
 
     private void Awake()
     {
@@ -17,62 +19,61 @@ public class Joystick : MonoBehaviour
 
     private void Update()
     {
-        if(player1 != null || player2 != null)
+        if (iscontrol)
         {
-            //아래꺼 위에 넣고 joystick 조종할때 사용하는 bool변수 사용해주시면됩니다.
-        }
-        float X = Input.GetAxis("Horizontal");
-        float Y = Input.GetAxis("Vertical");
+            float X = Input.GetAxis("Horizontal");
+            float Y = Input.GetAxis("Vertical");
 
-        Anim.SetFloat("Horizontal", X);
-        Anim.SetFloat("Vertical", Y);
-        if(X>0)
-            transform.Translate(new Vector3(X*2f*Time.deltaTime, 0, Y*3f*Time.deltaTime));
-        else
-            transform.Translate(new Vector3(X*4f*Time.deltaTime, 0, Y*3f*Time.deltaTime));
-        
-
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            if (player1 == null)
-            {
-                collision.transform.TryGetComponent(out player1);
-            }
+            Anim.SetFloat("Horizontal", X);
+            Anim.SetFloat("Vertical", Y);
+            if (X > 0)
+                transform.Translate(new Vector3(X * 2f * Time.deltaTime, 0, Y * 3f * Time.deltaTime));
             else
-            {
-                collision.transform.TryGetComponent(out player2);
-            }
+                transform.Translate(new Vector3(X * 4f * Time.deltaTime, 0, Y * 3f * Time.deltaTime));
 
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                controlPlayer.CurrentPlayer.GetComponent<Player_Movent>().enabled = true;
+                controlPlayer.CurrentPlayer.GetComponent<PlayerStateControl>().enabled = true;
+                iscontrol = false;
+            }
         }
-       
-            
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            iscontrol = false;
+        }
+
     }
-    private void OnCollisionExit(Collision collision)
+
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            if (collision.gameObject == player1.gameObject)
+            controlPlayer = collision.gameObject.transform.GetComponentInParent<Player_SwapManager>();
+            if (controlPlayer.CurrentPlayer != null)
             {
-                player1 = null;
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    controlPlayer.CurrentPlayer.GetComponent<Player_Movent>().enabled = false;
+                    controlPlayer.CurrentPlayer.GetComponent<PlayerStateControl>().enabled = false;
+                    controlPlayer.AniWalkingSetbool(controlPlayer.CurrentPlayer);
+                    iscontrol = true;
+                }
             }
-            else
-            {
-                player2 = null;
-            }
+
         }
+
+
     }
 
     private void LateUpdate()
     {
         float X = transform.position.x;
         float Z = transform.position.z;
-        X = Mathf.Clamp(X, pivot[0].position.x, pivot[1].position.x );
+        X = Mathf.Clamp(X, pivot[0].position.x, pivot[1].position.x);
         Z = Mathf.Clamp(Z, pivot[0].position.z, pivot[1].position.z);
         transform.position = new Vector3(X, transform.position.y, Z);
-        
+
     }
 }
