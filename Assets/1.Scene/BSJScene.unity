@@ -45998,6 +45998,7 @@ MonoBehaviour:
   cameraAnimator: {fileID: 606173469}
   testCamera: {fileID: 606173468}
   stage2: {fileID: 1349563226}
+  stage2Object: {fileID: 1349563223}
 --- !u!4 &2541751766345340616
 Transform:
   m_ObjectHideFlags: 0

@@ -7,8 +7,10 @@ public class WorldState : MonoBehaviour
     [SerializeField] private Animator cameraAnimator;
     [SerializeField] private TestCamera testCamera; // 카메라 스크립트
     [SerializeField] private Animator stage2;
+    [SerializeField] private GameObject stage2Object;
     
     private FlagUIController flagController;
+    private FlagUIController flagControllerStage2;
     private Animator animator;
     private int bestScore_W;
 
@@ -27,6 +29,13 @@ public class WorldState : MonoBehaviour
         if (flagController == null)
         {
             Debug.LogError("FlagUIController 컴포넌트를 찾을 수 없습니다!");
+            return;
+        }
+
+        flagControllerStage2 = stage2Object.GetComponentInChildren<FlagUIController>(); // stage2Object의 자식 오브젝트에서 FlagUIController를 찾습니다.
+        if (flagControllerStage2 == null)
+        {
+            Debug.LogError("Stage2의 FlagUIController 컴포넌트를 찾을 수 없습니다!");
             return;
         }
 
@@ -97,14 +106,40 @@ public class WorldState : MonoBehaviour
         else
         {
             RestoreState();
-            
-            stage2.SetTrigger("Stage2_");
-            
-            
+
+            HandleStage2Animation();
+
+
+
             Debug.Log("else에서 ResetState 메서드에 들어왔습니다.");
         }
     }
-    
+    private void HandleStage2Animation()
+    {
+        if (flagControllerStage2 == null)
+        {
+            Debug.LogError("Stage2의 플레그컨트롤러를 찾을 수 없습니다.");
+            return;
+        }
+        // 애니메이션 상태를 직접 확인
+        AnimatorStateInfo stateInfo = stage2.GetCurrentAnimatorStateInfo(0);
+        bool isStage2AnimationPlaying = stateInfo.IsName("Stage2");
+
+        if (!isStage2AnimationPlaying)
+        {
+            // Stage2 애니메이션이 재생되지 않은 경우에만 트리거를 설정
+            stage2.SetTrigger("Stage2_");
+        }
+
+        // Stage2 애니메이션이 완료된 상태로 만들기
+        if (flagControllerStage2.bestScore >= 100)
+        {
+            // 애니메이션을 끝으로 이동시키는 방법
+            stage2.Play("Stage2", 0, 1f);
+
+            
+        }
+    }
     //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
     //카메라 애니메이션 메서드
     public void StartCameraAnimation_Stage1()
