@@ -30,9 +30,12 @@ public class Cucumber : Ingredient
         isCook = false;
 
         cooking = eCooked.Normal;
+        
+
     }
 
-    public override void Change_Ingredient(eCooked cooked)
+
+public override void Change_Ingredient(eCooked cooked)
     {
         
 

@@ -31,9 +31,12 @@ public class Player_SwapManager : MonoBehaviour
     {
         //각각 맵에서 리스폰 오브젝트 부탁드립니다. 해당 리스폰 오브젝트를 찾아 둘겁니다. 
         //리스폰 맵에서만 쓸수잇게 if문 걸기?
-
-        player1_Respawn_pivot = GameObject.Find("player1_Respawn_pivot").transform;
-        player2_Respawn_pivot = GameObject.Find("player2_Respawn_pivot").transform;
+        if(player1_Respawn_pivot == null|| player2_Respawn_pivot == null)
+        {
+            player1_Respawn_pivot = GameObject.Find("player1_Respawn_pivot").transform;
+            player2_Respawn_pivot = GameObject.Find("player2_Respawn_pivot").transform;
+        }
+        
 
         player1.transform.position = player1_Respawn_pivot.position;
         player2.transform.position = player2_Respawn_pivot.position;

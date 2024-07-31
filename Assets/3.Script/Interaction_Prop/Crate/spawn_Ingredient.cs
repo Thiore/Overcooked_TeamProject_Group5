@@ -57,7 +57,6 @@ public class spawn_Ingredient : MonoBehaviour
         else
         {
             Ingredient newobj = Instantiate(myIngredient);
-            newobj.gameObject.SetActive(false);
             newobj.SetCookProcess(info);
             if (info.utensils.Equals(eCookutensils.Normal))
                 newobj.name = myIngredient.name;

@@ -9,17 +9,17 @@ public class Plate : MonoBehaviour
     [SerializeField] private Mesh[] Plate_Mesh;
     [SerializeField] private GameObject[] RecipeList;//�ش�ʿ� ���Ǵ� ��� ��ṭ����
 
-    private Crate_Data Data;
+    [SerializeField] private Crate_Data Data;
 
     private MeshFilter mesh;
     private Renderer renderer;
     private MeshCollider meshcol;
 
-    private bool isComplete = false;
+    public bool isComplete { get; private set; }
 
     public bool isPlate { get; private set; }
-    [field: SerializeField] public bool isWash { get; private set; }//true�� �������� �ؾ��ϴ»��� false�� �ø� �� �ִ»���
-    public bool isWash { get; private set; }//true�� �������� �ؾ��ϴ»��� false�� �ø� �� �ִ»���
+    //[field: SerializeField] public bool isWash { get; private set; }
+    public bool isWash { get; private set; }
 
     private List<Recipe> recipes;
 
@@ -40,6 +40,7 @@ public class Plate : MonoBehaviour
 
     private void OnEnable()
     {
+        isComplete = false;
         isPlate = false;
         Change_Plate(isWash);
         transform.name = "Plate";
@@ -65,7 +66,8 @@ public class Plate : MonoBehaviour
             {
                 if (RecipeList[i].name.StartsWith(Data.Info[j].Ingredients.ToString()))
                 {
-                    Instantiate(RecipeList[i], transform.position, transform.rotation, transform);
+                    GameObject obj = Instantiate(RecipeList[i], transform.position, transform.rotation, transform);
+                    obj.SetActive(false);
                 }
             }
         }
@@ -94,7 +96,7 @@ public class Plate : MonoBehaviour
         }
     }
 
-    public bool OnPlate(Ingredient Ingre) // �������� �ö��ִ� ���
+    public bool OnPlate(Ingredient Ingre)
     {
         if (isWash)
             return false;

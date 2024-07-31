@@ -5,7 +5,7 @@ using UnityEngine;
 public class CounterController : MonoBehaviour
 {
     //아무거나 올라가있으면 True, 아니면 false
-    [SerializeField] private bool isPutOn = false;
+    [SerializeField] private bool isPutOn;
     public bool IsPutOn { get => isPutOn; set => isPutOn = value; }
 
     [SerializeField] private GameObject putonOb = null;
@@ -16,6 +16,7 @@ public class CounterController : MonoBehaviour
 
     private void Awake()
     {
+        isPutOn = false;
         if (transform.childCount.Equals(1) && !transform.CompareTag("Crate")
             && !transform.CompareTag("GasRange") && !transform.CompareTag("Sink"))
         {

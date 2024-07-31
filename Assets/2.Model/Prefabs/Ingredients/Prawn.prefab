@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4758313108777045751}
   - component: {fileID: 4758313108777045752}
   - component: {fileID: 3197822107311376744}
-  - component: {fileID: 8504660235819941486}
   m_Layer: 0
   m_Name: Prawn
   m_TagString: Ingredients
@@ -141,28 +140,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31942c03d54f6d4448d3a3383325c09c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crate: {fileID: 0}
   Change_Mesh:
   - {fileID: 4300000, guid: f88b829bea599a34bafe3194f69d3803, type: 2}
   - {fileID: 4300000, guid: 530e0ba93beed314385110528a0f3536, type: 2}
   Change_Material:
   - {fileID: 2100000, guid: 4d2c7e00d097ad74bb3ac9d15bef01bf, type: 2}
   - {fileID: 2100000, guid: 4d2c7e00d097ad74bb3ac9d15bef01bf, type: 2}
-  CotrolBone: []
-  JointBone: []
-  myIngredients: 0
-  Chop_Script: 0
---- !u!114 &8504660235819941486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4758313108777045753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af8c705191dcf2d4c8f9f8beb343348d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AddIngrePrefabs: []
-  Ingredients_Info: {fileID: 11400000, guid: 2d512e20f9bfad04cbfd034936aa2130, type: 2}
+  Ingredient_renderer: {fileID: 0}
+  Ingredient_Mesh: {fileID: 0}
+  Ingredient_Col: {fileID: 0}
+  crate: {fileID: 0}
+  ChopTime: 0

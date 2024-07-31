@@ -105,10 +105,29 @@ public class Ingredient : MonoBehaviour
         isChop = false;
         isCook = false;
        
+       if(crate != null)
+        {
+            Change_Ingredient(eCooked.Normal);
+
+            if (CookProcess.Equals(eCookingProcess.Normal))
+            {
+                cooking = eCooked.ReadyCook;
+            }
+        }
        
+    }
+
+    protected virtual void Start()
+    {
+
+        ChopTime = 0;
+        isChop = false;
+        isCook = false;
+
+
         Change_Ingredient(eCooked.Normal);
-        
-        if(CookProcess.Equals(eCookingProcess.Normal))
+
+        if (CookProcess.Equals(eCookingProcess.Normal))
         {
             cooking = eCooked.ReadyCook;
         }
@@ -129,6 +148,13 @@ public class Ingredient : MonoBehaviour
         int CookEnum = (int)cooked;
         if (CookEnum > 0)
             CookEnum -= 1;
+        if (CookProcess.Equals(eCookingProcess.Chopping))
+        {
+            if(cooking. Equals(eCooked.ReadyCook))
+            {
+                CookEnum = 1;
+            }
+        }
         Ingredient_Mesh.mesh = Change_Mesh[CookEnum];
         Ingredient_renderer.material = Change_Material[CookEnum];
         Ingredient_Col.sharedMesh = Change_Mesh[CookEnum];
@@ -166,13 +192,16 @@ public class Ingredient : MonoBehaviour
 
     public bool Chopable()
     {
-        if (transform.parent.parent.CompareTag("ChoppingBoard"))
+        Debug.Log("1");
+        if (CookProcess.Equals(eCookingProcess.Chopping)||CookProcess.Equals(eCookingProcess.Chop_Cook))
         {
+            Debug.Log("2");
             if (cooking.Equals(eCooked.Chopping))
                 return true;
             else if (cooking.Equals(eCooked.Normal))
             {
-                if(Chop_Anim)
+                Debug.Log("3");
+                if (Chop_Anim)
                 {
                     Chop_Change_obj();
                 }
@@ -181,6 +210,8 @@ public class Ingredient : MonoBehaviour
                 return true;
             }
         }
+        Debug.Log("4");
+
         return false;
     }
     public bool Cookable()
@@ -257,6 +288,7 @@ public class Ingredient : MonoBehaviour
                         if (ChopTime > FinishChopTime)
                         {
                             isChop = false;
+                            playerAnim[i].transform.GetComponent<Player_StateController>().CleaverOb.SetActive(false);
                             ChopTime = 0;
                             if (!Chop_Anim)
                             {
@@ -275,7 +307,7 @@ public class Ingredient : MonoBehaviour
                                
 
                             playerAnim[i].SetTrigger("Finish");
-                            playerAnim[i].transform.GetComponent<Player_StateController>().CleaverOb.SetActive(false);
+                            
                         }
                     }
                 }
@@ -314,6 +346,7 @@ public class Ingredient : MonoBehaviour
             {
                 if (playerAnim[i].gameObject.Equals(other.gameObject))
                 {
+                    playerAnim[i].transform.GetComponent<Player_StateController>().CleaverOb.SetActive(false);
                     playerAnim[i] = null;
                     return;
                 }

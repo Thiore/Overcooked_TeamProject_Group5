@@ -55,6 +55,8 @@ public class PlayerStateControl : MonoBehaviour
                 {
                     if (counter.ChoppingBoard != null && counter.PutOnOb.CompareTag("Ingredients"))
                     {
+                        Debug.Log("¿ﬂ∂Û¡ª");
+
                         StartCoroutine(PlayerCookedChage());
                     }
                 }

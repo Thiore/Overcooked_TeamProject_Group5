@@ -12,6 +12,7 @@ public class Enter_Game_Controller : MonoBehaviour
     {
         buttons[0]= GetComponentsInChildren<Button>()[0];
         buttons[1]= GetComponentsInChildren<Button>()[1];
+        ChangeButtonSelection(currentButtonIndex);
     }
     private void Update()
     {
