@@ -17,7 +17,8 @@ public class CounterEmissionController : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Counter") || other.gameObject.CompareTag("Crate") || other.gameObject.CompareTag("Pass") ||
-            other.gameObject.CompareTag("TrashCan") || other.gameObject.transform.CompareTag("Plate_Return") || other.gameObject.CompareTag("GasRange"))
+            other.gameObject.CompareTag("TrashCan") || other.gameObject.transform.CompareTag("Plate_Return") || other.gameObject.CompareTag("GasRange")
+            || other.gameObject.CompareTag("Sink"))
         {
             pickList.Add(other.gameObject);
             if (pickQue.Count.Equals(0) && pickList.Count.Equals(1))

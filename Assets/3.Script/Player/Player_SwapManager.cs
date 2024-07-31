@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class Player_SwapManager : MonoBehaviour
     [SerializeField] private GameObject player1;
     [SerializeField] private GameObject player2;
     private GameObject currentPlayer;
+    public GameObject CurrentPlayer { get => currentPlayer; }
 
     [SerializeField] private Image currentMark1;
     [SerializeField] private Image currentMark2;
@@ -24,25 +26,28 @@ public class Player_SwapManager : MonoBehaviour
     private Text player1_respawnTimeText;
     private Text player2_respawnTimeText;
 
-    private Coroutine coroutine;
 
     private void Awake()
     {
         //각각 맵에서 리스폰 오브젝트 부탁드립니다. 해당 리스폰 오브젝트를 찾아 둘겁니다. 
         //리스폰 맵에서만 쓸수잇게 if문 걸기?
 
-     //   player1_Respawn_pivot = GameObject.Find("player1_Respawn_pivot").transform;
-    //    player2_Respawn_pivot = GameObject.Find("player2_Respawn_pivot").transform;
+        player1_Respawn_pivot = GameObject.Find("player1_Respawn_pivot").transform;
+        player2_Respawn_pivot = GameObject.Find("player2_Respawn_pivot").transform;
+
+        player1.transform.position = player1_Respawn_pivot.position;
+        player2.transform.position = player2_Respawn_pivot.position;
 
         player1_respawnTimeText = player1_respawnObj.transform.GetChild(0).GetComponent<Text>();
         player2_respawnTimeText = player2_respawnObj.transform.GetChild(0).GetComponent<Text>();
+
     }
     void Start()
     {
         currentPlayer = player1;
+        SetActivePlayer(player1);
         currentMark1.enabled = true;
         currentMark2.enabled = false;
-        SetActivePlayer(player1);
     }
 
     void Update()
@@ -56,6 +61,18 @@ public class Player_SwapManager : MonoBehaviour
         if (currentPlayer != null && currentPlayer.transform.position.y < -2f)
         {
             StartCoroutine(FallingCharacter());
+        }
+
+        if (currentPlayer == null)
+        {
+            if (!isRespawn_player1)
+            {
+                SetActivePlayer(player1);
+            }
+            else if (!isRespawn_player2)
+            {
+                SetActivePlayer(player2);
+            }
         }
 
     }
@@ -132,7 +149,7 @@ public class Player_SwapManager : MonoBehaviour
 
         if (currentPlayer == null)
         {
-            
+
             SetActivePlayer(player1);
         }
 
@@ -140,13 +157,12 @@ public class Player_SwapManager : MonoBehaviour
 
     public void SwapCharacter()
     {
+
         if (currentPlayer == player1)
         {
             if (!isRespawn_player1)
             {
                 SetActivePlayer(player2);
-                currentMark1.enabled = false;
-                currentMark2.enabled = true;
                 var ani = player1.transform.GetComponent<Animator>();
                 ani.SetBool("IsWalking", false);
             }
@@ -156,8 +172,6 @@ public class Player_SwapManager : MonoBehaviour
             if (!isRespawn_player2)
             {
                 SetActivePlayer(player1);
-                currentMark1.enabled = true;
-                currentMark2.enabled = false;
                 var ani = player2.transform.GetComponent<Animator>();
                 ani.SetBool("IsWalking", false);
             }
@@ -166,19 +180,22 @@ public class Player_SwapManager : MonoBehaviour
 
     void SetActivePlayer(GameObject player)
     {
-        if (!isRespawn_player1)
-        {
-            player1.GetComponent<Player_Movent>().enabled = player == player1;
-            player1.GetComponent<PlayerStateControl>().enabled = player == player1;
 
-        }
+        player1.GetComponent<Player_Movent>().enabled = player == player1;
+        player1.GetComponent<PlayerStateControl>().enabled = player == player1;
+        currentMark1.enabled = player == player1;
 
-        if (!isRespawn_player2)
-        {
-            player2.GetComponent<Player_Movent>().enabled = player == player2;
-            player2.GetComponent<PlayerStateControl>().enabled = player == player2;
-        }
+        player2.GetComponent<Player_Movent>().enabled = player == player2;
+        player2.GetComponent<PlayerStateControl>().enabled = player == player2;
+        currentMark2.enabled = player == player2;
 
         currentPlayer = player;
+
+    }
+
+    public void AniWalkingSetbool(GameObject player)
+    {
+        var ani = player.transform.GetComponent<Animator>();
+        ani.SetBool("IsWalking", false);
     }
 }

@@ -35,7 +35,7 @@ public class Beach_Spawn : MonoBehaviour
         {
             CrateArray[0][i] = New_Crate1(i);
         }
-        for (int i = 0; i < Crate_Pos3.Length; i++)
+        for (int i = 0; i < Crate_Pos2.Length; i++)
         {
             CrateArray[1][i] = New_Crate2(i);
         }
@@ -49,8 +49,6 @@ public class Beach_Spawn : MonoBehaviour
     private void Update()
     {
         MoveingPlatform();
-        Debug.Log("¿Ö¾È¿Í");
-
     }
     
     private void MoveingPlatform()
