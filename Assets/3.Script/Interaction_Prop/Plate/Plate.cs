@@ -17,6 +17,7 @@ public class Plate : MonoBehaviour
 
     private bool isComplete = false;
 
+    public bool isPlate { get; private set; }
     public bool isWash { get; private set; }//true면 설거지를 해야하는상태 false면 올릴 수 있는상태
 
     private List<Recipe> recipes;
@@ -32,7 +33,7 @@ public class Plate : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        isPlate = false;
         Change_Plate(isWash);
         transform.name = "Plate";
         
@@ -102,6 +103,7 @@ public class Plate : MonoBehaviour
                     if (recipes[i].ingredient.Count.Equals(1) && recipes[i].ingredient[0].Equals(transform.name))
                     {
                         isComplete = true;
+                        isPlate = true;
                         return true;
                     }
                 }
