@@ -3,7 +3,62 @@ guid: 019722e2ed05ac342b6e80651ab0bf9e
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _0Mat
+    second: {fileID: 2100000, guid: 8842a6d4d25f00b438c83be11e6fd22c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _10Mat
+    second: {fileID: 2100000, guid: 8255c9558f2fcff408afa6ef324f336f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _1Mat
+    second: {fileID: 2100000, guid: db1b95568e17077488ee3e0ae28ee27c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _2Mat
+    second: {fileID: 2100000, guid: 5d41cb7cd4205764f98a99bb05a40c3c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _3Mat
+    second: {fileID: 2100000, guid: 90bab271a1499844ab18320da6ceaf84, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _4Mat
+    second: {fileID: 2100000, guid: 1660043813d29994aab0a9f9430d4eb9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _5Mat
+    second: {fileID: 2100000, guid: c5c6e080a698d654cbc6e2f854e1308f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _6Mat
+    second: {fileID: 2100000, guid: fb34d2c042af29f4296411484950cab4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _7Mat
+    second: {fileID: 2100000, guid: dee3421e7f186724185076141c047db2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _8Mat
+    second: {fileID: 2100000, guid: 132d3ae17e233484cbe28b9d58ece171, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _9Mat
+    second: {fileID: 2100000, guid: 1e9461cb84d6510448ea82f3840e1800, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

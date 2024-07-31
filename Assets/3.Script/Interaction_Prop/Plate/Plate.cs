@@ -7,7 +7,7 @@ public class Plate : MonoBehaviour
 {
     [SerializeField] private Transform[] Sink_Pos;
     [SerializeField] private Mesh[] Plate_Mesh;
-    [SerializeField] private GameObject[] RecipeList;//ÇØ´ç¸Ê¿¡ »ç¿ëµÇ´Â ¸ðµç Àç·á¹­À½µé
+    [SerializeField] private GameObject[] RecipeList;//ï¿½Ø´ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½á¹­ï¿½ï¿½ï¿½ï¿½
 
     private Crate_Data Data;
 
@@ -18,7 +18,8 @@ public class Plate : MonoBehaviour
     private bool isComplete = false;
 
     public bool isPlate { get; private set; }
-    [field: SerializeField] public bool isWash { get; private set; }//true¸é ¼³°ÅÁö¸¦ ÇØ¾ßÇÏ´Â»óÅÂ false¸é ¿Ã¸± ¼ö ÀÖ´Â»óÅÂ
+    [field: SerializeField] public bool isWash { get; private set; }//trueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½Ï´Â»ï¿½ï¿½ï¿½ falseï¿½ï¿½ ï¿½Ã¸ï¿½ ï¿½ï¿½ ï¿½Ö´Â»ï¿½ï¿½ï¿½
+    public bool isWash { get; private set; }//trueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½Ï´Â»ï¿½ï¿½ï¿½ falseï¿½ï¿½ ï¿½Ã¸ï¿½ ï¿½ï¿½ ï¿½Ö´Â»ï¿½ï¿½ï¿½
 
     private List<Recipe> recipes;
 
@@ -93,7 +94,7 @@ public class Plate : MonoBehaviour
         }
     }
 
-    public bool OnPlate(Ingredient Ingre) // Á¢½ÃÀ§¿¡ ¿Ã¶ó°¡ÀÖ´Â Àç·á
+    public bool OnPlate(Ingredient Ingre) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¶ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½
     {
         if (isWash)
             return false;
