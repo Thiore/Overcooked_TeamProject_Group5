@@ -45995,6 +45995,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stage1: {fileID: 2541751766340966703}
+  cameraAnimator: {fileID: 606173469}
+  testCamera: {fileID: 606173468}
 --- !u!4 &2541751766345340616
 Transform:
   m_ObjectHideFlags: 0
@@ -72577,6 +72579,7 @@ MonoBehaviour:
   moveSpeed: 5
   rotateSpeed: 380
   playerInput: {fileID: 2815077216934562541}
+  worldState: {fileID: 0}
 --- !u!114 &2815077216934562533
 MonoBehaviour:
   m_ObjectHideFlags: 0
