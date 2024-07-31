@@ -17,14 +17,21 @@ public class Plate : MonoBehaviour
 
     private bool isComplete = false;
 
-    public bool isWash { get; private set; }//true면 설거지를 해야하는상태 false면 올릴 수 있는상태
+    public bool isPlate { get; private set; }
+    [field: SerializeField] public bool isWash { get; private set; }//true면 설거지를 해야하는상태 false면 올릴 수 있는상태
 
     private List<Recipe> recipes;
+
+    protected Animator playerAnim;
+    protected AnimatorStateInfo AnimInfo;
+    private float washtime;
+    private float finishWashtime = 4f;
 
 
     private void Awake()
     {
-        
+        AnimInfo = new AnimatorStateInfo();
+
         TryGetComponent(out mesh);
         TryGetComponent(out renderer);
         TryGetComponent(out meshcol);
@@ -32,22 +39,30 @@ public class Plate : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        isPlate = false;
         Change_Plate(isWash);
         transform.name = "Plate";
-        
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
+        {
+            playerAnim = other.gameObject.GetComponent<Animator>();
+        }
     }
 
     private void Start()
     {
         recipes = DataManager.Instance.StageRecipeData(GameManager.Instance.stage_index);
-        
+
 
         for (int j = 0; j < Data.Info.Length; j++)
         {
             for (int i = 0; i < RecipeList.Length; i++)
             {
-                if(RecipeList[i].name.StartsWith(Data.Info[j].Ingredients.ToString()))
+                if (RecipeList[i].name.StartsWith(Data.Info[j].Ingredients.ToString()))
                 {
                     Instantiate(RecipeList[i], transform.position, transform.rotation, transform);
                 }
@@ -62,7 +77,7 @@ public class Plate : MonoBehaviour
         this.isWash = isWash;
     }
 
-    private void Change_Plate(bool isWash)
+    public void Change_Plate(bool isWash)
     {
         if (!isWash)
         {
@@ -102,6 +117,7 @@ public class Plate : MonoBehaviour
                     if (recipes[i].ingredient.Count.Equals(1) && recipes[i].ingredient[0].Equals(transform.name))
                     {
                         isComplete = true;
+                        isPlate = true;
                         return true;
                     }
                 }
@@ -178,7 +194,33 @@ public class Plate : MonoBehaviour
             }
         }
         return false;
-            
+
     }
 
+
+    public void Wash()
+    {
+        if (isWash)
+        {
+            Debug.Log("iswash");
+            if (playerAnim != null)
+            {
+                AnimInfo = playerAnim.GetCurrentAnimatorStateInfo(0);
+                if (AnimInfo.IsName("New_Chef@Wash"))
+                {
+                    washtime += Time.deltaTime;
+
+                    Debug.Log(washtime);
+
+                    if (washtime > finishWashtime)
+                    {
+                        isWash = false;
+                        Change_Plate(isWash);
+                        washtime = 0;
+                        playerAnim.SetTrigger("Finish");
+                    }
+                }
+            }
+        }
+    }
 }

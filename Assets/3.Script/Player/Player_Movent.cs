@@ -45,13 +45,13 @@ public class Player_Movent : MonoBehaviour
             directionArrow.gameObject.SetActive(false);
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl) && playerStateController.IsHolding && playerStateController.HandsOnObject.CompareTag("Ingredients"))
-        {
-            //조준하는(회전만하는)
-            isRotation = true;
-            animator.SetBool(IsWalking, false);
-            directionArrow.gameObject.SetActive(true);
-        }
+        //if (Input.GetKeyDown(KeyCode.LeftControl) && playerStateController.IsHolding && playerStateController.HandsOnObject.CompareTag("Ingredients"))
+        //{
+        //    //조준하는(회전만하는)
+        //    isRotation = true;
+        //    animator.SetBool(IsWalking, false);
+        //    directionArrow.gameObject.SetActive(true);
+        //}
 
         ThrowRoration();
     }
