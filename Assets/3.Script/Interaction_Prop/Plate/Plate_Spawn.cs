@@ -68,7 +68,7 @@ public class Plate_Spawn : MonoBehaviour
                         DestroyPlateNum.Enqueue(i);
                         if (childobj.TryGetComponent(out Ingredient Ingre))
                         {
-                            Ingre.Die();
+                            Ingre.gameObject.SetActive(false);
                         }
                         else
                             Destroy(childobj.gameObject);

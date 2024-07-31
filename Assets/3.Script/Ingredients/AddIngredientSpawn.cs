@@ -97,7 +97,7 @@ public class AddIngredientSpawn : MonoBehaviour
                                 }
                             }
                         }
-                        targetIngre.Die();
+                        //targetIngre.Die();
                         for(int j = 0; j < recipe_Num.Count;j++)
                         {
                             for (int k = 0; k < recipes[recipe_Num[j]].ingredient.Count; k++)

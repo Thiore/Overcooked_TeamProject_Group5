@@ -10,8 +10,6 @@ public class Crate_spawn : MonoBehaviour
     [SerializeField] private GameObject crate_Prefabs;
 
 
-    private Queue<GameObject> Recipe_queue = new Queue<GameObject>();
-
 
     private void Awake()
     {

@@ -274,6 +274,6 @@ public class AddIngredient : MonoBehaviour
         gameObject.SetActive(false);
         transform.position = crate.transform.position;
         transform.localScale = new Vector3(1f, 1f, 1f);
-        crate.DestroyAdd(gameObject);
+        //crate.DestroyAdd(gameObject);
     }
 }
