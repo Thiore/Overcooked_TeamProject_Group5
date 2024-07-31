@@ -9,6 +9,7 @@ public class Bus_MV : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float rotateSpeed = 380f;
     [SerializeField] private PlayerIntput playerInput;
+    [SerializeField] private WorldState worldState;
 
     private Rigidbody player_rb;
     //private Animator animator;
@@ -31,6 +32,11 @@ public class Bus_MV : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //카메라 애니메이션이 재생 중이라면 이동 막음
+        if (worldState != null && worldState.isCameraAnimationPlaying)
+        {
+            return;
+        }
         Walking();
 
         //Debug.DrawRay(transform.position, transform.forward * 3f, Color.red);

@@ -4,9 +4,14 @@ using UnityEngine;
 public class WorldState : MonoBehaviour
 {
     [SerializeField] private GameObject stage1; // FlagUIController가 있는 부모 오브젝트를 할당합니다.
+    [SerializeField] private Animator cameraAnimator;
+    [SerializeField] private TestCamera testCamera; // 카메라 스크립트
     private FlagUIController flagController;
     private Animator animator;
     private int bestScore_W;
+
+    // 애니메이션 상태를 추적하는 변수
+    public bool isCameraAnimationPlaying { get; private set; }
 
     private void Start()
     {
@@ -91,6 +96,34 @@ public class WorldState : MonoBehaviour
         {
             RestoreState();
             Debug.Log("else에서 ResetState 메서드에 들어왔습니다.");
+        }
+    }
+
+    //카메라 애니메이션 메서드
+    public void StartCameraAnimation_Stage1()
+    {
+        if (cameraAnimator != null)
+        {
+            isCameraAnimationPlaying = true;
+            cameraAnimator.SetTrigger("Camera_Stage1");
+        }
+        else
+        {
+            Debug.Log("카메라 애니메이션 재생 안됨.");
+        }
+    }
+    public void OnCameraAnimationFinished()
+    {
+        Debug.Log("카메라 애니메이션이 끝났습니다."); // 디버깅을 위한 로그 추가
+        isCameraAnimationPlaying = false;
+        if (testCamera != null)
+        {
+            testCamera.StartFollowingPlayer();
+            Debug.Log("카메라가 플레이어를 따라갑니다."); // 디버깅을 위한 로그 추가
+        }
+        else
+        {
+            Debug.Log("testCamera가 할당되지 않았습니다.");
         }
     }
 }
