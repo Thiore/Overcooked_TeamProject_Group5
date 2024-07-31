@@ -13,6 +13,7 @@ public class WorldState : MonoBehaviour
     private FlagUIController flagControllerStage2;
     private Animator animator;
     private int bestScore_W;
+    private Vector3 vanPosition;
 
     // 애니메이션 상태를 추적하는 변수
     public bool isCameraAnimationPlaying { get; private set; }
@@ -132,7 +133,7 @@ public class WorldState : MonoBehaviour
         }
 
         // Stage2 애니메이션이 완료된 상태로 만들기
-        if (flagControllerStage2.bestScore >= 100)
+        if (flagControllerStage2.bestScore >= 50)
         {
             // 애니메이션을 끝으로 이동시키는 방법
             stage2.Play("Stage2", 0, 1f);
@@ -168,4 +169,19 @@ public class WorldState : MonoBehaviour
             Debug.Log("testCamera가 할당되지 않았습니다.");
         }
     }
+
+    //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    //Van 포지션 저장
+
+    public void SaveVanPosition(Vector3 position)
+    {
+        vanPosition = position;
+        Debug.Log("벤 위치 저장 값" + vanPosition);
+    }
+
+    public Vector3 GetVanPosition()
+    {
+        return vanPosition;
+    }
+    
 }
