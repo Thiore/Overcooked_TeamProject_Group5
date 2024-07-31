@@ -7,7 +7,6 @@ public class spawn_Ingredient : MonoBehaviour
     private eIngredients Ingredient_enum;
 
     [SerializeField] private Ingredient[] ingredient_prefab;
-    public GameObject[] AddIngredient_Prefabs;
     private Ingredient myIngredient;
     
     private Queue<Ingredient> ingredient_queue = new Queue<Ingredient>();

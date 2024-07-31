@@ -72,7 +72,7 @@ public class Ingredient : MonoBehaviour
     protected bool Chop_Anim;
 
     public float ChopTime;
-    protected readonly float FinishChopTime = 4f;
+    protected readonly float FinishChopTime = 8f;
 
 
     public bool isChop { get; protected set; }
@@ -114,14 +114,13 @@ public class Ingredient : MonoBehaviour
         }
     }
 
-    private void Update()
+    protected void Update()
     {
-        if(isChop)
+        if (isChop)
         {
             Chop();
         }
-        Chop();
-
+       
     }
 
     public virtual void Change_Ingredient(eCooked cooked)
@@ -135,11 +134,7 @@ public class Ingredient : MonoBehaviour
         Ingredient_Col.sharedMesh = Change_Mesh[CookEnum];
     }
 
-    public void Off_Ingredient()
-    {
-        Ingredient_Mesh.mesh = null;
-        Ingredient_Col.enabled = false;
-    }
+
 
 
     public void SetCookProcess(Crate_Info Info)
@@ -270,6 +265,13 @@ public class Ingredient : MonoBehaviour
                                 else
                                     Change_Ingredient(eCooked.Cooking);
                             }
+                            else
+                            {
+                                if (CookProcess.Equals(eCookingProcess.Chopping))
+                                    cooking = eCooked.ReadyCook;
+                                else
+                                    cooking = eCooked.Cooking;
+                            }
                                
 
                             playerAnim[i].SetTrigger("Finish");
@@ -321,10 +323,10 @@ public class Ingredient : MonoBehaviour
 
     }
 
-    protected virtual void OnDisable()
+    private void OnDisable()
     {
+        ChopTime = 0f;
         transform.parent = null;
-        gameObject.SetActive(false);
         transform.position = crate.transform.position;
         transform.localScale = new Vector3(1f, 1f, 1f);
         Ingredient_Col.enabled = true;

@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Plate : MonoBehaviour
 {
     [SerializeField] private Transform[] Sink_Pos;
     [SerializeField] private Mesh[] Plate_Mesh;
-    [SerializeField] private List<GameObject> RecipeList = new List<GameObject>();//해당맵에 사용되는 모든 재료묶음들
+    [SerializeField] private GameObject[] RecipeList;//해당맵에 사용되는 모든 재료묶음들
+
+    private Crate_Data Data;
 
     private MeshFilter mesh;
     private Renderer renderer;
     private MeshCollider meshcol;
+
+    private bool isComplete = false;
 
     public bool isWash { get; private set; }//true면 설거지를 해야하는상태 false면 올릴 수 있는상태
 
@@ -19,7 +24,7 @@ public class Plate : MonoBehaviour
 
     private void Awake()
     {
-        recipes = DataManager.Instance.StageRecipeData(GameManager.Instance.stage_index);
+        
         TryGetComponent(out mesh);
         TryGetComponent(out renderer);
         TryGetComponent(out meshcol);
@@ -29,10 +34,29 @@ public class Plate : MonoBehaviour
     {
         
         Change_Plate(isWash);
+        transform.name = "Plate";
         
     }
 
-   
+    private void Start()
+    {
+        recipes = DataManager.Instance.StageRecipeData(GameManager.Instance.stage_index);
+        
+
+        for (int j = 0; j < Data.Info.Length; j++)
+        {
+            for (int i = 0; i < RecipeList.Length; i++)
+            {
+                if(RecipeList[i].name.StartsWith(Data.Info[j].Ingredients.ToString()))
+                {
+                    Instantiate(RecipeList[i], transform.position, transform.rotation, transform);
+                }
+            }
+        }
+
+    }
+
+
     public void SetWash(bool isWash)
     {
         this.isWash = isWash;
@@ -54,115 +78,107 @@ public class Plate : MonoBehaviour
         }
     }
 
-    //public bool OnPlate(Plate targetPlate) // 접시위에 올라가있는 재료
-    //{
-    //    if (isPlate)
-    //        return false;
+    public bool OnPlate(Ingredient Ingre) // 접시위에 올라가있는 재료
+    {
+        if (isWash)
+            return false;
 
-    //    if (targetPlate.isWash)
-    //        return false;
+        if (isComplete)
+            return false;
 
-    //    if (Ingre.cooking.Equals(eCooked.ReadyCook))
-    //    {
-    //        if (targetPlate.transform.childCount.Equals(0))
-    //        {
-    //            isPlate = true;
-    //            if (transform.GetChild(1).childCount.Equals(1))
-    //                Ingre.Change_PlateIngredient();
+        if (transform.name.Contains(Ingre.name))
+            return false;
 
-    //            return true;
-    //        }
-    //        else
-    //        {
-    //            string[] target = targetPlate.transform.GetChild(0).name.Split('_');
-    //            string[] This = gameObject.name.Split('_');
+        string[] ThisName = null;
+
+        if (Ingre.cooking.Equals(eCooked.ReadyCook))
+        {
+            if (transform.name.Equals("Plate"))
+            {
+                transform.name = Ingre.name;
+                Ingre.gameObject.SetActive(false);
+                for (int i = 0; i < recipes.Count; i++)
+                {
+                    if (recipes[i].ingredient.Count.Equals(1) && recipes[i].ingredient[0].Equals(transform.name))
+                    {
+                        isComplete = true;
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                string checkName = $"{transform.name}_{Ingre.name}";
+                ThisName = checkName.Split('_');
+                int isDisable = transform.childCount;
+                int isEnable = transform.childCount;
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    bool isPass = false;
+                    if (transform.GetChild(i).gameObject.activeSelf)
+                    {
+                        isDisable = i;
+                    }
+                    else
+                    {
+                        if (!isEnable.Equals(transform.childCount))
+                        {
+                            if (transform.GetChild(i).name.Split('_').Length.Equals(ThisName.Length))
+                            {
+
+                                for (int j = 0; j < ThisName.Length; j++)
+                                {
+
+                                    if (!transform.GetChild(i).name.Contains(ThisName[j]))
+                                    {
+                                        isPass = true;
+                                        break;
+                                    }
+                                }
+                                if (!isPass)
+                                {
+                                    isEnable = i;
+
+                                }
+                            }
+                        }
 
 
-    //            for (int i = 0; i < target.Length; i++)
-    //            {
-    //                for (int j = 0; j < This.Length; j++)
-    //                {
-    //                    if (target[i].Equals(This[j])) // 동일한 재료가 있다면 false 반환
-    //                    {
-    //                        return false;
-    //                    }
-    //                }
-    //            }
+                    }
 
+                    if (!isEnable.Equals(transform.childCount) && !isDisable.Equals(transform.childCount))
+                    {
+                        transform.GetChild(i).gameObject.SetActive(true);
+                        transform.name = transform.GetChild(i).name;
 
-    //            for (int i = 0; i < RecipeList.Count; i++)
-    //            {
-    //                string[] Recipe_ingre = RecipeList[i].name.Split('_');
-    //                if (Recipe_ingre.Length.Equals(target.Length + This.Length))
-    //                {
-    //                    int CollectCount = 0;
-    //                    for (int j = 0; j < Recipe_ingre.Length; j++)
-    //                    {
-    //                        for (int k = 0; k < target.Length; k++)
-    //                        {
-    //                            if (Recipe_ingre[j].Equals(target[k]))
-    //                            {
-    //                                CollectCount += 1;
-    //                            }
-    //                        }
-    //                        for (int k = 0; k < This.Length; k++)
-    //                        {
-    //                            if (Recipe_ingre[j].Equals(This[k]))
-    //                            {
-    //                                CollectCount += 1;
-    //                            }
-    //                        }
-    //                        if (Recipe_ingre.Length.Equals(CollectCount))
-    //                        {
+                        for (int j = 0; j < recipes.Count; j++)
+                        {
+                            if (recipes[j].ingredient.Count.Equals(ThisName.Length))
+                            {
+                                for (int k = 0; k < ThisName.Length; k++)
+                                {
+                                    if (!recipes[j].ingredient.Contains(ThisName[k]))
+                                    {
+                                        return true;
+                                    }
+                                }
+                                isComplete = true;
+                                transform.name = recipes[j].recipe;
+                                return true;
+                            }
+                        }
+                    }
 
-    //                            Transform targetIngre = targetPlate.transform.GetChild(0).GetChild(1);
-    //                            transform.position = targetIngre.position;
-    //                            transform.rotation = targetIngre.rotation;
-    //                            for (int k = 0; k < transform.GetChild(1).childCount; k++)
-    //                            {
-    //                                transform.GetChild(1).GetChild(k).SetParent(targetIngre);
-    //                            }
-    //                            targetPlate.transform.GetChild(0).name = RecipeList[i].name;
-    //                            Ingre.Off_Ingredient();
-    //                            targetIngre.GetChild(0).GetComponent<Ingredient>().Off_Ingredient();
+                }
+                if (isEnable.Equals(transform.childCount))
+                {
+                    return false;
+                }
 
-    //                            for (int k = 0; k < recipes.Count; k++)
-    //                            {
-    //                                if (recipes[k].ingredient.Count.Equals(targetIngre.childCount))
-    //                                {
-    //                                    bool isDifferent = false;
-    //                                    foreach (string recipeIngre in recipes[i].ingredient)
-    //                                    {
-    //                                        foreach (string GetIngre in Recipe_ingre)
-    //                                        {
-    //                                            if (!recipeIngre.Equals(GetIngre))
-    //                                            {
-    //                                                isDifferent = true;
-    //                                                break;
-    //                                            }
-    //                                        }
-    //                                        if (isDifferent)
-    //                                            break;
-    //                                    }
-    //                                    targetPlate.transform.GetChild(0).name = recipes[k].recipe;
-    //                                }
-    //                            }
-    //                            return true;
-    //                        }
-    //                    }
-    //                }
-    //                else
-    //                {
-    //                    continue;
-    //                }
+            }
+        }
+        return false;
+            
+    }
 
-    //            }
-    //            return false;
-
-    //        }
-
-    //    }
-
-    //    return false;
-    //}
 }
