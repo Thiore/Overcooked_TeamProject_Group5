@@ -6,6 +6,8 @@ public class WorldState : MonoBehaviour
     [SerializeField] private GameObject stage1; // FlagUIController가 있는 부모 오브젝트를 할당합니다.
     [SerializeField] private Animator cameraAnimator;
     [SerializeField] private TestCamera testCamera; // 카메라 스크립트
+    [SerializeField] private Animator stage2;
+    private Stage2_Ani stage2_Ani;
     private FlagUIController flagController;
     private Animator animator;
     private int bestScore_W;
@@ -37,7 +39,7 @@ public class WorldState : MonoBehaviour
         }
 
         // 지연 호출로 FlagUIController 초기화를 기다림
-        StartCoroutine(DelayedResetState());
+        //StartCoroutine(DelayedResetState());
     }
 
     private void OnFlagUISet()
@@ -95,10 +97,15 @@ public class WorldState : MonoBehaviour
         else
         {
             RestoreState();
+            
+            stage2.SetTrigger("Stage2_");
+            
+            
             Debug.Log("else에서 ResetState 메서드에 들어왔습니다.");
         }
     }
-
+    
+    //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
     //카메라 애니메이션 메서드
     public void StartCameraAnimation_Stage1()
     {

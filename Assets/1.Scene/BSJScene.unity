@@ -1393,7 +1393,7 @@ Animator:
   m_GameObject: {fileID: 179548942}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3a18a2061b3ce9c4197c3c08ed441197, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3789,7 +3789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c628c5868521034f823d2e794f9a846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stage_index: 3
+  stage_index: 2
 --- !u!1 &640336714
 GameObject:
   m_ObjectHideFlags: 0
@@ -8933,6 +8933,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1349563224}
   - component: {fileID: 1349563226}
+  - component: {fileID: 1349563225}
   m_Layer: 0
   m_Name: Stage2 (1)
   m_TagString: Untagged
@@ -9011,6 +9012,20 @@ Transform:
   m_Father: {fileID: 2541751766178688532}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1349563225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349563223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5e06e2140cb3a469320722253b5be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stage2: {fileID: 1349563223}
+  bestScore_W: 0
 --- !u!95 &1349563226
 Animator:
   serializedVersion: 3
@@ -45995,6 +46010,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stage1: {fileID: 2541751766340966703}
+  cameraAnimator: {fileID: 606173469}
+  testCamera: {fileID: 606173468}
+  stage2: {fileID: 1349563226}
 --- !u!4 &2541751766345340616
 Transform:
   m_ObjectHideFlags: 0
@@ -72577,6 +72595,7 @@ MonoBehaviour:
   moveSpeed: 5
   rotateSpeed: 380
   playerInput: {fileID: 2815077216934562541}
+  worldState: {fileID: 0}
 --- !u!114 &2815077216934562533
 MonoBehaviour:
   m_ObjectHideFlags: 0
