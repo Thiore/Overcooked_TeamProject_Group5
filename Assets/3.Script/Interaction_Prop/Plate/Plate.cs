@@ -55,19 +55,19 @@ public class Plate : MonoBehaviour
 
     private void Start()
     {
-        //recipes = DataManager.Instance.StageRecipeData(GameManager.Instance.stage_index);
+        recipes = DataManager.Instance.StageRecipeData(GameManager.Instance.stage_index);
 
 
-        //for (int j = 0; j < Data.Info.Length; j++)
-        //{
-        //    for (int i = 0; i < RecipeList.Length; i++)
-        //    {
-        //        if (RecipeList[i].name.StartsWith(Data.Info[j].Ingredients.ToString()))
-        //        {
-        //            Instantiate(RecipeList[i], transform.position, transform.rotation, transform);
-        //        }
-        //    }
-        //}
+        for (int j = 0; j < Data.Info.Length; j++)
+        {
+            for (int i = 0; i < RecipeList.Length; i++)
+            {
+                if (RecipeList[i].name.StartsWith(Data.Info[j].Ingredients.ToString()))
+                {
+                    Instantiate(RecipeList[i], transform.position, transform.rotation, transform);
+                }
+            }
+        }
 
     }
 
@@ -208,8 +208,7 @@ public class Plate : MonoBehaviour
                 AnimInfo = playerAnim.GetCurrentAnimatorStateInfo(0);
                 if (AnimInfo.IsName("New_Chef@Wash"))
                 {
-                    if (playerAnim != null)
-                        washtime += Time.deltaTime;
+                    washtime += Time.deltaTime;
 
                     Debug.Log(washtime);
 
