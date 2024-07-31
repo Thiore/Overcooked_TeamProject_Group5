@@ -3,11 +3,46 @@ guid: 496ea10db7a4f694388d519190e22225
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _0Mat
+    second: {fileID: 2100000, guid: e5e0983786b20ea4ba94aeaafee8e3ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _1Mat
+    second: {fileID: 2100000, guid: 639071587c0025d4b85232048128fe3d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _2Mat
+    second: {fileID: 2100000, guid: c9eed9cfbd7815c46b7b881a5602ad97, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _3Mat
+    second: {fileID: 2100000, guid: 39f34ba578ab6624d9de3453b802f443, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _4Mat
+    second: {fileID: 2100000, guid: 7e0995450cdf4764eaaf232ce2aa4dc7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _5Mat
+    second: {fileID: 2100000, guid: eae6ec1e2432e8245ac62b460379ba5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _6Mat
+    second: {fileID: 2100000, guid: 9ca8f65e8a3577b4a8cf38357dc6c5f5, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
