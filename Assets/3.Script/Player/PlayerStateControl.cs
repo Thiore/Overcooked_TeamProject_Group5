@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class PlayerStateControl : MonoBehaviour
 {
@@ -99,8 +97,7 @@ public class PlayerStateControl : MonoBehaviour
             {
                 yield break;
             }
-
-            if (counter.CompareTag("Sink"))
+            else if (counter.CompareTag("Sink"))
             {
                 if (counter.TryGetComponent(out Sink sink))
                 {
@@ -116,6 +113,27 @@ public class PlayerStateControl : MonoBehaviour
                     }
                 }
             }
+            //여기 제출하는 부분
+            else if(counter.CompareTag("Pass"))
+            {
+                if (HandsOnOb.TryGetComponent(out Plate plate))
+                {
+                    counter.transform.TryGetComponent(out Plate_Spawn plate_spawn);
+                    if (plate_spawn.PassPlate(plate))
+                    {
+                        animator.SetBool("IsTake", false);
+                        HandsOnOb = null;
+                    }
+                    yield break;
+                }
+                else
+                {
+                    //접시가 아니면 뭐 패스 
+                    yield break;
+                }
+            }
+
+            
 
             // 카운터에 올라간게 null 이 아니면 올라간거 쿠킹툴인지, 손에 쥔걸 내릴수있는지 판단
             if (counter.PutOnOb != null && counter.PutOnOb.TryGetComponent(out Cookingtool tool))
@@ -141,6 +159,7 @@ public class PlayerStateControl : MonoBehaviour
                 {
                     if(plate.OnPlate(Ingre))
                     {
+                        Debug.Log("재료 넣기");
                         animator.SetBool("IsTake", false);
                         HandsOnOb = null;
                         yield break;
