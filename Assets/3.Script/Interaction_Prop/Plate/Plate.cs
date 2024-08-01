@@ -67,6 +67,7 @@ public class Plate : MonoBehaviour
                 if (RecipeList[i].name.StartsWith(Data.Info[j].Ingredients.ToString()))
                 {
                     GameObject obj = Instantiate(RecipeList[i], transform.position, transform.rotation, transform);
+                    obj.name = RecipeList[i].name;
                     obj.SetActive(false);
                 }
             }
@@ -124,7 +125,7 @@ public class Plate : MonoBehaviour
                             if(transform.GetChild(j).name.Equals(Ingre.name))
                             {
                                 transform.GetChild(j).gameObject.SetActive(true);
-                                Ingre.gameObject.SetActive(false);
+                                Ingre.Die();
                                 break;
                             }
                         }
@@ -190,6 +191,7 @@ public class Plate : MonoBehaviour
                                         return true;
                                     }
                                 }
+                                Ingre.Die();
                                 isComplete = true;
                                 transform.name = recipes[j].recipe;
                                 return true;

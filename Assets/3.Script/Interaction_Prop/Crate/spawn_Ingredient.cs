@@ -76,6 +76,7 @@ public class spawn_Ingredient : MonoBehaviour
     public void DestroyIngredient(Ingredient ingredient)
     {
         ingredient_queue.Enqueue(ingredient);
+        
     }
 
     public void Set_IngredientInfo(Crate_Info info, Crate_Data data)

@@ -357,11 +357,11 @@ public class Ingredient : MonoBehaviour
 
     }
 
-    private void OnDisable()
+    public void Die()
     {
         ChopTime = 0f;
-        if(transform.parent != null)
-            transform.parent = null;
+        gameObject.SetActive(false);
+        transform.SetParent(null);
         transform.position = crate.transform.position;
         transform.localScale = new Vector3(1f, 1f, 1f);
         Ingredient_Col.enabled = true;
