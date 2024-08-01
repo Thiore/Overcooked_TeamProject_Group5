@@ -191,17 +191,19 @@ public class Object_UI_Controll : MonoBehaviour
             {
                 ingredient_img_List[i].SetActive(true);
                 ingredient_img_List[i].transform.position = main_cam.WorldToScreenPoint(ingredient_object_List[i].transform.position + new Vector3(0, 1, 0));
-            }
-            if (ingredient_object_List[i].GetComponent<Ingredient>().cooking.Equals(eCooked.Chopping))
+            }else if (ingredient_object_List[i].GetComponent<Ingredient>().cooking.Equals(eCooked.Chopping))
             {
                 ingredient_slider_List[i].SetActive(true);
-                ingredient_slider_List[i].transform.position = main_cam.WorldToScreenPoint(ingredient_object_List[i].transform.position + new Vector3(-1f, -2, 0));
+                ingredient_slider_List[i].transform.position = main_cam.WorldToScreenPoint(ingredient_object_List[i].transform.position + new Vector3(0, -2, 0));
                 //Ingredient에서 써는거 시간 value로 넣어줘야함
                 ingredient_slider_List[i].GetComponent<Slider>().value = ingredient_object_List[i].GetComponent<Ingredient>().ChopTime/2f;
                 if (ingredient_object_List[i].GetComponent<Ingredient>().ChopTime >= 7.9f)
                 {
                     ingredient_slider_List[i].SetActive(false);
                 }
+            }else
+            {
+                ingredient_img_List[i].SetActive(false);
             }
         }
     }
