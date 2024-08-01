@@ -20,6 +20,8 @@ public class PlayerStateControl : MonoBehaviour
     private NearObject_EmissionController nearObjectEmissionController;
     [SerializeField] private Player_SwapManager playerSwapManager;
 
+    [SerializeField] private GameObject[] playerFaces;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
