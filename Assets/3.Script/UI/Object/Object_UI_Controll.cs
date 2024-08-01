@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Ojbect_UI_Controll : MonoBehaviour
+public class Object_UI_Controll : MonoBehaviour
 {
 
     /*
@@ -52,11 +52,13 @@ public class Ojbect_UI_Controll : MonoBehaviour
     private void Start()
     {
         main_cam = Camera.main;
+        
         Initialize();
 
     }
     private void Update()
     {
+        
         Pot_UI_Update();
         Ingredient_UI_Active();
         Pot_Ingredient_Img();
@@ -168,7 +170,7 @@ public class Ojbect_UI_Controll : MonoBehaviour
 
 
     //재료 오브젝트 생길 때 같이 불러줘야하는 메소드
-    public void Ingredient_UI_Int(GameObject ingredient)
+    public void Ingredient_UI_Init(GameObject ingredient)
     {
         ingredient_object_List.Add(ingredient);
         GameObject ingredient_img_object = Instantiate(ingredient_img, ingredient.transform.position, Quaternion.identity, transform);
@@ -188,13 +190,18 @@ public class Ojbect_UI_Controll : MonoBehaviour
             if (ingredient_object_List[i].GetComponent<Ingredient>().cooking.Equals(eCooked.ReadyCook))
             {
                 ingredient_img_List[i].SetActive(true);
-                ingredient_img_List[i].transform.position = main_cam.WorldToScreenPoint(ingredient_object_List[i].transform.position + new Vector3(0, -1, 0));
+                ingredient_img_List[i].transform.position = main_cam.WorldToScreenPoint(ingredient_object_List[i].transform.position + new Vector3(0, 1, 0));
             }
             if (ingredient_object_List[i].GetComponent<Ingredient>().cooking.Equals(eCooked.Chopping))
             {
                 ingredient_slider_List[i].SetActive(true);
+                ingredient_slider_List[i].transform.position = main_cam.WorldToScreenPoint(ingredient_object_List[i].transform.position + new Vector3(-1f, -2, 0));
                 //Ingredient에서 써는거 시간 value로 넣어줘야함
-                ingredient_slider_List[i].GetComponent<Slider>().value = ingredient_object_List[i].GetComponent<Ingredient>().ChopTime;
+                ingredient_slider_List[i].GetComponent<Slider>().value = ingredient_object_List[i].GetComponent<Ingredient>().ChopTime/2f;
+                if (ingredient_object_List[i].GetComponent<Ingredient>().ChopTime >= 7.9f)
+                {
+                    ingredient_slider_List[i].SetActive(false);
+                }
             }
         }
     }
