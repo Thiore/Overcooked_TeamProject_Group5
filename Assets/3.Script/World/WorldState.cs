@@ -157,8 +157,17 @@ public class WorldState : MonoBehaviour
             Debug.Log("카메라 애니메이션 재생 안됨.");
         }
     }
-    public void OnCameraAnimationFinished()
+    public void StartCameraAnimation_Stage2()
     {
+        if (cameraAnimator != null)
+        {
+            isCameraAnimationPlaying = true;
+            cameraAnimator.SetTrigger("Camera_Stage2");
+        }
+    }
+    public void OnCameraAnimationFinished()
+    { 
+    
         Debug.Log("카메라 애니메이션이 끝났습니다."); // 디버깅을 위한 로그 추가
         isCameraAnimationPlaying = false;
         if (testCamera != null)
