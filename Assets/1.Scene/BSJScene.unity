@@ -48066,6 +48066,7 @@ MonoBehaviour:
   testCamera: {fileID: 606173468}
   stage2: {fileID: 1349563226}
   stage2Object: {fileID: 1349563223}
+  vanTransform: {fileID: 3196141199767261273}
 --- !u!4 &2541751766345340616
 Transform:
   m_ObjectHideFlags: 0

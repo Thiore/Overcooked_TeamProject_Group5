@@ -55,7 +55,7 @@ public class WorldState : MonoBehaviour
 
         // 지연 호출로 FlagUIController 초기화를 기다림
         //StartCoroutine(DelayedResetState());
-        RestoreVanPosition();
+        
     }
 
     private void OnFlagUISet()
@@ -114,8 +114,8 @@ public class WorldState : MonoBehaviour
         {
             RestoreState();
 
+            RestoreVanPosition();
             HandleStage2Animation();
-
 
 
             Debug.Log("else에서 ResetState 메서드에 들어왔습니다.");
@@ -213,6 +213,10 @@ public class WorldState : MonoBehaviour
 
     public void RestoreVanPosition()
     {
+        bestScore_W = flagController.bestScore;
+        
+        
+            
         if (PlayerPrefs.HasKey("VanPositionX") && PlayerPrefs.HasKey("VanPositionY") && PlayerPrefs.HasKey("VanPositionZ"))
         {
             float x = PlayerPrefs.GetFloat("VanPositionX");
@@ -230,6 +234,7 @@ public class WorldState : MonoBehaviour
         {
             Debug.Log("저장된 벤 위치 값이 없습니다.");
         }
+        
     }
 
     public Vector3 GetVanPosition()

@@ -14,6 +14,12 @@ public class TestCamera : MonoBehaviour
 
     }
 
+    private void OnEnable()
+    {
+        transform.position = player.position + new Vector3(0, 4, -3);
+        camera.transform.LookAt(player);
+    }
+
     private void LateUpdate()
     {
         if (followVan)
