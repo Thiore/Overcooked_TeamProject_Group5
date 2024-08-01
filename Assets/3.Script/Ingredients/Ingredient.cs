@@ -288,7 +288,8 @@ public class Ingredient : MonoBehaviour
                         if (ChopTime > FinishChopTime)
                         {
                             isChop = false;
-                            playerAnim[i].transform.GetComponent<Player_StateController>().CleaverOb.SetActive(false);
+                            playerAnim[i].SetTrigger("Finish");
+                            playerAnim[i].transform.GetComponent<PlayerStateControl>().Cleaver.SetActive(false);
                             ChopTime = 0;
                             if (!Chop_Anim)
                             {
@@ -306,7 +307,7 @@ public class Ingredient : MonoBehaviour
                             }
                                
 
-                            playerAnim[i].SetTrigger("Finish");
+                            
                             
                         }
                     }
@@ -346,7 +347,7 @@ public class Ingredient : MonoBehaviour
             {
                 if (playerAnim[i].gameObject.Equals(other.gameObject))
                 {
-                    playerAnim[i].transform.GetComponent<Player_StateController>().CleaverOb.SetActive(false);
+                    playerAnim[i].transform.GetComponent<PlayerStateControl>().Cleaver.SetActive(false);
                     playerAnim[i] = null;
                     return;
                 }
@@ -359,7 +360,8 @@ public class Ingredient : MonoBehaviour
     private void OnDisable()
     {
         ChopTime = 0f;
-        transform.parent = null;
+        if(transform.parent != null)
+            transform.parent = null;
         transform.position = crate.transform.position;
         transform.localScale = new Vector3(1f, 1f, 1f);
         Ingredient_Col.enabled = true;

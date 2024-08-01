@@ -178,7 +178,6 @@ public class Ojbect_UI_Controll : MonoBehaviour
         GameObject ingredient_slider_object = Instantiate(pot_slider_prefab, ingredient.transform.position, Quaternion.identity, transform);
         ingredient_slider_List.Add(ingredient_slider_object);
         ingredient_slider_object.SetActive(false);
-
     }
 
     //onplate 가능 이미지 생성
