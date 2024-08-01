@@ -9,7 +9,7 @@ public class Player_Movent : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float rotateSpeed = 540f;
     [SerializeField] private PlayerIntput playerInput;
-    private Player_StateController playerStateController;
+    private PlayerStateControl playerStateController;
 
     private Rigidbody player_rb;
     private Animator animator;
@@ -45,13 +45,13 @@ public class Player_Movent : MonoBehaviour
             directionArrow.gameObject.SetActive(false);
         }
 
-        //if (Input.GetKeyDown(KeyCode.LeftControl) && playerStateController.IsHolding && playerStateController.HandsOnObject.CompareTag("Ingredients"))
-        //{
-        //    //조준하는(회전만하는)
-        //    isRotation = true;
-        //    animator.SetBool(IsWalking, false);
-        //    directionArrow.gameObject.SetActive(true);
-        //}
+        if (Input.GetKeyDown(KeyCode.LeftControl) && (playerStateController.HandsOnObGet != null && playerStateController.HandsOnObGet.CompareTag("Ingredients")))
+        {
+            //조준하는(회전만하는)
+            isRotation = true;
+            animator.SetBool(IsWalking, false);
+            directionArrow.gameObject.SetActive(true);
+        }
 
         ThrowRoration();
     }
