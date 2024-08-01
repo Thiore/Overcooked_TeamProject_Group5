@@ -34,6 +34,13 @@ public class Bus_MV : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("눌림");
+            GameManager.Instance.LoadScene("AnotherScene");
+        }
+
         //카메라 애니메이션이 재생 중이라면 이동 막음
         if (worldState != null && worldState.isCameraAnimationPlaying)
         {
@@ -45,6 +52,8 @@ public class Bus_MV : MonoBehaviour
             player_rb.angularVelocity = Vector3.zero;
             player_rb.velocity = Vector3.zero;
         }
+
+
 
         //Debug.DrawRay(transform.position, transform.forward * 3f, Color.red);
         //if (Input.GetKeyDown(KeyCode.V) && isJumping.Equals(false))
