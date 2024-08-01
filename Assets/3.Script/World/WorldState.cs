@@ -8,6 +8,7 @@ public class WorldState : MonoBehaviour
     [SerializeField] private TestCamera testCamera; // 카메라 스크립트
     [SerializeField] private Animator stage2;
     [SerializeField] private GameObject stage2Object;
+    [SerializeField] private Transform vanTransform;
     
 
     private FlagUIController flagController;
@@ -16,11 +17,13 @@ public class WorldState : MonoBehaviour
     private int bestScore_W;
     private Vector3 vanPosition;
 
+
     // 애니메이션 상태를 추적하는 변수
     public bool isCameraAnimationPlaying { get; private set; }
 
     private void Start()
     {
+        
         testCamera = FindObjectOfType<TestCamera>();
         if (stage1 == null)
         {
@@ -52,6 +55,7 @@ public class WorldState : MonoBehaviour
 
         // 지연 호출로 FlagUIController 초기화를 기다림
         //StartCoroutine(DelayedResetState());
+        RestoreVanPosition();
     }
 
     private void OnFlagUISet()
@@ -196,16 +200,53 @@ public class WorldState : MonoBehaviour
     }
     //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
     //Van 포지션 저장
+    // Van 포지션 저장
 
     public void SaveVanPosition(Vector3 position)
     {
         vanPosition = position;
-        Debug.Log("벤 위치 저장 값" + vanPosition);
+        PlayerPrefs.SetFloat("VanPositionX", vanPosition.x);
+        PlayerPrefs.SetFloat("VanPositionY", vanPosition.y);
+        PlayerPrefs.SetFloat("VanPositionZ", vanPosition.z);
+        Debug.Log("벤 위치 저장 값: " + vanPosition);
+    }
+
+    public void RestoreVanPosition()
+    {
+        if (PlayerPrefs.HasKey("VanPositionX") && PlayerPrefs.HasKey("VanPositionY") && PlayerPrefs.HasKey("VanPositionZ"))
+        {
+            float x = PlayerPrefs.GetFloat("VanPositionX");
+            float y = PlayerPrefs.GetFloat("VanPositionY");
+            float z = PlayerPrefs.GetFloat("VanPositionZ");
+            vanPosition = new Vector3(x, y, z);
+            Debug.Log("벤 위치 복원 값: " + vanPosition);
+            // Van 오브젝트의 위치 설정
+            if (vanTransform != null)
+            {
+                vanTransform.position = vanPosition;
+            }
+        }
+        else
+        {
+            Debug.Log("저장된 벤 위치 값이 없습니다.");
+        }
     }
 
     public Vector3 GetVanPosition()
     {
+        Debug.Log("벤 위치 값: " + vanPosition);
         return vanPosition;
     }
-    
+    //public void SaveVanPosition(Vector3 position)
+    //{
+    //    vanPosition = position;
+    //    Debug.Log("벤 위치 저장 값" + vanPosition);
+    //}
+
+    //public Vector3 GetVanPosition()
+    //{
+    //    return vanPosition;
+    //    Debug.Log("벤 위치 값" + vanPosition);
+    //}
+
 }
