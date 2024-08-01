@@ -11362,6 +11362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraAnimator: {fileID: 606173469}
   testCamera: {fileID: 606173468}
+  vanTransform: {fileID: 3196141199767261273}
 --- !u!95 &1349563226
 Animator:
   serializedVersion: 3
