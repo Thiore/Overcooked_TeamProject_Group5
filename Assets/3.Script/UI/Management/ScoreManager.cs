@@ -57,7 +57,7 @@ public class ScoreManager : MonoBehaviour
     // 점수를 초기화하는 메서드
     public void InitializeScores()
     {
-        score = 100;
+        score = 0;
         Tip_Score = 0;
         tip = 1;
         addScoreCount = 0;
