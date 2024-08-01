@@ -201,20 +201,16 @@ public class RecipePool : MonoBehaviour
             {
                 if (i == 0)
                 {
-                    Debug.Log("순서와 레시피 모두 동일");
-                    
-                    AllCorrect(i, activeObjects[i].GetComponent<Recipe>().ingredient.Count*10);
+                    AllCorrect(i, 20);
                 }
                 else
                 {
-                    Debug.Log("레시피는 맞았으나 순서 틀림");
-                    InCorrect(i, activeObjects[i].GetComponent<Recipe>().ingredient.Count * 10);
+                    InCorrect(i, 20);
                 }
 
                 return; // 매칭되는 오브젝트를 찾았으므로 메서드 종료
             }
         }
-        Debug.Log("틀림");
         StartCoroutine(Wrong());
     }
 
