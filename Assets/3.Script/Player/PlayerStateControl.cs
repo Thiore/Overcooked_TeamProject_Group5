@@ -24,6 +24,14 @@ public class PlayerStateControl : MonoBehaviour
 
     private void Awake()
     {
+        var facenum = GameManager.Instance.Faceindex;
+        for (int i = 0; i < playerFaces.Length; i++)
+        {
+            playerFaces[i].SetActive(false);
+        }
+
+        playerFaces[facenum].SetActive(true);
+
         animator = GetComponent<Animator>();
         counterEmissionController = GetComponent<CounterEmissionController>();
         nearObjectEmissionController = GetComponent<NearObject_EmissionController>();
