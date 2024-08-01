@@ -6,7 +6,7 @@ public class BusInput : MonoBehaviour
 {
     [SerializeField] private string _moveAxis_name = "Vertical";
     [SerializeField] private string _rotateAxis_name = "Horizontal";
-
+    
     public float Move_Value { get; private set; }
     public float Rotate_Value { get; private set; }
 

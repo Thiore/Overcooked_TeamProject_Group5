@@ -42,7 +42,7 @@ public class TicketManager : MonoBehaviour
         {
             GameManager.Instance.stage_index = 0;
             GameManager.Instance.LoadScene("BSJScene");
-            
+            worldState.GetVanPosition();
             ScoreManager.Instance.InitializeScores();
         }
     }
