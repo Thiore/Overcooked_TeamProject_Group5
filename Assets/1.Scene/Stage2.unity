@@ -10418,6 +10418,7 @@ MonoBehaviour:
   AttachTransform: {fileID: 7514796780402690159}
   cleaver: {fileID: 6643154855416958068}
   playerSwapManager: {fileID: 0}
+  playerFaces: []
 --- !u!136 &2410909864413624029
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -21062,6 +21063,7 @@ MonoBehaviour:
   AttachTransform: {fileID: 6996568644522588155}
   cleaver: {fileID: 6996568643461503940}
   playerSwapManager: {fileID: 0}
+  playerFaces: []
 --- !u!114 &6996568644082355454
 MonoBehaviour:
   m_ObjectHideFlags: 0
