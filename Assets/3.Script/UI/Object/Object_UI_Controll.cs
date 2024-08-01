@@ -191,8 +191,7 @@ public class Object_UI_Controll : MonoBehaviour
             {
                 ingredient_img_List[i].SetActive(true);
                 ingredient_img_List[i].transform.position = main_cam.WorldToScreenPoint(ingredient_object_List[i].transform.position + new Vector3(0, 1, 0));
-            }
-            if (ingredient_object_List[i].GetComponent<Ingredient>().cooking.Equals(eCooked.Chopping))
+            }else if (ingredient_object_List[i].GetComponent<Ingredient>().cooking.Equals(eCooked.Chopping))
             {
                 ingredient_slider_List[i].SetActive(true);
                 ingredient_slider_List[i].transform.position = main_cam.WorldToScreenPoint(ingredient_object_List[i].transform.position + new Vector3(0, -2, 0));
@@ -202,6 +201,9 @@ public class Object_UI_Controll : MonoBehaviour
                 {
                     ingredient_slider_List[i].SetActive(false);
                 }
+            }else
+            {
+                ingredient_img_List[i].SetActive(false);
             }
         }
     }
