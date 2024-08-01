@@ -26,7 +26,8 @@ public class BusController : MonoBehaviour
                 GameManager.Instance.stage_index = stage_index;
                 GameManager.Instance.LoadGame(stage_index);
                 worldState.ResetState(1);
-                //worldState.SaveVanPosition();
+                //ÇöÀç VanÀÇ position
+                worldState.SaveVanPosition(transform.position);
                 
             }
         }
