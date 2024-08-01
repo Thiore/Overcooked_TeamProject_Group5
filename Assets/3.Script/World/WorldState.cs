@@ -9,6 +9,7 @@ public class WorldState : MonoBehaviour
     [SerializeField] private Animator stage2;
     [SerializeField] private GameObject stage2Object;
     
+
     private FlagUIController flagController;
     private FlagUIController flagControllerStage2;
     private Animator animator;
@@ -20,6 +21,7 @@ public class WorldState : MonoBehaviour
 
     private void Start()
     {
+        testCamera = FindObjectOfType<TestCamera>();
         if (stage1 == null)
         {
             Debug.LogError("stage1 게임 오브젝트가 할당되지 않았습니다!");
@@ -169,7 +171,20 @@ public class WorldState : MonoBehaviour
             Debug.Log("testCamera가 할당되지 않았습니다.");
         }
     }
-
+    public void OnAnimationStart()
+    {
+        if (testCamera != null)
+        {
+            testCamera.StopFollowingPlayer();
+        }
+    }
+    public void OnAnimationEnd()
+    {
+        if (testCamera != null)
+        {
+            testCamera.StartFollowingPlayer();
+        }
+    }
     //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
     //Van 포지션 저장
 
