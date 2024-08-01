@@ -10,13 +10,16 @@ public class Crate_spawn : MonoBehaviour
     [SerializeField] private GameObject crate_Prefabs;
 
 
+
     private void Awake()
     {
         Debug.Log(crate_Data.Info.Length);
-        for (int i = 0; i < crate_Data.Info.Length;i++)
-        {
-            Crate_Tex_Offset(crate_Data.Info[i], i);
-        }
+      
+            for (int i = 0; i < crate_Data.Info.Length; i++)
+            {
+                Crate_Tex_Offset(crate_Data.Info[i], i);
+            }
+       
     }
 
     private void Crate_Tex_Offset(Crate_Info info, int num)
@@ -33,18 +36,19 @@ public class Crate_spawn : MonoBehaviour
                     GameObject obj = Instantiate(crate_Prefabs);
                     obj.transform.position = info.Position;
                     obj.transform.rotation = info.Rotation;
+                    obj.SetActive(false);
+                    
                     Debug.Log(obj.name);
                     Renderer crate_renderer = obj.GetComponent<Renderer>();
                     Material[] newMat = new Material[2];
                     newMat[0] = crate;
                     newMat[1] = crate_Material[num];
                     crate_renderer.materials = newMat;
-                    obj.GetComponent<spawn_Ingredient>().Set_IngredientInfo(info);
-                    
+                    obj.GetComponent<spawn_Ingredient>().Set_IngredientInfo(info, crate_Data);
+                    obj.SetActive(true);
                     return;
                 }
             }
         }
     }
-
 }

@@ -60,19 +60,16 @@ public class Plate_Spawn : MonoBehaviour
             {
                 if(!plate.isWash)
                 {
-                    if(plates[i].transform.childCount>0)
+                    if(!plates[i].name.Equals("Plate"))
                     {
-                        Transform childobj = plates[i].transform.GetChild(0);
-                        CheckRecipe.CheckRecipe($"{childobj.gameObject.name}_Food");
+                        CheckRecipe.CheckRecipe($"{plate.gameObject.name}_Food");
                         plates[i].transform.SetParent(null);
-                        DestroyPlateNum.Enqueue(i);
-                        if (childobj.TryGetComponent(out Ingredient Ingre))
+                        
+                        for(int j = 0; j < plate.transform.childCount;j++)
                         {
-                            Ingre.Die();
+                            plate.transform.GetChild(j).gameObject.SetActive(false);
                         }
-                        else
-                            Destroy(childobj.gameObject);
-
+                        DestroyPlateNum.Enqueue(i);
                         plates[i].gameObject.SetActive(false);
                         return true;
                     }  

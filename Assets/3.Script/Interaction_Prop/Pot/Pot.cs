@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pot : MonoBehaviour
+public class Pot : Cookingtool
 {
-    [SerializeField] private SkinnedMeshRenderer[] renderer;
+    [SerializeField] private Renderer[] renderer;
     [SerializeField] private Texture2D FalloffTexture;
 
     [SerializeField] private Animator Soup_Anim;
@@ -18,10 +18,14 @@ public class Pot : MonoBehaviour
     public readonly float FireTime = 10f;
     private Color BaseColor;
 
+    private bool isSoup;
+
     private void Awake()
     {
-        BaseColor = renderer[0].material.GetColor("_BaseColor");
-        
+        BaseColor = this.renderer[0].material.GetColor("_BaseColor");
+        isSoup = false;
+        CookTime = 0;
+
     }
     private void Update()
     {
@@ -37,25 +41,48 @@ public class Pot : MonoBehaviour
                     SaveRange = transform.parent;
                     transform.parent.GetChild(0).gameObject.SetActive(true);
                     transform.GetChild(1).TryGetComponent(out Ingre);
+                    gameObject.name = transform.GetChild(1).name;
                 }
                 
                 CookTime += Time.deltaTime;
+                Debug.Log(CookTime);
                 if(CookTime > FireTime)
                 {
-                    Ingre.cooking = eCooked.trash;
+                    if(!isSoup)
+                    {
+                        Soup_Anim.SetTrigger("Cook");
+                        Ingre.SetTrash();
+                        isSoup = true;
+                        Debug.Log("Fire");
+                    }
                     //∫“≥≤
+                    return;
                 }
                 else if(CookTime > OverCookTime)
                 {
-                    //ª°∞£ UI±Ù∫˝±Ù∫˝
+                    if (isSoup)
+                    {
+                        isSoup = false;
+                        Debug.Log("±Ù∫˝±Ù∫˝");
+                    }
+                    //ª°∞£ UI±Ù∫˝±Ù∫˝  
+                    return;
                 }
                 else if (CookTime > FinishCookTime)
                 {
-                    Ingre.cooking = eCooked.ReadyCook;
+                    if(!isSoup)
+                    {
+                        Ingre.SetReadyCook();
+                        Soup_Anim.SetTrigger("Cook");
+                        isSoup = true;
+                        Debug.Log("¡∂∏Æ≥°");
+                    }
+                    
                     //√ ∑œ UI ∂Ï∏µ
+                    return;
                 }
 
-
+                return;
             }
             else
             {
@@ -68,16 +95,18 @@ public class Pot : MonoBehaviour
         }
         else
         {
-            if (BaseColor != renderer[0].material.GetColor("_BaseColor"))
+            if (BaseColor != this.renderer[0].material.GetColor("_BaseColor"))
             {
-                for (int i = 0; i < renderer.Length; i++)
+                for (int i = 0; i < this.renderer.Length; i++)
                 {
-                    renderer[i].material.SetColor("_BaseColor", BaseColor);
+                    this.renderer[i].material.SetColor("_BaseColor", BaseColor);
                 }
                 transform.GetChild(0).gameObject.SetActive(false);
                 Ingre.Change_Ingredient(Ingre.cooking);
                 Ingre = null;
                 CookTime = 0f;
+                isSoup = false;
+                gameObject.name = "Pot";
             }
             
         }
@@ -85,24 +114,38 @@ public class Pot : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float Timerange = CookTime * 0.1f;
+        float Timerange = CookTime * 0.06f;
         if (Timerange > 0.11 && Timerange < 0.89f)
         {
-            float alpha = FalloffTexture.GetPixelBilinear(Timerange, 0.5f).a;
+            Color alphaColor = FalloffTexture.GetPixelBilinear(Timerange, 0.5f);
+            float alpha = alphaColor.a;
             ChangeSoupMaterial(alpha);
         }
     }
     private void ChangeSoupMaterial(float alpha)
     {
         Color newColor = BaseColor * alpha;
-        for (int i = 0; i < renderer.Length; i++)
+        for (int i = 0; i < this.renderer.Length; i++)
         {
-            renderer[i].material.SetColor("_BaseColor", newColor);
+            this.renderer[i].material.SetColor("_BaseColor", newColor);
         }
 
     }
 
 
 
+    public override bool CookedCheck(GameObject obj)
+    {
+        if (obj.TryGetComponent(out Ingredient ingre))
+        {
+            Debug.Log(this.name + " ¿Á∑·»Æ¿Œ");
+        }
+        return false;
+    }
+
+    public override void StartCook()
+    {
+        base.StartCook();
+    }
 
 }

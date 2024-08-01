@@ -19,7 +19,7 @@ public class Player_StateController : MonoBehaviour
     //이건 인스펙터에서 셰프 밑에 스켈레톤 Attach 넣어 사용하기
     [SerializeField] private Transform Attachtransform;
     [SerializeField] private GameObject Cleaver;
-    public GameObject CleaverOb { get => Cleaver; }
+    public GameObject CleaverOb;// { get => Cleaver; }
 
     //내가 들고 있는지 
     private bool isHolding = false;
@@ -288,7 +288,7 @@ public class Player_StateController : MonoBehaviour
                             {
                                 if(HandsOnOb.transform.GetChild(0).TryGetComponent(out Ingredient ingre))
                                 {
-                                    ingre.Die();
+                                    ingre.gameObject.SetActive(false);
                                     return;
                                 }
                             }
@@ -342,54 +342,16 @@ public class Player_StateController : MonoBehaviour
             {
                 //플레이트에 넣을때 
                 // 접시만(재료 X) / 접시(재료 O) / 재료 + 재료
-                if ((counter.PutOnOb.CompareTag("Plate") || counter.PutOnOb.CompareTag("Ingredients")) && HandsOnOb.CompareTag("Ingredients"))
+                if (counter.PutOnOb.CompareTag("Plate")&& HandsOnOb.CompareTag("Ingredients"))
                 {
                     HandsOnOb.TryGetComponent(out Ingredient ingre);
-                    HandsOnOb.TryGetComponent(out AddIngredientSpawn addingre);
                     HandsOnOb.TryGetComponent(out SphereCollider col);
-                    if (ingre.OnPlate)
+                    counter.PutOnOb.TryGetComponent(out Plate plate);
+                    if (plate.OnPlate(ingre))
                     {
-                        //손에 재료들고 접시만 
-                        if (counter.PutOnOb.CompareTag("Plate"))
-                        {
-
-                            //접시 재료 ㅇ 
-                            if(counter.PutOnOb.transform.childCount > 0)
-                            {
-                                if (addingre.SetAddIngredient(counter.PutOnOb.transform.GetChild(0).gameObject))
-                                {
-                                    ingre.Die();
-                                    animator.SetBool("IsTake", false);
-                                    HandsOnOb = null;
-                                    isHolding = false;
-                                }
-                             
-                            }
-                            else // 접시 재료 X 
-                            {
-                                HandsOnOb.transform.SetParent(counter.PutOnOb.transform);
-                                HandsOnOb.transform.position = counter.PutOnOb.transform.position;
-                                HandsOnOb.transform.rotation = counter.PutOnOb.transform.rotation;
-                                col.enabled = false;
-                                animator.SetBool("IsTake", false);
-                                HandsOnOb = null;
-                                isHolding = false;
-                            }
-                        }
-                        else // 재료재료
-                        {
-                            if (addingre.SetAddIngredient(counter.PutOnOb))
-                            {
-                                ingre.Die();
-                                animator.SetBool("IsTake", false);
-                                HandsOnOb = null;
-                                isHolding = false;
-                            }
-                            else
-                            {
-                                Debug.Log("못내림");
-                            }
-                        }
+                        animator.SetBool("IsTake", false);
+                        isHolding = false;
+                        HandsOnOb = null;                                                
                     }
                 }
                 //여기는 조리도구 안에 넣을때?
@@ -438,7 +400,7 @@ public class Player_StateController : MonoBehaviour
                     {
                         counter.ChoppingBoard.transform.GetChild(1).gameObject.transform.TryGetComponent(out Ingredient ingre);
 
-                        if (ingre != null && ingre.OnChopping)
+                        if (ingre != null && ingre.Chopable())
                         {
                             animator.SetTrigger("Chop");
                             Cleaver.SetActive(true);

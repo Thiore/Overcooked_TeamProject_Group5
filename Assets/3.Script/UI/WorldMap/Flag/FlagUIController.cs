@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +11,10 @@ public class FlagUIController : MonoBehaviour
     private Text BestScore;
     private Text[] Target_Score = new Text[3];
     private Image[] FullStar = new Image[3];
+
+    public delegate void OnUISetCallback();
+    public event OnUISetCallback OnUISet;
+
     private void Start()
     {
         InitUI();
@@ -39,9 +41,9 @@ public class FlagUIController : MonoBehaviour
             FullStar[i] = GameObject.Find($"{this.gameObject.name}/UI/UI_Canvas/Main_Panel/Stage_Info/Target_Panel/EmptyStar_{i + 1}/FullStar").GetComponent<Image>();
         }
     }
+
     private void SetUI()
     {
-        Debug.Log($"{this.gameObject.name} : {DataManager.Instance.GetStageInformation(flag.stage_index).targetScore[0]}");
         target_Score = DataManager.Instance.GetStageInformation(flag.stage_index).targetScore;
         for (int i = 0; i < 3; i++)
         {
@@ -49,7 +51,7 @@ public class FlagUIController : MonoBehaviour
             Debug.Log($"{DataManager.Instance.GetStageInformation(flag.stage_index).targetScore[i]}");
             Debug.Log($"{target_Score[i]}");
         }
-
+        Debug.Log($"{this.gameObject.name} : {DataManager.Instance.GetStageInformation(flag.stage_index).bestScore}");
         bestScore = DataManager.Instance.GetStageInformation(flag.stage_index).bestScore;
         BestScore.text = bestScore.ToString();
         for (int i = 0; i < 3; i++)
@@ -60,5 +62,6 @@ public class FlagUIController : MonoBehaviour
             }
             Target_Score[i].text = target_Score[i].ToString();
         }
+        OnUISet?.Invoke(); // SetUI 메서드가 완료된 후 이벤트 호출
     }
 }

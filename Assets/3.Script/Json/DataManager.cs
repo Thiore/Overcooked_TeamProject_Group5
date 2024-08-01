@@ -99,7 +99,11 @@ public class DataManager : MonoBehaviour
         string recipe_jsonFile = Resources.Load<TextAsset>("Data/Recipe_JDB").text;
         var recipes = JsonConvert.DeserializeObject<Recipe[]>(recipe_jsonFile);
 
-
+        //요리도구
+        foreach (var recipe in recipes)
+        {
+            recipe.tool_count = recipe.ingredient.Count(ingredient => ingredient.EndsWith("Pot") || ingredient.EndsWith("Pan") || ingredient.EndsWith("Fry"));
+        }
         // recipes 배열을 Dictionary로 변환
         recipeData = recipes.ToDictionary(x => x.id, x => x);
         //Debug.Log("Loaded " + recipeData.Count + " recipes from JSON.");

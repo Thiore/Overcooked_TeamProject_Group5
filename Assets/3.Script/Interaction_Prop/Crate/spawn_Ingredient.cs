@@ -7,14 +7,16 @@ public class spawn_Ingredient : MonoBehaviour
     private eIngredients Ingredient_enum;
 
     [SerializeField] private Ingredient[] ingredient_prefab;
-
     private Ingredient myIngredient;
+    
     private Queue<Ingredient> ingredient_queue = new Queue<Ingredient>();
-    private Player_StateController player;
+    private Object_UI_Controll obj_ui;
+    
+    //private Player_StateController player;
 
     private Animator anim;
 
-
+    public Crate_Data Data { get; private set; }
     private Crate_Info info;
 
     private void Awake()
@@ -25,7 +27,7 @@ public class spawn_Ingredient : MonoBehaviour
     private void Start()
     {
         Ingredient_enum = info.Ingredients;
-
+        obj_ui = GameObject.Find("Object_UI_Canvas").GetComponent<Object_UI_Controll>();
         //myIngredient = ingredient_prefab[0];
         for (int i = 0; i < ingredient_prefab.Length; i++)
         {
@@ -47,8 +49,7 @@ public class spawn_Ingredient : MonoBehaviour
 
     public GameObject newIngredient()
     {
-        Debug.Log(ingredient_queue.Count);
-        if(ingredient_queue.Count>0)
+        if (ingredient_queue.Count > 0)
         {
             Ingredient obj = ingredient_queue.Dequeue();
             obj.gameObject.SetActive(true);
@@ -57,21 +58,32 @@ public class spawn_Ingredient : MonoBehaviour
         else
         {
             Ingredient newobj = Instantiate(myIngredient);
-            newobj.SetCookProcess(info.CookingProcess, info.Chop_Anim, info.Ingredients);
-            newobj.name = myIngredient.name;
+            newobj.SetCookProcess(info);
+            if (info.utensils.Equals(eCookutensils.Normal))
+                newobj.name = myIngredient.name;
+            else
+                newobj.name = myIngredient.name + info.utensils.ToString();
+
             newobj.crate = this;
+
+            obj_ui.Ingredient_UI_Init(newobj.gameObject);
             return newobj.gameObject;
         }
+
+
     }
+    
     public void DestroyIngredient(Ingredient ingredient)
     {
         ingredient_queue.Enqueue(ingredient);
-        Debug.Log(ingredient_queue.Count);
+        
     }
 
-    public void Set_IngredientInfo(Crate_Info info)
+    public void Set_IngredientInfo(Crate_Info info, Crate_Data data)
     {
         this.info = info;
+        this.Data = data;
     }
+    
 
 }

@@ -6,6 +6,8 @@ public class RecipeObject : MonoBehaviour
 {
     public float activationTime;
     public int Point;
+    [SerializeField] private Image Tool_img_1;
+    [SerializeField] private Image Tool_img_2;
     private string recipe_name;
     public string Recipe_name { get { return recipe_name; } }
 
@@ -25,6 +27,18 @@ public class RecipeObject : MonoBehaviour
                     image.sprite = sprite;
                 }
             }
+        }
+    }
+
+    public void SetToolImage(int index,string toolname)
+    {
+        if(index == 1)
+        {
+            Tool_img_1.sprite = Resources.Load<Sprite>($"{toolname}");
+        }
+        else
+        {
+            Tool_img_2.sprite = Resources.Load<Sprite>($"{toolname}");
         }
     }
 }
