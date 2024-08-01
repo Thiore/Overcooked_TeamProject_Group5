@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -153,6 +153,128 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &483178405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 483178410}
+  - component: {fileID: 483178409}
+  - component: {fileID: 483178408}
+  - component: {fileID: 483178407}
+  - component: {fileID: 483178406}
+  m_Layer: 5
+  m_Name: Object_UI_Canvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &483178406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483178405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c4fdbd79296e4540983202cc6247eb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pot_slider_prefab: {fileID: 2216747952230463265, guid: 313515d5068981349a56dea11d142d28, type: 3}
+  ingredient_img: {fileID: 4195455021256428059, guid: 06ab0950ecdc1184f9afbee4fe39210f, type: 3}
+  warning_img: {fileID: 8341708942258299255, guid: bf26ff9d8acdbb24ea03a32cd5f99079, type: 3}
+  done_img: {fileID: 4872903222193941432, guid: 0499d3c1b9e0b9c45b3d99c18218cf09, type: 3}
+  respawn_img: {fileID: 2551625838707513182, guid: 33352efe65ebda94391178428a3e5243, type: 3}
+  hold_ext: {fileID: 6447699055327165793, guid: 9f7d300b130fb0a47b35f862730eb471, type: 3}
+  ingredient_object_List: []
+  cooking_pot_index: 
+  overcook_pot_index: 
+  fire_pot_index: 
+--- !u!114 &483178407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483178405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &483178408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483178405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &483178409
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483178405}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!224 &483178410
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483178405}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &1023681510
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,7 +1853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPutOn: 0
   putonOb: {fileID: 0}
-  choppingBoard: {fileID: 0}
+  choppingBoard: {fileID: 4025586968435517006}
 --- !u!65 &1553930059782152857
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7034,7 +7156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPutOn: 0
   putonOb: {fileID: 0}
-  choppingBoard: {fileID: 0}
+  choppingBoard: {fileID: 1553930060411817263}
 --- !u!65 &1553930061377471269
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7112,7 +7234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPutOn: 0
   putonOb: {fileID: 0}
-  choppingBoard: {fileID: 0}
+  choppingBoard: {fileID: 1553930061471454024}
 --- !u!65 &1553930061395654156
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13173,10 +13295,10 @@ MonoBehaviour:
   oneIngredientPrefab: {fileID: 4134851203775356756, guid: d703df5389365b54f9561142cb7d9a06, type: 3}
   twoIngredientsPrefab: {fileID: 1676535915141075299, guid: 54e27e557a63eaf46988d4ba7ab268b0, type: 3}
   threeIngredientsPrefab: {fileID: 5915875150680831650, guid: a077e376fa8986e408b22b8547535aed, type: 3}
-  twoIngredient_onetool_Prefab: {fileID: 0}
-  twoIngredient_twotool_Prefab: {fileID: 0}
-  threeIngredient_onetool_Prefab: {fileID: 0}
-  threeIngredient_twotool_Prefab: {fileID: 0}
+  twoIngredient_onetool_Prefab: {fileID: 1676535915141075299, guid: 4992a4b09d43c6c48ba52fab034886d7, type: 3}
+  twoIngredient_twotool_Prefab: {fileID: 1676535915141075299, guid: 54e27e557a63eaf46988d4ba7ab268b0, type: 3}
+  threeIngredient_onetool_Prefab: {fileID: 5915875150680831650, guid: 0351f113b0278e24abe95d81b931b42f, type: 3}
+  threeIngredient_twotool_Prefab: {fileID: 5915875150680831650, guid: b1cb1a384566be44cbb6d7502909f73c, type: 3}
   recipePoolPanel: {fileID: 4136548608852248974}
   moveSpeed: 10000
   maxVisibleObjects: 5

@@ -3066,7 +3066,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 071eb8abb1c1ec444b65fb163961e99e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 59ba3a02ea2831a48a1cc464134d0a2a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11362,6 +11362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraAnimator: {fileID: 606173469}
   testCamera: {fileID: 606173468}
+  vanTransform: {fileID: 3196141199767261273}
 --- !u!95 &1349563226
 Animator:
   serializedVersion: 3
@@ -15364,7 +15365,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 071eb8abb1c1ec444b65fb163961e99e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1b36479f8f3f36943ab54785debdd5cc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -50358,6 +50359,7 @@ MonoBehaviour:
   isInputEnabled: 0
   worldState: {fileID: 0}
   isFire: 0
+  Faceindex: 0
 --- !u!4 &2541751766452954996
 Transform:
   m_ObjectHideFlags: 0

@@ -9,8 +9,9 @@ public class WorldState : MonoBehaviour
     [SerializeField] private Animator stage2;
     [SerializeField] private GameObject stage2Object;
     [SerializeField] private Transform vanTransform;
-    
 
+
+    private Bus_MV bus_MV;
     private FlagUIController flagController;
     private FlagUIController flagControllerStage2;
     private Animator animator;
@@ -23,7 +24,7 @@ public class WorldState : MonoBehaviour
 
     private void Start()
     {
-        
+        bus_MV = GetComponent<Bus_MV>();
         testCamera = FindObjectOfType<TestCamera>();
         if (stage1 == null)
         {
@@ -201,7 +202,47 @@ public class WorldState : MonoBehaviour
     //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
     //Van 포지션 저장
     // Van 포지션 저장
-
+    public void VanStop()
+    {
+        if (vanTransform != null)
+        {
+            Bus_MV busMV = vanTransform.GetComponent<Bus_MV>();
+            if (busMV != null)
+            {
+                busMV.StopMoving(); // StopMoving 메서드를 추가하여 이동을 멈춥니다.
+                Debug.Log("Van의 움직임이 멈췄습니다.");
+            }
+            else
+            {
+                Debug.LogWarning("Bus_MV 컴포넌트가 없습니다.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("vanTransform이 할당되지 않았습니다.");
+        }
+    }
+    public void VanStart()
+    {
+        if (vanTransform != null)
+        {
+            Bus_MV busMV = vanTransform.GetComponent<Bus_MV>();
+            if (busMV != null)
+            {
+                // Bus_MV 스크립트의 Move 메서드를 호출하여 이동을 시작합니다.
+                busMV.StartMoving(); // StartMoving 메서드를 추가하여 이동을 시작하도록 합니다.
+                Debug.Log("Van의 움직임을 다시 시작합니다.");
+            }
+            else
+            {
+                Debug.LogWarning("Bus_MV 컴포넌트가 없습니다.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("vanTransform이 할당되지 않았습니다.");
+        }
+    }
     public void SaveVanPosition(Vector3 position)
     {
         vanPosition = position;

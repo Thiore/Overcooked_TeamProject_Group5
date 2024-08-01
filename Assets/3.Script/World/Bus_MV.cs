@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class Bus_MV : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float rotateSpeed = 380f;
     [SerializeField] private PlayerIntput playerInput;
     [SerializeField] private WorldState worldState;
@@ -14,7 +14,7 @@ public class Bus_MV : MonoBehaviour
     private Rigidbody player_rb;
     //private Animator animator;
     private Vector3 moveDirection;
-
+    private bool isMoving = false;
     //private Player_Ray playerRay;
     //private bool isJumping = false;
     //private Vector3 jumpvelocity = Vector3.zero;
@@ -39,7 +39,12 @@ public class Bus_MV : MonoBehaviour
         {
             return;
         }
-        Walking();
+        if (isMoving)
+        {
+            Walking();
+            player_rb.angularVelocity = Vector3.zero;
+            player_rb.velocity = Vector3.zero;
+        }
 
         //Debug.DrawRay(transform.position, transform.forward * 3f, Color.red);
         //if (Input.GetKeyDown(KeyCode.V) && isJumping.Equals(false))
@@ -165,6 +170,14 @@ public class Bus_MV : MonoBehaviour
         {
             Debug.Log("플레이어 위치 로드 못 함");
         }
+    }
+    public void StopMoving()
+    {
+        isMoving = false; // 이동을 멈춥니다.
+    }
+    public void StartMoving()
+    {
+        isMoving = true ; // 이동을 멈춥니다.
     }
 
 }
