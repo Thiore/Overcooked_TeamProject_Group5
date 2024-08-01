@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public int isInputEnabled = 0; // 입력 가능 상태
     public WorldState worldState;
     public int isFire = 0;
+    public int Faceindex = 0;
 
     
     private void Awake()

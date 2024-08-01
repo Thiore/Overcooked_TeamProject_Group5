@@ -12,6 +12,7 @@ public class Character_Btn_Controller : MonoBehaviour
 
     private void Start()
     {
+        
         characterButtons = new GameObject[2];
         characterButtons[0] = GameObject.Find("Left_Button");
         characterButtons[1] = GameObject.Find("Right_Button");
@@ -83,6 +84,6 @@ public class Character_Btn_Controller : MonoBehaviour
             current_face_index += index;
             CharacterFace[current_face_index].SetActive(true);
         }
-        
+        GameManager.Instance.Faceindex = current_face_index;
     }
 }

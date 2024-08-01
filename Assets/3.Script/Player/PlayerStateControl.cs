@@ -10,6 +10,8 @@ public class PlayerStateControl : MonoBehaviour
     private GameObject nearCounter = null;
     private GameObject HandsOnOb = null;
 
+    public GameObject HandsOnObGet {  get { return HandsOnOb; } }
+
     [SerializeField] private Transform AttachTransform;
     [SerializeField] private GameObject cleaver;
     public GameObject Cleaver { get => cleaver; }
@@ -70,8 +72,18 @@ public class PlayerStateControl : MonoBehaviour
                     }
                 }
             }
+
         }
 
+
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            if (HandsOnOb != null && HandsOnOb.CompareTag("Ingredients"))
+            {
+                Debug.Log("던지기");
+                ThrowIngredients();
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -114,7 +126,7 @@ public class PlayerStateControl : MonoBehaviour
                 }
             }
             //여기 제출하는 부분
-            else if(counter.CompareTag("Pass"))
+            else if (counter.CompareTag("Pass"))
             {
                 if (HandsOnOb.TryGetComponent(out Plate plate))
                 {
@@ -133,7 +145,7 @@ public class PlayerStateControl : MonoBehaviour
                 }
             }
 
-            
+
 
             // 카운터에 올라간게 null 이 아니면 올라간거 쿠킹툴인지, 손에 쥔걸 내릴수있는지 판단
             if (counter.PutOnOb != null && counter.PutOnOb.TryGetComponent(out Cookingtool tool))
@@ -155,9 +167,9 @@ public class PlayerStateControl : MonoBehaviour
             }
             else if (counter.PutOnOb != null && counter.PutOnOb.TryGetComponent(out Plate plate))
             {
-                if(HandsOnOb.TryGetComponent(out Ingredient Ingre))
+                if (HandsOnOb.TryGetComponent(out Ingredient Ingre))
                 {
-                    if(plate.OnPlate(Ingre))
+                    if (plate.OnPlate(Ingre))
                     {
                         Debug.Log("재료 넣기");
                         animator.SetBool("IsTake", false);
@@ -169,7 +181,7 @@ public class PlayerStateControl : MonoBehaviour
                         yield break;
                     }
                 }
-               
+
             }
             else if (counter.PutOnOb == null)
             //카운터가 근처에 있고, 카운터가 쿠킹툴이 아닐때(일반이겠지, 싱크대도 고려해야하나)
@@ -387,6 +399,24 @@ public class PlayerStateControl : MonoBehaviour
         yield return null;
     }
 
+    private void ThrowIngredients()
+    {
+        HandsOnOb.transform.SetParent(null);
+        var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();
+        rb.mass = 0.2f;
+        rb.angularDrag = 0;
+        rb.AddForce(transform.forward * 100f);
+        if (HandsOnOb.transform.TryGetComponent(out MeshCollider mesh))
+        {
+            mesh.enabled = true;
+        }
+        if (HandsOnOb.transform.TryGetComponent(out SphereCollider col))
+        {
+            col.enabled = true;
+        }
+        animator.SetBool("IsTake", false);
+        HandsOnOb = null;
+    }
 
 
 }
