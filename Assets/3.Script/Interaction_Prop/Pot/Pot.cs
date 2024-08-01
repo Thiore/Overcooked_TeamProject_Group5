@@ -13,9 +13,9 @@ public class Pot : Cookingtool
     private Ingredient Ingre = null;//³¿ºñ°¡ µé°íÀÖ´Â Àç·á
 
     public float CookTime;
-    public readonly float FinishCookTime = 4f;
-    public readonly float OverCookTime = 6f;
-    public readonly float FireTime = 10f;
+    public readonly float FinishCookTime = 6f;
+    //public readonly float OverCookTime = 6f;
+    //public readonly float FireTime = 10f;
     private Color BaseColor;
 
     private bool isSoup;
@@ -46,40 +46,26 @@ public class Pot : Cookingtool
                 
                 CookTime += Time.deltaTime;
                 Debug.Log(CookTime);
-                if(CookTime > FireTime)
+                if (CookTime > FinishCookTime)
                 {
-                    if(!isSoup)
-                    {
-                        Soup_Anim.SetTrigger("Cook");
-                        Ingre.SetTrash();
-                        isSoup = true;
-                        Debug.Log("Fire");
-                    }
-                    //ºÒ³²
-                    return;
-                }
-                else if(CookTime > OverCookTime)
-                {
-                    if (isSoup)
-                    {
-                        isSoup = false;
-                        Debug.Log("±ôºý±ôºý");
-                    }
-                    //»¡°£ UI±ôºý±ôºý  
-                    return;
-                }
-                else if (CookTime > FinishCookTime)
-                {
-                    if(!isSoup)
+                    if(isSoup)
                     {
                         Ingre.SetReadyCook();
                         Soup_Anim.SetTrigger("Cook");
-                        isSoup = true;
+                        isSoup = false;
                         Debug.Log("Á¶¸®³¡");
                     }
                     
                     //ÃÊ·Ï UI ¶ì¸µ
                     return;
+                }
+                else if(CookTime>FinishCookTime*0.3f)
+                {
+                    if(!isSoup)
+                    {
+                        Soup_Anim.SetTrigger("Cook");
+                        isSoup = true;
+                    }
                 }
 
                 return;

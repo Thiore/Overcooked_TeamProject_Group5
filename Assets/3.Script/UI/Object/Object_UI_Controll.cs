@@ -122,17 +122,17 @@ public class Object_UI_Controll : MonoBehaviour
                 {
                     done_img_List[i].SetActive(false);
                 }
-                //경고
-                else if (pot.CookTime + 0.3f < (int)pot_object_List[i].GetComponent<Pot>().FireTime)
-                {
+                ////경고
+                //else if (pot.CookTime + 0.3f < (int)pot_object_List[i].GetComponent<Pot>().FireTime)
+                //{
 
-                    Pot_Warning_Active(i);
-                }//불남
-                else if (pot.CookTime > pot.FireTime)
-                {
-                    pot.name = "Burn";
-                    warning_img_List[i].SetActive(false);
-                }
+                //    Pot_Warning_Active(i);
+                //}//불남
+                //else if (pot.CookTime > pot.FireTime)
+                //{
+                //    pot.name = "Burn";
+                //    warning_img_List[i].SetActive(false);
+                //}
             }
 
         }
