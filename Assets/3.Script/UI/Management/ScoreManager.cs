@@ -22,7 +22,8 @@ public class ScoreManager : MonoBehaviour
     public Score_UI_Manager score_ui;
     public int Tip_Score { get; private set; }  // 팁으로 인해 얻은 추가 점수를 기록하는 변수
     public int[] TargetScore = new int[3]; // 목표 점수 배열
-    public int score { get; private set; } // 현재 점수
+    [SerializeField]public int score { get; private set; } // 현재 점수
+    
     public int tip { get; set; } // 팁 배수
     public int addScoreCount { get; private set; } // 점수를 얻은 횟수
     public int TotalAddScore;
@@ -56,7 +57,7 @@ public class ScoreManager : MonoBehaviour
     // 점수를 초기화하는 메서드
     public void InitializeScores()
     {
-        score = 0;
+        score = 100;
         Tip_Score = 0;
         tip = 1;
         addScoreCount = 0;

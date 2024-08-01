@@ -62,6 +62,38 @@ public class FlagUIController : MonoBehaviour
             }
             Target_Score[i].text = target_Score[i].ToString();
         }
+        SetFlagMaterialOffset(bestScore);
         OnUISet?.Invoke(); // SetUI 메서드가 완료된 후 이벤트 호출
+    }
+    private void SetFlagMaterialOffset(int score)
+    {
+        Vector2 offset = Vector2.zero;
+
+        if (score >= 0 && score <= 39)
+        {
+            offset = new Vector2(0.69f, -0.25f);
+        }
+        else if (score >= 40 && score <= 59)
+        {
+            offset = new Vector2(0f, -0.25f);
+        }
+        else if (score >= 60 && score <= 99)
+        {
+            offset = new Vector2(0f, -0.5f);
+        }
+        else if (score >= 100)
+        {
+            offset = new Vector2(0f, -0.75f);
+        }
+
+        Transform childTransform = transform.Find("m_map_completed_flag_01_0.001_m_map_completed_flag_01_0.001"); // 자식 오브젝트 이름으로 변경
+        if (childTransform != null)
+        {
+            Renderer renderer = childTransform.GetComponent<Renderer>();
+            if (renderer != null && renderer.material != null)
+            {
+                renderer.material.SetTextureOffset("_MainTex", offset);
+            }
+        }
     }
 }
