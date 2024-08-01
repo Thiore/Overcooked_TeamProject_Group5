@@ -135,10 +135,23 @@ public class PlayerStateControl : MonoBehaviour
                     yield break;
                 }
             }
-            //else if (counter.PutOnOb != null /*&& counter.PutOnOb.TryGetComponent(out Plate plate)*/)
-            //{
-            //    // 디쉬가 판단하는 메소드
-            //}
+            else if (counter.PutOnOb != null && counter.PutOnOb.TryGetComponent(out Plate plate))
+            {
+                if(HandsOnOb.TryGetComponent(out Ingredient Ingre))
+                {
+                    if(plate.OnPlate(Ingre))
+                    {
+                        animator.SetBool("IsTake", false);
+                        HandsOnOb = null;
+                        yield break;
+                    }
+                    else
+                    {
+                        yield break;
+                    }
+                }
+               
+            }
             else if (counter.PutOnOb == null)
             //카운터가 근처에 있고, 카운터가 쿠킹툴이 아닐때(일반이겠지, 싱크대도 고려해야하나)
             {

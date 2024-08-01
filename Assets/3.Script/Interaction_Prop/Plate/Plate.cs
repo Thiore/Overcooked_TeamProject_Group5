@@ -114,11 +114,20 @@ public class Plate : MonoBehaviour
             if (transform.name.Equals("Plate"))
             {
                 transform.name = Ingre.name;
-                Ingre.gameObject.SetActive(false);
+                
                 for (int i = 0; i < recipes.Count; i++)
                 {
                     if (recipes[i].ingredient.Count.Equals(1) && recipes[i].ingredient[0].Equals(transform.name))
                     {
+                        for(int j = 0; j < transform.childCount;j++)
+                        {
+                            if(transform.GetChild(j).name.Equals(Ingre.name))
+                            {
+                                transform.GetChild(j).gameObject.SetActive(true);
+                                Ingre.gameObject.SetActive(false);
+                                break;
+                            }
+                        }
                         isComplete = true;
                         isPlate = true;
                         return true;
