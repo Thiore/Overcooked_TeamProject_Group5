@@ -10,7 +10,7 @@ public class Bus_MV : MonoBehaviour
     [SerializeField] private float rotateSpeed = 380f;
     [SerializeField] private PlayerIntput playerInput;
     [SerializeField] private WorldState worldState;
-
+    private AudioSource audio;
     private Rigidbody player_rb;
     //private Animator animator;
     private Vector3 moveDirection;
@@ -26,6 +26,8 @@ public class Bus_MV : MonoBehaviour
     {
         playerInput = GetComponent<PlayerIntput>();
         player_rb = GetComponent<Rigidbody>();
+        audio = GetComponent<AudioSource>();
+        audio.Play();
         //playerRay = GetComponent<Player_Ray>();
         //animator = GetComponent<Animator>();
     }
@@ -54,17 +56,20 @@ public class Bus_MV : MonoBehaviour
     {
         if (playerInput.Move_Value != 0 || playerInput.Rotate_Value != 0)
         {
+            audio.UnPause();
             //animator.SetBool(IsWalking, true);
             Move();
         }
         else
         {
+            audio.Pause();
             //animator.SetBool(IsWalking, false);
         }
     }
 
     private void Move()
     {
+        
         // 이동 전 회전을 주고 비교
         moveDirection = new Vector3(playerInput.Rotate_Value, 0, playerInput.Move_Value) * moveSpeed * Time.deltaTime;
 
