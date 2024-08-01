@@ -84,6 +84,7 @@ public class Ingredient : MonoBehaviour
 
 
 
+
     protected virtual void Awake()
     {
         
@@ -114,6 +115,8 @@ public class Ingredient : MonoBehaviour
                 cooking = eCooked.ReadyCook;
             }
         }
+
+       
        
     }
 
@@ -131,6 +134,8 @@ public class Ingredient : MonoBehaviour
         {
             cooking = eCooked.ReadyCook;
         }
+
+        
     }
 
     protected void Update()
@@ -360,8 +365,10 @@ public class Ingredient : MonoBehaviour
     public void Die()
     {
         ChopTime = 0f;
+        cooking = eCooked.Normal;
         gameObject.SetActive(false);
         transform.SetParent(null);
+        
         transform.position = crate.transform.position;
         transform.localScale = new Vector3(1f, 1f, 1f);
         Ingredient_Col.enabled = true;
