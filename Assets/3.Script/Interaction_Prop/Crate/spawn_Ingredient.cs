@@ -12,7 +12,6 @@ public class spawn_Ingredient : MonoBehaviour
     private Queue<Ingredient> ingredient_queue = new Queue<Ingredient>();
     private Object_UI_Controll obj_ui;
     
-    //private Player_StateController player;
 
     private Animator anim;
 

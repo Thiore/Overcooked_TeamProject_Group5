@@ -26,6 +26,8 @@ public class Player_SwapManager : MonoBehaviour
     private Text player1_respawnTimeText;
     private Text player2_respawnTimeText;
 
+    private bool isSwap;
+
 
     private void Awake()
     {
@@ -44,6 +46,7 @@ public class Player_SwapManager : MonoBehaviour
 
         player1_respawnTimeText = player1_respawnObj.transform.GetChild(0).GetComponent<Text>();
         player2_respawnTimeText = player2_respawnObj.transform.GetChild(0).GetComponent<Text>();
+        isSwap = false;
 
     }
     void Start()
@@ -56,7 +59,7 @@ public class Player_SwapManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift)&&!isSwap)
         {
             SwapCharacter();
         }
@@ -85,6 +88,8 @@ public class Player_SwapManager : MonoBehaviour
     {
         // 떨어지면 오브젝트가 없어지고 5초 있다가 
         // 특정 위치에 다시 등장한다 
+
+        isSwap = true;
 
         if (currentPlayer == player1)
         {
@@ -115,7 +120,7 @@ public class Player_SwapManager : MonoBehaviour
             player1.transform.position = player1_Respawn_pivot.position;
             player1_respawnObj.SetActive(false);
             isRespawn_player1 = false;
-
+            isSwap = false;
             yield break;
         }
         else
@@ -143,7 +148,7 @@ public class Player_SwapManager : MonoBehaviour
                 Debug.Log(player2_currentTime);
                 yield return null;
             }
-
+            isSwap = false;
             player2.transform.position = player2_Respawn_pivot.position;
             player2_respawnObj.SetActive(false);
             isRespawn_player2 = false;
@@ -194,7 +199,7 @@ public class Player_SwapManager : MonoBehaviour
         currentMark2.enabled = player == player2;
 
         currentPlayer = player;
-
+        isSwap = false;
     }
 
     public void AniWalkingSetbool(GameObject player)

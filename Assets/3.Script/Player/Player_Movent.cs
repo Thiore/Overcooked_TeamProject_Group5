@@ -64,7 +64,7 @@ public class Player_Movent : MonoBehaviour
         }
 
         player_rb.angularVelocity = Vector3.zero;
-        player_rb.velocity = new Vector3(0f, player_rb.velocity.y + 0.1f, 0f);
+        player_rb.velocity = new Vector3(0f, -5f, 0f);
 
     }
 
@@ -99,6 +99,7 @@ public class Player_Movent : MonoBehaviour
         }
         else
         {
+            if(!isJumping)
             animator.SetBool(IsWalking, false);
         }
     }
@@ -153,7 +154,7 @@ public class Player_Movent : MonoBehaviour
                 }
             }
 
-            player_rb.AddForce(transform.forward * 2f, ForceMode.VelocityChange);
+            player_rb.AddForce(transform.forward * 4f, ForceMode.VelocityChange);
            // player_rb.MovePosition(Vector3.Lerp(player_rb.position, endPos, elaspedTime / 0.3f));
             elaspedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();

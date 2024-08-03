@@ -14,7 +14,7 @@ public class Plate_Spawn : MonoBehaviour
     private Plate[] plates;
     private Queue<int> DestroyPlateNum = new Queue<int>();
 
-    private WaitForSeconds SpawnTime = new WaitForSeconds(1f);
+    private WaitForSeconds SpawnTime = new WaitForSeconds(4f);
     
 
     private void Start()

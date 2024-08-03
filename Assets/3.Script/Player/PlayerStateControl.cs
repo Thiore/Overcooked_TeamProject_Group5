@@ -22,6 +22,8 @@ public class PlayerStateControl : MonoBehaviour
 
     [SerializeField] private GameObject[] playerFaces;
 
+    private Coroutine stateCo = null;
+
     private void Awake()
     {
         var facenum = GameManager.Instance.Faceindex;
@@ -43,57 +45,59 @@ public class PlayerStateControl : MonoBehaviour
         nearCounter = counterEmissionController.GetNearCounter();
         nearOb = nearObjectEmissionController.GetNearObject();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(stateCo == null)
         {
-            if (HandsOnOb == null)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                StartCoroutine(PickUpDbjectCheck(nearCounter, nearOb));
-            }
-            else
-            {
-                StartCoroutine(DropDownObjectCheck(nearCounter, nearOb));
-            }
-        }
-
-
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-
-            if (HandsOnOb == null && nearCounter != null)
-            {
-                if (nearCounter.TryGetComponent(out CounterController counter))
+                if (HandsOnOb == null)
                 {
-                    if (counter.ChoppingBoard != null && counter.PutOnOb.CompareTag("Ingredients"))
-                    {
-                        Debug.Log("잘라좀");
+                    stateCo = StartCoroutine(PickUpDbjectCheck(nearCounter, nearOb));
+                }
+                else
+                {
+                    stateCo = StartCoroutine(DropDownObjectCheck(nearCounter, nearOb));
+                }
+            }
 
-                        StartCoroutine(PlayerCookedChage());
+
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+
+                if (HandsOnOb == null && nearCounter != null)
+                {
+                    if (nearCounter.TryGetComponent(out CounterController counter))
+                    {
+                        if (counter.ChoppingBoard != null && counter.PutOnOb.CompareTag("Ingredients"))
+                        {
+                            Debug.Log("잘라좀");
+
+                            stateCo = StartCoroutine(PlayerCookedChage());
+                        }
+                    }
+                }
+
+                if (HandsOnOb == null && nearCounter != null)
+                {
+                    if (nearCounter.CompareTag("Sink"))
+                    {
+                        if (nearCounter.TryGetComponent(out Sink sink))
+                        {
+                            stateCo = StartCoroutine(PlayerWashPlate());
+                        }
                     }
                 }
             }
 
-            if (HandsOnOb == null && nearCounter != null)
+            if (Input.GetKeyUp(KeyCode.LeftControl))
             {
-                if (nearCounter.CompareTag("Sink"))
+                if (HandsOnOb != null && HandsOnOb.CompareTag("Ingredients"))
                 {
-                    if (nearCounter.TryGetComponent(out Sink sink))
-                    {
-                        StartCoroutine(PlayerWashPlate());
-                    }
+                    Debug.Log("던지기");
+                    ThrowIngredients();
                 }
             }
-
         }
-
-
-        if (Input.GetKeyUp(KeyCode.LeftControl))
-        {
-            if (HandsOnOb != null && HandsOnOb.CompareTag("Ingredients"))
-            {
-                Debug.Log("던지기");
-                ThrowIngredients();
-            }
-        }
+        
     }
 
     private void OnTriggerExit(Collider other)
@@ -117,6 +121,7 @@ public class PlayerStateControl : MonoBehaviour
             //접시 줍는곳은 드랍은 일절 X 
             if (counter.CompareTag("Plate_Return"))
             {
+                stateCo = null;
                 yield break;
             }
             else if (counter.CompareTag("Sink"))
@@ -125,12 +130,14 @@ public class PlayerStateControl : MonoBehaviour
                 {
                     if (!sink.CheckInWaterPlate(HandsOnOb))
                     {
+                        stateCo = null;
                         yield break;
                     }
                     else
                     {
                         animator.SetBool("IsTake", false);
                         HandsOnOb = null;
+                        stateCo = null;
                         yield break;
                     }
                 }
@@ -146,11 +153,13 @@ public class PlayerStateControl : MonoBehaviour
                         animator.SetBool("IsTake", false);
                         HandsOnOb = null;
                     }
+                    stateCo = null;
                     yield break;
                 }
                 else
                 {
                     //접시가 아니면 뭐 패스 
+                    stateCo = null;
                     yield break;
                 }
             }
@@ -172,6 +181,7 @@ public class PlayerStateControl : MonoBehaviour
                 else
                 {
                     // 아무것도 안걸렸으면 손에 다른걸 들었거나 상호작용이 안되는거겠지
+                    stateCo = null;
                     yield break;
                 }
             }
@@ -184,10 +194,12 @@ public class PlayerStateControl : MonoBehaviour
                         Debug.Log("재료 넣기");
                         animator.SetBool("IsTake", false);
                         HandsOnOb = null;
+                        stateCo = null;
                         yield break;
                     }
                     else
                     {
+                        stateCo = null;
                         yield break;
                     }
                 }
@@ -279,8 +291,8 @@ public class PlayerStateControl : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
 
         }
-
-        yield return new WaitForSeconds(0.3f);
+        stateCo = null;
+        yield break;
     }
 
 
@@ -297,12 +309,14 @@ public class PlayerStateControl : MonoBehaviour
                         if (counterController.transform.TryGetComponent(out spawn_Ingredient spawn))
                         {
                             PickUpDbject(spawn.PickAnim());
+                            stateCo = null;
                             yield break;
                         }
                     }
                     else if (nearOb != null)
                     {
                         PickUpDbject(nearOb);
+                        stateCo = null;
                         yield break;
                     }
                 }
@@ -318,6 +332,7 @@ public class PlayerStateControl : MonoBehaviour
                         if (counterController.TryGetComponent(out Plate_Return platereturn))
                         {
                             PickUpDbject(platereturn.GetPlate());
+                            stateCo = null;
                             yield break;
                         }
                     }
@@ -325,16 +340,20 @@ public class PlayerStateControl : MonoBehaviour
                     PickUpDbject(counterController.PutOnOb);
                     counterController.PutOnOb = null;
                     counterController.ChangePuton();
+                    stateCo = null;
                     yield break;
                 }
             }
+
         }
         else
         {
             if (nearOb != null)
                 PickUpDbject(nearOb);
+            stateCo = null;
             yield break;
         }
+
     }
 
 
@@ -388,8 +407,8 @@ public class PlayerStateControl : MonoBehaviour
                 }
             }
         }
-
-        yield return null;
+        stateCo = null;
+        yield break;
     }
 
     public IEnumerator PlayerWashPlate()
@@ -405,8 +424,8 @@ public class PlayerStateControl : MonoBehaviour
                 }
             }
         }
-
-        yield return null;
+        stateCo = null;
+        yield break;
     }
 
     private void ThrowIngredients()

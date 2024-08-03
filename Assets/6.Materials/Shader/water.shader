@@ -38,7 +38,7 @@ Shader "Unlit/water"
                 Varyings vert(Attributes IN)
                 {
                     Varyings OUT;
-                    OUT.positionHCS = TransformObjectToHClip(IN.positionOS);
+                    OUT.positionHCS = TransformObjectToHClip(float3(IN.positionOS.xyz)); // 3D ∫§≈Õ∑Œ ∫Ø»Ø
                     OUT.uv = IN.uv;
                     return OUT;
                 }
