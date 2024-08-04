@@ -963,6 +963,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
 --- !u!4 &524766828750761648
 Transform:
   m_ObjectHideFlags: 0
@@ -1092,6 +1093,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
 --- !u!4 &823133800196955118
 Transform:
   m_ObjectHideFlags: 0
@@ -1310,6 +1312,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
 --- !u!114 &1240237760221161452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1325,6 +1328,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
 --- !u!4 &1360110187925545063
 Transform:
   m_ObjectHideFlags: 0
@@ -1647,6 +1651,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
 --- !u!33 &1950906254843104184
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2062,6 +2067,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
 --- !u!114 &2230258018716700833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2077,6 +2083,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
 --- !u!33 &2244288704477539085
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2167,6 +2174,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
 --- !u!4 &2514636259372253393
 Transform:
   m_ObjectHideFlags: 0
@@ -2228,6 +2236,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
 --- !u!23 &2543809242194071072
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7138,6 +7147,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
 --- !u!1 &3582465981910047911
 GameObject:
   m_ObjectHideFlags: 0
@@ -7171,6 +7181,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
 --- !u!33 &3593806263832141129
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7308,6 +7319,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 3
 --- !u!1 &4126225178473423694
 GameObject:
   m_ObjectHideFlags: 0
@@ -7415,6 +7427,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
 --- !u!33 &4309847017266232664
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7549,6 +7562,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 8201802473641166239}
+  counter: 5
 --- !u!23 &4511252884700333122
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7643,6 +7657,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 8
 --- !u!1 &4542539277101581622
 GameObject:
   m_ObjectHideFlags: 0
@@ -8287,6 +8302,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 8201802474801835569}
+  counter: 5
 --- !u!33 &6026241029188681672
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8351,6 +8367,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
 --- !u!4 &6103698367272495436
 Transform:
   m_ObjectHideFlags: 0
@@ -8502,6 +8519,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
 --- !u!1 &6241571966852008772
 GameObject:
   m_ObjectHideFlags: 0
@@ -9125,6 +9143,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 8201802474225456398}
+  counter: 5
 --- !u!4 &7451009673601285134
 Transform:
   m_ObjectHideFlags: 0
@@ -9299,6 +9318,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
 --- !u!23 &7834774473928200566
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12267,6 +12287,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
 --- !u!114 &8564828320155133602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12282,6 +12303,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
 --- !u!1 &8569920592299152801
 GameObject:
   m_ObjectHideFlags: 0
@@ -12337,6 +12359,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 4
 --- !u!65 &8569920592299152806
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12365,6 +12388,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 8201802475352118245}
+  counter: 5
 --- !u!4 &8642609816376482479
 Transform:
   m_ObjectHideFlags: 0
@@ -12680,3 +12704,4 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0

@@ -19,7 +19,7 @@ public class Plate : MonoBehaviour
     [SerializeField] private Crate_Data Data;
 
     private MeshFilter mesh;
-    private Renderer renderer;
+    private Renderer _renderer;
     private MeshCollider meshcol;
 
     public bool isComplete { get; private set; }
@@ -41,7 +41,7 @@ public class Plate : MonoBehaviour
         AnimInfo = new AnimatorStateInfo();
 
         TryGetComponent(out mesh);
-        TryGetComponent(out renderer);
+        TryGetComponent(out _renderer);
         TryGetComponent(out meshcol);
     }
 
@@ -60,6 +60,14 @@ public class Plate : MonoBehaviour
         {
             playerAnim = other.gameObject.GetComponent<Animator>();
         }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
+        {
+            playerAnim = null;
+        }
+
     }
 
     private void Start()
@@ -95,20 +103,20 @@ public class Plate : MonoBehaviour
             if (!isWash)
             {
                 mesh.mesh = Plate_Mesh[0];
-                renderer.material.SetFloat("_DetailAlbedoMapScale", 0f);
+                _renderer.material.SetFloat("_DetailAlbedoMapScale", 0f);
                 meshcol.sharedMesh = Plate_Mesh[0];
             }
             else
             {
                 mesh.mesh = Plate_Mesh[0];
-                renderer.material.SetFloat("_DetailAlbedoMapScale", 1f);
+                _renderer.material.SetFloat("_DetailAlbedoMapScale", 1f);
                 meshcol.sharedMesh = Plate_Mesh[0];
             }
         }
         else
         {
             mesh.mesh = Plate_Mesh[1];
-            renderer.material.SetFloat("_DetailAlbedoMapScale", 1f);
+            _renderer.material.SetFloat("_DetailAlbedoMapScale", 1f);
             meshcol.sharedMesh = Plate_Mesh[1];
         }
         

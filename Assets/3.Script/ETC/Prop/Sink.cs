@@ -7,7 +7,7 @@ public class Sink : CounterController
     [SerializeField] Transform inwater;
     [SerializeField] Transform outwater;
     public Queue<Plate> InPlate = new Queue<Plate>();
-    private Stack<Plate> outPlate = new Stack<Plate>();
+    public Stack<Plate> outPlate = new Stack<Plate>();
 
 
     private void Update()
@@ -19,6 +19,10 @@ public class Sink : CounterController
             if (!plate.isWash)
             {
                 InPlate.Dequeue();
+                if(outPlate.Count.Equals(0))
+                {
+                    ChangePuton();
+                }
                 outPlate.Push(plate);
                 plate.transform.SetParent(outwater.transform);
                 plate.transform.position = outwater.transform.position+Vector3.up * (outPlate.Count - 1) *0.08f;
@@ -28,6 +32,15 @@ public class Sink : CounterController
         }
     }
 
+    public bool CheckPos(Transform player)
+    {
+        float inDis = Vector3.Distance(player.position, inwater.position);
+        float outDis = Vector3.Distance(player.position, outwater.position);
+        if (inDis < outDis)
+            return true;
+        else
+            return false;
+    }
 
 
     //Playerstatecotrol에서 접시 놓을때 판별 
@@ -52,6 +65,27 @@ public class Sink : CounterController
         }
 
         return false;
+    }
+
+    public GameObject GetPlate()
+    {
+        GameObject obj = null;
+        if (outPlate.Count > 0)
+        {
+            obj = outPlate.Pop().gameObject;
+            obj.transform.SetParent(null);
+            
+            if (outPlate.Count.Equals(0))
+            {
+                PutOnOb = null;
+                ChangePuton();
+            }
+            else
+            {
+                PutOnOb = outPlate.Peek().gameObject;
+            }
+        }
+        return obj;
     }
 
 }

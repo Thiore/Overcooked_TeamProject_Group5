@@ -35,10 +35,15 @@ public class Plate_Return : MonoBehaviour
         {
             obj = Plate_Stack.Pop().gameObject;
             obj.transform.SetParent(null);
-            counter.PutOnOb = obj;
+            
             if(Plate_Stack.Count.Equals(0))
             {
+                counter.PutOnOb = null;
                 counter.ChangePuton();
+            }
+            else
+            {
+                counter.PutOnOb = Plate_Stack.Peek().gameObject;
             }
         }
         return obj;

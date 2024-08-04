@@ -77,17 +77,6 @@ public class PlayerStateControl : MonoBehaviour
                         }
                     }
                 }
-
-                if (HandsOnOb == null && nearCounter != null)
-                {
-                    if (nearCounter.CompareTag("Sink"))
-                    {
-                        if (nearCounter.TryGetComponent(out Sink sink))
-                        {
-                            stateCo = StartCoroutine(PlayerWashPlate());
-                        }
-                    }
-                }
             }
 
             if (Input.GetKeyUp(KeyCode.LeftControl))
@@ -123,24 +112,40 @@ public class PlayerStateControl : MonoBehaviour
             switch (counter.Counter)
             {
                 case eCounter.counter:
-                    if (counter.PutOnOb != null)
+                    if (counter.IsPutOn)
                     {
                         if (counter.PutOnOb.CompareTag(("Plate")))
                         {
                             if (IngreOnPlate(counter))
                             {
+                                HandsOnOb = null;
+                                animator.SetBool("IsTake", false);
+                                yield return AnimTime;
+                            }
+                        }
+                        else if(counter.PutOnOb.CompareTag("Cooker"))
+                        {
+                            if(IngreOnCooker(counter))
+                            {
+                                HandsOnOb = null;
+                                animator.SetBool("IsTake", false);
                                 yield return AnimTime;
                             }
                         }
                         break;
                     }
                     else
+                    {
                         HandsOnOb.transform.SetParent(counter.transform);
-                    HandsOnOb.transform.position = counter.transform.position;
-                    HandsOnOb.transform.rotation = counter.transform.rotation;
+                        HandsOnOb.transform.position = counter.transform.position;
+                        HandsOnOb.transform.rotation = counter.transform.rotation;
+                        HandsOnOb = null;
+                        animator.SetBool("IsTake", false);
+                        yield return AnimTime;
+                    }
                     break;
                 case eCounter.GasRange:
-                    if (counter.PutOnOb != null)
+                    if (counter.IsPutOn)
                     {
                         if (HandsOnOb.TryGetComponent(out Ingredient ingre))
                         {
@@ -152,11 +157,19 @@ public class PlayerStateControl : MonoBehaviour
                                     {
                                         if (tool is Pot && ingre.utensils.Equals(eCookutensils.Pot))
                                         {
-                                            break;
+                                            tool.ResetCook(ingre);
+                                            tool.StartCook();
+                                            animator.SetBool("IsTake", false);
+                                            HandsOnOb = null;
+                                            yield return AnimTime;
                                         }
                                         else if (tool is FryingPan && ingre.utensils.Equals(eCookutensils.Pan))
                                         {
-                                            break;
+                                            tool.ResetCook(ingre);
+                                            tool.StartCook();
+                                            animator.SetBool("IsTake", false);
+                                            HandsOnOb = null;
+                                            yield return AnimTime;
                                         }
 
                                     }
@@ -167,20 +180,11 @@ public class PlayerStateControl : MonoBehaviour
                     }
                     else
                     {
-                        if (HandsOnOb.CompareTag("Pot"))
+                        if (HandsOnOb.CompareTag("Cooker"))
                         {
+                            
                             HandsOnOb.transform.SetParent(counter.transform);
-                            HandsOnOb.transform.position = counter.transform.position;
-                            HandsOnOb.transform.rotation = counter.transform.rotation;
-                            animator.SetBool("IsTake", false);
-                            counter.PutOnOb = HandsOnOb;
-                            counter.ChangePuton();
-                            HandsOnOb = null;
-                            yield return AnimTime;
-                        }
-                        else if (HandsOnOb.CompareTag("Pan"))
-                        {
-                            HandsOnOb.transform.SetParent(counter.transform);
+                            HandsOnOb.GetComponent<Cookingtool>().StartCook();
                             HandsOnOb.transform.position = counter.transform.position;
                             HandsOnOb.transform.rotation = counter.transform.rotation;
                             animator.SetBool("IsTake", false);
@@ -192,7 +196,7 @@ public class PlayerStateControl : MonoBehaviour
                     }
                     break;
                 case eCounter.GasStation:
-                    if (counter.PutOnOb != null)
+                    if (counter.IsPutOn)
                     {
                         if (HandsOnOb.TryGetComponent(out Ingredient ingre))
                         {
@@ -204,7 +208,11 @@ public class PlayerStateControl : MonoBehaviour
                                     {
                                         if (tool is Pot && ingre.utensils.Equals(eCookutensils.Fry))
                                         {
-                                            break;
+                                            tool.ResetCook(ingre);
+                                            tool.StartCook();
+                                            animator.SetBool("IsTake", false);
+                                            HandsOnOb = null;
+                                            yield return AnimTime;
                                         }
 
                                     }
@@ -218,6 +226,7 @@ public class PlayerStateControl : MonoBehaviour
                         if (HandsOnOb.CompareTag("Fryer"))
                         {
                             HandsOnOb.transform.SetParent(counter.transform);
+                            HandsOnOb.GetComponent<Cookingtool>().StartCook();
                             HandsOnOb.transform.position = counter.transform.position;
                             HandsOnOb.transform.rotation = counter.transform.rotation;
                             animator.SetBool("IsTake", false);
@@ -242,7 +251,8 @@ public class PlayerStateControl : MonoBehaviour
                                     HandsOnOb.transform.GetChild(i).gameObject.SetActive(false);
                                 }
                             }
-
+                            HandsOnOb = null;
+                            animator.SetBool("IsTake", false);
                             yield return AnimTime;
                         }
 
@@ -267,116 +277,78 @@ public class PlayerStateControl : MonoBehaviour
                         {
 
                             HandsOnOb = null;
-                            yield return AnimTime;
-                        }
-                    }
-                    break;
-                case eCounter.ChoppingBoard:
-                    HandsOnOb.transform.SetParent(counter.ChoppingBoard.transform);
-                    HandsOnOb.transform.position = counter.ChoppingBoard.transform.position;
-                    HandsOnOb.transform.rotation = counter.ChoppingBoard.transform.rotation;
-                    counter.ChoppingBoard.transform.GetChild(0).gameObject.SetActive(false);
-                    yield return AnimTime;
-                    break;
-                case eCounter.Crate:
-                    HandsOnOb.transform.SetParent(counter.transform);
-                    var boxcol = counter.transform.GetComponent<BoxCollider>();
-                    Vector3 boxtop = boxcol.bounds.center + new Vector3(0, boxcol.bounds.extents.y, 0);
-                    HandsOnOb.transform.position = boxtop;
-                    HandsOnOb.transform.rotation = counter.transform.rotation;
-                    break;
-                case eCounter.Sink:
-                    if (counter.TryGetComponent(out Sink sink))
-                    {
-                        if (sink.CheckInWaterPlate(HandsOnOb))
-                        {
-                            HandsOnOb = null;
                             animator.SetBool("IsTake", false);
                             yield return AnimTime;
                         }
                     }
                     break;
+                case eCounter.ChoppingBoard:
+                    if (!counter.IsPutOn)
+                    {
+                        HandsOnOb.transform.SetParent(counter.ChoppingBoard.transform);
+                        HandsOnOb.transform.position = counter.ChoppingBoard.transform.position;
+                        HandsOnOb.transform.rotation = counter.ChoppingBoard.transform.rotation;
+                        counter.ChoppingBoard.transform.GetChild(0).gameObject.SetActive(false);
+                        HandsOnOb = null;
+                        animator.SetBool("IsTake", false);
+                        yield return AnimTime;
+                    }
+                    break;
+                case eCounter.Crate:
+                    if(!counter.IsPutOn)
+                    {
+                        HandsOnOb.transform.SetParent(counter.transform);
+                        var boxcol = counter.transform.GetComponent<BoxCollider>();
+                        Vector3 boxtop = boxcol.bounds.center + new Vector3(0, boxcol.bounds.extents.y, 0);
+                        HandsOnOb.transform.position = boxtop;
+                        HandsOnOb.transform.rotation = counter.transform.rotation;
+                        HandsOnOb = null;
+                        animator.SetBool("IsTake", false);
+                        yield return AnimTime;
+                    }
+                    break;
+                case eCounter.Sink:
+                    if (HandsOnOb.CompareTag("Plate"))
+                    {
+                        if (counter.TryGetComponent(out Sink sink))
+                        {
+                            if (sink.CheckInWaterPlate(HandsOnOb))
+                            {
+                                HandsOnOb = null;
+                                animator.SetBool("IsTake", false);
+                                yield return AnimTime;
+                            }
+                        }
+                    }
+                    break;
                 case eCounter.Plate_Return:
                     //접시 줍는곳은 드랍은 일절 X 
-                    stateCo = null;
-                    yield break;
+                    break;
             }
+            stateCo = null;
+            yield break;
+        }
+        else
+        {
+            animator.SetBool("IsTake", false);
+            HandsOnOb.transform.SetParent(null);
+            var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();
+            rb.mass = 0.05f;
+            rb.angularDrag = 0;
+            if (HandsOnOb.transform.TryGetComponent(out MeshCollider mesh))
+            {
+                mesh.enabled = true;
+            }
+            if (HandsOnOb.transform.TryGetComponent(out SphereCollider col))
+            {
+                col.enabled = true;
+            }
+            HandsOnOb = null;
+            yield return AnimTime;
+            stateCo = null;
+            yield break;
         }
 
-
-
-
-
-
-
-
-
-
-
-        //if (counter.PutOnOb == null)
-        ////카운터가 근처에 있고, 카운터가 쿠킹툴이 아닐때(일반이겠지, 싱크대도 고려해야하나)
-        //{
-        //    //드랍메소드
-            
-        //    else if (counter.ChoppingBoard != null)
-        //    {
-                
-        //    }
-        //    else
-        //    {
-        //        HandsOnOb.transform.SetParent(counter.transform);
-
-        //        if (counter.CompareTag("Crate"))
-        //        {
-        //            var boxcol = counter.transform.GetComponent<BoxCollider>();
-        //            Vector3 boxtop = boxcol.bounds.center + new Vector3(0, boxcol.bounds.extents.y, 0);
-        //            HandsOnOb.transform.position = boxtop;
-        //        }
-        //        else
-        //        {
-        //            HandsOnOb.transform.position = counter.transform.position;
-        //        }
-        //        HandsOnOb.transform.rotation = counter.transform.rotation;
-        //        yield return new WaitForSeconds(0.3f);
-        //    }
-
-        //    if (HandsOnOb.transform.TryGetComponent(out MeshCollider mesh))
-        //    {
-        //        mesh.enabled = true;
-        //    }
-        //    if (HandsOnOb.transform.TryGetComponent(out SphereCollider col))
-        //    {
-        //        col.enabled = true;
-        //    }
-
-        //    animator.SetBool("IsTake", false);
-        //    //counter.PutOnOb = HandsOnOb;
-        //    //counter.ChangePuton();
-        //    HandsOnOb = null;
-        //    yield return new WaitForSeconds(0.2f);
-        //}
-        
-        //else
-        //{
-        //    animator.SetBool("IsTake", false);
-        //    HandsOnOb.transform.SetParent(null);
-        //    var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();
-        //    rb.mass = 0.05f;
-        //    rb.angularDrag = 0;
-        //    if (HandsOnOb.transform.TryGetComponent(out MeshCollider mesh))
-        //    {
-        //        mesh.enabled = true;
-        //    }
-        //    if (HandsOnOb.transform.TryGetComponent(out SphereCollider col))
-        //    {
-        //        col.enabled = true;
-        //    }
-        //    HandsOnOb = null;
-        //    yield return new WaitForSeconds(0.2f);
-
-        //}
-        //stateCo = null;
-        //yield break;
     }
 
 
@@ -426,6 +398,11 @@ public class PlayerStateControl : MonoBehaviour
                             stateCo = null;
                             yield break;
                         }
+                    }
+                    else if(counterController.CompareTag("Sink"))
+                    {
+                        PlayerPlate();
+                        yield return AnimTime;
                     }
 
                     PickUpDbject(counterController.PutOnOb);
@@ -490,6 +467,7 @@ public class PlayerStateControl : MonoBehaviour
                         {
                             animator.SetTrigger("Chop");
                             Cleaver.SetActive(true);
+                            yield return AnimTime;
                         }
                         // 재료 eCooked enum에서 받고 노말일때만 }
                     }
@@ -500,21 +478,31 @@ public class PlayerStateControl : MonoBehaviour
         yield break;
     }
 
-    public IEnumerator PlayerWashPlate()
+    public void PlayerPlate()
     {
         //이미 싱크대인거 검수하고 들어옴 
         if (nearCounter != null)
         {
             if (nearCounter.TryGetComponent(out Sink sink))
             {
-                if (sink.transform.GetChild(0).childCount > 0)
+                if(sink.CheckPos(transform))
                 {
-                    animator.SetTrigger("Wash");
+                    if (sink.InPlate.Count > 0)
+                    {
+                        animator.SetTrigger("Wash");
+                    }
                 }
+                else
+                {
+                    if(sink.outPlate.Count > 0)
+                    {
+                        animator.SetBool("IsTake", true);
+                        PickUpDbject(sink.GetPlate());
+                    }
+                }
+                
             }
         }
-        stateCo = null;
-        yield break;
     }
 
     private void ThrowIngredients()

@@ -10,6 +10,8 @@ public class Cookingtool : MonoBehaviour
 {
     public bool isSoup;
 
+    protected bool isCooking;
+
     protected bool isFinish;
 
     [SerializeField] protected Animator Soup_Anim;
@@ -17,17 +19,16 @@ public class Cookingtool : MonoBehaviour
     protected Transform SaveRange = null;//가스레인지에서 떨어진 후 해당 가스레인지를 끄기위해
     protected Ingredient Ingre = null;//냄비가 들고있는 재료
 
-    public bool StartCook()
+    public void StartCook()
     {
-        if (!isSoup)
+        if(transform.childCount.Equals(2)&&!isFinish&&!isSoup)
         {
             isSoup = true;
             Soup_Anim.SetTrigger("Cook");
             SaveRange = transform.parent.parent;
-            return true;
+            return;
         }
-        else
-            return false;
+           
         
     }
     public void ResetCook(Ingredient ingre)

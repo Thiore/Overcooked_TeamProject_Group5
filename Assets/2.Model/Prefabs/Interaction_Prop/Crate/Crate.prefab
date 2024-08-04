@@ -188,9 +188,6 @@ MonoBehaviour:
   - {fileID: 5312632132793069, guid: e08029e3384d62a47bc3201effe13828, type: 3}
   - {fileID: 5316977999542352431, guid: 1d14a258a17a9694fb0e2f067cec2ad4, type: 3}
   - {fileID: 3197822107311376744, guid: c6bbc1344c9a27340be3b2d893739d9c, type: 3}
-  AddIngredient_Prefabs:
-  - {fileID: 4535495123387268195, guid: 22120aa1e57961f46826de437115131a, type: 3}
-  - {fileID: 1818316954041603341, guid: 63d2d67578812a84e987f91cefe8745b, type: 3}
 --- !u!114 &-8401417361517594841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +203,7 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 6
 --- !u!1 &3547977258986203295
 GameObject:
   m_ObjectHideFlags: 0

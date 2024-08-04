@@ -23,6 +23,7 @@ public class Pot : Cookingtool
     {
         BaseColor = this.renderer[0].material.GetColor("_BaseColor");
         isSoup = false;
+        isCooking = false;
         isFinish = false;
         CookTime = 0;
 
@@ -53,19 +54,13 @@ public class Pot : Cookingtool
             }
             else if (CookTime > FinishCookTime * 0.3f)
             {
-                if (!isSoup)
+                if (!isCooking)
                 {
                     Soup_Anim.SetTrigger("Cook");
-                    isSoup = true;
+                    isCooking = true;
                 }
             }
 
-            else
-            {
-                if (SaveRange.GetChild(0).gameObject.activeSelf) // fire
-                    SaveRange.GetChild(0).gameObject.SetActive(false);
-                SaveRange = null;
-            }
         }
 
 
