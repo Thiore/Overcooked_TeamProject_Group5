@@ -75,6 +75,7 @@ public class Ingredient : MonoBehaviour
     protected readonly float FinishChopTime = 8f;
 
 
+
     public bool isChop { get; protected set; }
     public bool isCook { get; protected set; }
     public bool isPlate { get; protected set; }
@@ -165,6 +166,11 @@ public class Ingredient : MonoBehaviour
         Ingredient_Col.sharedMesh = Change_Mesh[CookEnum];
     }
 
+    public virtual void Off_Mesh()
+    {
+        Ingredient_Mesh.mesh = null;
+    }
+
 
 
 
@@ -221,8 +227,6 @@ public class Ingredient : MonoBehaviour
     }
     public bool Cookable()
     {
-        if (transform.parent.parent.CompareTag("Cooker"))
-        {
             if (cooking.Equals(eCooked.Cooking))
             {
                 isCook = true;
@@ -239,7 +243,7 @@ public class Ingredient : MonoBehaviour
                     return true;
                 }
             }
-            if(CookProcess.Equals(eCookingProcess.Chop_Cook))
+            else if(CookProcess.Equals(eCookingProcess.Chop_Cook))
             {
                 if(cooking.Equals(eCooked.Chopping))
                 {
@@ -251,7 +255,7 @@ public class Ingredient : MonoBehaviour
                 }
             }
             
-        }
+        
         return false;
     }
     public void SetisCook() => isCook = !isCook;

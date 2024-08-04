@@ -6,23 +6,24 @@ public class Sink : CounterController
 {
     [SerializeField] Transform inwater;
     [SerializeField] Transform outwater;
+    public Queue<Plate> InPlate = new Queue<Plate>();
+    private Stack<Plate> outPlate = new Stack<Plate>();
+
 
     private void Update()
     {
-        if (inwater.childCount > 0)
+        if (InPlate.Count > 0)
         {
-            for (int i = 0; i < inwater.childCount; i++)
+            InPlate.Peek().TryGetComponent(out Plate plate);
+            plate.Wash();
+            if (!plate.isWash)
             {
-                if (inwater.GetChild(i).TryGetComponent(out Plate plate))
-                {
-                    plate.Wash();                    
-                    if(plate.isWash == false)
-                    {
-                        plate.transform.SetParent(outwater.transform);
-                        plate.transform.position = outwater.transform.position;
-                        plate.GetComponent<SphereCollider>().enabled = true;
-                    }
-                }
+                InPlate.Dequeue();
+                outPlate.Push(plate);
+                plate.transform.SetParent(outwater.transform);
+                plate.transform.position = outwater.transform.position+Vector3.up * (outPlate.Count - 1) *0.08f;
+                plate.GetComponent<SphereCollider>().enabled = true;
+                
             }
         }
     }
@@ -34,20 +35,20 @@ public class Sink : CounterController
     {
         if(obj.TryGetComponent(out Plate plate))
         {
-            if (plate != null) 
+            if (!plate.isWash)
             {
-                if (!plate.isWash)
-                {
-                    return false;
-                }
-                else
-                {
-                    plate.transform.SetParent(inwater);
-                    plate.transform.position = inwater.position;
-                    plate.Change_Plate(plate.isWash);
-                    return true;
-                }
-            } 
+                return false;
+            }
+            else
+            {
+                InPlate.Enqueue(plate);
+                inwater.position -= plate.transform.forward * 0.06f;
+                plate.Change_Plate(plate.isWash, eWash.inSink);
+                plate.transform.SetParent(inwater);
+                plate.transform.position = inwater.position+plate.transform.forward*(InPlate.Count-1)*0.08f;
+
+                return true;
+            }
         }
 
         return false;

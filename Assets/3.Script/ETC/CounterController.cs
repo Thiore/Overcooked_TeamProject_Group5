@@ -2,6 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum eCounter
+{
+    counter = 0,
+    GasRange,
+    GasStation,
+    TrashCan,
+    Pass,
+    ChoppingBoard,
+    Crate,
+    Sink,
+    Plate_Return
+}
+
 public class CounterController : MonoBehaviour
 {
     //아무거나 올라가있으면 True, 아니면 false
@@ -14,15 +27,10 @@ public class CounterController : MonoBehaviour
     [SerializeField] private GameObject choppingBoard = null;
     public GameObject ChoppingBoard { get => choppingBoard; }
 
-    private void Awake()
-    {
-        isPutOn = false;
-        if (transform.childCount.Equals(1) && !transform.CompareTag("Crate")
-            && !transform.CompareTag("GasRange") && !transform.CompareTag("Sink"))
-        {
-            choppingBoard = transform.GetChild(0).gameObject;
-        }
-    }
+    [SerializeField] private eCounter counter;
+    public eCounter Counter { get; private set; }
+
+    
 
     public void ChangePuton()
     {

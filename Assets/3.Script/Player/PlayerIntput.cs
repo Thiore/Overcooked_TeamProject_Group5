@@ -12,7 +12,9 @@ public class PlayerIntput : MonoBehaviour
 
     private void Update()
     {
-        Move_Value = Input.GetAxis(_moveAxis_name);
+        
         Rotate_Value = Input.GetAxis(_rotateAxis_name);
+        Move_Value = Input.GetAxis(_moveAxis_name);
     }
+ 
 }

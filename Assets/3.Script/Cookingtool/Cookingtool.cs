@@ -4,25 +4,40 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public interface ICookingtool
-{
-    bool CookedCheck(GameObject gameObject);
-    void StartCook();
-}
 
-public class Cookingtool : MonoBehaviour, ICookingtool
-{
-    public GameObject[] ingredients;
-    public List<GameObject> availableList;
 
-    public virtual bool CookedCheck(GameObject obj)
+public class Cookingtool : MonoBehaviour
+{
+    public bool isSoup;
+
+    protected bool isFinish;
+
+    [SerializeField] protected Animator Soup_Anim;
+
+    protected Transform SaveRange = null;//가스레인지에서 떨어진 후 해당 가스레인지를 끄기위해
+    protected Ingredient Ingre = null;//냄비가 들고있는 재료
+
+    public bool StartCook()
     {
-        return false;
+        if (!isSoup)
+        {
+            isSoup = true;
+            Soup_Anim.SetTrigger("Cook");
+            SaveRange = transform.parent.parent;
+            return true;
+        }
+        else
+            return false;
+        
+    }
+    public void ResetCook(Ingredient ingre)
+    {
+        isSoup = false;
+        isFinish = false;
+        transform.GetChild(0).gameObject.SetActive(true);
+        Ingre = ingre;
+        Ingre.Off_Mesh();
     }
 
-    public virtual void StartCook()
-    {
-
-    }
 
 }

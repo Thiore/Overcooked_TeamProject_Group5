@@ -15,7 +15,7 @@ public class Player_Ray : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(rayPoint.position, rayPoint.forward, out hit, 2f))
+        if (Physics.Raycast(rayPoint.position, rayPoint.forward, out hit, 1f))
         {
             if (hit.collider.gameObject != null)
             {

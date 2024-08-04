@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+public enum eWash
+{
+    outSink = 0,
+    inSink
+}
+
 public class Plate : MonoBehaviour
 {
     [SerializeField] private Transform[] Sink_Pos;
     [SerializeField] private Mesh[] Plate_Mesh;
-    [SerializeField] private GameObject[] RecipeList;//�ش�ʿ� ���Ǵ� ��� ��ṭ����
+    [SerializeField] private GameObject[] RecipeList;
+    [SerializeField] private Sink Sink;
 
     [SerializeField] private Crate_Data Data;
 
@@ -42,7 +49,7 @@ public class Plate : MonoBehaviour
     {
         isComplete = false;
         isPlate = false;
-        Change_Plate(isWash);
+        Change_Plate(isWash,eWash.outSink);
         transform.name = "Plate";
 
     }
@@ -81,13 +88,22 @@ public class Plate : MonoBehaviour
         this.isWash = isWash;
     }
 
-    public void Change_Plate(bool isWash)
+    public void Change_Plate(bool isWash, eWash sink)
     {
-        if (!isWash)
+        if(sink.Equals(eWash.outSink))
         {
-            mesh.mesh = Plate_Mesh[0];
-            renderer.material.SetFloat("_DetailAlbedoMapScale", 0f);
-            meshcol.sharedMesh = Plate_Mesh[0];
+            if (!isWash)
+            {
+                mesh.mesh = Plate_Mesh[0];
+                renderer.material.SetFloat("_DetailAlbedoMapScale", 0f);
+                meshcol.sharedMesh = Plate_Mesh[0];
+            }
+            else
+            {
+                mesh.mesh = Plate_Mesh[0];
+                renderer.material.SetFloat("_DetailAlbedoMapScale", 1f);
+                meshcol.sharedMesh = Plate_Mesh[0];
+            }
         }
         else
         {
@@ -95,6 +111,7 @@ public class Plate : MonoBehaviour
             renderer.material.SetFloat("_DetailAlbedoMapScale", 1f);
             meshcol.sharedMesh = Plate_Mesh[1];
         }
+        
     }
 
     public bool OnPlate(Ingredient Ingre)
@@ -229,9 +246,10 @@ public class Plate : MonoBehaviour
                     if (washtime > finishWashtime)
                     {
                         isWash = false;
-                        Change_Plate(isWash);
+                        Change_Plate(isWash,eWash.outSink);
                         washtime = 0;
-                        playerAnim.SetTrigger("Finish");
+                        if(Sink.InPlate.Count.Equals(0))
+                            playerAnim.SetTrigger("Finish");
                     }
                 }
             }

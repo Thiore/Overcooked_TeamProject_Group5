@@ -4,16 +4,7 @@ using UnityEngine;
 
 public class TrashCanController : CounterController
 {
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.transform.CompareTag("Ingredients"))
-        {
-            if (this.IsPutOn == true && this.PutOnOb.CompareTag("Ingredients"))
-            {
-                StartCoroutine(DropTrash_co());
-            }
-        }
-    }
+   
 
 
     public IEnumerator DropTrash_co()
@@ -25,8 +16,9 @@ public class TrashCanController : CounterController
         {
             this.PutOnOb.transform.localScale *= 0.9f;
             elapsedtime += Time.deltaTime;
-            yield return new WaitForSeconds(totaltime);
+            yield return null;
         }
+        this.PutOnOb.GetComponent<Ingredient>().Die();
 
     }
 
