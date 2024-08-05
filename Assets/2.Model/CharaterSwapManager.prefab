@@ -839,6 +839,12 @@ MonoBehaviour:
   AttachTransform: {fileID: 7514796779337988018}
   cleaver: {fileID: 6643154854352810921}
   playerSwapManager: {fileID: 0}
+  playerFaces:
+  - {fileID: 4890305845260627802}
+  - {fileID: 7354591754903536913}
+  - {fileID: 2290168476127472806}
+  - {fileID: 5009317707464778136}
+  - {fileID: 7615962232870076157}
 --- !u!136 &2410909865478031616
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2674,6 +2680,12 @@ MonoBehaviour:
   AttachTransform: {fileID: 6996568643457894438}
   cleaver: {fileID: 6996568644545061913}
   playerSwapManager: {fileID: 0}
+  playerFaces:
+  - {fileID: 6996568644279362304}
+  - {fileID: 6996568644597191265}
+  - {fileID: 6996568643794791610}
+  - {fileID: 6996568644806867448}
+  - {fileID: 6996568644512576235}
 --- !u!136 &6996568643018175293
 CapsuleCollider:
   m_ObjectHideFlags: 0

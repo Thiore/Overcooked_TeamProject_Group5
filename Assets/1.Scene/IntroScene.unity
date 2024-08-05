@@ -2685,6 +2685,8 @@ MonoBehaviour:
   pauseScreen: {fileID: 0}
   isInputEnabled: 0
   worldState: {fileID: 0}
+  isFire: 0
+  Faceindex: 0
 --- !u!4 &712305038
 Transform:
   m_ObjectHideFlags: 0
@@ -5311,6 +5313,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f384690a67a91e7438a1275896340a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveData:
+    clearedStage: 0
+    targetScore: 0
+    bestScore: 0
 --- !u!4 &1607072576
 Transform:
   m_ObjectHideFlags: 0
@@ -9941,6 +9947,7 @@ GameObject:
   - component: {fileID: 8105015488496250526}
   - component: {fileID: 8105015488496250525}
   - component: {fileID: 8105015488496250524}
+  - component: {fileID: 8105015488496250528}
   m_Layer: 0
   m_Name: UI_Chef
   m_TagString: Untagged
@@ -9948,6 +9955,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8105015488496250528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105015488496250527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9e2fdd773374c4192b0b0e94d1abe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8114843690295984617
 GameObject:
   m_ObjectHideFlags: 0

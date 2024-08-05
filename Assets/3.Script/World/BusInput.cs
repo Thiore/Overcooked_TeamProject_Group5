@@ -12,6 +12,13 @@ public class BusInput : MonoBehaviour
 
     private void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("´­¸²");
+            GameManager.Instance.LoadScene("AnotherScene");
+        }
+
         Move_Value = Input.GetAxis(_moveAxis_name);
         Rotate_Value = Input.GetAxis(_rotateAxis_name);
     }
