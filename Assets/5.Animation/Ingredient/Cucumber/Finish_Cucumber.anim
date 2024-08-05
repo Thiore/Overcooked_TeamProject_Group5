@@ -19,7 +19,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 29.95, y: 90, z: 0}
+        value: {x: 27, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -29,13 +29,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: ct_Slice01
+    path: ct_Root/ct_Center/bn_Center/ct_Slice01
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 27, y: 90, z: 0}
+        value: {x: 23.9, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -45,13 +45,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: ct_Slice02
+    path: ct_Root/ct_Center/bn_Center/ct_Slice02
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 24.7, y: 90, z: 0}
+        value: {x: 22.04, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -61,13 +61,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: ct_Slice03
+    path: ct_Root/ct_Center/bn_Center/ct_Slice03
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 22, y: 90, z: 0}
+        value: {x: 20.44, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -77,13 +77,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: ct_Slice04
+    path: ct_Root/ct_Center/bn_Center/ct_Slice04
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 20.4, y: 90, z: 0}
+        value: {x: 18.68, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -93,13 +93,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: ct_Slice05
+    path: ct_Root/ct_Center/bn_Center/ct_Slice05
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 19, y: 90, z: 0}
+        value: {x: 17.66, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -109,13 +109,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: ct_Slice06
+    path: ct_Root/ct_Center/bn_Center/ct_Slice06
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 17.8, y: 90, z: 0}
+        value: {x: 16.68, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -125,13 +125,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: ct_Slice07
+    path: ct_Root/ct_Center/bn_Center/ct_Slice07
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 16.46, y: 90, z: 0}
+        value: {x: 14.72, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -141,7 +141,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: ct_Slice08
+    path: ct_Root/ct_Center/bn_Center/ct_Slice08
   m_PositionCurves: []
   m_ScaleCurves: []
   m_FloatCurves: []
@@ -154,56 +154,56 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 3895323246
+      path: 791886341
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1898232788
+      path: 3057281983
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 102992706
+      path: 3242023721
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 2554797793
+      path: 1599721098
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 4013960823
+      path: 677314076
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1984528333
+      path: 2975313830
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 21909339
+      path: 3327172400
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 2448511690
+      path: 1458537121
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -236,63 +236,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 29.95
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: localEulerAnglesRaw.x
-    path: ct_Slice01
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 90
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: localEulerAnglesRaw.y
-    path: ct_Slice01
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: localEulerAnglesRaw.z
-    path: ct_Slice01
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
         value: 27
         inSlope: 0
         outSlope: 0
@@ -304,7 +247,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: ct_Slice02
+    path: ct_Root/ct_Center/bn_Center/ct_Slice01
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -312,7 +255,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 90
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -323,7 +266,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: ct_Slice02
+    path: ct_Root/ct_Center/bn_Center/ct_Slice01
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -342,7 +285,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: ct_Slice02
+    path: ct_Root/ct_Center/bn_Center/ct_Slice01
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -350,7 +293,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 24.7
+        value: 23.9
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -361,7 +304,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: ct_Slice03
+    path: ct_Root/ct_Center/bn_Center/ct_Slice02
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -369,7 +312,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 90
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -380,7 +323,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: ct_Slice03
+    path: ct_Root/ct_Center/bn_Center/ct_Slice02
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -399,7 +342,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: ct_Slice03
+    path: ct_Root/ct_Center/bn_Center/ct_Slice02
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -407,7 +350,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 22
+        value: 22.04
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -418,7 +361,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: ct_Slice04
+    path: ct_Root/ct_Center/bn_Center/ct_Slice03
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -426,7 +369,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 90
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -437,7 +380,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: ct_Slice04
+    path: ct_Root/ct_Center/bn_Center/ct_Slice03
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -456,7 +399,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: ct_Slice04
+    path: ct_Root/ct_Center/bn_Center/ct_Slice03
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -464,7 +407,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 20.4
+        value: 20.44
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -475,7 +418,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: ct_Slice05
+    path: ct_Root/ct_Center/bn_Center/ct_Slice04
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -483,7 +426,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 90
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -494,7 +437,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: ct_Slice05
+    path: ct_Root/ct_Center/bn_Center/ct_Slice04
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -513,7 +456,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: ct_Slice05
+    path: ct_Root/ct_Center/bn_Center/ct_Slice04
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -521,7 +464,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 19
+        value: 18.68
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -532,7 +475,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: ct_Slice06
+    path: ct_Root/ct_Center/bn_Center/ct_Slice05
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -540,7 +483,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 90
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -551,7 +494,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: ct_Slice06
+    path: ct_Root/ct_Center/bn_Center/ct_Slice05
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -570,7 +513,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: ct_Slice06
+    path: ct_Root/ct_Center/bn_Center/ct_Slice05
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -578,7 +521,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 17.8
+        value: 17.66
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -589,7 +532,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: ct_Slice07
+    path: ct_Root/ct_Center/bn_Center/ct_Slice06
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -597,7 +540,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 90
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -608,7 +551,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: ct_Slice07
+    path: ct_Root/ct_Center/bn_Center/ct_Slice06
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -627,7 +570,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: ct_Slice07
+    path: ct_Root/ct_Center/bn_Center/ct_Slice06
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -635,7 +578,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 16.46
+        value: 16.68
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -646,7 +589,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: ct_Slice08
+    path: ct_Root/ct_Center/bn_Center/ct_Slice07
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -654,7 +597,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 90
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -665,7 +608,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: ct_Slice08
+    path: ct_Root/ct_Center/bn_Center/ct_Slice07
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -684,7 +627,64 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: ct_Slice08
+    path: ct_Root/ct_Center/bn_Center/ct_Slice07
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 14.72
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: ct_Root/ct_Center/bn_Center/ct_Slice08
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: ct_Root/ct_Center/bn_Center/ct_Slice08
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: ct_Root/ct_Center/bn_Center/ct_Slice08
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves:
@@ -695,7 +695,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: ct_Slice06
+    path: ct_Root/ct_Center/bn_Center/ct_Slice07
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -705,7 +705,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: ct_Slice06
+    path: ct_Root/ct_Center/bn_Center/ct_Slice07
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -715,7 +715,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: ct_Slice06
+    path: ct_Root/ct_Center/bn_Center/ct_Slice07
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -725,7 +725,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: ct_Slice07
+    path: ct_Root/ct_Center/bn_Center/ct_Slice01
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -735,7 +735,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: ct_Slice07
+    path: ct_Root/ct_Center/bn_Center/ct_Slice01
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -745,7 +745,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: ct_Slice07
+    path: ct_Root/ct_Center/bn_Center/ct_Slice01
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -755,7 +755,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: ct_Slice01
+    path: ct_Root/ct_Center/bn_Center/ct_Slice02
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -765,7 +765,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: ct_Slice01
+    path: ct_Root/ct_Center/bn_Center/ct_Slice02
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -775,7 +775,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: ct_Slice01
+    path: ct_Root/ct_Center/bn_Center/ct_Slice02
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -785,7 +785,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: ct_Slice02
+    path: ct_Root/ct_Center/bn_Center/ct_Slice03
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -795,7 +795,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: ct_Slice02
+    path: ct_Root/ct_Center/bn_Center/ct_Slice03
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -805,7 +805,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: ct_Slice02
+    path: ct_Root/ct_Center/bn_Center/ct_Slice03
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -815,7 +815,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: ct_Slice03
+    path: ct_Root/ct_Center/bn_Center/ct_Slice04
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -825,7 +825,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: ct_Slice03
+    path: ct_Root/ct_Center/bn_Center/ct_Slice04
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -835,7 +835,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: ct_Slice03
+    path: ct_Root/ct_Center/bn_Center/ct_Slice04
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -845,7 +845,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: ct_Slice04
+    path: ct_Root/ct_Center/bn_Center/ct_Slice05
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -855,7 +855,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: ct_Slice04
+    path: ct_Root/ct_Center/bn_Center/ct_Slice05
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -865,7 +865,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: ct_Slice04
+    path: ct_Root/ct_Center/bn_Center/ct_Slice05
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -875,7 +875,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: ct_Slice05
+    path: ct_Root/ct_Center/bn_Center/ct_Slice06
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -885,7 +885,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: ct_Slice05
+    path: ct_Root/ct_Center/bn_Center/ct_Slice06
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -895,7 +895,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: ct_Slice05
+    path: ct_Root/ct_Center/bn_Center/ct_Slice06
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -905,7 +905,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: ct_Slice08
+    path: ct_Root/ct_Center/bn_Center/ct_Slice08
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -915,7 +915,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: ct_Slice08
+    path: ct_Root/ct_Center/bn_Center/ct_Slice08
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -925,7 +925,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: ct_Slice08
+    path: ct_Root/ct_Center/bn_Center/ct_Slice08
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

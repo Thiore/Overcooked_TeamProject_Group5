@@ -19,6 +19,8 @@ public class TrashCanController : CounterController
             yield return null;
         }
         this.PutOnOb.GetComponent<Ingredient>().Die();
+        this.PutOnOb = null;
+        this.IsPutOn = false;
 
     }
 

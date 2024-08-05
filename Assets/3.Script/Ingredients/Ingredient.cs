@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum eIngredients
 {
@@ -80,8 +81,8 @@ public class Ingredient : MonoBehaviour
     public bool isCook { get; protected set; }
     public bool isPlate { get; protected set; }
 
-    protected Animator[] playerAnim = new Animator[2];
     protected AnimatorStateInfo[] AnimInfo = new AnimatorStateInfo[2];
+    protected Animator Player;
 
 
 
@@ -93,10 +94,6 @@ public class Ingredient : MonoBehaviour
         TryGetComponent(out Ingredient_Mesh);
         TryGetComponent(out Ingredient_Col);
 
-        for (int i = 0; i < playerAnim.Length; i++)
-        {
-            playerAnim[i] = null;
-        }
         cooking = eCooked.Normal;
         
     }
@@ -181,26 +178,6 @@ public class Ingredient : MonoBehaviour
         utensils = Info.utensils;
     }
 
-    
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
-        {
-            for (int i = 0; i < playerAnim.Length; i++)
-            {
-                if (playerAnim[i] == null)
-                {
-                    playerAnim[i] = other.gameObject.GetComponent<Animator>();
-                    if (playerAnim[0] == playerAnim[1])
-                        playerAnim[i] = null;
-                    return;
-                }
-            }
-
-        }
-    }
-
     public bool Chopable()
     {
         Debug.Log("1");
@@ -232,28 +209,28 @@ public class Ingredient : MonoBehaviour
                 isCook = true;
                 return true;
             }
-            if (CookProcess.Equals(eCookingProcess.Cook))
+        if (CookProcess.Equals(eCookingProcess.Cook))
+        {
+            if (cooking.Equals(eCooked.Normal))
             {
-                if(cooking.Equals(eCooked.Normal))
-                {
-                    if (Ingredient_Mesh != null)
-                        Ingredient_Mesh = null;
-                    cooking = eCooked.Cooking;
-                    isCook = true;
-                    return true;
-                }
+                if (Ingredient_Mesh.mesh != null)
+                    Ingredient_Mesh.mesh = null;
+                cooking = eCooked.Cooking;
+                isCook = true;
+                return true;
             }
-            else if(CookProcess.Equals(eCookingProcess.Chop_Cook))
+        }
+        else if (CookProcess.Equals(eCookingProcess.Chop_Cook))
+        {
+            if (cooking.Equals(eCooked.Chopping))
             {
-                if(cooking.Equals(eCooked.Chopping))
-                {
-                    if (Ingredient_Mesh != null)
-                        Ingredient_Mesh = null;
-                    cooking = eCooked.Cooking;
-                    isCook = true;
-                    return true;
-                }
+                if (Ingredient_Mesh.mesh != null)
+                    Ingredient_Mesh.mesh = null;
+                cooking = eCooked.Cooking;
+                isCook = true;
+                return true;
             }
+        }
             
         
         return false;
@@ -280,49 +257,66 @@ public class Ingredient : MonoBehaviour
     {
         if (cooking.Equals(eCooked.Chopping))
         {
-            for (int i = 0; i < playerAnim.Length; i++)
+            CounterController counter;
+            transform.parent.parent.TryGetComponent(out counter);
+
+            for (int i = 0; i < counter.playerAnim.Length; i++)
             {
-                if (playerAnim[i] != null)
+                if (counter.playerAnim[i] != null)
                 {
-                    AnimInfo[i] = playerAnim[i].GetCurrentAnimatorStateInfo(0);
-                    if (AnimInfo[i].IsName("New_Chef@Chop"))
+                    if (counter.playerAnim[i].GetCurrentAnimatorStateInfo(0).IsName("New_Chef@Chop"))
                     {
-                        if (playerAnim[i] != null)
-                            ChopTime += Time.deltaTime;
-
-                        if(Chop_Anim)
-                            ChildChopAnim(ChopTime);
-
-                        Debug.Log($"잘리는중{ChopTime}");
-                        if (ChopTime > FinishChopTime)
-                        {
-                            isChop = false;
-                            playerAnim[i].SetTrigger("Finish");
-                            playerAnim[i].transform.GetComponent<PlayerStateControl>().Cleaver.SetActive(false);
-                            ChopTime = 0;
-                            if (!Chop_Anim)
-                            {
-                                if (CookProcess.Equals(eCookingProcess.Chopping))
-                                    Change_Ingredient(eCooked.ReadyCook);
-                                else
-                                    Change_Ingredient(eCooked.Cooking);
-                            }
-                            else
-                            {
-                                if (CookProcess.Equals(eCookingProcess.Chopping))
-                                    cooking = eCooked.ReadyCook;
-                                else
-                                    cooking = eCooked.Cooking;
-                            }
-                               
-
-                            
-                            
-                        }
+                        Player = counter.playerAnim[i];
+                        break;
                     }
                 }
-
             }
+
+
+            if (Player != null)
+            {
+                Slider ChopSlide = counter.ChoppingBoard.transform.GetChild(1).GetComponent<Slider>();
+                if(!ChopSlide.gameObject.activeSelf)
+                {
+                    ChopSlide.maxValue = FinishChopTime;
+                    ChopSlide.value = ChopTime;
+                    ChopSlide.gameObject.SetActive(true);
+                    
+                }
+                ChopTime += Time.deltaTime;
+                ChopSlide.value = ChopTime;
+
+                if (Chop_Anim)
+                    ChildChopAnim(ChopTime);
+
+                Debug.Log($"잘리는중{ChopTime}");
+                if (ChopTime > FinishChopTime)
+                {
+                    isChop = false;
+                    Player.SetTrigger("Finish");
+                    Player.transform.GetComponent<PlayerStateControl>().Cleaver.SetActive(false);
+                    Player = null;
+                    counter.playerAnim[0] = null;
+                    counter.playerAnim[1] = null;
+                    ChopSlide.gameObject.SetActive(false);
+                    ChopTime = 0;
+                    if (!Chop_Anim)
+                    {
+                        if (CookProcess.Equals(eCookingProcess.Chopping))
+                            Change_Ingredient(eCooked.ReadyCook);
+                        else
+                            Change_Ingredient(eCooked.Cooking);
+                    }
+                    else
+                    {
+                        if (CookProcess.Equals(eCookingProcess.Chopping))
+                            cooking = eCooked.ReadyCook;
+                        else
+                            cooking = eCooked.Cooking;
+                    }
+                }
+            }
+            Player = null;
         }
     }
 
@@ -347,25 +341,6 @@ public class Ingredient : MonoBehaviour
     }
    
 
-
-    private void OnTriggerExit(Collider other)
-    {
-        for (int i = 0; i < playerAnim.Length; i++)
-        {
-            if (playerAnim[i] != null)
-            {
-                if (playerAnim[i].gameObject.Equals(other.gameObject))
-                {
-                    playerAnim[i].transform.GetComponent<PlayerStateControl>().Cleaver.SetActive(false);
-                    playerAnim[i] = null;
-                    return;
-                }
-            }
-
-        }
-
-    }
-
     public void Die()
     {
         ChopTime = 0f;
@@ -375,7 +350,7 @@ public class Ingredient : MonoBehaviour
         
         transform.position = crate.transform.position;
         transform.localScale = new Vector3(1f, 1f, 1f);
-        Ingredient_Col.enabled = true;
+        //Ingredient_Col.enabled = true;
         crate.DestroyIngredient(this);
     }
 }

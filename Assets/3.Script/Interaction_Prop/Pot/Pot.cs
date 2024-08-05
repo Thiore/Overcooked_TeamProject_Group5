@@ -62,8 +62,6 @@ public class Pot : Cookingtool
             }
 
         }
-
-
         else
         {
             if (BaseColor != this.renderer[0].material.GetColor("_BaseColor"))
@@ -72,8 +70,7 @@ public class Pot : Cookingtool
                 {
                     this.renderer[i].material.SetColor("_BaseColor", BaseColor);
                 }
-                transform.GetChild(0).gameObject.SetActive(false);
-                Ingre.Change_Ingredient(Ingre.cooking);
+                //transform.GetChild(0).gameObject.SetActive(false);
                 Ingre = null;
                 CookTime = 0f;
                 isSoup = false;

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7636307637849737286}
   - component: {fileID: 7636307637849737287}
   m_Layer: 0
-  m_Name: Seawead
+  m_Name: Seaweed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 7636307637849737288}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.056387685, y: 0.42808795, z: -0.46208036}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0

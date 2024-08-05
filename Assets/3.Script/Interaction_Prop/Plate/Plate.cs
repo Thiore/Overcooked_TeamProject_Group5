@@ -11,7 +11,7 @@ public enum eWash
 
 public class Plate : MonoBehaviour
 {
-    [SerializeField] private Transform[] Sink_Pos;
+    private Transform[] Sink_Pos = new Transform[2];
     [SerializeField] private Mesh[] Plate_Mesh;
     [SerializeField] private GameObject[] RecipeList;
     [SerializeField] private Sink Sink;
@@ -38,6 +38,12 @@ public class Plate : MonoBehaviour
 
     private void Awake()
     {
+        if(Sink!=null)
+        {
+            Sink_Pos[0] = Sink.transform.GetChild(0).GetChild(0);
+            Sink_Pos[1] = Sink.transform.GetChild(0);
+        }
+       
         AnimInfo = new AnimatorStateInfo();
 
         TryGetComponent(out mesh);
@@ -75,17 +81,13 @@ public class Plate : MonoBehaviour
         recipes = DataManager.Instance.StageRecipeData(GameManager.Instance.stage_index);
 
 
-        for (int j = 0; j < Data.Info.Length; j++)
+
+        for (int i = 0; i < RecipeList.Length; i++)
         {
-            for (int i = 0; i < RecipeList.Length; i++)
-            {
-                if (RecipeList[i].name.StartsWith(Data.Info[j].Ingredients.ToString()))
-                {
-                    GameObject obj = Instantiate(RecipeList[i], transform.position, transform.rotation, transform);
-                    obj.name = RecipeList[i].name;
-                    obj.SetActive(false);
-                }
-            }
+
+            GameObject obj = Instantiate(RecipeList[i], transform.position, transform.rotation, transform);
+            obj.name = RecipeList[i].name;
+            obj.SetActive(false);
         }
 
     }
@@ -147,7 +149,7 @@ public class Plate : MonoBehaviour
                     {
                         for(int j = 0; j < transform.childCount;j++)
                         {
-                            if(transform.GetChild(j).name.Equals(Ingre.name))
+                            if(transform.GetChild(j).name.Equals($"{transform.name}_Food"))
                             {
                                 transform.GetChild(j).gameObject.SetActive(true);
                                 Ingre.Die();
@@ -158,77 +160,98 @@ public class Plate : MonoBehaviour
                         isPlate = true;
                         return true;
                     }
+                    else
+                    {
+                        for (int j = 0; j < transform.childCount; j++)
+                        {
+                            if (transform.GetChild(j).name.Equals(Ingre.name))
+                            {
+                                transform.GetChild(j).gameObject.SetActive(true);
+                                Ingre.Die();
+                                break;
+                            }
+                        }
+                        
+                        isPlate = true;
+                        return true;
+                    }
                 }
             }
             else
             {
                 string checkName = $"{transform.name}_{Ingre.name}";
                 ThisName = checkName.Split('_');
-                int isDisable = transform.childCount;
-                int isEnable = transform.childCount;
+                string[] RecipeArray = default;
+                string recipe = default;
+                for (int j = 0; j < recipes.Count; j++)
+                {
+                    recipe = recipes[j].recipe;
+                    RecipeArray = recipes[j].ingredient.ToArray();
+                    bool isSelect = true;
+                    for (int k = 0; k < ThisName.Length; k++)
+                    {
+                        if (!RecipeArray.Contains(ThisName[k]))
+                        {
+                            isSelect = false;
+                            break;
+                        }
+                    }
+                    if(isSelect)
+                    {
+                        break;
+                    }
+                    if(j.Equals(recipes.Count-1))
+                    {
+                        return false;
+                    }
+                    
+                }
+                if (new HashSet<string>(RecipeArray).SetEquals(ThisName))
+                {
+
+                    isComplete = true;
+                    transform.name = recipe;
+                    for (int j = 0; j < transform.childCount; j++)
+                    {
+                        if (transform.GetChild(j).name.Equals(recipe))
+                        {
+                            transform.GetChild(j).gameObject.SetActive(true);
+                        }
+                        else
+                        {
+                            transform.GetChild(j).gameObject.SetActive(false);
+                        }
+                    }
+                    return true;
+                }
+
                 for (int i = 0; i < transform.childCount; i++)
                 {
-                    bool isPass = false;
-                    if (transform.GetChild(i).gameObject.activeSelf)
+                    if (transform.GetChild(i).name.Equals(recipe))
+                        continue;
+                    string[] IngreArray = transform.GetChild(i).name.Split('_');
+
+                    if (IngreArray.Length.Equals(ThisName.Length))
                     {
-                        isDisable = i;
+                        if (new HashSet<string>(IngreArray).SetEquals(ThisName))
+                        {
+                            transform.GetChild(i).gameObject.SetActive(true);
+                            transform.name = transform.GetChild(i).name;
+                        }
+                        else
+                        {
+                            transform.GetChild(i).gameObject.SetActive(false);
+                        }
                     }
                     else
                     {
-                        if (!isEnable.Equals(transform.childCount))
-                        {
-                            if (transform.GetChild(i).name.Split('_').Length.Equals(ThisName.Length))
-                            {
-
-                                for (int j = 0; j < ThisName.Length; j++)
-                                {
-
-                                    if (!transform.GetChild(i).name.Contains(ThisName[j]))
-                                    {
-                                        isPass = true;
-                                        break;
-                                    }
-                                }
-                                if (!isPass)
-                                {
-                                    isEnable = i;
-
-                                }
-                            }
-                        }
-
-
+                        transform.GetChild(i).gameObject.SetActive(false);
                     }
-
-                    if (!isEnable.Equals(transform.childCount) && !isDisable.Equals(transform.childCount))
-                    {
-                        transform.GetChild(i).gameObject.SetActive(true);
-                        transform.name = transform.GetChild(i).name;
-
-                        for (int j = 0; j < recipes.Count; j++)
-                        {
-                            if (recipes[j].ingredient.Count.Equals(ThisName.Length))
-                            {
-                                for (int k = 0; k < ThisName.Length; k++)
-                                {
-                                    if (!recipes[j].ingredient.Contains(ThisName[k]))
-                                    {
-                                        return true;
-                                    }
-                                }
-                                Ingre.Die();
-                                isComplete = true;
-                                transform.name = recipes[j].recipe;
-                                return true;
-                            }
-                        }
-                    }
-
                 }
-                if (isEnable.Equals(transform.childCount))
-                {
-                    return false;
-                }
+                
+
+                return true;
+                    
 
             }
         }

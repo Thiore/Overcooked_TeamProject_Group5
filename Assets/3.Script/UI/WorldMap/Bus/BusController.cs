@@ -22,6 +22,7 @@ public class BusController : MonoBehaviour
             stage_index = col.gameObject.GetComponent<Flag>().stage_index;
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                GameManager.Instance.AfterResult = "BSJScene";
                 Debug.Log("¿©±â¼­ ResetState");
                 GameManager.Instance.stage_index = stage_index;
                 GameManager.Instance.LoadGame(stage_index);

@@ -37,7 +37,9 @@ public class Cookingtool : MonoBehaviour
         isFinish = false;
         transform.GetChild(0).gameObject.SetActive(true);
         Ingre = ingre;
-        Ingre.Off_Mesh();
+        Ingre.transform.SetParent(transform);
+        Ingre.transform.position = transform.position;
+        Ingre.transform.rotation = transform.rotation;
     }
 
 

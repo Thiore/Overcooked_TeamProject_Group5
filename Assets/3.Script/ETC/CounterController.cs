@@ -28,9 +28,11 @@ public class CounterController : MonoBehaviour
     public GameObject ChoppingBoard { get => choppingBoard; }
 
     [SerializeField] private eCounter counter;
-    public eCounter Counter { get; private set; }
+    public eCounter Counter { get => counter; private set => counter = value; }
 
-    
+    public Animator[] playerAnim = { null, null};
+
+
 
     public void ChangePuton()
     {

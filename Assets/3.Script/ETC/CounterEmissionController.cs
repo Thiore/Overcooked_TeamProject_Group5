@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -82,6 +83,8 @@ public class CounterEmissionController : MonoBehaviour
         {
             renderer.material.DisableKeyword("_EMISSION");
         }
+        gameObject.TryGetComponent(out CounterController counter);
+        Array.Clear(counter.playerAnim, 0, counter.playerAnim.Length);
     }
 
     public GameObject GetNearCounter()

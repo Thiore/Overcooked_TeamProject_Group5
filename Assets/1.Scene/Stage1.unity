@@ -7304,22 +7304,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4126225178473423680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4126225178473423694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82c2b28fe315f2a459750ea20bcb200b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPutOn: 0
-  putonOb: {fileID: 0}
-  choppingBoard: {fileID: 0}
-  counter: 3
 --- !u!1 &4126225178473423694
 GameObject:
   m_ObjectHideFlags: 0
@@ -7331,8 +7315,8 @@ GameObject:
   - component: {fileID: 5871987684884504162}
   - component: {fileID: 2828585766625563131}
   - component: {fileID: 8687937734804625895}
+  - component: {fileID: 4126225178473423696}
   - component: {fileID: 4126225178473423695}
-  - component: {fileID: 4126225178473423680}
   m_Layer: 31
   m_Name: m_sk_bin_01_0
   m_TagString: TrashCan
@@ -7353,6 +7337,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2125158, y: 0.5490261, z: 1.207332}
   m_Center: {x: 0.0017554467, y: 0.27131805, z: -0.0015172962}
+--- !u!114 &4126225178473423696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4126225178473423694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 340c9a425492e744982400e59a90ee04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPutOn: 0
+  putonOb: {fileID: 0}
+  choppingBoard: {fileID: 0}
+  counter: 3
 --- !u!23 &4130376979368466872
 MeshRenderer:
   m_ObjectHideFlags: 0

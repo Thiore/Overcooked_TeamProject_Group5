@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public WorldState worldState;
     public int isFire = 0;
     public int Faceindex = 0;
+    public string AfterResult;
 
     
     private void Awake()

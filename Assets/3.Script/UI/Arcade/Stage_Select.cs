@@ -46,6 +46,7 @@ public class Stage_Select : MonoBehaviour
                     }
                     else if (Input.GetKeyDown(KeyCode.Space))
                     {
+                        GameManager.Instance.AfterResult = "Arcade_Menu";
                         GameManager.Instance.LoadGame(selected_stage);
                     }
                     break;

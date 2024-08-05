@@ -26,7 +26,7 @@ public class spawn_Ingredient : MonoBehaviour
     private void Start()
     {
         Ingredient_enum = info.Ingredients;
-        obj_ui = GameObject.Find("Object_UI_Canvas").GetComponent<Object_UI_Controll>();
+        //obj_ui = GameObject.Find("Object_UI_Canvas").GetComponent<Object_UI_Controll>();
         //myIngredient = ingredient_prefab[0];
         for (int i = 0; i < ingredient_prefab.Length; i++)
         {
@@ -65,7 +65,7 @@ public class spawn_Ingredient : MonoBehaviour
 
             newobj.crate = this;
 
-            obj_ui.Ingredient_UI_Init(newobj.gameObject);
+            //obj_ui.Ingredient_UI_Init(newobj.gameObject);
             return newobj.gameObject;
         }
 

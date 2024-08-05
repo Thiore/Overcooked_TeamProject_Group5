@@ -10,6 +10,7 @@ public class Score_UI_Manager : MonoBehaviour
     private Text TipText;      // 팁을 표시할 UI 텍스트
     public Animator ScoreAni; // 점수가 변경될 때 애니메이션을 재생할 애니메이터
     private GameObject coinbanner;
+
     private void Start()
     {
         coinbanner = GameObject.Find("Coin_Banner").GetComponent<Image>().gameObject;

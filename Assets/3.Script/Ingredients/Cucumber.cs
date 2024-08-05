@@ -16,10 +16,7 @@ public class Cucumber : Ingredient
         TryGetComponent(out Anim);
         Chop_Anim = true;
 
-        for (int i = 0; i < playerAnim.Length; i++)
-        {
-            playerAnim[i] = null;
-        }
+        
         LastTime = 0;
     }
 
