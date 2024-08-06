@@ -10,6 +10,7 @@ public class RecipeObject : MonoBehaviour
     [SerializeField] private Image Tool_img_2;
     private string recipe_name;
     public string Recipe_name { get { return recipe_name; } }
+    public Recipe recipe;
 
     // 자식 Image 오브젝트의 이름을 기준으로 이미지를 설정하는 메소드
     public void SetImagesByName(Dictionary<string, string> imageNameMap)
@@ -32,13 +33,13 @@ public class RecipeObject : MonoBehaviour
 
     public void SetToolImage(int index,string toolname)
     {
-        if(index == 1)
+        if(index == 0)
         {
-            Tool_img_1.sprite = Resources.Load<Sprite>($"{toolname}");
+            Tool_img_1.sprite = Resources.Load<Sprite>(toolname);
         }
         else
         {
-            Tool_img_2.sprite = Resources.Load<Sprite>($"{toolname}");
+            Tool_img_2.sprite = Resources.Load<Sprite>(toolname);
         }
     }
 }
