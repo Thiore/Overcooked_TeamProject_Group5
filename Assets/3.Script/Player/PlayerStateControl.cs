@@ -553,6 +553,24 @@ public class PlayerStateControl : MonoBehaviour
                         yield return AnimTime;
                     }
                     break;
+                //case eCounter.Joystick:
+                //    Joystick joy = counterController as Joystick;
+                //    if(!joy.iscontrol)
+                //    {
+                //        joy.iscontrol = true;
+                //        animator.SetBool("IsWalking", false);
+                //        GetComponent<Player_Movent>().enabled = false;
+                //    }
+                //    else
+                //    {
+                //        joy.iscontrol = false;
+                //        GetComponent<Player_Movent>().enabled = true;
+                //    }
+                  
+                    
+                    
+
+                    //break;
             }
             stateCo = null;
             yield break;
@@ -616,22 +634,15 @@ public class PlayerStateControl : MonoBehaviour
                         ChopSaveCounter = nearCounter;
                         yield return new WaitForSeconds(0.1f);
 
-                        for (int i = 0; i < counter.playerAnim.Length; i++)
+                        if((counter.playerAnim[0] == null || counter.playerAnim[0]!= animator)&&counter.playerAnim[1] !=animator)
                         {
-                            if (counter.playerAnim[i] != null && counter.playerAnim[i] == animator)
-                            {
-                                stateCo = null;
-                                yield break;
+                            counter.playerAnim[0] = animator;
 
-                            }
-                            else
-                            {
-                                counter.playerAnim[i] = animator;
-                                stateCo = null;
-                                yield break;
-                            }
                         }
-
+                        else if(counter.playerAnim[0]!=animator&&(counter.playerAnim[1] == null||counter.playerAnim[1] != animator))
+                        {
+                            counter.playerAnim[1] = animator;
+                        }
                     }
                 }
                 // 재료 eCooked enum에서 받고 노말일때만 }

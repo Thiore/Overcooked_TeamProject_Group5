@@ -12,8 +12,7 @@ public enum eCounter
     ChoppingBoard,
     Crate,
     Sink,
-    Plate_Return,
-    Joystick
+    Plate_Return
 }
 
 public class CounterController : MonoBehaviour

@@ -30,7 +30,7 @@ public class Joystick : MonoBehaviour
             else
                 transform.Translate(new Vector3(X * 4f * Time.deltaTime, 0, Y * 3f * Time.deltaTime));
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyUp(KeyCode.Space))
             {
                 controlPlayer.CurrentPlayer.GetComponent<Player_Movent>().enabled = true;
                 controlPlayer.CurrentPlayer.GetComponent<PlayerStateControl>().enabled = true;
@@ -49,21 +49,25 @@ public class Joystick : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if(!iscontrol)
         {
-            controlPlayer = collision.gameObject.transform.GetComponentInParent<Player_SwapManager>();
-            if (controlPlayer.CurrentPlayer != null)
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                if (Input.GetKey(KeyCode.Space))
+                controlPlayer = collision.gameObject.transform.GetComponentInParent<Player_SwapManager>();
+                if (controlPlayer.CurrentPlayer != null)
                 {
-                    controlPlayer.CurrentPlayer.GetComponent<Player_Movent>().enabled = false;
-                    controlPlayer.CurrentPlayer.GetComponent<PlayerStateControl>().enabled = false;
-                    controlPlayer.AniWalkingSetbool(controlPlayer.CurrentPlayer);
-                    iscontrol = true;
+                    if (Input.GetKeyUp(KeyCode.Space))
+                    {
+                        controlPlayer.CurrentPlayer.GetComponent<Player_Movent>().enabled = false;
+                        controlPlayer.CurrentPlayer.GetComponent<PlayerStateControl>().enabled = false;
+                        controlPlayer.AniWalkingSetbool(controlPlayer.CurrentPlayer);
+                        iscontrol = true;
+                    }
                 }
-            }
 
+            }
         }
+        
 
 
     }
