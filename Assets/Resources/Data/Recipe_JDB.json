@@ -1,26 +1,65 @@
 [
   {
-    "id" :  101,
+    "id": 101,
     "stage": 1,
     "recipe": "Fish_Food",
-    "ingredient": [ "Fish" ]
+    "ingredient": [ "Fish" ],
+    "tool_count" :  0
   },
   {
     "id": 102,
     "stage": 1,
     "recipe": "Prawn_Food",
-    "ingredient": [ "Prawn" ]
+    "ingredient": [ "Prawn" ],
+    "tool_count": 0
   },
   {
     "id": 103,
     "stage": 2,
     "recipe": "Sushi_Food",
-    "ingredient": [ "RicePot", "Seaweed", "Cucumber" ]
+    "ingredient": [ "RicePot", "Seaweed", "Cucumber" ],
+    "tool_count": 1
   },
   {
     "id": 104,
     "stage": 2,
     "recipe": "Prawn_Food",
-    "ingredient": [ "Prawn" ]
+    "ingredient": [ "Prawn" ],
+    "tool_count": 0
+  },
+  {
+    "id": 105,
+    "stage": 3,
+    "recipe": "CheeseBuger_Food",
+    "ingredient": [ "MeatPan", "Bun", "Cheese" ],
+    "tool_count": 1
+  },
+  {
+    "id": 106,
+    "stage": 3,
+    "recipe": "LettuceBuger_Food",
+    "ingredient": [ "MeatPan", "Bun", "Lettuce" ],
+    "tool_count": 1
+  },
+  {
+    "id": 107,
+    "stage": 3,
+    "recipe": "FriedChicken_Food",
+    "ingredient": [ "ChickenFry" ],
+    "tool_count": 1
+  },
+  {
+    "id": 108,
+    "stage": 3,
+    "recipe": "FrenchFry_Food",
+    "ingredient": [ "PotatoFry" ],
+    "tool_count": 1
+  },
+  {
+    "id": 109,
+    "stage": 3,
+    "recipe": "ChickenPotatoFry_Food",
+    "ingredient": [ "PotatoFry", "ChickenFry" ],
+    "tool_count": 2
   }
 ]

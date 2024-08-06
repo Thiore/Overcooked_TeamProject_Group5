@@ -329,13 +329,16 @@ public class PlayerStateControl : MonoBehaviour
                     {
                         if (counter.TryGetComponent(out TrashCanController trash))
                         {
-                            trash.PutOnOb = HandsOnOb;
-                            animator.SetBool("IsTake", false);
                             HandsOnOb.transform.SetParent(counter.transform);
                             HandsOnOb.transform.position = counter.transform.position;
                             HandsOnOb.transform.rotation = counter.transform.rotation;
+                            trash.PutOnOb = HandsOnOb;
                             trash.IsPutOn = true;
                             trash.isTrash = true;
+                            HandsOnOb = null;
+                            animator.SetBool("IsTake", false);
+                            
+                            
                             yield return AnimTime;
                         }
                     }

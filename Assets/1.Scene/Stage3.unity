@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 7dfd0e7e0379d6a4a9308c3672dd81a3, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: f52acfebb02f20241b29bbb1ee48d981, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -429,6 +429,10 @@ MonoBehaviour:
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
   counter: 0
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &322899342
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,6 +881,10 @@ MonoBehaviour:
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
   counter: 0
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &618744456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,6 +1078,10 @@ MonoBehaviour:
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
   counter: 0
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &673560501
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,6 +1194,10 @@ MonoBehaviour:
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
   counter: 0
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &690859998
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,6 +1489,10 @@ MonoBehaviour:
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
   counter: 0
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &873088512
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,6 +1606,10 @@ MonoBehaviour:
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
   counter: 1
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &1048297584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1699,6 +1723,10 @@ MonoBehaviour:
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 156604440}
   counter: 5
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &1132142649
 GameObject:
   m_ObjectHideFlags: 0
@@ -2291,6 +2319,10 @@ MonoBehaviour:
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 62023529}
   counter: 5
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &1420538358
 GameObject:
   m_ObjectHideFlags: 0
@@ -2403,6 +2435,10 @@ MonoBehaviour:
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
   counter: 0
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &1468790619
 GameObject:
   m_ObjectHideFlags: 0
@@ -2930,6 +2966,10 @@ MonoBehaviour:
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
   counter: 0
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &1966890177
 GameObject:
   m_ObjectHideFlags: 0
@@ -3042,6 +3082,10 @@ MonoBehaviour:
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
   counter: 0
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &2133031002
 GameObject:
   m_ObjectHideFlags: 0
@@ -3154,6 +3198,10 @@ MonoBehaviour:
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
   counter: 0
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!23 &6341804348099377
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6720,6 +6768,10 @@ MonoBehaviour:
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
   counter: 3
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!4 &1462118341406854694
 Transform:
   m_ObjectHideFlags: 0
@@ -11777,6 +11829,7 @@ MonoBehaviour:
   - {fileID: 3196093497089971728}
   - {fileID: 3196093498225115986}
   - {fileID: 3196093498519668801}
+  isSwap: 0
 --- !u!114 &3196093497362975115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18129,6 +18182,10 @@ MonoBehaviour:
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
   counter: 0
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &5353435987692186725
 GameObject:
   m_ObjectHideFlags: 0
@@ -19316,6 +19373,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a509cd8fb6b3874698a83d7236f2bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pivot:
+  - {fileID: 787616717}
+  - {fileID: 1132142650}
 --- !u!65 &6095713507996580997
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23868,6 +23928,10 @@ MonoBehaviour:
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
   counter: 8
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!114 &7585582004287533519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24453,6 +24517,7 @@ MonoBehaviour:
   - {fileID: 5947654351729038860}
   - {fileID: 632381830854515506}
   - {fileID: 2662565581424641111}
+  isSwap: 0
 --- !u!54 &7797777942493279148
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27400,7 +27465,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b7f62be224f330a4f873ec7e3e7a5e3d, type: 2}
   - {fileID: 2100000, guid: 48bec78fc3a2fc14c8e7dd2e220394ac, type: 2}
   - {fileID: 2100000, guid: 1ccb4d6b57b61944d80cfd18ff781de1, type: 2}
-  crate_Data: {fileID: 0}
+  - {fileID: 2100000, guid: c79bf26109564df4d9cc6e901f17988b, type: 2}
+  crate_Data: {fileID: 11400000, guid: 92dfcd09518b7f347a372770b220c044, type: 2}
   crate_Prefabs: {fileID: 3547977258791744772, guid: 4ed2471b8aa55914194a397a97a53ddc, type: 3}
   Crate_Pos1:
   - {fileID: 4598336421070943739}
@@ -27498,6 +27564,10 @@ MonoBehaviour:
   putonOb: {fileID: 1518558959570339473}
   choppingBoard: {fileID: 0}
   counter: 2
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &8950418180866238607
 GameObject:
   m_ObjectHideFlags: 0

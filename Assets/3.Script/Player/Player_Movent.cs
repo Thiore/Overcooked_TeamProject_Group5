@@ -33,7 +33,7 @@ public class Player_Movent : MonoBehaviour
 
     private void Update()
     {
-        Debug.DrawRay(transform.position, transform.forward * 3f, Color.red);
+        //Debug.DrawRay(transform.position, transform.forward * 2f, Color.red);
         if (Input.GetKeyDown(KeyCode.V) && isJumping.Equals(false) && !isRotation)
         {
             Jump();
@@ -137,7 +137,7 @@ public class Player_Movent : MonoBehaviour
         isJumping = true;
         animator.SetBool(IsWalking, true);
 
-        Vector3 endPos = player_rb.position + transform.forward;
+        Vector3 endPos = player_rb.position + transform.forward*0.5f;
         float elaspedTime = 0f;
 
         while (elaspedTime < 0.3f)
@@ -155,7 +155,7 @@ public class Player_Movent : MonoBehaviour
                 }
             }
 
-            player_rb.AddForce(transform.forward, ForceMode.VelocityChange);
+            player_rb.AddForce(transform.forward*0.5f, ForceMode.VelocityChange);
            // player_rb.MovePosition(Vector3.Lerp(player_rb.position, endPos, elaspedTime / 0.3f));
             elaspedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();

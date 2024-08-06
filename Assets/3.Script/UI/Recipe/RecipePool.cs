@@ -53,18 +53,17 @@ public class RecipePool : MonoBehaviour
     // 오브젝트 풀 초기화
     private void InitializeObjectPool()
     {
-        foreach (Recipe recipe in recipes)
+        for(int i = 0; i < 30; i++)
         {
-            GameObject prefab = GetPrefabForRecipe(recipe);
-            for (int i = 0; i < 3; i++) // 각 레시피에 대해 3개의 오브젝트 생성
-            {
-                GameObject obj = Instantiate(prefab, recipePoolPanel);
-                obj.name = recipe.recipe;
-                obj.SetActive(false); // 오브젝트를 비활성화
-                objectPool.Add(obj); // 풀에 추가
-                allObjects.Add(obj); // 모든 오브젝트 목록에 추가
-            }
+            int rand = Random.Range(0, recipes.Count);
+            GameObject prefab = GetPrefabForRecipe(recipes[rand]);
+            GameObject obj = Instantiate(prefab, recipePoolPanel);
+            obj.name = recipes[rand].recipe;
+            obj.SetActive(false); // 오브젝트를 비활성화
+            objectPool.Add(obj); // 풀에 추가
+            allObjects.Add(obj); // 모든 오브젝트 목록에 추가
         }
+        
     }
 
     // 레시피에 맞는 프리팹을 반환

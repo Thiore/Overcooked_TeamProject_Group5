@@ -18,8 +18,9 @@ public class TrashCanController : CounterController
             PutOnOb.transform.localScale *= 0.98f;
             if (elapsedtime>totaltime)
             {
-                IsPutOn = false;
+               
                 PutOnOb.GetComponent<Ingredient>().Die();
+                IsPutOn = false;
                 PutOnOb = null;
                 isTrash = false;
             }

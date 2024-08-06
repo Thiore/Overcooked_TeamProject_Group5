@@ -109,6 +109,9 @@ public class GameManager : MonoBehaviour
             case 2:
                 LoadingSceneManager.LoadScene("Stage2");
                 break;
+            case 3:
+                LoadingSceneManager.LoadScene("Stage3");
+                break;
         }
     }
 

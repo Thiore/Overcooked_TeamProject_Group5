@@ -102,30 +102,30 @@ public class Beach_Spawn : MonoBehaviour
 
     public void Crate_Tex_Offset(GameObject obj)
     {
-        int rand = Random.Range(0, 5/*crate_Data.Info.Length*/);
-        //Crate_Info info = crate_Data.Info[rand];
-       // for (int i = 0; i < 5; i++)
-        //{
-            //for (int j = 0; j < 5; j++)
-           // {
+        int rand = Random.Range(0, crate_Data.Info.Length);
+        Crate_Info info = crate_Data.Info[rand];
+        for (int i = 0; i < 5; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
 
-                //if (info.Ingredients.Equals((eIngredients)(i * 5 + j)))
-               // {
-                    //crate_Material[rand].mainTextureOffset = new Vector2(0.2f * j, 1 - 0.2f * (i + 1));
-                    
+                if (info.Ingredients.Equals((eIngredients)(i * 5 + j)))
+                {
+                    crate_Material[rand].mainTextureOffset = new Vector2(0.2f * j, 1 - 0.2f * (i + 1));
+
                     Renderer crate_renderer = obj.GetComponent<Renderer>();
                     Material[] newMat = new Material[2];
 
                     newMat[0] = crate;
                     newMat[1] = crate_Material[rand];
                     crate_renderer.materials = newMat;
-                    //obj.GetComponent<spawn_Ingredient>().Set_IngredientInfo(info, crate_Data);
+                    obj.GetComponent<spawn_Ingredient>().Set_IngredientInfo(info, crate_Data);
 
                     return;
-               // }
+                }
 
-            //}
-       // }//
+            }
+        }
     }
 
 }

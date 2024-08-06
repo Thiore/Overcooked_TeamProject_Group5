@@ -80,22 +80,22 @@ public class Stage_Select : MonoBehaviour
                         GameManager.Instance.LoadGame(selected_stage);
                     }
                     break;
-                default:
-                    Buttons[0].SetActive(true);
-                    Buttons[1].SetActive(true);
-                    if (Input.GetKeyDown(KeyCode.LeftArrow))
-                    {
-                        Change_Stage(-1);
-                    }
-                    else if (Input.GetKeyDown(KeyCode.RightArrow))
-                    {
-                        Change_Stage(1);
-                    }
-                    else if (Input.GetKeyDown(KeyCode.Space))
-                    {
-                        GameManager.Instance.LoadGame(selected_stage);
-                    }
-                    break;
+                //default:
+                //    Buttons[0].SetActive(true);
+                //    Buttons[1].SetActive(true);
+                //    if (Input.GetKeyDown(KeyCode.LeftArrow))
+                //    {
+                //        Change_Stage(-1);
+                //    }
+                //    else if (Input.GetKeyDown(KeyCode.RightArrow))
+                //    {
+                //        Change_Stage(1);
+                //    }
+                //    else if (Input.GetKeyDown(KeyCode.Space))
+                //    {
+                //        GameManager.Instance.LoadGame(selected_stage);
+                //    }
+                //    break;
             }
         }
 
