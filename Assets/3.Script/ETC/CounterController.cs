@@ -12,7 +12,8 @@ public enum eCounter
     ChoppingBoard,
     Crate,
     Sink,
-    Plate_Return
+    Plate_Return,
+    Joystick
 }
 
 public class CounterController : MonoBehaviour
@@ -31,6 +32,10 @@ public class CounterController : MonoBehaviour
     public eCounter Counter { get => counter; private set => counter = value; }
 
     public Animator[] playerAnim = { null, null};
+
+    [SerializeField] private GameObject slider;
+
+    public GameObject Slider { get => slider; set => slider = value; }
 
 
 

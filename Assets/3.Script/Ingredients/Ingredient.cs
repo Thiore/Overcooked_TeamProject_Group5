@@ -83,6 +83,7 @@ public class Ingredient : MonoBehaviour
 
     protected AnimatorStateInfo[] AnimInfo = new AnimatorStateInfo[2];
     protected Animator Player;
+    protected Slider ChopSlide = null;
 
 
 
@@ -275,8 +276,12 @@ public class Ingredient : MonoBehaviour
 
             if (Player != null)
             {
-                Slider ChopSlide = counter.ChoppingBoard.transform.GetChild(1).GetComponent<Slider>();
-                if(!ChopSlide.gameObject.activeSelf)
+                if(ChopSlide == null)
+                {
+                    ChopSlide = counter.Slider.GetComponent<Slider>();
+                }
+               
+                if(!ChopSlide.gameObject.activeSelf&&!ChopTime.Equals(0))
                 {
                     ChopSlide.maxValue = FinishChopTime;
                     ChopSlide.value = ChopTime;
@@ -300,6 +305,7 @@ public class Ingredient : MonoBehaviour
                     counter.playerAnim[1] = null;
                     ChopSlide.gameObject.SetActive(false);
                     ChopTime = 0;
+                    ChopSlide = null;
                     if (!Chop_Anim)
                     {
                         if (CookProcess.Equals(eCookingProcess.Chopping))

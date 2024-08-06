@@ -191,11 +191,11 @@ public class Player_SwapManager : MonoBehaviour
     {
 
         player1.GetComponent<Player_Movent>().enabled = player == player1;
-        player1.GetComponent<PlayerStateControl>().enabled = player == player1;
+        player1.GetComponent<PlayerStateControl>().isSwap = player == player1;
         currentMark1.enabled = player == player1;
 
         player2.GetComponent<Player_Movent>().enabled = player == player2;
-        player2.GetComponent<PlayerStateControl>().enabled = player == player2;
+        player2.GetComponent<PlayerStateControl>().isSwap = player == player2;
         currentMark2.enabled = player == player2;
 
         currentPlayer = player;

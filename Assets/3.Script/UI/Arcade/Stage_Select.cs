@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Stage_Select : MonoBehaviour
 {
-    private GameObject[] Stage = new GameObject[5];
+    private GameObject[] Stage = new GameObject[3];
     private int selected_stage = 1;
     private GameObject[] Buttons = new GameObject[2];
     private float moveSpeed = 5f; // 이동 속도 조정
@@ -12,7 +12,7 @@ public class Stage_Select : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 1; i <= 5; i++)
+        for (int i = 1; i <= 3; i++)
         {
             Stage[i - 1] = GameObject.Find($"Arcade_Screen/Stage_{i}");
         }
@@ -50,7 +50,24 @@ public class Stage_Select : MonoBehaviour
                         GameManager.Instance.LoadGame(selected_stage);
                     }
                     break;
-                case 5:
+                case 2:
+                    Buttons[0].SetActive(true);
+                    Buttons[1].SetActive(true);
+                    if (Input.GetKeyDown(KeyCode.LeftArrow))
+                    {
+                        Change_Stage(-1);
+                    }
+                    else if (Input.GetKeyDown(KeyCode.RightArrow))
+                    {
+                        Change_Stage(1);
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        GameManager.Instance.AfterResult = "Arcade_Menu";
+                        GameManager.Instance.LoadGame(selected_stage);
+                    }
+                    break;
+                case 3:
                     Buttons[0].SetActive(true);
                     Buttons[1].SetActive(false);
                     if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -59,6 +76,7 @@ public class Stage_Select : MonoBehaviour
                     }
                     else if (Input.GetKeyDown(KeyCode.Space))
                     {
+                        GameManager.Instance.AfterResult = "Arcade_Menu";
                         GameManager.Instance.LoadGame(selected_stage);
                     }
                     break;

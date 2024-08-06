@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class TrashCanController : CounterController
 {
-   
 
+    public bool isTrash = false;
+    private float totaltime = 2f;
+    private float elapsedtime = 0f;
 
-    public IEnumerator DropTrash_co()
+    private void Update()
     {
-        float totaltime = 10f;
-        float elapsedtime = 0f;
-       
-        while (elapsedtime < totaltime)
+       if(isTrash)
         {
-            this.PutOnOb.transform.localScale *= 0.9f;
             elapsedtime += Time.deltaTime;
-            yield return null;
+            PutOnOb.transform.Rotate(Vector3.up, 2f);
+            PutOnOb.transform.localScale *= 0.98f;
+            if (elapsedtime>totaltime)
+            {
+                IsPutOn = false;
+                PutOnOb.GetComponent<Ingredient>().Die();
+                PutOnOb = null;
+                isTrash = false;
+            }
         }
-        this.PutOnOb.GetComponent<Ingredient>().Die();
-        this.PutOnOb = null;
-        this.IsPutOn = false;
 
+       
     }
 
 

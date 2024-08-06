@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Pot : Cookingtool
 {
@@ -33,19 +34,31 @@ public class Pot : Cookingtool
         
 
         if(isSoup&&!isFinish)
-        { 
-                
-                CookTime += Time.deltaTime;
-                Debug.Log(CookTime);
+        {
+            if(slider == null)
+            {
+                transform.parent.TryGetComponent(out CounterController counter);
+                slider = counter.Slider.GetComponent<Slider>();
+                slider.maxValue = FinishCookTime;
+                slider.value = CookTime;
+                slider.gameObject.SetActive(true);
+            }
+            
+            CookTime += Time.deltaTime;
+            slider.value = CookTime;
+            Debug.Log(CookTime);
             if (CookTime > FinishCookTime)
             {
                 if (!isFinish)
                 {
                     Ingre.SetReadyCook();
-                    Soup_Anim.SetTrigger("Cook");
+                    //Soup_Anim.SetTrigger("Cook");
                     CookTime = 0f;
                     SaveRange.GetChild(0).gameObject.SetActive(false);
                     isFinish = true;
+                    slider.gameObject.SetActive(false);
+                    slider = null;
+                   
                     Debug.Log("Á¶¸®³¡");
                 }
 

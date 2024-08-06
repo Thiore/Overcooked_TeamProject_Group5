@@ -8,6 +8,9 @@ public class CounterEmissionController : MonoBehaviour
     private Queue<GameObject> pickQue;
     private List<GameObject> pickList;
 
+    //private GameObject SelectObj = null;
+    private GameObject NextObj = null;
+
     private void Awake()
     {
         pickQue = new Queue<GameObject>();
@@ -17,37 +20,43 @@ public class CounterEmissionController : MonoBehaviour
     //카운터나 화구 등등 설치된거 검별 나중에 if || 추가하기 (태그를 나눠도 똑같이 queue로 검사하기 위해)
     private void OnTriggerStay(Collider other)
     {
+        
         if (other.gameObject.CompareTag("Counter") || other.gameObject.CompareTag("Crate") || other.gameObject.CompareTag("Pass") ||
             other.gameObject.CompareTag("TrashCan") || other.gameObject.transform.CompareTag("Plate_Return") || other.gameObject.CompareTag("GasRange")
-            || other.gameObject.CompareTag("Sink"))
+            || other.gameObject.CompareTag("Sink") || other.gameObject.CompareTag("GasStation"))
         {
-            pickList.Add(other.gameObject);
-            if (pickQue.Count.Equals(0) && pickList.Count.Equals(1))
+            if(pickQue.Count.Equals(0))
             {
                 pickQue.Enqueue(other.gameObject);
                 ChangeEmission(pickQue.Peek());
-                pickList.Clear();
                 return;
             }
-
-            for (int i = 0; i < pickList.Count; i++)
+            else
             {
-                float queDistance = Vector3.Distance(transform.position, pickQue.Peek().transform.position);
-                float distance = Vector3.Distance(transform.position, pickList[i].transform.position);
-                
-                if(distance < queDistance)
+                ChangeEmission(pickQue.Peek());
+                if (other.gameObject == pickQue.Peek())
                 {
-                    if(pickQue.Count != 0)
-                    ChangeOriginEmission(pickQue.Dequeue());
-
-                    pickQue.Enqueue(pickList[i]);
-                    ChangeEmission(pickQue.Peek());
-                    pickList.Clear();
                     return;
-                }              
+                }
+                else
+                {
+                    NextObj = other.gameObject;
+                }
             }
+            
+           
+                float queDistance = Vector3.Distance(transform.position, pickQue.Peek().transform.position);
+                float distance = Vector3.Distance(transform.position, NextObj.transform.position);
 
-            pickList.Clear();
+            if (distance < queDistance)
+            {
+                ChangeOriginEmission(pickQue.Dequeue());
+
+                pickQue.Enqueue(NextObj);
+                ChangeEmission(pickQue.Peek());
+
+                return;
+            }   
         }
     }
 
@@ -56,7 +65,6 @@ public class CounterEmissionController : MonoBehaviour
         if (pickQue.Count > 0)
         {
             ChangeOriginEmission(pickQue.Dequeue());
-            pickQue.Clear();
         }
     }
 

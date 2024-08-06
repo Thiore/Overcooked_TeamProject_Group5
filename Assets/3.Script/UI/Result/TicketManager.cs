@@ -42,9 +42,11 @@ public class TicketManager : MonoBehaviour
         {
             GameManager.Instance.stage_index = 0;
             
-            GameManager.Instance.LoadScene(GameManager.Instance.AfterResult);
+            
             
             ScoreManager.Instance.InitializeScores();
+
+            GameManager.Instance.LoadScene(GameManager.Instance.AfterResult);
         }
     }
 

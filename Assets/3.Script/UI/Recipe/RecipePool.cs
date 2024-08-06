@@ -70,7 +70,7 @@ public class RecipePool : MonoBehaviour
     // 레시피에 맞는 프리팹을 반환
     private GameObject GetPrefabForRecipe(Recipe recipe)
     {
-        RecipeObject recipeObject = new RecipeObject();
+        //RecipeObject recipeObject = new RecipeObject();
         
         switch (recipe.ingredient.Count)
         {

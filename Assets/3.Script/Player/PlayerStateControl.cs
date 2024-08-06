@@ -27,6 +27,10 @@ public class PlayerStateControl : MonoBehaviour
     private WaitForSeconds AnimTime = new WaitForSeconds(0.2f);
 
     private CounterController resetChoppingBoard = null;
+    private GameObject ChopSaveCounter;
+    private GameObject SinkSaveCounter;
+
+    public bool isSwap = false;
 
     private void Awake()
     {
@@ -46,65 +50,96 @@ public class PlayerStateControl : MonoBehaviour
 
     private void Update()
     {
+
         nearCounter = counterEmissionController.GetNearCounter();
+        
         if (HandsOnOb == null)
             nearOb = nearObjectEmissionController.GetNearObject();
-
-        if(stateCo == null)
+        if (isSwap)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+
+
+            if (stateCo == null)
             {
-                if (HandsOnOb == null)
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    if(nearCounter != null)
+                    if (HandsOnOb == null)
                     {
-                        stateCo = StartCoroutine(PickUpObjectCheck(nearCounter, nearOb));
+                        if (nearCounter != null)
+                        {
+                            stateCo = StartCoroutine(PickUpObjectCheck(nearCounter, nearOb));
+                        }
+                        else
+                        {
+                            if (nearOb != null)
+                                PickUpObject(nearOb);
+                        }
                     }
                     else
                     {
-                        if(nearOb!=null)
-                            PickUpObject(nearOb);
+                        stateCo = StartCoroutine(DropDownObjectCheck(nearCounter));
                     }
                 }
-                else
-                {
-                    stateCo = StartCoroutine(DropDownObjectCheck(nearCounter));
-                }
             }
-        }
-        if (stateCo == null)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftControl))
+            if (stateCo == null)
             {
-
-                if (HandsOnOb == null && nearCounter != null)
+                if (Input.GetKeyDown(KeyCode.LeftControl))
                 {
-                    if (nearCounter.TryGetComponent(out CounterController counter))
-                    {
-                        if (counter.Counter.Equals(eCounter.ChoppingBoard) && counter.PutOnOb.CompareTag("Ingredients"))
-                        {
-                            Debug.Log("잘라좀");
 
-                            stateCo = StartCoroutine(PlayerCookedChage());
+                    if (HandsOnOb == null && nearCounter != null)
+                    {
+                        if (nearCounter.TryGetComponent(out CounterController counter))
+                        {
+                            if (counter.Counter.Equals(eCounter.ChoppingBoard) && counter.PutOnOb.CompareTag("Ingredients"))
+                            {
+                                Debug.Log("잘라좀");
+
+                                stateCo = StartCoroutine(PlayerCookedChage());
+                            }
                         }
                     }
                 }
             }
-        }
-        if (stateCo == null)
-        {
-            if (Input.GetKeyUp(KeyCode.LeftControl))
+            if (stateCo == null)
             {
-                if (HandsOnOb != null && HandsOnOb.CompareTag("Ingredients"))
+                if (Input.GetKeyUp(KeyCode.LeftControl))
                 {
-                    Debug.Log("던지기");
-                    ThrowIngredients();
+                    if (HandsOnOb != null && HandsOnOb.CompareTag("Ingredients"))
+                    {
+                        Debug.Log("던지기");
+                        ThrowIngredients();
+                    }
                 }
+            }
+        }
+        if(ChopSaveCounter!=null)
+        {
+            if(ChopSaveCounter != nearCounter)
+            {
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("New_Chef@Chop"))
+                    animator.SetTrigger("Finish");
+                
+                ChopSaveCounter = null;
+            }
+        }
+        if(SinkSaveCounter!= null)
+        {
+            if(SinkSaveCounter != nearCounter)
+            {
+                if(!animator.GetCurrentAnimatorStateInfo(0).IsName("New_Chef@Wash"))
+                    animator.SetTrigger("Finish");
+
+                SinkSaveCounter.TryGetComponent(out Sink sink);
+                sink.sinkAnim = null;
+                sink.isWash = false;
+                SinkSaveCounter = null;
+
             }
         }
         if(!animator.GetCurrentAnimatorStateInfo(0).IsName("New_Chef@Chop")&& Cleaver.activeSelf)
         {
             Cleaver.SetActive(false);
+            ChopSaveCounter = null;
         }
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("New_Chef@Chop") && !Cleaver.activeSelf)
         {
@@ -273,23 +308,26 @@ public class PlayerStateControl : MonoBehaviour
                     break;
                 case eCounter.TrashCan:
                     //쓰레기통
-                    if (counter.TryGetComponent(out TrashCanController trash))
-                    {
-                        if (HandsOnOb.CompareTag("Plate"))
-                        {
-                            for (int i = 0; i < HandsOnOb.transform.childCount; i++)
-                            {
-                                if (HandsOnOb.transform.GetChild(i).gameObject.activeSelf)
-                                {
-                                    HandsOnOb.transform.GetChild(i).gameObject.SetActive(false);
-                                }
-                            }
-                            HandsOnOb = null;
-                            animator.SetBool("IsTake", false);
-                            yield return AnimTime;
-                        }
 
-                        if (HandsOnOb.CompareTag("Ingredients"))
+                    if (HandsOnOb.CompareTag("Plate"))
+                    {
+                        for (int i = 0; i < HandsOnOb.transform.childCount; i++)
+                        {
+                            if (HandsOnOb.transform.GetChild(i).gameObject.activeSelf)
+                            {
+                                HandsOnOb.transform.GetChild(i).gameObject.SetActive(false);
+                            }
+                            HandsOnOb.TryGetComponent(out Plate p);
+                            p.name = "Plate";
+                            p.isComplete = false;
+                            p.isPlate = false;
+
+                        }
+                        yield return AnimTime;
+                    }
+                    else if (HandsOnOb.CompareTag("Ingredients"))
+                    {
+                        if (counter.TryGetComponent(out TrashCanController trash))
                         {
                             trash.PutOnOb = HandsOnOb;
                             animator.SetBool("IsTake", false);
@@ -297,7 +335,7 @@ public class PlayerStateControl : MonoBehaviour
                             HandsOnOb.transform.position = counter.transform.position;
                             HandsOnOb.transform.rotation = counter.transform.rotation;
                             trash.IsPutOn = true;
-                            StartCoroutine(trash.DropTrash_co());
+                            trash.isTrash = true;
                             yield return AnimTime;
                         }
                     }
@@ -445,8 +483,8 @@ public class PlayerStateControl : MonoBehaviour
                 case eCounter.GasRange:
                     if(counterController.IsPutOn)
                     {
-                        if (counterController.transform.GetChild(0).gameObject.activeSelf)
-                            counterController.transform.GetChild(0).gameObject.SetActive(false);
+                        counterController.transform.GetChild(0).gameObject.SetActive(false);
+                        counterController.Slider.gameObject.SetActive(false);
                         PickUpObject(counterController.transform.GetChild(1).gameObject);
                         //counterController.transform.GetChild(1).transform.SetParent(null);
                         counterController.PutOnOb = null;
@@ -457,9 +495,8 @@ public class PlayerStateControl : MonoBehaviour
                 case eCounter.GasStation:
                     if (counterController.IsPutOn)
                     {
-                        if (counterController.transform.GetChild(0).gameObject.activeSelf)
-                            counterController.transform.GetChild(0).gameObject.SetActive(false);
-                        
+                        counterController.transform.GetChild(0).gameObject.SetActive(false);
+                        counterController.Slider.gameObject.SetActive(false);
                         PickUpObject(counterController.transform.GetChild(1).gameObject);
                         //counterController.transform.GetChild(1).transform.SetParent(null);
                         counterController.PutOnOb = null;
@@ -471,7 +508,7 @@ public class PlayerStateControl : MonoBehaviour
                     if (counterController.IsPutOn)
                     {
                         counterController.ChoppingBoard.transform.GetChild(0).gameObject.SetActive(true);
-                        counterController.ChoppingBoard.transform.GetChild(1).gameObject.SetActive(true);
+                        counterController.Slider.gameObject.SetActive(false);
                         PickUpObject(counterController.PutOnOb);
                         counterController.PutOnOb = null;
                         counterController.ChangePuton();
@@ -502,8 +539,7 @@ public class PlayerStateControl : MonoBehaviour
                     }
                     else
                     {
-                        counterController.PutOnOb = null;
-                        counterController.ChangePuton();
+                        
                         yield return AnimTime;                        
                     }
                     break;
@@ -515,6 +551,8 @@ public class PlayerStateControl : MonoBehaviour
                     }
                     break;
             }
+            stateCo = null;
+            yield break;
         }
         if(HandsOnOb==null)
         {
@@ -562,9 +600,9 @@ public class PlayerStateControl : MonoBehaviour
             // 동작만하고 실질적인 처리는 재료가?
             // 도마가 있는지, 도마 자식에 태그가 재료인 오브젝트가 있는지 + 재료 가 썰 수있는 boolean인지 
 
-            if (counter.ChoppingBoard.transform.childCount.Equals(3))
+            if (counter.ChoppingBoard.transform.childCount.Equals(2))
             {
-                counter.ChoppingBoard.transform.GetChild(2).gameObject.transform.TryGetComponent(out Ingredient ingre);
+                counter.ChoppingBoard.transform.GetChild(1).gameObject.transform.TryGetComponent(out Ingredient ingre);
 
                 if (ingre.Chopable())
                 {
@@ -572,6 +610,7 @@ public class PlayerStateControl : MonoBehaviour
                     if (!AnimInfo.IsName("New_Chef@Chop"))
                     {
                         animator.SetTrigger("Chop");
+                        ChopSaveCounter = nearCounter;
                         yield return new WaitForSeconds(0.1f);
 
                         for (int i = 0; i < counter.playerAnim.Length; i++)
@@ -612,6 +651,9 @@ public class PlayerStateControl : MonoBehaviour
                     if (sink.InPlate.Count > 0)
                     {
                         animator.SetTrigger("Wash");
+                        SinkSaveCounter = nearCounter;
+                        sink.sinkAnim = animator;
+                        sink.isWash = true;
                         return false;
                     }
                 }

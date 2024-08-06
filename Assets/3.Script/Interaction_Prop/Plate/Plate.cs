@@ -22,11 +22,11 @@ public class Plate : MonoBehaviour
     private Renderer _renderer;
     private MeshCollider meshcol;
 
-    public bool isComplete { get; private set; }
+    public bool isComplete = false;
 
-    public bool isPlate { get; private set; }
+    public bool isPlate = false;
     //[field: SerializeField] public bool isWash { get; private set; }
-    public bool isWash { get; private set; }
+    public bool isWash = false;
 
     private List<Recipe> recipes;
 
@@ -152,6 +152,7 @@ public class Plate : MonoBehaviour
                             if(transform.GetChild(j).name.Equals($"{transform.name}_Food"))
                             {
                                 transform.GetChild(j).gameObject.SetActive(true);
+                                transform.name = transform.name + "_Food";
                                 Ingre.Die();
                                 break;
                             }
@@ -160,22 +161,19 @@ public class Plate : MonoBehaviour
                         isPlate = true;
                         return true;
                     }
-                    else
+                }
+                for (int j = 0; j < transform.childCount; j++)
+                {
+                    if (transform.GetChild(j).name.Equals(Ingre.name))
                     {
-                        for (int j = 0; j < transform.childCount; j++)
-                        {
-                            if (transform.GetChild(j).name.Equals(Ingre.name))
-                            {
-                                transform.GetChild(j).gameObject.SetActive(true);
-                                Ingre.Die();
-                                break;
-                            }
-                        }
-                        
-                        isPlate = true;
-                        return true;
+                        transform.GetChild(j).gameObject.SetActive(true);
+                        Ingre.Die();
+                        break;
                     }
                 }
+
+                isPlate = true;
+                return true;
             }
             else
             {
@@ -260,14 +258,13 @@ public class Plate : MonoBehaviour
     }
 
 
-    public void Wash()
+    public void Wash(Animator Anim)
     {
         if (isWash)
         {
-            Debug.Log("iswash");
-            if (playerAnim != null)
+            if (Anim != null)
             {
-                AnimInfo = playerAnim.GetCurrentAnimatorStateInfo(0);
+                AnimInfo = Anim.GetCurrentAnimatorStateInfo(0);
                 if (AnimInfo.IsName("New_Chef@Wash"))
                 {
                     washtime += Time.deltaTime;
@@ -280,7 +277,9 @@ public class Plate : MonoBehaviour
                         Change_Plate(isWash,eWash.outSink);
                         washtime = 0;
                         if(Sink.InPlate.Count.Equals(0))
-                            playerAnim.SetTrigger("Finish");
+                            Anim.SetTrigger("Finish");
+                        Sink.sinkAnim = null;
+                        AnimInfo = default;
                     }
                 }
             }
