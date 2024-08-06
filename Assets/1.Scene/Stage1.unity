@@ -8521,6 +8521,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   slider: {fileID: 0}
+  isTrash: 0
 --- !u!23 &4130376979368466872
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8738,7 +8739,7 @@ MonoBehaviour:
   playerAnim:
   - {fileID: 0}
   - {fileID: 0}
-  slider: {fileID: 693835023}
+  slider: {fileID: 1194469209}
 --- !u!23 &4511252884700333122
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10339,7 +10340,7 @@ MonoBehaviour:
   playerAnim:
   - {fileID: 0}
   - {fileID: 0}
-  slider: {fileID: 1194469209}
+  slider: {fileID: 693835023}
 --- !u!4 &7451009673601285134
 Transform:
   m_ObjectHideFlags: 0

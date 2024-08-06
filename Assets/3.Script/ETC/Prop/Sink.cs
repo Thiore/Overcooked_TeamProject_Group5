@@ -18,7 +18,7 @@ public class Sink : CounterController
             if (InPlate.Count > 0)
             {
                 InPlate.Peek().TryGetComponent(out Plate plate);
-                plate.Wash(sinkAnim);
+                plate.Wash(sinkAnim, Slider);
                 if (!plate.isWash)
                 {
                     InPlate.Dequeue();

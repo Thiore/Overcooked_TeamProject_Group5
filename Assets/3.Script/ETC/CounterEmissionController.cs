@@ -91,8 +91,9 @@ public class CounterEmissionController : MonoBehaviour
         {
             renderer.material.DisableKeyword("_EMISSION");
         }
-        gameObject.TryGetComponent(out CounterController counter);
-        Array.Clear(counter.playerAnim, 0, counter.playerAnim.Length);
+        //gameObject.TryGetComponent(out CounterController counter);
+        //if()
+        //Array.Clear(counter.playerAnim, 0, counter.playerAnim.Length);
     }
 
     public GameObject GetNearCounter()

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public enum eWash
 {
@@ -34,6 +35,7 @@ public class Plate : MonoBehaviour
     protected AnimatorStateInfo AnimInfo;
     private float washtime;
     private float finishWashtime = 4f;
+    private Slider slide = null;
 
 
     private void Awake()
@@ -258,7 +260,7 @@ public class Plate : MonoBehaviour
     }
 
 
-    public void Wash(Animator Anim)
+    public void Wash(Animator Anim, GameObject SlideObj)
     {
         if (isWash)
         {
@@ -267,14 +269,25 @@ public class Plate : MonoBehaviour
                 AnimInfo = Anim.GetCurrentAnimatorStateInfo(0);
                 if (AnimInfo.IsName("New_Chef@Wash"))
                 {
-                    washtime += Time.deltaTime;
+                    if(!SlideObj.activeSelf||slide == null)
+                    {
+                        SlideObj.TryGetComponent(out slide);
+                        slide.maxValue = finishWashtime;
+                        slide.value = washtime;
+                        SlideObj.SetActive(true);
 
+                    }
+
+                    washtime += Time.deltaTime;
+                    slide.value = washtime;
                     Debug.Log(washtime);
 
                     if (washtime > finishWashtime)
                     {
                         isWash = false;
                         Change_Plate(isWash,eWash.outSink);
+                        SlideObj.SetActive(false);
+                        slide = null;
                         washtime = 0;
                         if(Sink.InPlate.Count.Equals(0))
                             Anim.SetTrigger("Finish");
