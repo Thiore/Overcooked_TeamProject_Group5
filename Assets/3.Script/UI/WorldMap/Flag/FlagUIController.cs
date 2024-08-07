@@ -47,11 +47,11 @@ public class FlagUIController : MonoBehaviour
         target_Score = DataManager.Instance.GetStageInformation(flag.stage_index).targetScore;
         for (int i = 0; i < 3; i++)
         {
-            Debug.Log($"{flag.stage_index}");
-            Debug.Log($"{DataManager.Instance.GetStageInformation(flag.stage_index).targetScore[i]}");
-            Debug.Log($"{target_Score[i]}");
+            //Debug.Log($"{flag.stage_index}");
+            //Debug.Log($"{DataManager.Instance.GetStageInformation(flag.stage_index).targetScore[i]}");
+            //Debug.Log($"{target_Score[i]}");
         }
-        Debug.Log($"{this.gameObject.name} : {DataManager.Instance.GetStageInformation(flag.stage_index).bestScore}");
+        //Debug.Log($"{this.gameObject.name} : {DataManager.Instance.GetStageInformation(flag.stage_index).bestScore}");
         bestScore = DataManager.Instance.GetStageInformation(flag.stage_index).bestScore;
         BestScore.text = bestScore.ToString();
         for (int i = 0; i < 3; i++)

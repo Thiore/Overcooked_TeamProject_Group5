@@ -75,7 +75,7 @@ public class DataManager : MonoBehaviour
 
         if (!File.Exists(filePath))
         {
-            Debug.Log("json 생기지 않음");
+            //Debug.Log("json 생기지 않음");
             
             LoadStageFromJson();
             //파일에서 json문자열 읽기
@@ -144,7 +144,7 @@ public class DataManager : MonoBehaviour
 
         else
         {
-            Debug.LogError($"Stage {stageNumber} 정보 못 불러왔으요");
+            //Debug.LogError($"Stage {stageNumber} 정보 못 불러왔으요");
             return null;
         }
     }
@@ -204,7 +204,7 @@ public class DataManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Save file not found.");
+            //Debug.LogError("Save file not found.");
         }
 
 

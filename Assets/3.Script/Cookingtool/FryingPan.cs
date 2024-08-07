@@ -40,7 +40,7 @@ public class FryingPan : Cookingtool
             }
             if (slider != null)
             {
-                slider.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 100f);
+                slider.transform.position = Camera.main.WorldToScreenPoint(transform.position) + Vector3.up * 80f;
             }
             CookTime += Time.deltaTime;
             if (cookColor.r > 0f)
@@ -51,7 +51,7 @@ public class FryingPan : Cookingtool
                 targetRenderer.material.SetColor("_EmissionColor", cookColor);
             }
             slider.value = CookTime;
-            Debug.Log(CookTime);
+            //Debug.Log(CookTime);
             if (CookTime > FinishCookTime)
             {
                 if (!isFinish)
@@ -64,7 +64,7 @@ public class FryingPan : Cookingtool
                     slider.gameObject.SetActive(false);
                     slider = null;
 
-                    Debug.Log("조리끝");
+                    //Debug.Log("조리끝");
                 }
 
                 //초록 UI 띠링

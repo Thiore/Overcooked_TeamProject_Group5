@@ -13,7 +13,7 @@ public class Crate_spawn : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(crate_Data.Info.Length);
+        //Debug.Log(crate_Data.Info.Length);
       
             for (int i = 0; i < crate_Data.Info.Length; i++)
             {
@@ -32,13 +32,13 @@ public class Crate_spawn : MonoBehaviour
                 {
                     
                     crate_Material[num].mainTextureOffset = new Vector2(0.2f * j, 1 - 0.2f * (i+1));
-                    Debug.Log(info.Ingredients.ToString());
+                    //Debug.Log(info.Ingredients.ToString());
                     GameObject obj = Instantiate(crate_Prefabs);
                     obj.transform.position = info.Position;
                     obj.transform.rotation = info.Rotation;
                     obj.SetActive(false);
                     
-                    Debug.Log(obj.name);
+                    //Debug.Log(obj.name);
                     Renderer crate_renderer = obj.GetComponent<Renderer>();
                     Material[] newMat = new Material[2];
                     newMat[0] = crate;

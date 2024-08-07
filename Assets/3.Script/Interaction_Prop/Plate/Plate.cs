@@ -280,7 +280,7 @@ public class Plate : MonoBehaviour
 
                     washtime += Time.deltaTime;
                     slide.value = washtime;
-                    Debug.Log(washtime);
+                    //Debug.Log(washtime);
 
                     if (washtime > finishWashtime)
                     {

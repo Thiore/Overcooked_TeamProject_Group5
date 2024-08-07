@@ -324,7 +324,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   plateReturn: {fileID: 0}
-  PlatePrefabs: {fileID: 5570174263193704086, guid: ad0ad28da228afc489fb53a777d96ea9, type: 3}
+  PlatePrefabs: {fileID: 5570174263193704086, guid: 60dcd76da53783542a3a3c56d9c2c015, type: 3}
   CheckRecipe: {fileID: 0}
   isWash: 0
 --- !u!114 &8341231482810583190
@@ -342,6 +342,11 @@ MonoBehaviour:
   isPutOn: 0
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
+  counter: 0
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &8430421214329245534
 GameObject:
   m_ObjectHideFlags: 0

@@ -37,7 +37,7 @@ public class Fryer : Cookingtool
             }
             if (slider != null)
             {
-                slider.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 100f);
+                slider.transform.position = Camera.main.WorldToScreenPoint(transform.position) + Vector3.up * 80f;
             }
             CookTime += Time.deltaTime;
             slider.value = CookTime;

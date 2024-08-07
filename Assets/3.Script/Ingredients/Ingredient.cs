@@ -177,10 +177,10 @@ public class Ingredient : MonoBehaviour
 
     public bool Chopable()
     {
-        Debug.Log("1");
+        //Debug.Log("1");
         if (CookProcess.Equals(eCookingProcess.Chopping)||CookProcess.Equals(eCookingProcess.Chop_Cook))
         {
-            Debug.Log("2");
+            //Debug.Log("2");
             if (cooking.Equals(eCooked.Chopping))
                 return true;
             else if (cooking.Equals(eCooked.Normal))
@@ -190,7 +190,7 @@ public class Ingredient : MonoBehaviour
                 return true;
             }
         }
-        Debug.Log("4");
+        //Debug.Log("4");
 
         return false;
     }
@@ -278,11 +278,15 @@ public class Ingredient : MonoBehaviour
                 }
                 ChopTime += Time.deltaTime;
                 ChopSlide.value = ChopTime;
+               
+                    ChopSlide.transform.position = Camera.main.WorldToScreenPoint(transform.position)+Vector3.up*80f;
+                //ChopSlide.transform.LookAt(Camera.main.transform);
+                
 
                 if (Chop_Anim)
                     ChildChopAnim(ChopTime);
 
-                Debug.Log($"잘리는중{ChopTime}");
+                //Debug.Log($"잘리는중{ChopTime}");
                 if (ChopTime > FinishChopTime)
                 {
                     isChop = false;

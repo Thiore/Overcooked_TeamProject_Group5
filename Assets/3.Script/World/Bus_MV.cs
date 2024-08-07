@@ -37,7 +37,7 @@ public class Bus_MV : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("눌림");
+           // Debug.Log("눌림");
             GameManager.Instance.LoadScene("AnotherScene");
         }
 
@@ -162,7 +162,7 @@ public class Bus_MV : MonoBehaviour
         PlayerPrefs.SetFloat("PlayerPosZ", playerPosition.z);
         //저장
         PlayerPrefs.Save();
-        Debug.Log("벤 위치 저장");
+        //Debug.Log("벤 위치 저장");
     }
 
     public void LoadVanPosition()
@@ -173,11 +173,11 @@ public class Bus_MV : MonoBehaviour
             float y = PlayerPrefs.GetFloat("PlayerPosY");
             float z = PlayerPrefs.GetFloat("PlayerPosZ");
             transform.position = new Vector3(x, y, z);
-            Debug.Log("플레이어 벤 위치");
+            //Debug.Log("플레이어 벤 위치");
         }
         else
         {
-            Debug.Log("플레이어 위치 로드 못 함");
+            //Debug.Log("플레이어 위치 로드 못 함");
         }
     }
     public void StopMoving()

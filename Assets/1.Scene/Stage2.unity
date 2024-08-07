@@ -5729,7 +5729,7 @@ MonoBehaviour:
   - {fileID: 1553930061342511987}
   plateReturn: {fileID: 2638617685359770281}
   PlatePrefabs: {fileID: 5570174263193704086, guid: b4f4d798426f7894e9cb6db2ccf75503, type: 3}
-  CheckRecipe: {fileID: 0}
+  CheckRecipe: {fileID: 270844014}
   isWash: 1
 --- !u!108 &1553930060580356489
 Light:
@@ -15126,7 +15126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d283d9dae0bbc1545a8f9f61118d29fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initTime: 360
+  initTime: 150
   playTime: 0
   tip: 1
 --- !u!95 &4136548608810614654

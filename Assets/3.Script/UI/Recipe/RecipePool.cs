@@ -141,7 +141,7 @@ public class RecipePool : MonoBehaviour
                 }
 
                 // 오브젝트가 활성화된 지 20초가 지나면 비활성화
-                if (Time.time - obj.GetComponent<RecipeObject>().activationTime >= 20f)
+                if (Time.time - obj.GetComponent<RecipeObject>().activationTime >= 15f*obj.GetComponent<RecipeObject>().recipe.ingredient.Count)
                 {
                     DeactivateObject(obj); // 오브젝트 비활성화
                     ScoreManager.Instance.SubScore(10); // 점수 감소
@@ -178,7 +178,7 @@ public class RecipePool : MonoBehaviour
                 
             }
         }
-        Debug.Log("레시피 활성화");
+        //Debug.Log("레시피 활성화");
     }
 
     // 오브젝트 비활성화
@@ -187,7 +187,7 @@ public class RecipePool : MonoBehaviour
         activeObjects.Remove(obj); // 활성화된 목록에서 제거
         obj.SetActive(false); // 오브젝트 비활성화
         objectPool.Add(obj); // 풀에 다시 추가
-        Debug.Log("레시피 비활성화");
+        //Debug.Log("레시피 비활성화");
     }
 
 
@@ -222,7 +222,7 @@ public class RecipePool : MonoBehaviour
             img.color = Color.green;
         }
 
-        Debug.Log(activeObjects[index].name);
+       // Debug.Log(activeObjects[index].name);
         StartCoroutine(DeactivateAfterDelay(activeObjects[index], 0.2f));
         GameManager.Instance.AllCorrect_Recipe(point);
         if (activeObjects.Count == 0)
@@ -239,7 +239,7 @@ public class RecipePool : MonoBehaviour
         {
             img.color = Color.green;
         }
-        Debug.Log(activeObjects[index].name);
+        //Debug.Log(activeObjects[index].name);
         StartCoroutine(DeactivateAfterDelay(activeObjects[index], 0.5f));
         
         GameManager.Instance.Incorrect_Recipe(point);
@@ -301,9 +301,22 @@ public class RecipePool : MonoBehaviour
                 {
                     imageNameMap.Add($"Ingredient_Icon_{k + 1}", objectIndex.recipe.ingredient[k]);
                 }
-                if (!objectIndex.recipe.tool_count.Equals(0))
+                if (k<objectIndex.recipe.tool_count)
                 {
-                        string tool = objectIndex.recipe.ingredient[k].Substring(objectIndex.recipe.ingredient[k].Length - 3);
+                    string tool = string.Empty;
+                    if (objectIndex.recipe.ingredient[k].Contains("Pot"))
+                    {
+                        tool = "Pot";
+                    }
+                    else if(objectIndex.recipe.ingredient[k].Contains("Pan"))
+                    {
+                        tool = "Pan";
+                    }
+                    else
+                    {
+                        tool = "Fry";
+                    }
+                        //string tool = objectIndex.recipe.ingredient[k].Substring(objectIndex.recipe.ingredient[k].Length - 3);
                         objectIndex.SetToolImage(k, tool);
                 }
             }

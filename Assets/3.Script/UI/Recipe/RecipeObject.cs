@@ -33,6 +33,7 @@ public class RecipeObject : MonoBehaviour
 
     public void SetToolImage(int index,string toolname)
     {
+        
         if(index == 0)
         {
             Tool_img_1.sprite = Resources.Load<Sprite>(toolname);

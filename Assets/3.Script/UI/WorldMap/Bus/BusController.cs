@@ -23,7 +23,7 @@ public class BusController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 GameManager.Instance.AfterResult = "BSJScene";
-                Debug.Log("여기서 ResetState");
+                //Debug.Log("여기서 ResetState");
                 GameManager.Instance.stage_index = stage_index;
                 GameManager.Instance.LoadGame(stage_index);
                 worldState.ResetState(1);

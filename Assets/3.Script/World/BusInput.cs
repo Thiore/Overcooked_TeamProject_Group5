@@ -15,7 +15,7 @@ public class BusInput : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("눌림");
+           // Debug.Log("눌림");
             GameManager.Instance.LoadScene("AnotherScene");
         }
 

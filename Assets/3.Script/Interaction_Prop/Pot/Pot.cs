@@ -48,7 +48,7 @@ public class Pot : Cookingtool
             
             CookTime += Time.deltaTime;
             slider.value = CookTime;
-            Debug.Log(CookTime);
+            //Debug.Log(CookTime);
             if (CookTime > FinishCookTime)
             {
                 if (!isFinish)
@@ -61,7 +61,7 @@ public class Pot : Cookingtool
                     slider.gameObject.SetActive(false);
                     slider = null;
                    
-                    Debug.Log("조리끝");
+                    //Debug.Log("조리끝");
                 }
 
                 //초록 UI 띠링

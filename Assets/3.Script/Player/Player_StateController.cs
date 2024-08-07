@@ -63,7 +63,7 @@ public class Player_StateController : MonoBehaviour
                 if (isHolding && HandsOnOb.CompareTag("Ingredients"))
                 {
                     //회전하는건 Movement에. 던지는건 여기에
-                    Debug.Log("던지기");
+                    //Debug.Log("던지기");
                     ThrowIngredients();
                 }
             }
@@ -181,7 +181,7 @@ public class Player_StateController : MonoBehaviour
                     //else 
                     if (counter.ChoppingBoard != null)
                     {
-                        Debug.Log("들어오긴해?");
+                        //Debug.Log("들어오긴해?");
                         TakeHandObject(counter.ChoppingBoard.transform.GetChild(1).gameObject);
                         counter.ChoppingBoard.transform.GetChild(0).gameObject.SetActive(true);
                     }
@@ -272,7 +272,7 @@ public class Player_StateController : MonoBehaviour
                     }
                     else if (counter.transform.CompareTag("Plate_Return")) //플레이트 쌓이는데는 집는것만 됨 
                     {
-                        Debug.Log("드랍못함");
+                        //Debug.Log("드랍못함");
                         return;
                     }
                     else if (counter.transform.CompareTag("TrashCan")) // 쓰레기통은 재료만  

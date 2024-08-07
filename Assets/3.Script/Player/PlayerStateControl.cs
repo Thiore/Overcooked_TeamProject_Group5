@@ -92,7 +92,7 @@ public class PlayerStateControl : MonoBehaviour
                         {
                             if (counter.Counter.Equals(eCounter.ChoppingBoard) && counter.PutOnOb.CompareTag("Ingredients"))
                             {
-                                Debug.Log("잘라좀");
+                                //Debug.Log("잘라좀");
 
                                 stateCo = StartCoroutine(PlayerCookedChage());
                             }
@@ -106,7 +106,7 @@ public class PlayerStateControl : MonoBehaviour
                 {
                     if (HandsOnOb != null && HandsOnOb.CompareTag("Ingredients"))
                     {
-                        Debug.Log("던지기");
+                        //Debug.Log("던지기");
                         ThrowIngredients();
                     }
                 }
@@ -724,7 +724,7 @@ public class PlayerStateControl : MonoBehaviour
                 if (plate.OnPlate(Ingre))
                 {
                     Ingre.Die();
-                    Debug.Log("재료 넣기");
+                    //Debug.Log("재료 넣기");
                     animator.SetBool("IsTake", false);
                     HandsOnOb = null;
                     return true;
@@ -748,7 +748,7 @@ public class PlayerStateControl : MonoBehaviour
                         }
                         ingre.Die();
                         
-                        Debug.Log("재료 넣기");
+                        //Debug.Log("재료 넣기");
                         return true;
                     }
                     else

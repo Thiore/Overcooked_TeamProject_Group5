@@ -113,7 +113,7 @@ public class Player_SwapManager : MonoBehaviour
             {
                 player1_currentTime -= Time.deltaTime;
                 player1_respawnTimeText.text = player1_currentTime.ToString(string.Format("N0"));
-                Debug.Log(player1_currentTime);
+                //Debug.Log(player1_currentTime);
                 yield return null;
             }
 
@@ -145,7 +145,7 @@ public class Player_SwapManager : MonoBehaviour
             {
                 player2_currentTime -= Time.deltaTime;
                 player2_respawnTimeText.text = player2_currentTime.ToString(string.Format("N0"));
-                Debug.Log(player2_currentTime);
+                //Debug.Log(player2_currentTime);
                 yield return null;
             }
             isSwap = false;

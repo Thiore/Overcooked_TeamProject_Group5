@@ -146,7 +146,7 @@ public class Player_Movent : MonoBehaviour
             {
                 if (hitPoint != null)
                 {
-                    Debug.Log(hitPoint);
+                    //Debug.Log(hitPoint);
                     var dis = Vector3.Distance(player_rb.position, hitPoint);
                     if (dis < 0.5f)
                     {

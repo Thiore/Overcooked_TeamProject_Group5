@@ -13,7 +13,7 @@ public class ScoreManager : MonoBehaviour
         {
             if (instance == null)
             {
-                Debug.LogError("ScoreManager instance is null!");
+                //Debug.LogError("ScoreManager instance is null!");
             }
             return instance;
         }

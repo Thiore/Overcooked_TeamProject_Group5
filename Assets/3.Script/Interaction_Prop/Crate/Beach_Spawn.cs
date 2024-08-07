@@ -64,8 +64,8 @@ public class Beach_Spawn : MonoBehaviour
         for(int i = 0; i < Section_Pos.Length;i++)
         {
             Section_Pos[i].Translate(Vector3.right * Time.deltaTime * 2f);
-            Debug.Log(Section_Pos[i].name);
-            Debug.Log(Section_Pos[i].position);
+            //Debug.Log(Section_Pos[i].name);
+            //Debug.Log(Section_Pos[i].position);
             if (Section_Pos[i].position.x>CopySection[2].x+13.8f)
             {
                 
