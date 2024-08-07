@@ -126,6 +126,21 @@ MonoBehaviour:
   Plate_Mesh:
   - {fileID: 4300000, guid: 7a295d16fbdd5e14a8d1e3277a24aedc, type: 2}
   - {fileID: 4300000, guid: 5cd9dd8fb7179154e8ae8f3935b747eb, type: 2}
-  RecipeList: []
+  RecipeList:
+  - {fileID: 8655827148235100741, guid: 3fc315545ad775d4daeeae3464853d71, type: 3}
+  - {fileID: 3583271917520719135, guid: b328b163abf68c644a389220c221ab4c, type: 3}
+  - {fileID: 7250879420460479298, guid: 64005da66d673eb438cd075953523250, type: 3}
+  - {fileID: 4673594833572445231, guid: beb87b46b0362aa448eab2ae53baf6a7, type: 3}
+  - {fileID: 4022262252403232903, guid: 29cc55b8542b9204e89d933e8a8688e3, type: 3}
+  - {fileID: 2609687954473102587, guid: 04f66740492f816428853811dfdf3f24, type: 3}
+  - {fileID: 319935366991210097, guid: a2d1de6d9fd086c42a761eddb1d222fe, type: 3}
+  - {fileID: 242188339215187057, guid: fd2498af73e53704195906fbd987e383, type: 3}
+  - {fileID: 9220961780470692592, guid: dbe1d34873bdfcb47a31b5d6b1a2b73a, type: 3}
+  - {fileID: 4252496072584402451, guid: 8334eaf0649bd6b44abf0473490ad421, type: 3}
+  - {fileID: 7019412349620047667, guid: 8840c47f42bcf7148bbe64fd2ab37186, type: 3}
+  - {fileID: 6023936677062597168, guid: 99350c2a28fd4444fb47e1f6f0206d6b, type: 3}
   Sink: {fileID: 0}
-  Data: {fileID: 0}
+  Data: {fileID: 11400000, guid: 92dfcd09518b7f347a372770b220c044, type: 2}
+  isComplete: 0
+  isPlate: 0
+  isWash: 0

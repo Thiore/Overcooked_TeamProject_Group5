@@ -167,22 +167,22 @@ MonoBehaviour:
   ingredient_prefab:
   - {fileID: 3691066980963678556, guid: 36aa246206291c54f87a233a8802d9cc, type: 3}
   - {fileID: 2073751701283481806, guid: f58282053dc33f84ab6510a09bd78366, type: 3}
-  - {fileID: 3637550663591282422, guid: db6a5aa7af521c1448fb99c0bf7f6d8d, type: 3}
+  - {fileID: 1543558261818077050, guid: 3a7a6beebb3adec4bab3cdd7ebf0fae9, type: 3}
   - {fileID: 812215084471818108, guid: 32810c2122af84e48b641f6abee22a1e, type: 3}
   - {fileID: 7724359992237901786, guid: 60ca9895025900a43a32de9fc0db6777, type: 3}
   - {fileID: 2817981648651809535, guid: 39b73eb870176f341928663e6b81cc17, type: 3}
-  - {fileID: 4855411175859642397, guid: fa5ea1370388a5146a7cb75ff3d4c1a2, type: 3}
-  - {fileID: 5794837660257246557, guid: 60613e8eb4303d249b224921752ecbc8, type: 3}
+  - {fileID: 9167844768395263414, guid: 960e54ed2c8d949419961835afa7b188, type: 3}
+  - {fileID: 8794229866646634688, guid: 0c41018e3c2b21646838af9bda1309ea, type: 3}
   - {fileID: 5961615853705446645, guid: fc633aeb75b38ca418b7b3bd6b4ef737, type: 3}
   - {fileID: 1409422206636914374, guid: f52ea6e74cc196c44b59a0af39faeed3, type: 3}
-  - {fileID: 3102281433937951499, guid: 22156677bf7616d4c91db7f4fe38f3fd, type: 3}
+  - {fileID: 81584043926196658, guid: 5730f831c0f3b4f4ba74f0476fb7863f, type: 3}
   - {fileID: 1173123358443828338, guid: d6fc5a7c08de0444d9dd843808ebe9b1, type: 3}
   - {fileID: 3053268032588768978, guid: c5c09d432a17ef64386d0d55c4c9aaa0, type: 3}
   - {fileID: 7848378492448796049, guid: 9f67ca7502e599642b515efe82cd05cb, type: 3}
   - {fileID: 486417742985993681, guid: 87f9acf7ac604754396d6ffe1adf909f, type: 3}
-  - {fileID: 5908231848635343417, guid: 8b3341cd235e16d4da579e03923bfbea, type: 3}
+  - {fileID: 8300631978848589297, guid: 1925df426e711ea43b6be79c022efaa6, type: 3}
   - {fileID: 4843524043963510437, guid: 89ab363d186ca9d489b29906e82c90bf, type: 3}
-  - {fileID: 489413019631725331, guid: dd48d648a9a76e948997eede5f1d2fb2, type: 3}
+  - {fileID: 3874164506515892014, guid: 71822ea540c545a479e641737421a3bc, type: 3}
   - {fileID: 5903802869662929563, guid: 143db76c25f051b4b962d872da93bdd2, type: 3}
   - {fileID: 1707201279812482068, guid: 6cb1c64d642de80448df7ed6246fcb9c, type: 3}
   - {fileID: 5312632132793069, guid: e08029e3384d62a47bc3201effe13828, type: 3}
@@ -204,6 +204,10 @@ MonoBehaviour:
   putonOb: {fileID: 0}
   choppingBoard: {fileID: 0}
   counter: 6
+  playerAnim:
+  - {fileID: 0}
+  - {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &3547977258986203295
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class CounterEmissionController : MonoBehaviour
         
         if (other.gameObject.CompareTag("Counter") || other.gameObject.CompareTag("Crate") || other.gameObject.CompareTag("Pass") ||
             other.gameObject.CompareTag("TrashCan") || other.gameObject.transform.CompareTag("Plate_Return") || other.gameObject.CompareTag("GasRange")
-            || other.gameObject.CompareTag("Sink") || other.gameObject.CompareTag("GasStation"))
+            || other.gameObject.CompareTag("Sink") || other.gameObject.CompareTag("GasStation")|| other.gameObject.CompareTag("Joystick"))
         {
             if(pickQue.Count.Equals(0))
             {

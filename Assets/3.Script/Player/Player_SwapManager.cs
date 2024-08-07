@@ -59,7 +59,7 @@ public class Player_SwapManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift)&&!isSwap)
+        if (Input.GetKeyUp(KeyCode.LeftShift)&&!isSwap)
         {
             SwapCharacter();
         }

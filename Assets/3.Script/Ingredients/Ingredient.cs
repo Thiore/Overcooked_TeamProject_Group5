@@ -159,19 +159,15 @@ public class Ingredient : MonoBehaviour
                 CookEnum = 1;
             }
         }
+        else if(CookProcess.Equals(eCookingProcess.Chop_Cook))
+        {
+            if (cooking.Equals(eCooked.Cooking) || cooking.Equals(eCooked.Cooking))
+                CookEnum = 1;
+        }
         Ingredient_Mesh.mesh = Change_Mesh[CookEnum];
         Ingredient_renderer.material = Change_Material[CookEnum];
         Ingredient_Col.sharedMesh = Change_Mesh[CookEnum];
     }
-
-    public virtual void Off_Mesh()
-    {
-        Ingredient_Mesh.mesh = null;
-    }
-
-
-
-
     public void SetCookProcess(Crate_Info Info)
     {
         CookProcess = Info.CookingProcess;
@@ -189,11 +185,6 @@ public class Ingredient : MonoBehaviour
                 return true;
             else if (cooking.Equals(eCooked.Normal))
             {
-                Debug.Log("3");
-                if (Chop_Anim)
-                {
-                    Chop_Change_obj();
-                }
                 cooking = eCooked.Chopping;
                 isChop = true;
                 return true;
@@ -248,10 +239,7 @@ public class Ingredient : MonoBehaviour
         cooking = eCooked.trash;
     }
 
-    protected virtual void Chop_Change_obj()
-    {
-
-    }
+  
     
 
     private void Chop()
@@ -311,14 +299,14 @@ public class Ingredient : MonoBehaviour
                         if (CookProcess.Equals(eCookingProcess.Chopping))
                             Change_Ingredient(eCooked.ReadyCook);
                         else
-                            Change_Ingredient(eCooked.Cooking);
+                            Change_Ingredient(eCooked.Chopping);
                     }
                     else
                     {
                         if (CookProcess.Equals(eCookingProcess.Chopping))
                             cooking = eCooked.ReadyCook;
                         else
-                            cooking = eCooked.Cooking;
+                            cooking = eCooked.Chopping;
                     }
                 }
             }

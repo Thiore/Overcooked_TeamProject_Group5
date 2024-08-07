@@ -1,41 +1,83 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FryingPan : Cookingtool
 {
 
-    private Ingredient ingre = null;
+    [SerializeField] private Renderer[] _renderer;
+    [SerializeField] private Texture2D FalloffTexture;
     public float CookTime;
-    public readonly float FinishCookTime = 4f;
-    public readonly float OverCookTime = 6f;
-    public readonly float FireTime = 10f;
+    public readonly float FinishCookTime = 6f;
 
-   
+    private Renderer targetRenderer;
+    Color cookColor;
+    private void Awake()
+    {
+        isSoup = false;
+        isCooking = false;
+        isFinish = false;
+        CookTime = 0;
+        
+    }
+    private void Update()
+    {
 
-    //public override bool CookedCheck(GameObject obj)
-    //{
-    //    if(obj.TryGetComponent(out Ingredient ingre))
-    //    {
-    //        if(ingre.cooking.Equals(eCooked.Chopping))
-    //        {
-    //            ingre.transform.SetParent(this.transform);
-    //            ingre.transform.position = this.transform.position;
-    //            ingre.transform.rotation = this.transform.rotation;
-    //        }
-    //        else
-    //        {
-    //            return false;
-    //        }
-    //        Debug.Log(this.name + " 재료확인");
 
-    //    }
-    //    return false;
-    //}
+        if (isSoup && !isFinish)
+        {
+            if (slider == null)
+            {
+                isPlate = false;
+                targetRenderer = transform.GetChild(1).GetComponent<Renderer>();
+                cookColor = targetRenderer.material.GetColor("_EmissionColor");
+                transform.parent.TryGetComponent(out CounterController counter);
+                slider = counter.Slider.GetComponent<Slider>();
+                slider.maxValue = FinishCookTime;
+                slider.value = CookTime;
+                slider.gameObject.SetActive(true);
+            }
+            if (slider != null)
+            {
+                slider.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 100f);
+            }
+            CookTime += Time.deltaTime;
+            if (cookColor.r > 0f)
+            {
+                cookColor.r -= Time.deltaTime * 3f / 255f;
+                cookColor.g -= Time.deltaTime * 3f / 255f;
+                cookColor.b -= Time.deltaTime * 3f / 255f;
+                targetRenderer.material.SetColor("_EmissionColor", cookColor);
+            }
+            slider.value = CookTime;
+            Debug.Log(CookTime);
+            if (CookTime > FinishCookTime)
+            {
+                if (!isFinish)
+                {
+                    Ingre.SetReadyCook();
+                    //Soup_Anim.SetTrigger("Cook");
+                    CookTime = 0f;
+                    SaveRange.GetChild(0).gameObject.SetActive(false);
+                    isFinish = true;
+                    slider.gameObject.SetActive(false);
+                    slider = null;
 
-    //public override void StartCook()
-    //{
-    //    base.StartCook();
-    //}
+                    Debug.Log("조리끝");
+                }
+
+                //초록 UI 띠링
+                return;
+            }
+        }
+        if (isPlate)
+        {
+            isSoup = false;
+            Ingre = null;
+            CookTime = 0f;
+            gameObject.name = "Pot";
+        }
+    }
 
 }

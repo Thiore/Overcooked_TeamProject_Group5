@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Joystick : MonoBehaviour
+public class Joystick : CounterController
 {
     private Animator Anim;
     [SerializeField] private Transform[] pivot;
 
     private Player_SwapManager controlPlayer;
 
-    private bool iscontrol = false;
+    public bool iscontrol = false;
 
     private void Awake()
     {
@@ -30,43 +30,47 @@ public class Joystick : MonoBehaviour
             else
                 transform.Translate(new Vector3(X * 4f * Time.deltaTime, 0, Y * 3f * Time.deltaTime));
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                controlPlayer.CurrentPlayer.GetComponent<Player_Movent>().enabled = true;
-                controlPlayer.CurrentPlayer.GetComponent<PlayerStateControl>().enabled = true;
-                iscontrol = false;
-            }
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    controlPlayer.CurrentPlayer.GetComponent<Player_Movent>().enabled = true;
+            //    controlPlayer.CurrentPlayer.GetComponent<PlayerStateControl>().enabled = true;
+            //    iscontrol = false;
+            //}
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            controlPlayer.CurrentPlayer.GetComponent<Player_Movent>().enabled = true;
-            controlPlayer.CurrentPlayer.GetComponent<PlayerStateControl>().enabled = true;
-            iscontrol = false;
-        }
+        //if (Input.GetKeyDown(KeyCode.LeftShift))
+        //{
+        //    controlPlayer.CurrentPlayer.GetComponent<Player_Movent>().enabled = true;
+        //    controlPlayer.CurrentPlayer.GetComponent<PlayerStateControl>().enabled = true;
+        //    iscontrol = false;
+        //}
 
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            controlPlayer = collision.gameObject.transform.GetComponentInParent<Player_SwapManager>();
-            if (controlPlayer.CurrentPlayer != null)
-            {
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    controlPlayer.CurrentPlayer.GetComponent<Player_Movent>().enabled = false;
-                    controlPlayer.CurrentPlayer.GetComponent<PlayerStateControl>().enabled = false;
-                    controlPlayer.AniWalkingSetbool(controlPlayer.CurrentPlayer);
-                    iscontrol = true;
-                }
-            }
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if(!iscontrol)
+    //    {
+    //        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+    //        {
+    //            controlPlayer = collision.gameObject.transform.GetComponentInParent<Player_SwapManager>();
+    //            if (controlPlayer.CurrentPlayer != null)
+    //            {
+    //                if (Input.GetKeyDown(KeyCode.Space))
+    //                {
+    //                    controlPlayer.CurrentPlayer.GetComponent<Player_Movent>().enabled = false;
+    //                    controlPlayer.CurrentPlayer.GetComponent<PlayerStateControl>().enabled = false;
+    //                    controlPlayer.AniWalkingSetbool(controlPlayer.CurrentPlayer);
+    //                    iscontrol = true;
+    //                }
+    //            }
 
-        }
+    //        }
+    //    }
+       
 
 
-    }
+    //}
 
     private void LateUpdate()
     {

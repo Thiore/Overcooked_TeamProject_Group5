@@ -24,7 +24,6 @@ public class Cucumber : Ingredient
     {
         ChopTime = 0;
         isChop = false;
-        isCook = false;
 
         cooking = eCooked.Normal;
         

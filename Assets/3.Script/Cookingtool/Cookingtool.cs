@@ -15,7 +15,10 @@ public class Cookingtool : MonoBehaviour
 
     protected bool isFinish;
 
+    public bool isPlate = false;
+
     [SerializeField] protected Animator Soup_Anim;
+    public GameObject Soup;
 
     protected Transform SaveRange = null;//가스레인지에서 떨어진 후 해당 가스레인지를 끄기위해
     protected Ingredient Ingre = null;//냄비가 들고있는 재료

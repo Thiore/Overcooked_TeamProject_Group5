@@ -61,9 +61,9 @@ public class RecipePool : MonoBehaviour
             obj.name = recipes[rand].recipe;
             obj.TryGetComponent(out RecipeObject recipeobj);
             recipeobj.recipe = recipes[rand];
-            obj.SetActive(false); // 오브젝트를 비활성화
             objectPool.Add(obj); // 풀에 추가
             allObjects.Add(recipeobj); // 모든 오브젝트 목록에 추가
+            obj.SetActive(false); // 오브젝트를 비활성화
         }
         
     }
@@ -295,7 +295,7 @@ public class RecipePool : MonoBehaviour
             {
                 if (objectIndex.recipe.ingredient.Count == 1)
                 {
-                    imageNameMap.Add($"Ingredient_Icon", objectIndex.recipe.ingredient[k]);
+                    imageNameMap.Add("Ingredient_Icon", objectIndex.recipe.ingredient[k]);
                 }
                 else
                 {
@@ -303,7 +303,7 @@ public class RecipePool : MonoBehaviour
                 }
                 if (!objectIndex.recipe.tool_count.Equals(0))
                 {
-                        string tool = objectIndex.recipe.ingredient[k].Substring(objectIndex.recipe.ingredient[0].Length - 3);
+                        string tool = objectIndex.recipe.ingredient[k].Substring(objectIndex.recipe.ingredient[k].Length - 3);
                         objectIndex.SetToolImage(k, tool);
                 }
             }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Pot : Cookingtool
 {
-    [SerializeField] private Renderer[] renderer;
+    [SerializeField] private Renderer[] _renderer;
     [SerializeField] private Texture2D FalloffTexture;
 
     
@@ -22,7 +22,7 @@ public class Pot : Cookingtool
 
     private void Awake()
     {
-        BaseColor = this.renderer[0].material.GetColor("_BaseColor");
+        BaseColor = this._renderer[0].material.GetColor("_BaseColor");
         isSoup = false;
         isCooking = false;
         isFinish = false;
@@ -37,11 +37,13 @@ public class Pot : Cookingtool
         {
             if(slider == null)
             {
+                isPlate = false;
                 transform.parent.TryGetComponent(out CounterController counter);
                 slider = counter.Slider.GetComponent<Slider>();
                 slider.maxValue = FinishCookTime;
                 slider.value = CookTime;
                 slider.gameObject.SetActive(true);
+                
             }
             
             CookTime += Time.deltaTime;
@@ -75,13 +77,13 @@ public class Pot : Cookingtool
             }
 
         }
-        else
+        if(isPlate)
         {
-            if (BaseColor != this.renderer[0].material.GetColor("_BaseColor"))
+            if (BaseColor != this._renderer[0].material.GetColor("_BaseColor"))
             {
-                for (int i = 0; i < this.renderer.Length; i++)
+                for (int i = 0; i < this._renderer.Length; i++)
                 {
-                    this.renderer[i].material.SetColor("_BaseColor", BaseColor);
+                    this._renderer[i].material.SetColor("_BaseColor", BaseColor);
                 }
                 //transform.GetChild(0).gameObject.SetActive(false);
                 Ingre = null;
@@ -106,9 +108,9 @@ public class Pot : Cookingtool
     private void ChangeSoupMaterial(float alpha)
     {
         Color newColor = BaseColor * alpha;
-        for (int i = 0; i < this.renderer.Length; i++)
+        for (int i = 0; i < this._renderer.Length; i++)
         {
-            this.renderer[i].material.SetColor("_BaseColor", newColor);
+            this._renderer[i].material.SetColor("_BaseColor", newColor);
         }
 
     }
