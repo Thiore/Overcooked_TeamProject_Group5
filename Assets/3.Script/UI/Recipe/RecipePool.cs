@@ -295,7 +295,7 @@ public class RecipePool : MonoBehaviour
             {
                 if (objectIndex.recipe.ingredient.Count == 1)
                 {
-                    imageNameMap.Add("Ingredient_Icon", objectIndex.recipe.ingredient[k]);
+                    imageNameMap.Add("Ingredient_Icon", objectIndex.recipe.ingredient[0]);
                 }
                 else
                 {

@@ -19,15 +19,15 @@ public class RecipeObject : MonoBehaviour
 
         foreach (Image image in images)
         {
-            if (imageNameMap.ContainsKey(image.name))
-            {
-                // Resources 폴더에서 이미지 파일을 로드
-                Sprite sprite = Resources.Load<Sprite>(imageNameMap[image.name]);
-                if (sprite != null)
+                if (imageNameMap.ContainsKey(image.name))
                 {
-                    image.sprite = sprite;
+                    // Resources 폴더에서 이미지 파일을 로드
+                    Sprite sprite = Resources.Load<Sprite>(imageNameMap[image.name]);
+                    if (sprite != null)
+                    {
+                        image.sprite = sprite;
+                    }
                 }
-            }
         }
     }
 
@@ -36,11 +36,29 @@ public class RecipeObject : MonoBehaviour
         
         if(index == 0)
         {
-            Tool_img_1.sprite = Resources.Load<Sprite>(toolname);
+            Tool_img_1.sprite = Resources.Load<Sprite>(path: toolname);
+            if(Tool_img_1.sprite != null)
+            {
+                Debug.Log(toolname+"tool_1");
+
+            }
+            else
+            {
+                Debug.Log("안뜸");
+            }
         }
         else
         {
             Tool_img_2.sprite = Resources.Load<Sprite>(toolname);
+            if (Tool_img_2.sprite != null)
+            {
+                Debug.Log(toolname + "tool_2");
+
+            }
+            else
+            {
+                Debug.Log("안뜸");
+            }
         }
     }
 }
