@@ -13,13 +13,14 @@ public class BusController : MonoBehaviour
     {
         worldState = FindObjectOfType<WorldState>();
     }
-    private void OnCollisionStay(Collision col)
+    
+    private void OnTriggerStay(Collider other)
     {
-        if (col.gameObject.name.Contains("Flag"))
+        if (other.gameObject.name.Contains("Flag"))
         {
-            flag_ui = col.gameObject.GetComponent<FlagUIController>();
+            flag_ui = other.gameObject.GetComponent<FlagUIController>();
             flag_ui.ActiveUI();
-            stage_index = col.gameObject.GetComponent<Flag>().stage_index;
+            stage_index = other.gameObject.GetComponent<Flag>().stage_index;
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 GameManager.Instance.AfterResult = "BSJScene";
@@ -29,17 +30,18 @@ public class BusController : MonoBehaviour
                 worldState.ResetState(1);
                 //ÇöÀç VanÀÇ position
                 worldState.SaveVanPosition(transform.position);
-                
+
             }
         }
     }
-    private void OnCollisionExit(Collision col)
+    private void OnTriggerExit(Collider other)
     {
-        if (col.gameObject.name.Contains("Flag"))
+        if (other.gameObject.name.Contains("Flag"))
         {
-            flag_ui = col.gameObject.GetComponent<FlagUIController>();
+            flag_ui = other.gameObject.GetComponent<FlagUIController>();
             flag_ui.DeActiveUI();
             stage_index = 0;
         }
     }
+
 }

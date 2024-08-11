@@ -216,8 +216,8 @@ public class Ingredient : MonoBehaviour
         {
             if (cooking.Equals(eCooked.Chopping))
             {
-                if (Ingredient_Mesh.mesh != null)
-                    Ingredient_Mesh.mesh = null;
+                //if (Ingredient_Mesh.mesh != null)
+                //    Ingredient_Mesh.mesh = null;
                 cooking = eCooked.Cooking;
                 isCook = true;
                 return true;
@@ -279,7 +279,7 @@ public class Ingredient : MonoBehaviour
                 ChopTime += Time.deltaTime;
                 ChopSlide.value = ChopTime;
                
-                    ChopSlide.transform.position = Camera.main.WorldToScreenPoint(transform.position)+Vector3.up*80f;
+                    ChopSlide.transform.position = Camera.main.WorldToScreenPoint(transform.position)+Vector3.up*70f;
                 //ChopSlide.transform.LookAt(Camera.main.transform);
                 
 
@@ -314,7 +314,6 @@ public class Ingredient : MonoBehaviour
                     }
                 }
             }
-            Player = null;
         }
     }
 

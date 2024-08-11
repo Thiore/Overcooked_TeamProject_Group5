@@ -21,15 +21,20 @@ public class Cookingtool : MonoBehaviour
     public GameObject Soup;
 
     protected Transform SaveRange = null;//가스레인지에서 떨어진 후 해당 가스레인지를 끄기위해
-    protected Ingredient Ingre = null;//냄비가 들고있는 재료
+    protected Ingredient ingre = null;
+    public Ingredient Ingre { get { return ingre; } protected set { ingre = value; } }//냄비가 들고있는 재료
 
     protected Slider slider = null;
     public void StartCook()
     {
-        if(transform.childCount.Equals(2)&&!isFinish&&!isSoup)
+        if(!isFinish&&!isSoup)
         {
             isSoup = true;
-            Soup_Anim.SetTrigger("Cook");
+            if(Soup_Anim != null)
+            {
+                Soup_Anim.SetTrigger("Cook");
+            }
+            
             SaveRange = transform.parent.parent;
             return;
         }

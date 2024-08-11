@@ -37,7 +37,7 @@ public class Fryer : Cookingtool
             }
             if (slider != null)
             {
-                slider.transform.position = Camera.main.WorldToScreenPoint(transform.position) + Vector3.up * 80f;
+                slider.transform.position = Camera.main.WorldToScreenPoint(transform.position) + Vector3.up * 70f;
             }
             CookTime += Time.deltaTime;
             slider.value = CookTime;
@@ -49,7 +49,6 @@ public class Fryer : Cookingtool
                     Ingre.SetReadyCook();
                     //Soup_Anim.SetTrigger("Cook");
                     CookTime = 0f;
-                    SaveRange.GetChild(0).gameObject.SetActive(false);
                     isFinish = true;
                     slider.gameObject.SetActive(false);
                     slider = null;

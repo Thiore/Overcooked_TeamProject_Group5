@@ -23,20 +23,25 @@ public class spawn_Ingredient : MonoBehaviour
         TryGetComponent(out anim);
         
     }
-    private void Start()
-    {
-        Ingredient_enum = info.Ingredients;
-        //obj_ui = GameObject.Find("Object_UI_Canvas").GetComponent<Object_UI_Controll>();
-        //myIngredient = ingredient_prefab[0];
-        for (int i = 0; i < ingredient_prefab.Length; i++)
-        {
-            if (Ingredient_enum.ToString().Equals(ingredient_prefab[i].name))
-            {
-                myIngredient = ingredient_prefab[i];
-                return;
-            }
+    //private void Start()
+    //{
+    //    Ingredient_enum = info.Ingredients;
+    //    //obj_ui = GameObject.Find("Object_UI_Canvas").GetComponent<Object_UI_Controll>();
+    //    //myIngredient = ingredient_prefab[0];
+    //    for (int i = 0; i < ingredient_prefab.Length; i++)
+    //    {
+    //        if (Ingredient_enum.ToString().Equals(ingredient_prefab[i].name))
+    //        {
+    //            myIngredient = ingredient_prefab[i];
+    //            return;
+    //        }
 
-        }
+    //    }
+    //}
+
+    public void Beach_ResetQueue(Queue<Ingredient> reset)
+    {
+        ingredient_queue = reset;
     }
 
     public GameObject PickAnim()
@@ -82,6 +87,17 @@ public class spawn_Ingredient : MonoBehaviour
     {
         this.info = info;
         this.Data = data;
+        Ingredient_enum = info.Ingredients;
+        
+        for (int i = 0; i < ingredient_prefab.Length; i++)
+        {
+            if (Ingredient_enum.ToString().Equals(ingredient_prefab[i].name))
+            {
+                myIngredient = ingredient_prefab[i];
+                return;
+            }
+
+        }
     }
     
 

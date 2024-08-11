@@ -6,11 +6,11 @@ using UnityEngine.UIElements;
 
 public class Bus_MV : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 3f;
-    [SerializeField] private float rotateSpeed = 380f;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float rotateSpeed;
     [SerializeField] private PlayerIntput playerInput;
     [SerializeField] private WorldState worldState;
-    private AudioSource audio;
+    private AudioSource _audio;
     private Rigidbody player_rb;
     //private Animator animator;
     private Vector3 moveDirection;
@@ -26,18 +26,18 @@ public class Bus_MV : MonoBehaviour
     {
         playerInput = GetComponent<PlayerIntput>();
         player_rb = GetComponent<Rigidbody>();
-        audio = GetComponent<AudioSource>();
-        audio.Play();
+        _audio = GetComponent<AudioSource>();
+        _audio.Play();
         //playerRay = GetComponent<Player_Ray>();
         //animator = GetComponent<Animator>();
     }
 
-    private void FixedUpdate()
+   
+    private void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-           // Debug.Log("눌림");
+            // Debug.Log("눌림");
             GameManager.Instance.LoadScene("AnotherScene");
         }
 
@@ -49,8 +49,6 @@ public class Bus_MV : MonoBehaviour
         if (isMoving)
         {
             Walking();
-            player_rb.angularVelocity = Vector3.zero;
-            player_rb.velocity = Vector3.zero;
         }
 
 
@@ -61,23 +59,28 @@ public class Bus_MV : MonoBehaviour
         //    Jump();
         //}
 
-        player_rb.angularVelocity = Vector3.zero;
-        player_rb.velocity = Vector3.zero;
-
+        
     }
+
+    //private void FixedUpdate()
+    //{
+       
+    //}
 
     private void Walking()
     {
         if (playerInput.Move_Value != 0 || playerInput.Rotate_Value != 0)
         {
-            audio.UnPause();
+            _audio.UnPause();
             //animator.SetBool(IsWalking, true);
             Move();
         }
         else
         {
-            audio.Pause();
+            _audio.Pause();
             //animator.SetBool(IsWalking, false);
+            player_rb.angularVelocity = Vector3.zero;
+            player_rb.velocity = player_rb.velocity * 0.5f;
         }
     }
 
@@ -186,7 +189,7 @@ public class Bus_MV : MonoBehaviour
     }
     public void StartMoving()
     {
-        isMoving = true ; // 이동을 멈춥니다.
+        isMoving = true ; // 이동을 시작합니다.
     }
 
 }

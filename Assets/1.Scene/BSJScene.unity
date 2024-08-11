@@ -18879,7 +18879,7 @@ SphereCollider:
   m_GameObject: {fileID: 1124714581599899777}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.0012439081
   m_Center: {x: -0.00039071616, y: 0.000000186963, z: -3.4924613e-10}
@@ -18992,7 +18992,7 @@ SphereCollider:
   m_GameObject: {fileID: 1359105104822022872}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.0012439081
   m_Center: {x: -0.00039071616, y: 0.000000186963, z: 0.000000003376044}
@@ -50423,6 +50423,7 @@ MonoBehaviour:
   worldState: {fileID: 0}
   isFire: 0
   Faceindex: 0
+  AfterResult: 
 --- !u!4 &2541751766452954996
 Transform:
   m_ObjectHideFlags: 0
@@ -72973,7 +72974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0226bfbcfce9594f8276fa67bcab2cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 4
   rotateSpeed: 380
   playerInput: {fileID: 2815077216934562541}
   worldState: {fileID: 0}
@@ -73005,7 +73006,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 64
   m_CollisionDetection: 0
 --- !u!114 &2815077216934562535
 MonoBehaviour:
@@ -73159,8 +73160,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.008693281, y: 0.0060214396, z: 0.018152598}
-  m_Center: {x: 0.00063788745, y: -0.0052558277, z: -0.005}
+  m_Size: {x: 0.0091209635, y: 0.011425214, z: 0.014018403}
+  m_Center: {x: -0.00036002323, y: -0.00660341, z: -0.004358489}
 --- !u!137 &2838789946807722578
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -73978,7 +73979,7 @@ SphereCollider:
   m_GameObject: {fileID: 4214001437999018284}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.0012439081
   m_Center: {x: -0.00039071802, y: 0.000000186963, z: -3.4924613e-10}
@@ -76038,7 +76039,7 @@ SphereCollider:
   m_GameObject: {fileID: 7363511969275900040}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.0012439081
   m_Center: {x: -0.00039071988, y: 0.000000186963, z: -0.0000000022118913}

@@ -141,6 +141,14 @@ public class PlayerStateControl : MonoBehaviour
         {
             Cleaver.SetActive(false);
             ChopSaveCounter = null;
+            for (int i = 0; i < resetChoppingBoard.playerAnim.Length; i++)
+            {
+                if (resetChoppingBoard.playerAnim[i] == animator)
+                {
+                    resetChoppingBoard.playerAnim[i] = null;
+                    break;
+                }
+            }
         }
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("New_Chef@Chop") && !Cleaver.activeSelf)
         {
@@ -195,6 +203,8 @@ public class PlayerStateControl : MonoBehaviour
                         {
                             if(IngreOnCooker(counter))
                             {
+                                animator.SetBool("IsTake", false);
+                                HandsOnOb = null;
                                 yield return AnimTime;
                             }
                         }
@@ -216,35 +226,44 @@ public class PlayerStateControl : MonoBehaviour
                 case eCounter.GasRange:
                     if (counter.IsPutOn)
                     {
-                        if (HandsOnOb.TryGetComponent(out Ingredient ingre))
+                        if (counter.PutOnOb.TryGetComponent(out Cookingtool tool))
                         {
-                            if (!ingre.isCook)
+                            if(tool.Ingre != null)
                             {
-                                if (ingre.Cookable())
+                                break;
+                            }
+                            else
+                            {
+                                if (HandsOnOb.TryGetComponent(out Ingredient ingre))
                                 {
-                                    if (counter.PutOnOb.TryGetComponent(out Cookingtool tool))
+                                    if (!ingre.isCook)
                                     {
-                                        if (tool is Pot && ingre.utensils.Equals(eCookutensils.Pot))
+                                        if (ingre.Cookable())
                                         {
-                                            tool.ResetCook(ingre);
-                                            tool.StartCook();
-                                            animator.SetBool("IsTake", false);
-                                            HandsOnOb = null;
-                                            yield return AnimTime;
-                                        }
-                                        else if (tool is FryingPan && ingre.utensils.Equals(eCookutensils.Pan))
-                                        {
-                                            tool.ResetCook(ingre);
-                                            tool.StartCook();
-                                            animator.SetBool("IsTake", false);
-                                            HandsOnOb = null;
-                                            yield return AnimTime;
-                                        }
 
+                                            if (tool is Pot && ingre.utensils.Equals(eCookutensils.Pot))
+                                            {
+                                                tool.ResetCook(ingre);
+                                                tool.StartCook();
+                                                animator.SetBool("IsTake", false);
+                                                HandsOnOb = null;
+                                                yield return AnimTime;
+                                            }
+                                            else if (tool is FryingPan && ingre.utensils.Equals(eCookutensils.Pan))
+                                            {
+                                                tool.ResetCook(ingre);
+                                                tool.StartCook();
+                                                animator.SetBool("IsTake", false);
+                                                HandsOnOb = null;
+                                                yield return AnimTime;
+                                            }
+
+                                        }
                                     }
                                 }
                             }
                         }
+                            
 
                     }
                     else
@@ -253,7 +272,13 @@ public class PlayerStateControl : MonoBehaviour
                         {
                             
                             HandsOnOb.transform.SetParent(counter.transform);
-                            HandsOnOb.GetComponent<Cookingtool>().StartCook();
+                            if (HandsOnOb.TryGetComponent(out Cookingtool tool))
+                            {
+                                if (tool.Ingre != null)
+                                {
+                                    tool.StartCook();
+                                }
+                            }
                             HandsOnOb.transform.position = counter.transform.position;
                             HandsOnOb.transform.rotation = counter.transform.rotation;
                             animator.SetBool("IsTake", false);
@@ -267,26 +292,35 @@ public class PlayerStateControl : MonoBehaviour
                 case eCounter.GasStation:
                     if (counter.IsPutOn)
                     {
-                        if (HandsOnOb.TryGetComponent(out Ingredient ingre))
+                        if (counter.PutOnOb.TryGetComponent(out Cookingtool tool))
                         {
-                            if (!ingre.isCook)
+                            if (tool.Ingre != null)
                             {
-                                if (ingre.Cookable())
+                                break;
+                            }
+                            else
+                            {
+                                if (HandsOnOb.TryGetComponent(out Ingredient ingre))
                                 {
-                                    if (counter.PutOnOb.TryGetComponent(out Cookingtool tool))
+                                    if (!ingre.isCook)
                                     {
-                                        if (tool is Pot && ingre.utensils.Equals(eCookutensils.Fry))
+                                        if (ingre.Cookable())
                                         {
-                                            tool.ResetCook(ingre);
-                                            tool.StartCook();
-                                            animator.SetBool("IsTake", false);
-                                            HandsOnOb = null;
-                                            yield return AnimTime;
+
+                                            if (tool is Fryer && ingre.utensils.Equals(eCookutensils.Fry))
+                                            {
+                                                tool.ResetCook(ingre);
+                                                tool.StartCook();
+                                                animator.SetBool("IsTake", false);
+                                                HandsOnOb = null;
+                                                yield return AnimTime;
+                                            }
+
+
                                         }
 
                                     }
                                 }
-
                             }
                         }
                     }
@@ -295,7 +329,13 @@ public class PlayerStateControl : MonoBehaviour
                         if (HandsOnOb.CompareTag("Fryer"))
                         {
                             HandsOnOb.transform.SetParent(counter.transform);
-                            HandsOnOb.GetComponent<Cookingtool>().StartCook();
+                            if (HandsOnOb.TryGetComponent(out Cookingtool tool))
+                            {
+                                if (tool.Ingre != null)
+                                {
+                                    tool.StartCook();
+                                }
+                            }
                             HandsOnOb.transform.position = counter.transform.position;
                             HandsOnOb.transform.rotation = counter.transform.rotation;
                             animator.SetBool("IsTake", false);
@@ -371,6 +411,8 @@ public class PlayerStateControl : MonoBehaviour
                         {
                             if (IngreOnCooker(counter))
                             {
+                                animator.SetBool("IsTake", false);
+                                HandsOnOb = null;
                                 yield return AnimTime;
                             }
                         }
@@ -404,6 +446,8 @@ public class PlayerStateControl : MonoBehaviour
                         {
                             if (IngreOnCooker(counter))
                             {
+                                animator.SetBool("IsTake", false);
+                                HandsOnOb = null;
                                 yield return AnimTime;
                             }
                         }
@@ -578,8 +622,8 @@ public class PlayerStateControl : MonoBehaviour
 
                         if (renderer1 != null && renderer2 != null)
                         {
-                            renderer1.material.SetFloat("_GlowIntensity", 8.1f);
-                            renderer2.material.SetFloat("_GlowIntensity", 8.1f);
+                            renderer1.material.SetFloat("_GlowIntensity", 0);
+                            renderer2.material.SetFloat("_GlowIntensity", 0);
                         }
                         GetComponent<Player_Movent>().enabled = true;
                     }
@@ -800,36 +844,43 @@ public class PlayerStateControl : MonoBehaviour
     {
         if (counter.PutOnOb.CompareTag("Cooker"))
         {
-            if (HandsOnOb.TryGetComponent(out Ingredient Ingre))
+            if (counter.PutOnOb.TryGetComponent(out Cookingtool tool))
             {
-                if (!Ingre.isCook)
+                if(tool.Ingre != null)
                 {
-                    if (Ingre.Cookable())
+                    return false;
+                }
+                else
+                {
+                    if (HandsOnOb.TryGetComponent(out Ingredient Ingre))
                     {
-                        if (counter.PutOnOb.TryGetComponent(out Cookingtool tool))
+                        if (!Ingre.isCook)
                         {
-                            if (tool is Pot && Ingre.utensils.Equals(eCookutensils.Pot))
+                            if (Ingre.Cookable())
                             {
-                                tool.ResetCook(Ingre);
-                                return true;
-                            }
-                            else if (tool is FryingPan && Ingre.utensils.Equals(eCookutensils.Pan))
-                            {
-                                tool.ResetCook(Ingre);
-                                return true;
-                            }
-                            else if (tool is FryingPan && Ingre.utensils.Equals(eCookutensils.Fry))
-                            {
-                                tool.ResetCook(Ingre);
-                                return true;
-                            }
 
+                                if (tool is Pot && Ingre.utensils.Equals(eCookutensils.Pot))
+                                {
+                                    tool.ResetCook(Ingre);
+                                    return true;
+                                }
+                                else if (tool is FryingPan && Ingre.utensils.Equals(eCookutensils.Pan))
+                                {
+                                    tool.ResetCook(Ingre);
+                                    return true;
+                                }
+                                else if (tool is FryingPan && Ingre.utensils.Equals(eCookutensils.Fry))
+                                {
+                                    tool.ResetCook(Ingre);
+                                    return true;
+                                }
+
+                            }
                         }
                     }
+
                 }
-
             }
-
         }
         
         return false;

@@ -18,10 +18,16 @@ public class Beach_Spawn : MonoBehaviour
     
 
     private Queue<GameObject> Recipe_queue = new Queue<GameObject>();
+    private Dictionary<eIngredients, Queue<Ingredient>> spawner = new Dictionary<eIngredients, Queue<Ingredient>>();
 
 
     private void Awake()
     {
+        for(int i = 0; i < crate_Data.Info.Length;i++)
+        {
+            spawner.Add(crate_Data.Info[i].Ingredients, new Queue<Ingredient>());
+        }
+
         CopySection = new Vector3[Section_Pos.Length];
         for(int i = 0; i < Section_Pos.Length;i++)
         {
@@ -119,6 +125,9 @@ public class Beach_Spawn : MonoBehaviour
                     newMat[0] = crate;
                     newMat[1] = crate_Material[rand];
                     crate_renderer.materials = newMat;
+                    obj.TryGetComponent(out spawn_Ingredient ingre);
+                    ingre.Set_IngredientInfo(info, crate_Data);
+                    ingre.Beach_ResetQueue(spawner[info.Ingredients]);
                     obj.GetComponent<spawn_Ingredient>().Set_IngredientInfo(info, crate_Data);
 
                     return;

@@ -40,7 +40,7 @@ public class FryingPan : Cookingtool
             }
             if (slider != null)
             {
-                slider.transform.position = Camera.main.WorldToScreenPoint(transform.position) + Vector3.up * 80f;
+                slider.transform.position = Camera.main.WorldToScreenPoint(transform.position) + Vector3.up * 70f;
             }
             CookTime += Time.deltaTime;
             if (cookColor.r > 0f)
