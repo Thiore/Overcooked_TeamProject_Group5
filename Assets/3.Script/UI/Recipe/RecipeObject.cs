@@ -33,32 +33,37 @@ public class RecipeObject : MonoBehaviour
 
     public void SetToolImage(int index,string toolname)
     {
+        Sprite sprite = Resources.Load<Sprite>(path: toolname);
+        if (sprite != null)
+        {
+            if (index == 0)
+            {
+
+                Tool_img_1.sprite = sprite;
+                if (Tool_img_1.sprite != null)
+                {
+                    Debug.Log(toolname + "tool_1");
+
+                }
+                else
+                {
+                    Debug.Log("¾È¶ä");
+                }
+            }
+            else
+            {
+                Tool_img_2.sprite = sprite;
+                if (Tool_img_2.sprite != null)
+                {
+                    Debug.Log(toolname + "tool_2");
+
+                }
+                else
+                {
+                    Debug.Log("¾È¶ä");
+                }
+            }
+        }
         
-        if(index == 0)
-        {
-            Tool_img_1.sprite = Resources.Load<Sprite>(path: toolname);
-            if(Tool_img_1.sprite != null)
-            {
-                Debug.Log(toolname+"tool_1");
-
-            }
-            else
-            {
-                Debug.Log("¾È¶ä");
-            }
-        }
-        else
-        {
-            Tool_img_2.sprite = Resources.Load<Sprite>(toolname);
-            if (Tool_img_2.sprite != null)
-            {
-                Debug.Log(toolname + "tool_2");
-
-            }
-            else
-            {
-                Debug.Log("¾È¶ä");
-            }
-        }
     }
 }

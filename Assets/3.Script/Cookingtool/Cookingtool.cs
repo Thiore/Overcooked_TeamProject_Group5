@@ -36,11 +36,12 @@ public class Cookingtool : MonoBehaviour
            
         
     }
-    public void ResetCook(Ingredient ingre)
+    public virtual void ResetCook(Ingredient ingre)
     {
         isSoup = false;
         isFinish = false;
-        transform.GetChild(0).gameObject.SetActive(true);
+        if(Soup != null)
+            transform.GetChild(0).gameObject.SetActive(true);
         Ingre = ingre;
         Ingre.transform.SetParent(transform);
         Ingre.transform.position = transform.position;

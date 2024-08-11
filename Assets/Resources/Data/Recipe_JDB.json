@@ -44,14 +44,14 @@
   {
     "id": 107,
     "stage": 3,
-    "recipe": "FriedChicken_Food",
+    "recipe": "ChickenFry_Food",
     "ingredient": [ "ChickenFry" ],
     "tool_count": 1
   },
   {
     "id": 108,
     "stage": 3,
-    "recipe": "FrenchFry_Food",
+    "recipe": "PotatoFry_Food",
     "ingredient": [ "PotatoFry" ],
     "tool_count": 1
   },

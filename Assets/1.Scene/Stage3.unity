@@ -4220,7 +4220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPutOn: 1
-  putonOb: {fileID: 0}
+  putonOb: {fileID: 465660592045392118}
   choppingBoard: {fileID: 0}
   counter: 1
   playerAnim:
@@ -8026,6 +8026,7 @@ MonoBehaviour:
   oneIngredientPrefab: {fileID: 4134851203775356756, guid: d703df5389365b54f9561142cb7d9a06, type: 3}
   twoIngredientsPrefab: {fileID: 1676535915141075299, guid: 61dfa3334c749fd4ea11e3403f64fc7f, type: 3}
   threeIngredientsPrefab: {fileID: 5915875150680831650, guid: a077e376fa8986e408b22b8547535aed, type: 3}
+  oneIngredient_onetool_Prefab: {fileID: 4134851203775356756, guid: 14a1cb45437f8af42b7ebc43ef3badbd, type: 3}
   twoIngredient_onetool_Prefab: {fileID: 1676535915141075299, guid: 4992a4b09d43c6c48ba52fab034886d7, type: 3}
   twoIngredient_twotool_Prefab: {fileID: 1676535915141075299, guid: 54e27e557a63eaf46988d4ba7ab268b0, type: 3}
   threeIngredient_onetool_Prefab: {fileID: 5915875150680831650, guid: 0351f113b0278e24abe95d81b931b42f, type: 3}
@@ -10172,7 +10173,7 @@ GameObject:
   - component: {fileID: 465660592045392119}
   m_Layer: 0
   m_Name: Fryingpan
-  m_TagString: Untagged
+  m_TagString: Cooker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13088,7 +13089,7 @@ GameObject:
   - component: {fileID: 1518558959570339474}
   m_Layer: 0
   m_Name: Basket
-  m_TagString: Untagged
+  m_TagString: Cooker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

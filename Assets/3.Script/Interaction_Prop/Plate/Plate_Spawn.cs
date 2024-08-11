@@ -57,7 +57,7 @@ public class Plate_Spawn : MonoBehaviour
         {
             if (!plate.name.Equals("Plate"))
             {
-                CheckRecipe.CheckRecipe(plate.gameObject.name);
+                CheckRecipe.CheckRecipe(plate.gameObject.name+"_Food");
                 plate.transform.SetParent(null);
 
                 for (int j = 0; j < plate.transform.childCount; j++)
@@ -70,6 +70,7 @@ public class Plate_Spawn : MonoBehaviour
             }
             else
             {
+                CheckRecipe.CheckRecipe(plate.gameObject.name);
                 plate.transform.SetParent(null);
                 DestroyPlate.Enqueue(plate);
                 plate.gameObject.SetActive(false);

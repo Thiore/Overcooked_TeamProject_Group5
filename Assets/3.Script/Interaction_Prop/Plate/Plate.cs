@@ -87,7 +87,7 @@ public class Plate : MonoBehaviour
         for (int i = 0; i < RecipeList.Length; i++)
         {
 
-            GameObject obj = Instantiate(RecipeList[i], transform.position, transform.rotation, transform);
+            GameObject obj = Instantiate(RecipeList[i], transform.position+Vector3.up*0.1f, transform.rotation, transform);
             obj.name = RecipeList[i].name;
             obj.SetActive(false);
         }
@@ -131,7 +131,7 @@ public class Plate : MonoBehaviour
         if (isWash)
             return false;
 
-        if (isComplete)
+        if (isComplete&&!Ingre.name.Equals("Potato")&&!Ingre.name.Equals("Chicken"))
             return false;
 
         if (transform.name.Contains(Ingre.name))
@@ -151,10 +151,10 @@ public class Plate : MonoBehaviour
                     {
                         for(int j = 0; j < transform.childCount;j++)
                         {
-                            if(transform.GetChild(j).name.Equals($"{transform.name}_Food"))
+                            if(transform.GetChild(j).name.Equals($"{transform.name}"))
                             {
                                 transform.GetChild(j).gameObject.SetActive(true);
-                                transform.name = transform.name + "_Food";
+                                
                                 Ingre.Die();
                                 break;
                             }
@@ -185,7 +185,7 @@ public class Plate : MonoBehaviour
                 string recipe = default;
                 for (int j = 0; j < recipes.Count; j++)
                 {
-                    recipe = recipes[j].recipe;
+                    recipe = recipes[j].recipe.Replace("_Food","");
                     RecipeArray = recipes[j].ingredient.ToArray();
                     bool isSelect = true;
                     for (int k = 0; k < ThisName.Length; k++)

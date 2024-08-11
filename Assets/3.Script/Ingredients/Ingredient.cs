@@ -303,14 +303,14 @@ public class Ingredient : MonoBehaviour
                         if (CookProcess.Equals(eCookingProcess.Chopping))
                             Change_Ingredient(eCooked.ReadyCook);
                         else
-                            Change_Ingredient(eCooked.Chopping);
+                            Change_Ingredient(eCooked.Cooking);
                     }
                     else
                     {
                         if (CookProcess.Equals(eCookingProcess.Chopping))
                             cooking = eCooked.ReadyCook;
                         else
-                            cooking = eCooked.Chopping;
+                            cooking = eCooked.Cooking;
                     }
                 }
             }

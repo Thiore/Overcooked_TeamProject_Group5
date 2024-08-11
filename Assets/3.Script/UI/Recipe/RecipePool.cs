@@ -9,6 +9,7 @@ public class RecipePool : MonoBehaviour
     public GameObject oneIngredientPrefab; // 1개의 재료를 가지는 레시피 프리팹
     public GameObject twoIngredientsPrefab; // 2개의 재료를 가지는 레시피 프리팹
     public GameObject threeIngredientsPrefab; // 3개의 재료를 가지는 레시피 프리팹
+    public GameObject oneIngredient_onetool_Prefab;
     public GameObject twoIngredient_onetool_Prefab;
     public GameObject twoIngredient_twotool_Prefab;
     public GameObject threeIngredient_onetool_Prefab;
@@ -19,7 +20,7 @@ public class RecipePool : MonoBehaviour
 
     private List<GameObject> objectPool = new List<GameObject>(); // 오브젝트 풀을 저장하는 리스트
     public List<GameObject> activeObjects = new List<GameObject>(); // 활성화된 오브젝트 목록
-    private List<RecipeObject> allObjects = new List<RecipeObject>(); // 생성된 모든 오브젝트 목록
+    //private List<RecipeObject> allObjects = new List<RecipeObject>(); // 생성된 모든 오브젝트 목록
 
     private float spawnInterval = 8f; // 오브젝트 생성 간격 (초)
     private float elapsedTime = 0f; // 경과 시간
@@ -30,8 +31,8 @@ public class RecipePool : MonoBehaviour
     {
         GetRecipes(); // 레시피 데이터를 가져옴
         InitializeObjectPool(); // 오브젝트 풀 초기화
-        SetRecipeObjectImages(); // 각 오브젝트의 이미지를 설정
-        ActivateObject(); // 첫 번째 오브젝트 활성화
+        
+        //ActivateObject(); // 첫 번째 오브젝트 활성화
     }
 
     private void Update()
@@ -44,6 +45,11 @@ public class RecipePool : MonoBehaviour
             {
                 elapsedTime = 0f;
                 ActivateObject(); // 새로운 오브젝트 활성화
+            }
+            if(activeObjects.Count.Equals(0))
+            {
+                elapsedTime = 0f;
+                ActivateObject();
             }
 
             MoveActiveObjects(); // 활성화된 오브젝트 이동
@@ -58,11 +64,12 @@ public class RecipePool : MonoBehaviour
             int rand = Random.Range(0, recipes.Count);
             GameObject prefab = GetPrefabForRecipe(recipes[rand]);
             GameObject obj = Instantiate(prefab, recipePoolPanel);
+            SetRecipeObjectImages(obj.GetComponent<RecipeObject>(),recipes[rand]); // 각 오브젝트의 이미지를 설정
             obj.name = recipes[rand].recipe;
-            obj.TryGetComponent(out RecipeObject recipeobj);
-            recipeobj.recipe = recipes[rand];
+            //obj.TryGetComponent(out RecipeObject recipeobj);
+            //recipeobj.recipe = recipes[rand];
             objectPool.Add(obj); // 풀에 추가
-            allObjects.Add(recipeobj); // 모든 오브젝트 목록에 추가
+            //allObjects.Add(recipeobj); // 모든 오브젝트 목록에 추가
             obj.SetActive(false); // 오브젝트를 비활성화
         }
         
@@ -74,7 +81,15 @@ public class RecipePool : MonoBehaviour
         switch (recipe.ingredient.Count)
         {
             case 1:
-                return oneIngredientPrefab;
+                if (recipe.tool_count == 1)
+                {
+                    return oneIngredient_onetool_Prefab;
+                }
+                else
+                {
+                    return oneIngredientPrefab;
+
+                }
             case 2:
 
                 if (recipe.tool_count ==1)
@@ -275,65 +290,51 @@ public class RecipePool : MonoBehaviour
     }
 
     // 각 오브젝트의 이미지를 설정
-    private void SetRecipeObjectImages()
+    private void SetRecipeObjectImages(RecipeObject objectIndex, Recipe recipe)
     {
-        // int objectsPerRecipe = allObjects.Count / recipes.Count;
 
-        //for (int i = 0; i < recipes.Count; i++)
-        //{
-        // for (int j = 0; j < objectsPerRecipe; j++)
-        //{
-        //int objectIndex = i * objectsPerRecipe + j;
-        foreach (RecipeObject objectIndex in allObjects)
-        {
-            //objectIndex.name = objectIndex.recipe.recipe;
-            Dictionary<string, string> imageNameMap = new Dictionary<string, string>
+        objectIndex.recipe = recipe;
+
+        //objectIndex.name = objectIndex.recipe.recipe;
+        Dictionary<string, string> imageNameMap = new Dictionary<string, string>
             {
                 { "Recipe_Icon", objectIndex.recipe.recipe }
             };
-            for (int k = 0; k < objectIndex.recipe.ingredient.Count; k++)
+        for (int k = 0; k < objectIndex.recipe.ingredient.Count; k++)
+        {
+            if (objectIndex.recipe.ingredient.Count == 1)
             {
-                if (objectIndex.recipe.ingredient.Count == 1)
+                imageNameMap.Add("Ingredient_Icon", objectIndex.recipe.ingredient[0]);
+            }
+            else
+            {
+                imageNameMap.Add($"Ingredient_Icon_{k + 1}", objectIndex.recipe.ingredient[k]);
+            }
+            if (k < objectIndex.recipe.tool_count)
+            {
+                string tool = string.Empty;
+                if (objectIndex.recipe.ingredient[k].Contains("Pot"))
                 {
-                    imageNameMap.Add("Ingredient_Icon", objectIndex.recipe.ingredient[0]);
+                    tool = "Pot";
+                }
+                else if (objectIndex.recipe.ingredient[k].Contains("Pan"))
+                {
+                    tool = "Pan";
                 }
                 else
                 {
-                    imageNameMap.Add($"Ingredient_Icon_{k + 1}", objectIndex.recipe.ingredient[k]);
+                    tool = "Fry";
                 }
-                if (k<objectIndex.recipe.tool_count)
-                {
-                    string tool = string.Empty;
-                    if (objectIndex.recipe.ingredient[k].Contains("Pot"))
-                    {
-                        tool = "Pot";
-                    }
-                    else if(objectIndex.recipe.ingredient[k].Contains("Pan"))
-                    {
-                        tool = "Pan";
-                    }
-                    else
-                    {
-                        tool = "Fry";
-                    }
-                        //string tool = objectIndex.recipe.ingredient[k].Substring(objectIndex.recipe.ingredient[k].Length - 3);
-                        objectIndex.SetToolImage(k, tool);
-                }
+                //string tool = objectIndex.recipe.ingredient[k].Substring(objectIndex.recipe.ingredient[k].Length - 3);
+                objectIndex.SetToolImage(k, tool);
             }
-
-
-
-            objectIndex.SetImagesByName(imageNameMap);
         }
-                
-               
-                
-                
-               
 
-                
-                
-            //}
+
+
+        objectIndex.SetImagesByName(imageNameMap);
+
+        //}
         //}
     }
 

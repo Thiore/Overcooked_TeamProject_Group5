@@ -30,7 +30,7 @@ public class FryingPan : Cookingtool
             if (slider == null)
             {
                 isPlate = false;
-                targetRenderer = transform.GetChild(1).GetComponent<Renderer>();
+                targetRenderer = transform.GetChild(0).GetComponent<Renderer>();
                 cookColor = targetRenderer.material.GetColor("_EmissionColor");
                 transform.parent.TryGetComponent(out CounterController counter);
                 slider = counter.Slider.GetComponent<Slider>();
@@ -59,7 +59,7 @@ public class FryingPan : Cookingtool
                     Ingre.SetReadyCook();
                     //Soup_Anim.SetTrigger("Cook");
                     CookTime = 0f;
-                    SaveRange.GetChild(0).gameObject.SetActive(false);
+                    //SaveRange.GetChild(0).gameObject.SetActive(false);
                     isFinish = true;
                     slider.gameObject.SetActive(false);
                     slider = null;
@@ -76,8 +76,18 @@ public class FryingPan : Cookingtool
             isSoup = false;
             Ingre = null;
             CookTime = 0f;
-            gameObject.name = "Pot";
+            gameObject.name = "FryPan";
         }
+    }
+
+    public override void ResetCook(Ingredient ingre)
+    {
+        isSoup = false;
+        isFinish = false;
+        Ingre = ingre;
+        Ingre.transform.SetParent(transform);
+        Ingre.transform.position = transform.position;
+        Ingre.transform.rotation = transform.rotation;
     }
 
 }

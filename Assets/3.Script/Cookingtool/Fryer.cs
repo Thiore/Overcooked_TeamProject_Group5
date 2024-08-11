@@ -67,7 +67,7 @@ public class Fryer : Cookingtool
                 Ingre = null;
                 CookTime = 0f;
                 isSoup = false;
-                gameObject.name = "Pot";
+                gameObject.name = "Fry";
             
 
         }

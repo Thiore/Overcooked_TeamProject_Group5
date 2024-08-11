@@ -116,9 +116,10 @@ public class PlayerStateControl : MonoBehaviour
         {
             if(ChopSaveCounter != nearCounter)
             {
-                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("New_Chef@Chop"))
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("New_Chef@Chop"))
+                {
                     animator.SetTrigger("Finish");
-                
+                }
                 ChopSaveCounter = null;
             }
         }
@@ -126,7 +127,7 @@ public class PlayerStateControl : MonoBehaviour
         {
             if(SinkSaveCounter != nearCounter)
             {
-                if(!animator.GetCurrentAnimatorStateInfo(0).IsName("New_Chef@Wash"))
+                if(animator.GetCurrentAnimatorStateInfo(0).IsName("New_Chef@Wash"))
                     animator.SetTrigger("Finish");
 
                 SinkSaveCounter.TryGetComponent(out Sink sink);
@@ -558,11 +559,13 @@ public class PlayerStateControl : MonoBehaviour
                     if (!joy.iscontrol)
                     {
                         joy.iscontrol = true;
-                        Renderer renderer = joy.transform.GetChild(1).GetComponent<Renderer>();
+                        Renderer renderer1 = joy.transform.GetChild(1).GetComponent<Renderer>();
+                        Renderer renderer2 = joy.transform.GetChild(0).GetChild(0).GetComponent<Renderer>();
 
-                        if (renderer != null)
+                        if (renderer1 != null&& renderer2 != null)
                         {
-                            renderer.material.SetFloat("_GlowIntensity", 8.1f);
+                            renderer1.material.SetFloat("_GlowIntensity", 8.1f);
+                            renderer2.material.SetFloat("_GlowIntensity", 8.1f);
                         }
                         animator.SetBool("IsWalking", false);
                         GetComponent<Player_Movent>().enabled = false;
@@ -570,11 +573,13 @@ public class PlayerStateControl : MonoBehaviour
                     else
                     {
                         joy.iscontrol = false;
-                        Renderer renderer = joy.transform.GetChild(1).GetComponent<Renderer>();
+                        Renderer renderer1 = joy.transform.GetChild(1).GetComponent<Renderer>();
+                        Renderer renderer2 = joy.transform.GetChild(0).GetChild(0).GetComponent<Renderer>();
 
-                        if (renderer != null)
+                        if (renderer1 != null && renderer2 != null)
                         {
-                            renderer.material.SetFloat("_GlowIntensity", 0f);
+                            renderer1.material.SetFloat("_GlowIntensity", 8.1f);
+                            renderer2.material.SetFloat("_GlowIntensity", 8.1f);
                         }
                         GetComponent<Player_Movent>().enabled = true;
                     }
@@ -736,26 +741,55 @@ public class PlayerStateControl : MonoBehaviour
             }
             else if (HandsOnOb.CompareTag("Cooker"))
             {
-                if(HandsOnOb.transform.GetChild(1).TryGetComponent(out Ingredient ingre))
+                if(HandsOnOb.TryGetComponent(out FryingPan pan))
                 {
-                    if (plate.OnPlate(ingre))
+                    if (HandsOnOb.transform.GetChild(0).TryGetComponent(out Ingredient ingre))
                     {
-                        HandsOnOb.TryGetComponent(out Cookingtool tool);
-                        tool.isPlate = true;
-                        if (tool.Soup != null)
+                        if (plate.OnPlate(ingre))
                         {
-                            tool.Soup.gameObject.SetActive(false);
+
+                            pan.isPlate = true;
+                            if (pan.Soup != null)
+                            {
+                                pan.Soup.gameObject.SetActive(false);
+                            }
+                            ingre.Die();
+
+                            //Debug.Log("재료 넣기");
+                            return true;
                         }
-                        ingre.Die();
                         
-                        //Debug.Log("재료 넣기");
-                        return true;
                     }
                     else
                     {
                         return false;
                     }
                 }
+                else
+                {
+                    if (HandsOnOb.transform.GetChild(1).TryGetComponent(out Ingredient ingre))
+                    {
+                        if (plate.OnPlate(ingre))
+                        {
+                            HandsOnOb.TryGetComponent(out Cookingtool tool);
+                            tool.isPlate = true;
+                            if (tool.Soup != null)
+                            {
+                                tool.Soup.gameObject.SetActive(false);
+                            }
+                            ingre.Die();
+
+                            //Debug.Log("재료 넣기");
+                            return true;
+                        }
+                        
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                
 
             }
         }
@@ -764,7 +798,7 @@ public class PlayerStateControl : MonoBehaviour
 
     private bool IngreOnCooker(CounterController counter)
     {
-        if(counter.PutOnOb.transform.childCount.Equals(1))
+        if (counter.PutOnOb.CompareTag("Cooker"))
         {
             if (HandsOnOb.TryGetComponent(out Ingredient Ingre))
             {
