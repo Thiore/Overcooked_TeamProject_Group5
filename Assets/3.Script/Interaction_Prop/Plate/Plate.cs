@@ -131,7 +131,7 @@ public class Plate : MonoBehaviour
         if (isWash)
             return false;
 
-        if (isComplete&&!Ingre.name.Equals("Potato")&&!Ingre.name.Equals("Chicken"))
+        if (isComplete&&!Ingre.name.Equals("PotatoFry")&&!Ingre.name.Equals("ChickenFry"))
             return false;
 
         if (transform.name.Contains(Ingre.name))

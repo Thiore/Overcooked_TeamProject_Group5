@@ -359,6 +359,12 @@ MonoBehaviour:
   Point: 0
   Tool_img_1: {fileID: 6481212963162514773}
   Tool_img_2: {fileID: 3734981051722027573}
+  recipe:
+    id: 0
+    stage: 0
+    recipe: 
+    ingredient: []
+    tool_count: 0
 --- !u!1 &1922882030734584432
 GameObject:
   m_ObjectHideFlags: 0

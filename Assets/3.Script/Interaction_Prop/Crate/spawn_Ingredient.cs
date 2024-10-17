@@ -11,6 +11,8 @@ public class spawn_Ingredient : MonoBehaviour
     
     private Queue<Ingredient> ingredient_queue = new Queue<Ingredient>();
     private Object_UI_Controll obj_ui;
+
+    private bool isthis;
     
 
     private Animator anim;
@@ -53,7 +55,19 @@ public class spawn_Ingredient : MonoBehaviour
 
     public GameObject newIngredient()
     {
+
         if (ingredient_queue.Count > 0)
+        {
+            if (ingredient_queue.Peek().name.Equals(myIngredient.name))
+            {
+                isthis = true;
+            }
+            else
+            {
+                isthis = false;
+            }
+        }
+        if (isthis)
         {
             Ingredient obj = ingredient_queue.Dequeue();
             obj.gameObject.SetActive(true);

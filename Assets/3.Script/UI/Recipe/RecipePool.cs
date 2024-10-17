@@ -313,7 +313,11 @@ public class RecipePool : MonoBehaviour
             if (k < objectIndex.recipe.tool_count)
             {
                 string tool = string.Empty;
-                if (objectIndex.recipe.ingredient[k].Contains("Pot"))
+                if (objectIndex.recipe.ingredient[k].Contains("Fry"))
+                {
+                    tool = "Fry";
+                }
+                else if (objectIndex.recipe.ingredient[k].Contains("Pot"))
                 {
                     tool = "Pot";
                 }
@@ -321,10 +325,7 @@ public class RecipePool : MonoBehaviour
                 {
                     tool = "Pan";
                 }
-                else
-                {
-                    tool = "Fry";
-                }
+                
                 //string tool = objectIndex.recipe.ingredient[k].Substring(objectIndex.recipe.ingredient[k].Length - 3);
                 objectIndex.SetToolImage(k, tool);
             }

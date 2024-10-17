@@ -326,7 +326,7 @@ public class PlayerStateControl : MonoBehaviour
                     }
                     else
                     {
-                        if (HandsOnOb.CompareTag("Fryer"))
+                        if (HandsOnOb.CompareTag("Cooker"))
                         {
                             HandsOnOb.transform.SetParent(counter.transform);
                             if (HandsOnOb.TryGetComponent(out Cookingtool tool))
@@ -543,9 +543,8 @@ public class PlayerStateControl : MonoBehaviour
                 case eCounter.GasStation:
                     if (counterController.IsPutOn)
                     {
-                        counterController.transform.GetChild(0).gameObject.SetActive(false);
                         counterController.Slider.gameObject.SetActive(false);
-                        PickUpObject(counterController.transform.GetChild(1).gameObject);
+                        PickUpObject(counterController.transform.GetChild(0).gameObject);
                         //counterController.transform.GetChild(1).transform.SetParent(null);
                         counterController.PutOnOb = null;
                         counterController.ChangePuton();
@@ -651,13 +650,13 @@ public class PlayerStateControl : MonoBehaviour
         animator.SetBool("IsTake", true);
         HandsOnOb = gameObject;
         nearObjectEmissionController.ChangeOriginEmission(HandsOnOb);
-        if (HandsOnOb.transform.TryGetComponent(out Rigidbody rigi))
-        {
-            Destroy(rigi);
-        }
         if (HandsOnOb.transform.TryGetComponent(out MeshCollider mesh))
         {
             mesh.enabled = false;
+        }
+        if (HandsOnOb.transform.TryGetComponent(out Rigidbody rigi))
+        {
+            Destroy(rigi);
         }
         if (HandsOnOb.transform.TryGetComponent(out SphereCollider col))
         {
@@ -744,10 +743,6 @@ public class PlayerStateControl : MonoBehaviour
 
     private void ThrowIngredients()
     {
-        
-        var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();
-        rb.mass = 0.2f;
-        rb.angularDrag = 0;
         if (HandsOnOb.transform.TryGetComponent(out MeshCollider mesh))
         {
             mesh.enabled = true;
@@ -756,6 +751,10 @@ public class PlayerStateControl : MonoBehaviour
         {
             col.enabled = true;
         }
+        var rb = HandsOnOb.gameObject.AddComponent<Rigidbody>();
+        rb.mass = 0.2f;
+        rb.angularDrag = 0;
+        
         HandsOnOb.transform.SetParent(null);
         rb.AddForce(transform.forward * 100f);
        
@@ -869,7 +868,7 @@ public class PlayerStateControl : MonoBehaviour
                                     tool.ResetCook(Ingre);
                                     return true;
                                 }
-                                else if (tool is FryingPan && Ingre.utensils.Equals(eCookutensils.Fry))
+                                else if (tool is Fryer && Ingre.utensils.Equals(eCookutensils.Fry))
                                 {
                                     tool.ResetCook(Ingre);
                                     return true;

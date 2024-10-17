@@ -28,6 +28,8 @@ public class Player_SwapManager : MonoBehaviour
 
     private bool isSwap;
 
+    [SerializeField] private Joystick joystick = null;
+
 
     private void Awake()
     {
@@ -61,7 +63,16 @@ public class Player_SwapManager : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.LeftShift)&&!isSwap)
         {
-            SwapCharacter();
+            if(joystick != null)
+            {
+                if(!joystick.iscontrol)
+                {
+                    SwapCharacter();
+                }
+            }
+            else
+                SwapCharacter();
+
         }
 
 
